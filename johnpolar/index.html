@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Polar | PolaRecords</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="../images/hat.png">
+    <style>
+        /* Artist Specific Overrides */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+        }
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hat.png'); /* Placeholder bg */
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .hero h1 {
+            color: white;
+            font-size: 3.5rem;
+        }
+        .hero p {
+            color: #ecf0f1;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Artist Navigation -->
+    <header style="position: absolute; background: transparent; width: 100%; box-shadow: none;">
+        <a href="../index.html" class="logo" style="color: white;">
+            &larr; Back to Label
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#bio" style="color: white;">Bio</a></li>
+                <li><a href="#discography" style="color: white;">Discography</a></li>
+                <li><a href="#tour" style="color: white;">Tour</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Artist Hero -->
+    <section class="hero" style="height: 80vh;">
+        <h1>John Polar</h1>
+        <p>The voice of a new generation. Soulful. Authentic. Timeless.</p>
+        <a href="#discography" class="btn btn-primary" style="background-color: white; color: black; border: none;">Latest Release</a>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <section id="bio" style="padding: 4rem 0;">
+            <h2>Biography</h2>
+            <p>John Polar emerged from the underground scene with a unique blend of acoustic soul and electronic textures. His debut album redefined the genre, earning critical acclaim and a dedicated following.</p>
+        </section>
+
+        <section id="discography">
+            <h2>Discography</h2>
+            <div class="grid">
+                <article class="card">
+                    <h3>Polar Night (LP)</h3>
+                    <p>2024</p>
+                    <button class="btn btn-primary" style="font-size: 0.8rem; margin-top: 10px;">Listen</button>
+                </article>
+                <article class="card">
+                    <h3>Echoes (EP)</h3>
+                    <p>2023</p>
+                    <button class="btn btn-primary" style="font-size: 0.8rem; margin-top: 10px;">Listen</button>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 John Polar / PolaRecords.</p>
+    </footer>
+
+</body>
+</html>

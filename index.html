@@ -4,9 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PolaRecords</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/hat.png">
+    <meta name="description" content="PolaRecords - The official home of sound.">
 </head>
 <body>
-    <h1>Welcome to PolaRecords</h1>
-    <p>Official website coming soon.</p>
+
+    <!-- Navigation -->
+    <header>
+        <a href="#" class="logo">
+            <img src="images/hat.png" alt="PolaRecords Logo">
+            PolaRecords
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#music">Music</a></li>
+                <li><a href="johnpolar/index.html">John Polar</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Welcome to PolaRecords</h1>
+        <p>Discover the sound of the future. Curated tracks, exclusive artists, and the vinyl experience reimagined.</p>
+        <div class="cta-group">
+            <a href="#music" class="btn btn-primary">Listen Now</a>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section id="music">
+            <h2>Latest Releases</h2>
+            <div class="grid">
+                <!-- Placeholder Cards -->
+                <article class="card">
+                    <h3>Midnight Blue</h3>
+                    <p>The latest smooth jazz compilation features top artists from around the globe.</p>
+                    <br>
+                    <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">Stream</a>
+                </article>
+                <article class="card">
+                    <h3>Neon City</h3>
+                    <p>Synthwave beats that take you back to the future. Available on vinyl.</p>
+                    <br>
+                    <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">Buy Vinyl</a>
+                </article>
+                <article class="card">
+                    <h3>Acoustic Sessions</h3>
+                    <p>Raw, unfiltered, and purely emotional. The acoustic sessions are here.</p>
+                    <br>
+                    <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">Listen</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Stay Tuned</h2>
+            <p>Join our mailing list for exclusive updates and drops.</p>
+            <form class="form-group">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 PolaRecords. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
