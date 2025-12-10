@@ -8,96 +8,28 @@
     <title>PølarAF | John Polar Presents</title>
     <link rel="canonical" href="https://polarecords.net/polaraf/">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../xp-theme.css">
+    <link rel="stylesheet" href="../polaraf-theme.css">
     <link rel="icon" type="image/png" href="../images/hat.png">
-    <style>
-        /* PolarAF Dark Theme Customizations */
-        body {
-            background: #2C2C2C !important;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-            border-color: #444 #111 #111 #444 !important;
-        }
-
-        .hero h1 {
-            color: #00FF41 !important;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .hero .subtitle {
-            color: #888 !important;
-            font-size: 10px;
-            font-style: italic;
-            margin-top: -8px;
-        }
-
-        .hero p {
-            color: #ccc !important;
-        }
-
-        .container {
-            background: #2a2a2a !important;
-            border-color: #444 #111 #111 #444 !important;
-        }
-
-        .card {
-            background: #1a1a1a !important;
-            border-color: #444 #111 #111 #444 !important;
-            color: #ccc;
-        }
-
-        .card:hover {
-            background: #252525 !important;
-            border-color: #00FF41 #006618 #006618 #00FF41 !important;
-        }
-
-        .card h3 {
-            color: #00FF41;
-        }
-
-        h2 {
-            color: #00FF41 !important;
-            border-bottom-color: #444 !important;
-        }
-
-        section p {
-            color: #ccc !important;
-        }
-
-        .btn-primary {
-            background: #00FF41 !important;
-            color: #000 !important;
-            border-color: #00FF41 #006618 #006618 #00FF41 !important;
-            font-weight: 700 !important;
-        }
-
-        .btn-primary:hover {
-            background: #00DD38 !important;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Windows XP Title Bar -->
+    <!-- Navigation Header -->
     <header>
         <a href="../index.html" class="logo">
-            John Polar Presents: PølarAF
+            PølarAF - The Raw & Unfiltered
         </a>
-        <nav>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            ☰
+        </button>
+        <nav id="mainNav">
             <ul>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="#bio">Bio</a></li>
                 <li><a href="#tracks">Tracks</a></li>
-                <li><a href="#shows">Shows</a></li>
+                <li><a href="../johnpolar/index.html">John Polar</a></li>
+                <li><a href="../polarx/index.html">PolarX</a></li>
             </ul>
         </nav>
-        <div style="display: flex; gap: 2px;">
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; font-weight: 700; line-height: 1;">_</div>
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">&#9744;</div>
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #F38C2F 0%, #D46414 50%, #C44F0F 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; font-weight: 700; line-height: 1;">×</div>
-        </div>
     </header>
 
     <!-- Artist Hero -->
@@ -118,8 +50,12 @@
     <main class="container">
 
         <section id="bio">
-            <h2>About PølarAF</h2>
-            <p>PølarAF represents the gritty, authentic side of John Polar's artistic vision. Born from the underground hip-hop scene, PølarAF delivers hard-hitting bars with uncompromising honesty. This project tackles real issues, tells real stories, and connects with listeners on a visceral level.</p>
+            <h2>About PølarAF: The Raw & Unfiltered</h2>
+            <p><strong>PølarAF</strong> is the chaotic energy, the freestyle fire—the raw, unedited, honest-to-a-fault side of the psyche. He's the uncut vibe that doesn't hold back, delivering experimental freestyle flows with aggressive, unapologetic lyrics and direct emotional release.</p>
+            <p style="margin-top: 8px;"><strong>Voice & Tone:</strong> Intense, passionate, rebellious, and brutally honest. PølarAF channels anxiety and rage into a chaotic yet compelling delivery. He speaks the truth that others won't say, breaking down walls with every bar.</p>
+            <p style="margin-top: 8px;"><strong>Themes:</strong> Mental health struggles, social commentary, raw expression, and breaking through societal expectations. This is the voice that screams when silence isn't an option—the cathartic release of everything bottled up inside.</p>
+            <p style="margin-top: 8px;"><strong>Genre:</strong> Trap, Hardcore Hip Hop, Experimental Electronica. Real rap. Real stories. Real impact.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #888; border-left: 3px solid #00FF41; padding-left: 12px; background: rgba(0,255,65,0.05);">"Tired of the rage? This is the stage. No cap, no filter, just the truth and the flow. Sometimes you just gotta scream until you can't scream no more."</p>
         </section>
 
         <section id="tracks">
@@ -170,19 +106,40 @@
     </main>
 
     <footer>
-        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div class="xp-start-btn" style="cursor: pointer;">
-                    <span style="font-size: 14px; vertical-align: middle;">❖</span> start
-                </div>
-            </div>
-            <div>&copy; 2025 PølarAF / John Polar Presents / PolaRecords</div>
-            <div style="display: flex; gap: 4px; align-items: center;">
-                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">🎤 PølarAF</div>
-                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">🔊</div>
-            </div>
-        </div>
+        <p>&copy; 2025 PølarAF / John Polar Presents / PølaRecørds - No Cap, No Filter</p>
     </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (mobileMenuToggle && mainNav) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking a link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    if (mobileMenuToggle) {
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
