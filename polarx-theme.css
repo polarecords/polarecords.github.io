@@ -215,6 +215,80 @@ h2 {
     backdrop-filter: blur(15px);
 }
 
+/* Coming Soon Sections */
+.coming-soon {
+    background: linear-gradient(135deg, rgba(26, 10, 46, 0.7) 0%, rgba(13, 4, 21, 0.7) 100%);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, var(--px-secondary), var(--px-primary)) 1;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 0 40px var(--px-glow),
+        inset 0 0 60px rgba(155, 89, 182, 0.1);
+}
+
+.coming-soon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(231, 76, 60, 0.1) 50%,
+        transparent 70%
+    );
+    animation: rotate-glow 15s linear infinite;
+}
+
+@keyframes rotate-glow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.coming-soon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(155, 89, 182, 0.15) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: pulse-glow-big 5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-big {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.coming-soon h3 {
+    background: linear-gradient(135deg, var(--px-secondary) 0%, var(--px-primary) 50%, var(--px-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 20px var(--px-glow));
+}
+
+.coming-soon p {
+    color: var(--px-text);
+    opacity: 0.8;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+}
+
 /* Footer */
 footer {
     background: linear-gradient(180deg, rgba(26, 10, 46, 0.8) 0%, rgba(13, 4, 21, 0.95) 100%);
