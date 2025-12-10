@@ -8,35 +8,29 @@
     <title>John Polar | PolaRecords</title>
     <link rel="canonical" href="https://polarecords.net/johnpolar/">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../xp-theme.css">
+    <link rel="stylesheet" href="../johnpolar-theme.css">
     <link rel="icon" type="image/png" href="../images/hat.png">
-    <style>
-        /* Windows XP Artist Page Customizations */
-        body {
-            overflow-x: hidden;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Windows XP Title Bar -->
+    <!-- Navigation Header -->
     <header>
         <a href="../index.html" class="logo">
-            John Polar - PolaRecords
+            John Polar - The Artisan of Artistry
         </a>
-        <nav>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            ☰
+        </button>
+        <nav id="mainNav">
             <ul>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="#bio">Bio</a></li>
                 <li><a href="#live">Live</a></li>
                 <li><a href="#discography">Discography</a></li>
-                <li><a href="#tour">Tour</a></li>
+                <li><a href="../polaraf/index.html">PølarAF</a></li>
+                <li><a href="../polarx/index.html">PolarX</a></li>
             </ul>
         </nav>
-        <div style="display: flex; gap: 2px;">
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; font-weight: 700; line-height: 1;">_</div>
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">&#9744;</div>
-            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #F38C2F 0%, #D46414 50%, #C44F0F 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; font-weight: 700; line-height: 1;">×</div>
-        </div>
     </header>
 
     <!-- Artist Hero -->
@@ -76,10 +70,12 @@
         </section>
 
         <section id="bio">
-            <h2>Biography</h2>
-            <p>John Polar is a musical mad scientist performing as a one-man band with an eclectic fusion of synth-pop, electronic, and experimental hip-hop. Standing behind a table cluttered with keyboards, synthesizers, and electronic equipment, he delivers high-energy performances characterized by rapid-fire, stream-of-consciousness vocals that blur the line between singing and rapping.</p>
-            <p style="margin-top: 8px;">His signature technique includes rhythmic stuttering, vocal repetition, and stylistic use of autotune as an instrument. John pioneered "Pol-AI-r"—a unique approach where he uses Moises AI to strip vocals from existing tracks, then freestyles over the instrumentals live. His lyrics explore existential themes: time, consciousness, duality of light and dark, anxiety, and self-motivation.</p>
-            <p style="margin-top: 8px;">Cutting an eccentric figure on stage in his white fedora, dark sunglasses, and black leather jacket, John thrives on spontaneity and improvisation. From The Nick in Birmingham, AL to venues nationwide, his quirky, trippy performances project pure creative chaos—the sound of someone genuinely making magic in the moment.</p>
+            <h2>Biography: The Artisan of Artistry</h2>
+            <p><strong>John Polar</strong> is the introspective narrator, the polished producer—the refined sound of the Pola universe. He's got the voice, the skill, and the feels. Behind his table of keyboards, synthesizers, and electronic equipment, John delivers deeply emotional performances that blur the line between singing and rapping with stream-of-consciousness flow.</p>
+            <p style="margin-top: 8px;"><strong>Voice & Tone:</strong> Reflective, vulnerable, and eloquent. John delivers complex truths with clarity and artistry. His signature techniques include rhythmic stuttering, vocal repetition, and stylistic use of autotune as an instrument. He pioneered "Pol-AI-r"—using Moises AI to strip vocals from tracks and freestyle over instrumentals live.</p>
+            <p style="margin-top: 8px;"><strong>Themes:</strong> Identity, inner conflict, love and heartbreak, existential exploration of time and consciousness, the duality of light and dark, anxiety, and self-motivation. Every lyric is a meditation on the human experience.</p>
+            <p style="margin-top: 8px;"><strong>Genre:</strong> Alternative Hip Hop, Indie Pop, Melodic Rap with acoustic, orchestral, and electronic elements. This is the professional, production-focused sound that showcases John's artistic range.</p>
+            <p style="margin-top: 12px; font-style: italic; color: #666; border-left: 3px solid #3498db; padding-left: 12px;">"Every rhythm, every rhyme, is just me trying to make sense of the vast sea of strain and disdain. It's the artistry that sets the compass."</p>
         </section>
 
         <section id="discography">
@@ -120,19 +116,40 @@
     </main>
 
     <footer>
-        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div class="xp-start-btn" style="cursor: pointer;">
-                    <span style="font-size: 14px; vertical-align: middle;">❖</span> start
-                </div>
-            </div>
-            <div>&copy; 2025 John Polar / PolaRecords</div>
-            <div style="display: flex; gap: 4px; align-items: center;">
-                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">♪ Now Playing</div>
-                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">🔊</div>
-            </div>
-        </div>
+        <p>&copy; 2025 John Polar / PølaRecørds - The Artisan of Artistry</p>
     </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (mobileMenuToggle && mainNav) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking a link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    if (mobileMenuToggle) {
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>

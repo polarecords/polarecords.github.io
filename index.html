@@ -17,14 +17,18 @@
     <header>
         <a href="#" class="logo">
             <img src="images/hat.png" alt="PolaRecords Logo">
-            PolaRecords
+            PølaRecørds
         </a>
-        <nav>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            ☰
+        </button>
+        <nav id="mainNav">
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#music">Music</a></li>
+                <li><a href="#music">Artists</a></li>
                 <li><a href="johnpolar/index.html">John Polar</a></li>
                 <li><a href="polaraf/index.html">PølarAF</a></li>
+                <li><a href="polarx/index.html">PolarX</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -32,56 +36,123 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Welcome to PolaRecords</h1>
-        <p>Discover the sound of the future. Curated tracks, exclusive artists, and the vinyl experience reimagined.</p>
+        <h1>Welcome to PølaRecørds</h1>
+        <p class="subtitle" style="font-style: italic; color: #ccc; margin-top: -10px;">The Pola Principle: Finding the Balance in the Polar Sphere</p>
+        <p>An independent creative hub and label dedicated to authentic, boundary-breaking artistry. We believe in duality: the raw and the refined, the chaos and the control. We don't just release music; we project a spectrum of human experience.</p>
+        <p style="font-weight: 600; margin-top: 12px;">From the Studio to the Stage: It's All in the PolaZone.</p>
         <div class="cta-group">
-            <a href="#music" class="btn btn-primary">Listen Now</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            <a href="#music" class="btn btn-primary">Explore Artists</a>
+            <a href="#contact" class="btn btn-secondary">Join the PolaPath</a>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="container">
         <section id="music">
-            <h2>Featured Artists</h2>
+            <h2>The Polar Personas</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #ccc;">Three voices. One vision. The spectrum of human experience.</p>
             <div class="grid">
                 <!-- Artist Cards -->
                 <article class="card">
-                    <h3>John Polar</h3>
-                    <p>Musical mad scientist and one-man band. Eclectic fusion of synth-pop, electronic, and experimental hip-hop with stream-of-consciousness flow. Pioneering "Pol-AI-r" live freestyle performances from Birmingham, AL to stages nationwide.</p>
-                    <br>
-                    <a href="johnpolar/index.html" class="btn btn-primary" style="font-size: 0.8rem;">Visit Page</a>
+                    <div style="text-align: center; margin-bottom: 12px;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">🎹</div>
+                        <h3>John Polar</h3>
+                        <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">The Artisan of Artistry</p>
+                    </div>
+                    <p>The introspective narrator, the polished producer. Reflective, vulnerable, deeply emotional. Alternative Hip Hop, Indie Pop, Melodic Rap with orchestral elements.</p>
+                    <p style="font-size: 0.8rem; font-style: italic; margin-top: 8px; color: #888;">"Every rhythm, every rhyme, is just me trying to make sense of the vast sea of strain and disdain."</p>
+                    <a href="johnpolar/index.html" class="btn btn-primary" style="font-size: 0.8rem; margin-top: 12px;">Visit Page</a>
                 </article>
                 <article class="card">
-                    <h3>PølarAF</h3>
-                    <p>John Polar Presents: Raw, unfiltered hip-hop from the streets. Real rap. Real stories. Real impact.</p>
-                    <br>
-                    <a href="polaraf/index.html" class="btn btn-primary" style="font-size: 0.8rem;">Visit Page</a>
+                    <div style="text-align: center; margin-bottom: 12px;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #00FF41 0%, #006618 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #000;">🎤</div>
+                        <h3>PølarAF</h3>
+                        <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">The Raw & Unfiltered</p>
+                    </div>
+                    <p>The chaotic energy, the freestyle fire. Intense, passionate, rebellious, and brutally honest. Trap, Hardcore Hip Hop, Experimental Electronica with direct emotional release.</p>
+                    <p style="font-size: 0.8rem; font-style: italic; margin-top: 8px; color: #888;">"No cap, no filter, just the truth and the flow."</p>
+                    <a href="polaraf/index.html" class="btn btn-primary" style="font-size: 0.8rem; margin-top: 12px;">Visit Page</a>
                 </article>
                 <article class="card">
-                    <h3>More Coming Soon</h3>
-                    <p>PolaRecords is constantly evolving. Stay tuned for more exclusive artists and releases.</p>
-                    <br>
-                    <a href="#contact" class="btn btn-primary" style="font-size: 0.8rem;">Get Updates</a>
+                    <div style="text-align: center; margin-bottom: 12px;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">🎧</div>
+                        <h3>PolarX</h3>
+                        <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">The Sound Bender</p>
+                    </div>
+                    <p>The innovative DJ, the sonic scientist, the master of the remix. Transformative, energetic, purely instrumental. Future Bass, Experimental Electronica, and innovative remixes.</p>
+                    <p style="font-size: 0.8rem; font-style: italic; margin-top: 8px; color: #888;">"I'm just here to turn that static buzz into something gold."</p>
+                    <a href="polarx/index.html" class="btn btn-primary" style="font-size: 0.8rem; margin-top: 12px;">Visit Page</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Pola Brands Section -->
+        <section style="margin-top: 40px;">
+            <h2>More Than Music: It's the PolaVerse</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #ccc;">The interconnected ecosystem of Pola brands</p>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <article class="card" style="text-align: center;">
+                    <h3 style="font-size: 1rem;">PolaPresents</h3>
+                    <p style="font-size: 0.85rem;">Events & Live Shows</p>
+                </article>
+                <article class="card" style="text-align: center;">
+                    <h3 style="font-size: 1rem;">PolaBoard</h3>
+                    <p style="font-size: 0.85rem;">Action Sports & Lifestyle</p>
+                </article>
+                <article class="card" style="text-align: center;">
+                    <h3 style="font-size: 1rem;">PolaRepairs</h3>
+                    <p style="font-size: 0.85rem;">Tech & Device Fixes</p>
                 </article>
             </div>
         </section>
 
         <!-- Newsletter Section -->
         <section class="newsletter" id="contact">
-            <h2>Stay Tuned</h2>
-            <p>Join our mailing list for exclusive updates and drops.</p>
+            <h2>Join the Polar People</h2>
+            <p>Our Fam, Our Fanbase: Welcome to the PolaPath. Get exclusive updates, drops, and behind-the-scenes access.</p>
             <form class="form-group">
                 <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="btn btn-primary">Subscribe</button>
+                <button type="submit" class="btn btn-primary">Join the Journey</button>
             </form>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 PolaRecords. All rights reserved.</p>
+        <p>&copy; 2025 PølaRecørds. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (mobileMenuToggle && mainNav) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking a link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    if (mobileMenuToggle) {
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
