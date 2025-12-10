@@ -7,64 +7,50 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../images/hat.png">
     <style>
-        /* Artist Specific Overrides */
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-        }
-        .hero {
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hat.png'); /* Placeholder bg */
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
-        .hero h1 {
-            color: white;
-            font-size: 3.5rem;
-        }
-        .hero p {
-            color: #ecf0f1;
-        }
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            background: rgba(0,0,0,0.5);
-            padding: 5px 10px;
-            border-radius: 4px;
+        /* Windows XP Artist Page Customizations */
+        body {
+            overflow-x: hidden;
         }
     </style>
 </head>
 <body>
 
-    <!-- Artist Navigation -->
-    <header style="position: absolute; background: transparent; width: 100%; box-shadow: none;">
-        <a href="../index.html" class="logo" style="color: white;">
-            &larr; Back to Label
+    <!-- Windows XP Title Bar -->
+    <header>
+        <a href="../index.html" class="logo">
+            John Polar - PolaRecords
         </a>
         <nav>
             <ul>
-                <li><a href="#bio" style="color: white;">Bio</a></li>
-                <li><a href="#discography" style="color: white;">Discography</a></li>
-                <li><a href="#tour" style="color: white;">Tour</a></li>
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#discography">Discography</a></li>
+                <li><a href="#tour">Tour</a></li>
             </ul>
         </nav>
+        <div style="display: flex; gap: 2px;">
+            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; font-weight: 700; line-height: 1;">_</div>
+            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #2F8CF3 0%, #1464D4 50%, #0F4FC4 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; color: white;">&#9744;</div>
+            <div style="width: 21px; height: 21px; background: linear-gradient(to bottom, #F38C2F 0%, #D46414 50%, #C44F0F 100%); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; font-weight: 700; line-height: 1;">×</div>
+        </div>
     </header>
 
     <!-- Artist Hero -->
-    <section class="hero" style="height: 80vh;">
-        <h1>John Polar</h1>
-        <p>The voice of a new generation. Soulful. Authentic. Timeless.</p>
-        <a href="#discography" class="btn btn-primary" style="background-color: white; color: black; border: none;">Latest Release</a>
+    <section class="hero" style="min-height: 300px;">
+        <div style="text-align: center; margin: 20px 0;">
+            <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); border-radius: 4px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; border: 2px solid; border-color: #FFFFFF #808080 #808080 #FFFFFF; box-shadow: 2px 2px 4px rgba(0,0,0,0.3);">♪</div>
+            <h1>John Polar</h1>
+            <p>The voice of a new generation. Soulful. Authentic. Timeless.</p>
+            <div style="margin-top: 16px;">
+                <a href="#discography" class="btn btn-primary">Latest Release</a>
+                <a href="#tour" class="btn btn-secondary">Tour Dates</a>
+            </div>
+        </div>
     </section>
 
     <!-- Main Content -->
     <main class="container">
-        
-        <section id="bio" style="padding: 4rem 0;">
+
+        <section id="bio">
             <h2>Biography</h2>
             <p>John Polar emerged from the underground scene with a unique blend of acoustic soul and electronic textures. His debut album redefined the genre, earning critical acclaim and a dedicated following.</p>
         </section>
@@ -73,22 +59,52 @@
             <h2>Discography</h2>
             <div class="grid">
                 <article class="card">
-                    <h3>Polar Night (LP)</h3>
-                    <p>2024</p>
-                    <button class="btn btn-primary" style="font-size: 0.8rem; margin-top: 10px;">Listen</button>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 1px solid #999; margin-right: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">💿</div>
+                        <div>
+                            <h3 style="margin: 0;">Polar Night</h3>
+                            <p style="margin: 0; color: #666; font-size: 10px;">LP • 2024</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Listen Now</button>
                 </article>
                 <article class="card">
-                    <h3>Echoes (EP)</h3>
-                    <p>2023</p>
-                    <button class="btn btn-primary" style="font-size: 0.8rem; margin-top: 10px;">Listen</button>
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border: 1px solid #999; margin-right: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">💿</div>
+                        <div>
+                            <h3 style="margin: 0;">Echoes</h3>
+                            <p style="margin: 0; color: #666; font-size: 10px;">EP • 2023</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Listen Now</button>
                 </article>
+            </div>
+        </section>
+
+        <section id="tour">
+            <h2>Tour Dates</h2>
+            <div style="background: #FFFFFF; border: 2px solid; border-color: #7F9DB9 #FFFFFF #FFFFFF #7F9DB9; padding: 12px; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);">
+                <p style="margin: 8px 0; padding: 6px; background: #E8F4FF; border-left: 3px solid #0054E3;"><strong>March 15, 2025</strong> - Los Angeles, CA @ The Roxy</p>
+                <p style="margin: 8px 0; padding: 6px; background: #E8F4FF; border-left: 3px solid #0054E3;"><strong>March 22, 2025</strong> - New York, NY @ Webster Hall</p>
+                <p style="margin: 8px 0; padding: 6px; background: #E8F4FF; border-left: 3px solid #0054E3;"><strong>March 29, 2025</strong> - Chicago, IL @ Metro</p>
             </div>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2025 John Polar / PolaRecords.</p>
+        <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="xp-start-btn" style="cursor: pointer;">
+                    <span style="font-size: 14px; vertical-align: middle;">❖</span> start
+                </div>
+            </div>
+            <div>&copy; 2025 John Polar / PolaRecords</div>
+            <div style="display: flex; gap: 4px; align-items: center;">
+                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">♪ Now Playing</div>
+                <div style="padding: 2px 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.3); border-radius: 2px;">🔊</div>
+            </div>
+        </div>
     </footer>
 
 </body>
