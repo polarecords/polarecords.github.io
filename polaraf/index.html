@@ -18,10 +18,7 @@
         <a href="../index.html" class="logo">
             PølarAF - The Raw & Unfiltered
         </a>
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-            ☰
-        </button>
-        <nav id="mainNav">
+        <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="#bio">Bio</a></li>
@@ -87,38 +84,6 @@
     <footer>
         <p>&copy; 2025 PølarAF / John Polar Presents / PølaRecørds - No Cap, No Filter</p>
     </footer>
-
-    <script>
-        // Mobile Navigation Toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mainNav = document.getElementById('mainNav');
-
-        if (mobileMenuToggle && mainNav) {
-            mobileMenuToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                this.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
-            });
-
-            // Close menu when clicking a link
-            const navLinks = mainNav.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mainNav.classList.remove('active');
-                    if (mobileMenuToggle) {
-                        mobileMenuToggle.textContent = '☰';
-                    }
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!mainNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                    mainNav.classList.remove('active');
-                    mobileMenuToggle.textContent = '☰';
-                }
-            });
-        }
-    </script>
 
 </body>
 </html>
