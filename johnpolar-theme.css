@@ -1,25 +1,61 @@
 /* John Polar Theme: The Artisan of Artistry */
-/* Refined, melodic, introspective aesthetic */
+/* Refined, melodic, introspective aesthetic with cosmic undertones */
 
 :root {
     --jp-primary: #3498db;
     --jp-secondary: #2c3e50;
     --jp-accent: #9b59b6;
-    --jp-bg: #0f1419;
-    --jp-surface: #1a2332;
-    --jp-text: #e8eaf0;
+    --jp-light-blue: #5dade2;
+    --jp-purple: #af7ac5;
+    --jp-gold: #f4d03f;
+    --jp-bg: #0a0e14;
+    --jp-surface: #151b26;
+    --jp-surface-light: #1e2838;
+    --jp-text: #e8edf5;
+    --jp-text-muted: #8b95a8;
 }
 
 body {
-    background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+    background: #0a0e14;
+    background-image:
+        radial-gradient(ellipse at 20% 30%, rgba(52, 152, 219, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(155, 89, 182, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
     color: var(--jp-text);
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(52, 152, 219, 0.03) 2px,
+            rgba(52, 152, 219, 0.03) 4px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
+main, header, footer {
+    position: relative;
+    z-index: 1;
 }
 
 /* Header Styling */
 header {
-    background: linear-gradient(180deg, rgba(52, 152, 219, 0.15) 0%, rgba(44, 62, 80, 0.15) 100%);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+    background: rgba(15, 20, 25, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
@@ -40,19 +76,57 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
-    border: 1px solid rgba(52, 152, 219, 0.2);
-    border-radius: 12px;
-    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(21, 27, 38, 0.95) 0%, rgba(30, 40, 56, 0.95) 100%);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, rgba(52, 152, 219, 0.4), rgba(155, 89, 182, 0.4)) 1;
+    border-radius: 16px;
+    padding: 5rem 2rem;
     margin: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.5), transparent);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: pulse-glow 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
 }
 
 .hero h1 {
-    background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+    background: linear-gradient(135deg, #5dade2 0%, #af7ac5 50%, #f4d03f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(52, 152, 219, 0.4));
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Buttons */
@@ -74,20 +148,41 @@ nav a:hover {
 
 /* Cards */
 .card {
-    background: rgba(26, 35, 50, 0.8);
-    border: 1px solid rgba(52, 152, 219, 0.3);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(21, 27, 38, 0.9) 0%, rgba(30, 40, 56, 0.85) 100%);
+    border: 1px solid rgba(52, 152, 219, 0.25);
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.card:hover::before {
+    left: 100%;
 }
 
 .card:hover {
     border-color: var(--jp-primary);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
-    transform: translateY(-5px);
+    box-shadow:
+        0 12px 40px rgba(52, 152, 219, 0.3),
+        0 0 0 1px rgba(52, 152, 219, 0.2);
+    transform: translateY(-8px) scale(1.02);
 }
 
 .card h3 {
-    color: var(--jp-primary);
+    color: var(--jp-light-blue);
+    font-weight: 600;
 }
 
 /* Section Headings */
@@ -99,10 +194,56 @@ h2 {
 
 /* Container */
 .container {
-    background: rgba(26, 35, 50, 0.6);
-    border: 1px solid rgba(52, 152, 219, 0.2);
+    background: linear-gradient(135deg, rgba(21, 27, 38, 0.7) 0%, rgba(15, 20, 25, 0.7) 100%);
+    border: 1px solid rgba(52, 152, 219, 0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(20px) saturate(120%);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Coming Soon Sections */
+.coming-soon {
+    background: linear-gradient(135deg, rgba(30, 40, 56, 0.5) 0%, rgba(21, 27, 38, 0.5) 100%);
+    border: 2px dashed rgba(52, 152, 219, 0.3);
     border-radius: 12px;
-    backdrop-filter: blur(10px);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.coming-soon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: rotate-slow 20s linear infinite;
+}
+
+@keyframes rotate-slow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.coming-soon h3 {
+    color: var(--jp-light-blue);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.coming-soon p {
+    color: var(--jp-text-muted);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* Footer */
