@@ -5,75 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <title>PolaRecords</title>
+    <title>PolaRecords - The Official Home of Sound | Three Sides of One Mind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="images/hat.png">
     <link rel="canonical" href="https://polarecords.net/">
-    <meta name="description" content="PolaRecords - The official home of sound.">
+    <meta name="description" content="PolaRecords - The official home of sound. One artist, three personas: John Polar, PølarAF, and PolarX. Explore music from the mind of a 24-year-old finding himself.">
+    <meta name="keywords" content="PolaRecords, music, John Polar, PølarAF, PolarX, electronic music, hip hop, experimental, remix, DJ, producer, artist">
+    <meta name="author" content="PolaRecords">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:title" content="PolaRecords - The Official Home of Sound">
+    <meta property="og:description" content="One artist, three personas: John Polar, PølarAF, and PolarX. Explore music from the mind of a 24-year-old finding himself.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polarecords.net/">
+    <meta property="og:image" content="https://polarecords.net/images/hat.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PolaRecords - The Official Home of Sound">
+    <meta name="twitter:description" content="One artist, three personas: John Polar, PølarAF, and PolarX. Explore music from the mind of a 24-year-old finding himself.">
+    <meta name="twitter:image" content="https://polarecords.net/images/hat.png">
 </head>
 <body>
 
     <!-- Navigation -->
-    <header>
-        <a href="#" class="logo">
-            <img src="images/hat.png" alt="PolaRecords Logo">
+    <header role="banner">
+        <a href="index.html" class="logo" aria-label="PolaRecords Home">
+            <img src="images/hat.png" alt="PolaRecords Logo" loading="lazy" width="30" height="30">
             PølaRecørds
         </a>
-        <nav>
+        <nav role="navigation" aria-label="Main navigation">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#music">Artists</a></li>
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="index.html#music">Artists</a></li>
                 <li><a href="johnpolar/index.html">John Polar</a></li>
                 <li><a href="polaraf/index.html">PølarAF</a></li>
                 <li><a href="polarx/index.html">PolarX</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" role="banner" aria-label="Welcome to PolaRecords">
         <h1>PølaRecørds</h1>
         <p class="subtitle" style="font-style: italic; color: #ccc; margin-top: -10px; font-size: 1.1rem;">music from the mind of a 24-year-old finding himself</p>
         <p style="font-size: 1.2rem; max-width: 700px; margin: 20px auto;">not a label. not a brand. just one artist, three personas, endless expression.</p>
         <p style="color: #999; margin-top: 12px;">the raw, the refined, the remixed. the chaos, the calm, the creative outlet. welcome to the PolaZone.</p>
-        <div class="cta-group">
+        <div class="cta-group" role="group" aria-label="Main actions">
             <a href="#music" class="btn btn-primary">explore the personas</a>
             <a href="#contact" class="btn btn-secondary">stay connected</a>
         </div>
     </section>
 
     <!-- Main Content -->
-    <main class="container">
-        <section id="music">
-            <h2>three sides of one mind</h2>
+    <main class="container" role="main">
+        <section id="music" aria-labelledby="artists-heading">
+            <h2 id="artists-heading">three sides of one mind</h2>
             <p style="text-align: center; margin-bottom: 20px; color: #ccc; font-size: 1rem;">one artist. three creative outlets. different moods, different vibes.</p>
-            <div class="grid">
+            <div class="grid" role="list">
                 <!-- Artist Cards -->
-                <article class="card">
+                <article class="card" role="listitem" aria-labelledby="john-polar">
                     <div style="text-align: center; margin-bottom: 12px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">🎹</div>
-                        <h3>John Polar</h3>
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;" aria-label="Musical keyboard icon" role="img">🎹</div>
+                        <h3 id="john-polar">John Polar</h3>
                         <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">when i'm in my feels</p>
                     </div>
                     <p>the introspective side. freestyling over internet beats, trying to figure life out through music. stream-of-consciousness flows, melodic rap, spoken word vibes.</p>
                     <p style="font-size: 0.8rem; font-style: italic; margin-top: 8px; color: #888;">"just tryna make sense of it all through rhythm and rhyme"</p>
                     <a href="johnpolar/index.html" class="btn btn-primary" style="font-size: 0.8rem; margin-top: 12px;">dive deeper →</a>
                 </article>
-                <article class="card">
+                <article class="card" role="listitem" aria-labelledby="polaraf">
                     <div style="text-align: center; margin-bottom: 12px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #00FF41 0%, #006618 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #000;">🎤</div>
-                        <h3>PølarAF</h3>
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #00FF41 0%, #006618 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #000;" aria-label="Microphone icon" role="img">🎤</div>
+                        <h3 id="polaraf">PølarAF</h3>
                         <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">when i need to let it out</p>
                     </div>
                     <p>the unfiltered side. raw energy, aggressive flows, no holding back. this is where the frustration, the anger, the real talk lives. straight from the gut.</p>
                     <p style="font-size: 0.8rem; font-style: italic; margin-top: 8px; color: #888;">"no cap, no filter. just truth."</p>
                     <a href="polaraf/index.html" class="btn btn-primary" style="font-size: 0.8rem; margin-top: 12px;">check it out →</a>
                 </article>
-                <article class="card">
+                <article class="card" role="listitem" aria-labelledby="polarx">
                     <div style="text-align: center; margin-bottom: 12px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">🎧</div>
-                        <h3>PolarX</h3>
+                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); border-radius: 4px; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;" aria-label="Headphones icon" role="img">🎧</div>
+                        <h3 id="polarx">PolarX</h3>
                         <p style="font-size: 0.85rem; font-style: italic; color: #999; margin: 4px 0;">when i just wanna create</p>
                     </div>
                     <p>the experimental side. remixing sounds, bending genres, playing with audio. this is where i get to be a producer, a DJ, a sound designer.</p>
@@ -84,19 +99,19 @@
         </section>
 
         <!-- Pola Brands Section -->
-        <section style="margin-top: 40px;">
-            <h2>More Than Music: It's the PolaVerse</h2>
+        <section style="margin-top: 40px;" aria-labelledby="brands-heading">
+            <h2 id="brands-heading">More Than Music: It's the PolaVerse</h2>
             <p style="text-align: center; margin-bottom: 20px; color: #ccc;">The interconnected ecosystem of Pola brands</p>
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                <article class="card" style="text-align: center;">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));" role="list">
+                <article class="card" style="text-align: center;" role="listitem">
                     <h3 style="font-size: 1rem;">PolaPresents</h3>
                     <p style="font-size: 0.85rem;">Events & Live Shows</p>
                 </article>
-                <article class="card" style="text-align: center;">
+                <article class="card" style="text-align: center;" role="listitem">
                     <h3 style="font-size: 1rem;">PolaBoard</h3>
                     <p style="font-size: 0.85rem;">Action Sports & Lifestyle</p>
                 </article>
-                <article class="card" style="text-align: center;">
+                <article class="card" style="text-align: center;" role="listitem">
                     <h3 style="font-size: 1rem;">PolaRepairs</h3>
                     <p style="font-size: 0.85rem;">Tech & Device Fixes</p>
                 </article>
@@ -104,20 +119,86 @@
         </section>
 
         <!-- Newsletter Section -->
-        <section class="newsletter" id="contact">
-            <h2>Join the Polar People</h2>
+        <section class="newsletter" id="contact" aria-labelledby="newsletter-heading">
+            <h2 id="newsletter-heading">Join the Polar People</h2>
             <p>Our Fam, Our Fanbase: Welcome to the PolaPath. Get exclusive updates, drops, and behind-the-scenes access.</p>
-            <form class="form-group">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="btn btn-primary">Join the Journey</button>
+            <form class="form-group" role="form" aria-label="Newsletter subscription">
+                <input type="email" placeholder="Enter your email address" required aria-label="Email address">
+                <button type="submit" class="btn btn-primary" aria-label="Subscribe to newsletter">Join the Journey</button>
             </form>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 PølaRecørds. All rights reserved.</p>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Back to top button
+            const backToTopButton = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Enhanced form validation
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const emailInput = form.querySelector('input[type="email"]');
+                    const email = emailInput.value;
+
+                    if (!isValidEmail(email)) {
+                        e.preventDefault();
+                        alert('Please enter a valid email address.');
+                        emailInput.focus();
+                        return false;
+                    }
+
+                    // Show success message
+                    alert('Thank you for joining the journey! We\'ll keep you updated.');
+                });
+            }
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        });
+    </script>
 
 </body>
 </html>
