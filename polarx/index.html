@@ -5,39 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <title>PolarX | John Polar Presents</title>
-    <link rel="canonical" href="https://polarecords.net/polarx/">
+    <title>PolarX - The Sound Bender | PolaRecords</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../polarx-theme.css">
     <link rel="icon" type="image/png" href="../images/hat.png">
+    <link rel="canonical" href="https://polarecords.net/polarx/">
+    <meta name="description" content="PolarX - The Sound Bender. Innovative DJ, sonic scientist, master of the remix. Transformative edits, experimental beats, and futuristic sound design.">
+    <meta name="keywords" content="PolarX, DJ, remix, electronic music, future bass, experimental electronica, EDM, sound design, producer, sonic scientist, PolaRecords">
+    <meta name="author" content="PolaRecords">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0d0415">
+    <meta property="og:title" content="PolarX - The Sound Bender">
+    <meta property="og:description" content="Innovative DJ, sonic scientist, master of the remix. Transformative edits, experimental beats, and futuristic sound design.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polarecords.net/polarx/">
+    <meta property="og:image" content="https://polarecords.net/images/hat.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PolarX - The Sound Bender">
+    <meta name="twitter:description" content="Innovative DJ, sonic scientist, master of the remix. Transformative edits, experimental beats, and futuristic sound design.">
+    <meta name="twitter:image" content="https://polarecords.net/images/hat.png">
 </head>
 <body>
 
     <!-- Navigation Header -->
-    <header>
-        <a href="../index.html" class="logo">
-            PolarX - The Sound Bender
+    <header role="banner">
+        <a href="../index.html" class="logo" aria-label="PolaRecords Home">
+            <img src="../images/hat.png" alt="PolaRecords Logo" loading="lazy" width="30" height="30"> PølaRecørds
         </a>
-        <nav>
+        <nav role="navigation" aria-label="Main navigation">
             <ul>
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="#bio">Bio</a></li>
-                <li><a href="#remixes">Remixes</a></li>
+                <li><a href="../index.html#music">Artists</a></li>
                 <li><a href="../johnpolar/index.html">John Polar</a></li>
                 <li><a href="../polaraf/index.html">PølarAF</a></li>
+                <li><a href="index.html" aria-current="page">PolarX</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Artist Hero -->
-    <section class="hero" style="min-height: 300px;">
+    <section class="hero" style="min-height: 300px;" role="banner" aria-label="PolarX - The Sound Bender">
         <div style="text-align: center; margin: 20px 0;">
-            <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); border-radius: 4px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #fff; border: 2px solid; border-color: #e74c3c #9b59b6 #9b59b6 #e74c3c; box-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(231, 76, 60, 0.3);">🎧</div>
+            <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); border-radius: 4px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #fff; border: 2px solid; border-color: #e74c3c #9b59b6 #9b59b6 #e74c3c; box-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(231, 76, 60, 0.3);" aria-label="Headphones icon" role="img">🎧</div>
             <h1>PolarX</h1>
             <p class="subtitle">John Polar Presents</p>
             <p style="margin-top: 12px;">The innovative DJ. The sonic scientist. The master of the remix.</p>
             <div style="margin-top: 12px;">
-                <a href="https://instagram.com/polarxmusic" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; filter: drop-shadow(0 0 8px rgba(231, 76, 60, 0.5));">
+                <a href="https://instagram.com/polarxmusic" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(135deg, #9b59b6 0%, #e74c3c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; filter: drop-shadow(0 0 8px rgba(231, 76, 60, 0.5));" aria-label="Follow PolarX on Instagram">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="url(#gradient-ig)" style="filter: drop-shadow(0 0 10px rgba(231, 76, 60, 0.5));">
                         <defs>
                             <linearGradient id="gradient-ig" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -50,7 +67,7 @@
                     @polarxmusic
                 </a>
             </div>
-            <div style="margin-top: 16px;">
+            <div class="cta-group" style="margin-top: 16px;" role="group" aria-label="Main actions">
                 <a href="#remixes" class="btn btn-primary">Latest Remixes</a>
                 <a href="#bio" class="btn btn-secondary">Learn More</a>
             </div>
@@ -58,10 +75,10 @@
     </section>
 
     <!-- Main Content -->
-    <main class="container">
+    <main class="container" role="main">
 
-        <section id="bio">
-            <h2>About PolarX: The Sound Bender</h2>
+        <section id="bio" aria-labelledby="bio-heading">
+            <h2 id="bio-heading">About PolarX: The Sound Bender</h2>
             <p><strong>PolarX</strong> is the innovative DJ, the sonic scientist, the master of the remix. He takes the pieces and builds a whole new world. Through transformative edits, experimental beats, and futuristic sound design, PolarX speaks through the manipulation of sound itself.</p>
             <p style="margin-top: 8px;"><strong>Voice & Tone:</strong> Transformative, energetic, and purely instrumental/sonic. PolarX doesn't need words—the music tells the story. Every remix is a reimagining, every mashup a new perspective on familiar sounds.</p>
             <p style="margin-top: 8px;"><strong>Themes:</strong> Innovation, pushing genre boundaries, recontextualizing existing music, and sonic euphoria. This is the sound of transformation—taking what exists and making it something entirely new.</p>
@@ -69,16 +86,16 @@
             <p style="margin-top: 12px; font-style: italic; color: #888; border-left: 3px solid #e74c3c; padding-left: 12px; background: rgba(231, 76, 60, 0.05);">"Digital Escape, Copy Paste, Edit? That's the world these days. I'm just here to turn that static buzz into something gold."</p>
         </section>
 
-        <section id="remixes">
-            <h2>Remixes & Productions</h2>
+        <section id="remixes" aria-labelledby="remixes-heading">
+            <h2 id="remixes-heading">Remixes & Productions</h2>
             <div class="coming-soon">
                 <h3>🎧 Sonic Transformations Coming</h3>
                 <p>The sound bender is in the lab. Remixes, mashups, and original productions dropping soon.</p>
             </div>
         </section>
 
-        <section id="sets">
-            <h2>DJ Sets & Live Mixes</h2>
+        <section id="sets" aria-labelledby="sets-heading">
+            <h2 id="sets-heading">DJ Sets & Live Mixes</h2>
             <div class="coming-soon">
                 <h3>🌊 Sets & Performances TBA</h3>
                 <p>Stay tuned for live DJ sets and experimental performances.</p>
@@ -87,9 +104,51 @@
 
     </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 PolarX / John Polar Presents / PølaRecørds - Turning Static Into Gold</p>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Back to top button
+            const backToTopButton = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

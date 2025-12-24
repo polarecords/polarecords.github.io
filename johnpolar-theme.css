@@ -1,26 +1,26 @@
-/* John Polar Theme: The Artisan of Artistry */
-/* Refined, melodic, introspective aesthetic with cosmic undertones */
+/* John Polar Theme: The Acoustic Storyteller */
+/* Warm, intimate, acoustic aesthetic with white guitar undertones */
 
 :root {
-    --jp-primary: #3498db;
-    --jp-secondary: #2c3e50;
-    --jp-accent: #9b59b6;
-    --jp-light-blue: #5dade2;
-    --jp-purple: #af7ac5;
-    --jp-gold: #f4d03f;
-    --jp-bg: #0a0e14;
-    --jp-surface: #151b26;
-    --jp-surface-light: #1e2838;
-    --jp-text: #e8edf5;
-    --jp-text-muted: #8b95a8;
+    --jp-primary: #f0d9b5; /* Warm cream color like a white guitar */
+    --jp-secondary: #8d6e63; /* Earthy brown like guitar wood */
+    --jp-accent: #d7ccc8; /* Light brown like acoustic guitar wood */
+    --jp-light-blue: #cfd8dc;
+    --jp-purple: #bcaaa4;
+    --jp-gold: #fff176;
+    --jp-bg: #1a1a1a;
+    --jp-surface: #2c2c2c;
+    --jp-surface-light: #3b3b3b;
+    --jp-text: #e8e8e8;
+    --jp-text-muted: #b8b8b8;
 }
 
 body {
-    background: #0a0e14;
+    background: #1a1a1a;
     background-image:
-        radial-gradient(ellipse at 20% 30%, rgba(52, 152, 219, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(155, 89, 182, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
+        radial-gradient(ellipse at 20% 30%, rgba(240, 217, 181, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(141, 110, 99, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(215, 204, 200, 0.05) 0%, transparent 70%);
     color: var(--jp-text);
     position: relative;
     overflow-x: hidden;
@@ -76,9 +76,9 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(21, 27, 38, 0.95) 0%, rgba(30, 40, 56, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(44, 44, 44, 0.95) 0%, rgba(59, 59, 59, 0.95) 100%);
     border: 2px solid;
-    border-image: linear-gradient(135deg, rgba(52, 152, 219, 0.4), rgba(155, 89, 182, 0.4)) 1;
+    border-image: linear-gradient(135deg, rgba(240, 217, 181, 0.4), rgba(141, 110, 99, 0.4)) 1;
     border-radius: 16px;
     padding: 5rem 2rem;
     margin: 2rem;
@@ -87,6 +87,7 @@ nav a:hover {
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    animation: fadeInUp 1s ease-out;
 }
 
 .hero::before {
@@ -118,26 +119,37 @@ nav a:hover {
 }
 
 .hero h1 {
-    background: linear-gradient(135deg, #5dade2 0%, #af7ac5 50%, #f4d03f 100%);
+    background: linear-gradient(135deg, #f0d9b5 0%, #8d6e63 50%, #d7ccc8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 30px rgba(52, 152, 219, 0.4));
+    filter: drop-shadow(0 0 20px rgba(240, 217, 181, 0.4));
     font-weight: 700;
     letter-spacing: -0.5px;
     position: relative;
     z-index: 1;
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        filter: drop-shadow(0 0 20px rgba(52, 152, 219, 0.4));
+    }
+    to {
+        filter: drop-shadow(0 0 40px rgba(52, 152, 219, 0.7));
+    }
 }
 
 /* Buttons */
 .btn-primary {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-    border: 1px solid rgba(52, 152, 219, 0.5);
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    background: linear-gradient(135deg, #f0d9b5 0%, #8d6e63 100%);
+    border: 1px solid rgba(240, 217, 181, 0.5);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(240, 217, 181, 0.3);
 }
 
 .btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    box-shadow: 0 6px 20px rgba(240, 217, 181, 0.5);
     transform: translateY(-2px);
 }
 
@@ -148,8 +160,8 @@ nav a:hover {
 
 /* Cards */
 .card {
-    background: linear-gradient(135deg, rgba(21, 27, 38, 0.9) 0%, rgba(30, 40, 56, 0.85) 100%);
-    border: 1px solid rgba(52, 152, 219, 0.25);
+    background: linear-gradient(135deg, rgba(44, 44, 44, 0.9) 0%, rgba(59, 59, 59, 0.85) 100%);
+    border: 1px solid rgba(240, 217, 181, 0.25);
     border-radius: 12px;
     backdrop-filter: blur(15px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -164,7 +176,7 @@ nav a:hover {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(240, 217, 181, 0.1), transparent);
     transition: left 0.6s;
 }
 
@@ -175,27 +187,27 @@ nav a:hover {
 .card:hover {
     border-color: var(--jp-primary);
     box-shadow:
-        0 12px 40px rgba(52, 152, 219, 0.3),
-        0 0 0 1px rgba(52, 152, 219, 0.2);
+        0 12px 40px rgba(240, 217, 181, 0.3),
+        0 0 0 1px rgba(240, 217, 181, 0.2);
     transform: translateY(-8px) scale(1.02);
 }
 
 .card h3 {
-    color: var(--jp-light-blue);
+    color: var(--jp-primary);
     font-weight: 600;
 }
 
 /* Section Headings */
 h2 {
     color: var(--jp-primary);
-    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+    border-bottom: 2px solid rgba(240, 217, 181, 0.3);
     padding-bottom: 0.5rem;
 }
 
 /* Container */
 .container {
-    background: linear-gradient(135deg, rgba(21, 27, 38, 0.7) 0%, rgba(15, 20, 25, 0.7) 100%);
-    border: 1px solid rgba(52, 152, 219, 0.15);
+    background: linear-gradient(135deg, rgba(44, 44, 44, 0.7) 0%, rgba(26, 26, 26, 0.7) 100%);
+    border: 1px solid rgba(240, 217, 181, 0.15);
     border-radius: 16px;
     backdrop-filter: blur(20px) saturate(120%);
     box-shadow:
@@ -205,8 +217,8 @@ h2 {
 
 /* Coming Soon Sections */
 .coming-soon {
-    background: linear-gradient(135deg, rgba(30, 40, 56, 0.5) 0%, rgba(21, 27, 38, 0.5) 100%);
-    border: 2px dashed rgba(52, 152, 219, 0.3);
+    background: linear-gradient(135deg, rgba(59, 59, 59, 0.5) 0%, rgba(44, 44, 44, 0.5) 100%);
+    border: 2px dashed rgba(240, 217, 181, 0.3);
     border-radius: 12px;
     padding: 3rem 2rem;
     text-align: center;
@@ -221,7 +233,7 @@ h2 {
     left: 50%;
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(240, 217, 181, 0.1) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     animation: rotate-slow 20s linear infinite;
 }
@@ -232,7 +244,7 @@ h2 {
 }
 
 .coming-soon h3 {
-    color: var(--jp-light-blue);
+    color: var(--jp-primary);
     font-size: 1.8rem;
     margin-bottom: 1rem;
     position: relative;
@@ -248,18 +260,77 @@ h2 {
 
 /* Footer */
 footer {
-    background: linear-gradient(180deg, rgba(44, 62, 80, 0.8) 0%, rgba(26, 35, 50, 0.8) 100%);
-    border-top: 1px solid rgba(52, 152, 219, 0.3);
+    background: linear-gradient(180deg, rgba(141, 110, 99, 0.5) 0%, rgba(44, 44, 44, 0.8) 100%);
+    border-top: 1px solid rgba(240, 217, 181, 0.3);
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+    body::before {
+        opacity: 0.3;
+    }
+
+    header {
+        background: rgba(15, 20, 25, 0.95);
+    }
+
     .hero {
-        margin: 1rem;
-        padding: 2.5rem 1.5rem;
+        margin: 0.75rem;
+        padding: 1rem 0.75rem;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero::before,
+    .hero::after {
+        opacity: 0.5;
+    }
+
+    .hero h1 {
+        animation: none;
+        filter: drop-shadow(0 0 15px rgba(52, 152, 219, 0.3));
+        font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
     .container {
-        margin: 1rem;
+        margin: 0.5rem;
+        padding: 0.75rem;
+        border: 1px solid rgba(240, 217, 181, 0.1);
+        border-radius: 8px;
+        background: rgba(44, 44, 44, 0.5);
+    }
+
+    .card {
+        background: linear-gradient(135deg, rgba(44, 44, 44, 0.85) 0%, rgba(59, 59, 59, 0.8) 100%);
+    }
+
+    .card::before {
+        display: none;
+    }
+
+    .coming-soon {
+        padding: 2rem 1.5rem;
+    }
+
+    .coming-soon::before {
+        opacity: 0.3;
+    }
+
+    .coming-soon h3 {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+    }
+
+    .coming-soon p {
+        font-size: clamp(0.85rem, 2.2vw, 1rem);
+        line-height: 1.5;
+    }
+
+    h2 {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    }
+
+    section p {
+        font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+        line-height: 1.5;
     }
 }
