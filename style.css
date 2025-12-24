@@ -564,23 +564,21 @@ section.visible {
         margin-right: 6px;
     }
 
-    /* Remove animations on mobile for performance */
-    section {
-        opacity: 1;
-        transform: none;
-    }
-
-    .hero::before {
-        display: none;
-    }
-
-    .card::before {
-        display: none;
-    }
-
     /* Improve card icons on mobile */
     .card div[role="img"] {
         margin-bottom: 6px !important;
+    }
+
+    /* Keep animations on mobile */
+    section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

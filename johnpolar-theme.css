@@ -267,7 +267,7 @@ footer {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     body::before {
-        opacity: 0.3;
+        opacity: 0.5;
     }
 
     header {
@@ -283,11 +283,12 @@ footer {
 
     .hero::before,
     .hero::after {
-        opacity: 0.5;
+        opacity: 0.7;
+        animation: pulse-glow 8s ease-in-out infinite;
     }
 
     .hero h1 {
-        animation: none;
+        animation: textGlow 3s ease-in-out infinite alternate;
         filter: drop-shadow(0 0 15px rgba(52, 152, 219, 0.3));
         font-size: clamp(1.5rem, 5vw, 2rem);
     }
@@ -305,7 +306,18 @@ footer {
     }
 
     .card::before {
-        display: none;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(240, 217, 181, 0.1), transparent);
+        transition: left 0.6s;
+    }
+
+    .card:hover::before {
+        left: 100%;
     }
 
     .coming-soon {
@@ -313,7 +325,8 @@ footer {
     }
 
     .coming-soon::before {
-        opacity: 0.3;
+        opacity: 0.5;
+        animation: rotate-slow 20s linear infinite;
     }
 
     .coming-soon h3 {

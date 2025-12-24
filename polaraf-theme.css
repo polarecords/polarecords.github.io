@@ -385,7 +385,8 @@ footer {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     body::before {
-        opacity: 0.4;
+        opacity: 0.6;
+        animation: drift 30s ease-in-out infinite alternate;
     }
 
     header {
@@ -393,7 +394,8 @@ footer {
     }
 
     header::after {
-        opacity: 0.5;
+        opacity: 0.7;
+        animation: scan-line 3s linear infinite;
     }
 
     .hero {
@@ -404,22 +406,20 @@ footer {
     }
 
     .hero::before {
-        opacity: 0.3;
+        opacity: 0.5;
+        animation: slide-diagonal 20s linear infinite;
     }
 
     .hero::after {
-        opacity: 0.5;
+        opacity: 0.7;
+        animation: scan-vertical 4s ease-in-out infinite;
     }
 
     .hero h1 {
-        animation: none;
+        animation: text-flicker 5s ease-in-out infinite;
         letter-spacing: 2px;
         font-size: clamp(1.5rem, 5vw, 2rem);
         text-shadow: 0 0 20px var(--paf-glow), 2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-
-    .hero h1::before {
-        display: none;
     }
 
     .container {
@@ -435,11 +435,27 @@ footer {
     }
 
     .card::before {
-        display: none;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 65, 65, 0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    .card:hover::before {
+        left: 100%;
     }
 
     .card::after {
-        opacity: 0.5;
+        opacity: 0.7;
+        transition: opacity 0.4s;
+    }
+
+    .card:hover::after {
+        opacity: 1;
     }
 
     .coming-soon {
@@ -447,11 +463,13 @@ footer {
     }
 
     .coming-soon::before {
-        opacity: 0.5;
+        opacity: 0.7;
+        animation: sweep 3s ease-in-out infinite;
     }
 
     .coming-soon::after {
-        opacity: 0.6;
+        opacity: 0.8;
+        animation: pulse-expand 4s ease-in-out infinite;
     }
 
     .coming-soon h3 {
