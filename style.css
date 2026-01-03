@@ -96,7 +96,9 @@ header {
 }
 
 .magic-nav a:hover {
-    color: var(--accent-color);
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
+    transform: translateY(-2px);
 }
 
 /* Magic Line Element */
@@ -105,13 +107,35 @@ header {
     bottom: 0;
     left: var(--left, calc(100% / var(--items) * (var(--index) - 1)));
     width: var(--width, calc(100% / var(--items)));
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    height: 4px;
+    background: linear-gradient(90deg, #00d9ff, #00ffff, #00d9ff);
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 0 10px var(--accent-color);
+    box-shadow:
+        0 0 20px #00d9ff,
+        0 0 40px rgba(0, 217, 255, 0.6),
+        0 0 60px rgba(0, 217, 255, 0.4),
+        0 -2px 10px rgba(0, 217, 255, 0.5);
     border-radius: 2px 2px 0 0;
     --index: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 20px #00d9ff,
+            0 0 40px rgba(0, 217, 255, 0.6),
+            0 0 60px rgba(0, 217, 255, 0.4),
+            0 -2px 10px rgba(0, 217, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            0 0 30px #00d9ff,
+            0 0 60px rgba(0, 217, 255, 0.8),
+            0 0 90px rgba(0, 217, 255, 0.6),
+            0 -2px 15px rgba(0, 217, 255, 0.7);
+    }
 }
 
 .magic-nav a:hover ~ .magic-line {
@@ -128,7 +152,7 @@ header {
 
 /* Show magic line on active/current page */
 .magic-nav a[aria-current="page"] ~ .magic-line {
-    opacity: 0.7;
+    opacity: 1;
     --index: 1;
 }
 
