@@ -1,22 +1,16 @@
-:root {
-    --bg-color: #0a0a0a;
-    --text-color: #e0e0e0;
-    --primary-color: #ffffff;
-    --accent-color: #00d9ff;
-    --secondary-bg: #1a1a1a;
-    --nav-height: 70px;
-    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
 
-/* Improved Dark Theme */
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg-color: #0a0a0a;
-        --text-color: #e0e0e0;
-        --primary-color: #ffffff;
-        --secondary-bg: #1a1a1a;
-    }
+:root {
+    --bg-color: #345;
+    --text-color: #eee;
+    --primary-color: #85c6f6;
+    --accent-color: #85c6f6;
+    --secondary-bg: #fff;
+    --content-bg: #fff;
+    --content-text: #666;
+    --footer-bg: #246c;
+    --font-main: 'Lato', sans-serif;
+    --font-code: 'Inconsolata', monospace;
 }
 
 * {
@@ -25,14 +19,25 @@
     padding: 0;
 }
 
-body {
-    font-family: var(--font-main);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
+html, body {
     min-height: 100vh;
+}
+
+body {
+    background-color: #345;
+    background-image: linear-gradient(to bottom, #0009, transparent);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 62.5%;
+    padding: 0 20px 100px 20px;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+code {
+    background: #fff1;
+    font-family: var(--font-code);
+    padding: .2em .4em;
 }
 
 /* Navigation */
@@ -70,38 +75,61 @@ header {
     transform: rotate(10deg) scale(1.1);
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
+/* Magic Line Navigation */
+.magic-nav {
+    display: grid;
+    grid-template-columns: repeat(var(--items), 1fr);
+    position: relative;
+    gap: 0;
+    align-items: center;
 }
 
-nav a {
+.magic-nav a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
-    padding: 5px 0;
+    padding: 10px 15px;
+    text-align: center;
+    z-index: 1;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--accent-color);
-    transition: width 0.3s ease;
-}
-
-nav a:hover {
+.magic-nav a:hover {
     color: var(--accent-color);
 }
 
-nav a:hover::after {
-    width: 100%;
+/* Magic Line Element */
+.magic-line {
+    position: absolute;
+    bottom: 0;
+    left: var(--left, calc(100% / var(--items) * (var(--index) - 1)));
+    width: var(--width, calc(100% / var(--items)));
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 10px var(--accent-color);
+    border-radius: 2px 2px 0 0;
+    --index: 0;
+}
+
+.magic-nav a:hover ~ .magic-line {
+    opacity: 1;
+}
+
+/* Individual hover states for each nav item */
+.magic-nav a:nth-of-type(1):hover ~ .magic-line { --index: 1; }
+.magic-nav a:nth-of-type(2):hover ~ .magic-line { --index: 2; }
+.magic-nav a:nth-of-type(3):hover ~ .magic-line { --index: 3; }
+.magic-nav a:nth-of-type(4):hover ~ .magic-line { --index: 4; }
+.magic-nav a:nth-of-type(5):hover ~ .magic-line { --index: 5; }
+.magic-nav a:nth-of-type(6):hover ~ .magic-line { --index: 6; }
+
+/* Show magic line on active/current page */
+.magic-nav a[aria-current="page"] ~ .magic-line {
+    opacity: 0.7;
+    --index: 1;
 }
 
 /* Hero Section */
@@ -371,7 +399,8 @@ section.visible {
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    nav ul {
+    .magic-nav {
+        display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: flex-end;
@@ -380,15 +409,20 @@ section.visible {
         scrollbar-width: none;
     }
 
-    nav ul::-webkit-scrollbar {
+    .magic-nav::-webkit-scrollbar {
         display: none;
     }
 
-    nav a {
+    .magic-nav a {
         padding: 0.35rem 0.6rem;
         font-size: clamp(0.7rem, 1.8vw, 0.8rem);
         white-space: nowrap;
         border-radius: 4px;
+    }
+
+    /* Hide magic line on mobile for better performance */
+    .magic-line {
+        display: none;
     }
 
     .hero {
@@ -736,11 +770,11 @@ textarea:focus {
         padding: 0.6rem;
     }
 
-    nav ul {
+    .magic-nav {
         gap: 0.25rem;
     }
 
-    nav a {
+    .magic-nav a {
         padding: 0.3rem 0.5rem;
         font-size: clamp(0.65rem, 1.7vw, 0.75rem);
     }
