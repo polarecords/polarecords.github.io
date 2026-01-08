@@ -16,7 +16,7 @@
     <meta name="keywords" content="John Polar, acoustic guitar, singer-songwriter, folk music, acoustic rock, white guitar, intimate performances, acoustic music, PolaRecords">
     <meta name="author" content="PolaRecords">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#345">
     <meta property="og:title" content="John Polar - Singer-Songwriter & Acoustic Guitar Virtuoso">
     <meta property="og:description" content="Intimate acoustic performances with heartfelt vocals and signature white guitar. Explore the introspective side of PolaRecords.">
     <meta property="og:type" content="website">
@@ -29,22 +29,6 @@
 </head>
 <body>
 
-    <!-- Navigation Header -->
-    <header role="banner">
-        <a href="../index.html" class="logo" aria-label="PolaRecords Home">
-            <img src="../images/hat.png" alt="PolaRecords Logo" loading="lazy" width="30" height="30"> PølaRecørds
-        </a>
-        <nav role="navigation" aria-label="Main navigation">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#music">Artists</a></li>
-                <li><a href="index.html" aria-current="page">John Polar</a></li>
-                <li><a href="../polaraf/index.html">PølarAF</a></li>
-                <li><a href="../polarx/index.html">PolarX</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <!-- Artist Hero -->
     <section class="hero" style="min-height: 300px;" role="banner" aria-label="John Polar - Singer-Songwriter">
@@ -142,7 +126,26 @@
 
     </main>
 
-    <footer role="contentinfo">
+    <!-- Floating Bottom-Left Logo Menu -->
+    <div class="floating-logo" id="floatingLogo">
+        <div class="logo-trigger">
+            <div class="click-hint">click me!</div>
+            <img src="../images/hat.png" alt="PolaRecords Logo" width="40" height="40">
+            <span class="logo-text">PølaRecørds</span>
+        </div>
+        <nav class="popup-menu" id="popupMenu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#music">Artists</a></li>
+                <li><a href="index.html">John Polar</a></li>
+                <li><a href="../polaraf/index.html">PølarAF</a></li>
+                <li><a href="../polarx/index.html">PolarX</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <footer role="contentinfo" style="text-align: center; padding: 2rem; font-size: 0.9rem; color: #999; margin-bottom: 80px;">
         <p>&copy; 2025 John Polar / PølaRecørds - The Artisan of Artistry</p>
     </footer>
 
@@ -184,6 +187,26 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+
+            // Floating logo menu
+            const floatingLogo = document.getElementById('floatingLogo');
+            const logoTrigger = floatingLogo.querySelector('.logo-trigger');
+            let isMenuOpen = false;
+
+            // Toggle menu on click
+            logoTrigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                floatingLogo.classList.toggle('active', isMenuOpen);
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!floatingLogo.contains(e.target)) {
+                    isMenuOpen = false;
+                    floatingLogo.classList.remove('active');
+                }
             });
         });
     </script>

@@ -16,7 +16,7 @@
     <meta name="keywords" content="PølarAF, rap, hip hop, freestyle, experimental, aggressive, unfiltered, real rap, real stories, trap, hardcore hip hop, PolaRecords">
     <meta name="author" content="PolaRecords">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="#345">
     <meta property="og:title" content="PølarAF - The Raw & Unfiltered">
     <meta property="og:description" content="Experimental freestyle flows with aggressive, unapologetic lyrics. Real rap, real stories, real impact. The raw voice of the streets.">
     <meta property="og:type" content="website">
@@ -29,22 +29,6 @@
 </head>
 <body>
 
-    <!-- Navigation Header -->
-    <header role="banner">
-        <a href="../index.html" class="logo" aria-label="PolaRecords Home">
-            <img src="../images/hat.png" alt="PolaRecords Logo" loading="lazy" width="30" height="30"> PølaRecørds
-        </a>
-        <nav role="navigation" aria-label="Main navigation">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../index.html#music">Artists</a></li>
-                <li><a href="../johnpolar/index.html">John Polar</a></li>
-                <li><a href="index.html" aria-current="page">PølarAF</a></li>
-                <li><a href="../polarx/index.html">PolarX</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <!-- Artist Hero -->
     <section class="hero" style="min-height: 300px;" role="banner" aria-label="PølarAF - The Raw & Unfiltered">
@@ -146,7 +130,26 @@
 
     </main>
 
-    <footer role="contentinfo">
+    <!-- Floating Bottom-Left Logo Menu -->
+    <div class="floating-logo" id="floatingLogo">
+        <div class="logo-trigger">
+            <div class="click-hint">click me!</div>
+            <img src="../images/hat.png" alt="PolaRecords Logo" width="40" height="40">
+            <span class="logo-text">PølaRecørds</span>
+        </div>
+        <nav class="popup-menu" id="popupMenu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#music">Artists</a></li>
+                <li><a href="../johnpolar/index.html">John Polar</a></li>
+                <li><a href="index.html">PølarAF</a></li>
+                <li><a href="../polarx/index.html">PolarX</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <footer role="contentinfo" style="text-align: center; padding: 2rem; font-size: 0.9rem; color: #999; margin-bottom: 80px;">
         <p>&copy; 2025 PølarAF / John Polar Presents / PølaRecørds - No Cap, No Filter</p>
     </footer>
 
@@ -188,6 +191,26 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+
+            // Floating logo menu
+            const floatingLogo = document.getElementById('floatingLogo');
+            const logoTrigger = floatingLogo.querySelector('.logo-trigger');
+            let isMenuOpen = false;
+
+            // Toggle menu on click
+            logoTrigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                floatingLogo.classList.toggle('active', isMenuOpen);
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!floatingLogo.contains(e.target)) {
+                    isMenuOpen = false;
+                    floatingLogo.classList.remove('active');
+                }
             });
         });
     </script>
