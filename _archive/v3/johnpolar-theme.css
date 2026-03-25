@@ -1,0 +1,124 @@
+/* John Polar Theme: The Artisan of Artistry */
+/* Refined, melodic, introspective aesthetic */
+
+:root {
+    --jp-primary: #3498db;
+    --jp-secondary: #2c3e50;
+    --jp-accent: #9b59b6;
+    --jp-bg: #0f1419;
+    --jp-surface: #1a2332;
+    --jp-text: #e8eaf0;
+}
+
+body {
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+    color: var(--jp-text);
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(180deg, rgba(52, 152, 219, 0.15) 0%, rgba(44, 62, 80, 0.15) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.logo {
+    color: var(--jp-primary);
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+}
+
+nav a {
+    color: var(--jp-text);
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    color: var(--jp-primary);
+    text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    margin: 2rem;
+}
+
+.hero h1 {
+    background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: 1px solid rgba(52, 152, 219, 0.5);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    border-color: var(--jp-primary);
+    color: var(--jp-primary);
+}
+
+/* Cards */
+.card {
+    background: rgba(26, 35, 50, 0.8);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    border-color: var(--jp-primary);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--jp-primary);
+}
+
+/* Section Headings */
+h2 {
+    color: var(--jp-primary);
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+/* Container */
+.container {
+    background: rgba(26, 35, 50, 0.6);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(180deg, rgba(44, 62, 80, 0.8) 0%, rgba(26, 35, 50, 0.8) 100%);
+    border-top: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        margin: 1rem;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+        margin: 1rem;
+    }
+}
