@@ -3,45 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolaRecords - System Terminal</title>
+    <title>PolaRecords Terminal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="terminal-container">
-        <div class="scrolling-header">
-            <span>POLARECORDS OS [Version 1.0.42] - (C) 2026 POLARECORDS CORP. - UNAUTHORIZED ACCESS IS PROHIBITED - POLARECORDS OS [Version 1.0.42]</span>
-        </div>
+    <div id="header-marquee">
+        <span>POLARECORDS - POLARECORDS - POLARECORDS - POLARECORDS - POLARECORDS - POLARECORDS</span>
+    </div>
 
-        <div class="terminal-prompt">
-            <span class="typing-text" id="typewriter"></span>
-        </div>
+    <div id="terminal">
+        <div id="output"></div>
+    </div>
 
-        <div class="content-section">
-            <h2>> DIRECTORY_LISTING: /PROJECTS</h2>
-            <ul class="menu-list">
-                <li><a href="johnpolar/">JOHN_POLAR.exe</a></li>
-                <li><a href="polaraf/">POLAR_AF.exe</a></li>
-                <li><a href="polarband/">POLAR_BAND.exe</a></li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            [SESSION_ID: 0x8F22A] - [ENCRYPTION: AES-256] - [STATUS: ONLINE]
-        </div>
+    <div id="input-area">
+        <span id="prompt">polar@records:~$</span>
+        <input type="text" id="cmd-input" autofocus spellcheck="false">
     </div>
 
     <script>
-        const text = "INITIALIZING BOOT SEQUENCE...\nLOADING CORE KERNEL...\nSYSTEM_CHECK: OK\nACCESS_LEVEL: ADMIN\n\nWELCOME TO POLARECORDS V1.0.42\nSELECT A PROJECT TO EXECUTE:";
-        let i = 0;
-        const speed = 40;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            }
+        const output = document.getElementById('output');
+        const input = document.getElementById('cmd-input');
+
+        const content = {
+            home: `
+                <div class="output-line">Welcome to <span class="highlight">PolaRecords</span>.</div>
+                <div class="output-line">Choose a path to execute:</div>
+                <div class="output-line"> [1] <span class="highlight">John Polar</span> - Songwriter & Performer</div>
+                <div class="output-line"> [2] <span class="highlight">PolarAF</span> - Experimental & Freestyle</div>
+                <div class="output-line"> [3] <span class="highlight">PolarBand</span> - Polar and The Bears</div>
+                <div class="output-line">Type the number or name to navigate.</div>
+            `,
+            john: `
+                <div class="output-line"><span class="highlight">JOHN POLAR</span></div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Songwriter and performer based in Birmingham, Alabama.</div>
+                <div class="output-line">A regular face at <span class="highlight">The Nick's Songwriters Night</span>, bringing raw, honest performances to the Tuesday night showcase.</div>
+                <div class="output-line">Current project: <span class="highlight">Polar & The Boys</span>.</div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Type 'home' to return.</div>
+            `,
+            polaraf: `
+                <div class="output-line"><span class="highlight">POLARAF</span></div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">The experimental side of the sound.</div>
+                <div class="output-line">A fusion of melodic rap, singing, and freestyle jams.</div>
+                <div class="output-line">Known for high-energy sets at <span class="highlight">The Nick</span> where local musicians hop up to freestyle sounds while PolarAF freestyle raps.</div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Type 'home' to return.</div>
+            `,
+            polarband: `
+                <div class="output-line"><span class="highlight">POLARBAND</span></div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">AKA <span class="highlight">Polar and The Bears</span>.</div>
+                <div class="output-line">Project sync in progress...</div>
+                <div class="output-line">Full details coming soon.</div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Type 'home' to return.</div>
+            `,
+            unknown: `
+                <div class="output-line">Command not found. Type '1', '2', '3', or 'home'.</div>
+            `
+        };
+
+        function print(text) {
+            output.innerHTML = text;
+            input.scrollIntoView();
         }
-        window.onload = typeWriter;
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = input.value.toLowerCase().trim();
+                input.value = '';
+
+                if (val === '1' || val === 'john') {
+                    print(content.john);
+                } else if (val === '2' || val === 'polaraf') {
+                    print(content.polaraf);
+                } else if (val === '3' || val === 'polarband') {
+                    print(content.polarband);
+                } else if (val === 'home' || val === 'help' || val === 'menu' || val === '') {
+                    print(content.home);
+                } else if (val === 'clear') {
+                    output.innerHTML = '';
+                    print(content.home);
+                } else {
+                    print(content.unknown);
+                    setTimeout(() => print(content.home), 2000);
+                }
+            }
+        });
+
+        // Initial print
+        print(content.home);
+
+        // Keep input focused
+        document.addEventListener('click', () => input.focus());
     </script>
 </body>
 </html>
