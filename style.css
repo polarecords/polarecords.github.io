@@ -8,21 +8,26 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Prevent zoom on input focus for iOS */
+    touch-action: manipulation;
 }
 
 #header-marquee {
     border-bottom: 1px solid #39ff14;
-    padding: 10px 0;
+    padding: 12px 0;
     white-space: nowrap;
     overflow: hidden;
+    background: #000;
+    z-index: 10;
 }
 
 #header-marquee span {
     display: inline-block;
     padding-left: 100%;
-    animation: marquee 30s linear infinite;
+    animation: marquee 20s linear infinite;
     font-weight: bold;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
+    font-size: 14px;
 }
 
 @keyframes marquee {
@@ -32,20 +37,27 @@ body {
 
 #terminal {
     flex-grow: 1;
-    padding: 20px;
+    padding: 15px;
     overflow-y: auto;
-    font-size: 1.1em;
-    line-height: 1.5;
+    font-size: 16px; /* Optimized for mobile readability and preventing iOS zoom */
+    line-height: 1.6;
+    -webkit-overflow-scrolling: touch;
 }
 
 #input-area {
     border-top: 1px solid #39ff14;
-    padding: 10px 20px;
+    padding: 15px;
     display: flex;
+    align-items: center;
+    background: #000;
+    z-index: 10;
 }
 
 #prompt {
-    margin-right: 10px;
+    margin-right: 8px;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #fff;
 }
 
 #cmd-input {
@@ -53,37 +65,49 @@ body {
     border: none;
     color: #39ff14;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 16px; /* Must be at least 16px to prevent iOS auto-zoom */
     outline: none;
     flex-grow: 1;
+    width: 100%;
 }
 
 .output-line {
-    margin-bottom: 10px;
-}
-
-.menu-item {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.menu-item:hover {
-    background: #39ff14;
-    color: #000;
+    margin-bottom: 12px;
+    word-wrap: break-word;
 }
 
 .highlight {
     color: #fff;
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+.hint {
+    font-size: 0.85em;
+    opacity: 0.7;
+    font-style: italic;
+    margin-top: 4px;
 }
 
 /* Scrollbar styling */
 #terminal::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
 }
 #terminal::-webkit-scrollbar-track {
     background: #000;
 }
 #terminal::-webkit-scrollbar-thumb {
     background: #39ff14;
+}
+
+@media (max-width: 600px) {
+    #terminal {
+        font-size: 14px;
+    }
+    #prompt {
+        font-size: 14px;
+    }
+    #cmd-input {
+        font-size: 16px; /* Keep 16px to avoid zoom */
+    }
 }
