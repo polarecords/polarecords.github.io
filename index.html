@@ -21,31 +21,44 @@
         const content = {
             home: `
                 <div class="output-line">Welcome to <span class="highlight">PolaRecords</span>.</div>
-                <div class="output-line">Select a project:</div>
+                <div class="output-line">Select a path:</div>
                 <div class="nav-link" onclick="show('john')">John Polar</div>
                 <div class="nav-link" onclick="show('polaraf')">PolarAF</div>
                 <div class="nav-link" onclick="show('polarband')">PolarBand</div>
+                <div class="nav-link" onclick="show('media')">Media Archive</div>
             `,
             john: `
                 <div class="output-line"><span class="highlight">JOHN POLAR</span></div>
                 <div class="output-line">Songwriter and performer based in Birmingham, Alabama.</div>
-                <div class="output-line">A regular face at <span class="highlight">The Nick's Songwriters Night</span>, bringing raw, honest performances to the Tuesday night showcase.</div>
+                <div class="output-line">A regular at <span class="highlight">The Nick's Songwriters Night</span>.</div>
                 <div class="output-line">Current project: <span class="highlight">Polar & The Boys</span>.</div>
                 <div class="output-line">Connect: <a href="https://www.facebook.com/PolarAFmusic" target="_blank" style="color:#fff">Facebook</a></div>
-                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
             `,
             polaraf: `
                 <div class="output-line"><span class="highlight">POLARAF</span></div>
-                <div class="output-line">Experimental melodic rap, singing, and freestyle jams.</div>
-                <div class="output-line">Known for high-energy sets at <span class="highlight">The Nick</span> where local musicians join in to freestyle sounds while PolarAF freestyle raps.</div>
+                <div class="output-line">Experimental melodic rap and freestyle jams.</div>
+                <div class="output-line">Known for high-energy sets at <span class="highlight">The Nick</span>.</div>
                 <div class="output-line">Connect: <a href="https://www.instagram.com/polaraf_/" target="_blank" style="color:#fff">Instagram</a></div>
-                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
             `,
             polarband: `
                 <div class="output-line"><span class="highlight">POLARBAND</span></div>
                 <div class="output-line">AKA <span class="highlight">Polar and The Bears</span>.</div>
                 <div class="output-line">Full details coming soon.</div>
-                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
+            `,
+            media: `
+                <div class="output-line"><span class="highlight">MEDIA ARCHIVE</span></div>
+                <div class="output-line">Digital records of the Birmingham music scene.</div>
+                <div class="output-line">> <span class="highlight">YouTube: @thejohnpolar</span></div>
+                <div class="output-line">A massive archive of live performances from <span class="highlight">The Nick</span>, Zydeco, and Saturn.</div>
+                <div class="output-line">> <span class="highlight">Instagram: @polaraf_</span></div>
+                <div class="output-line">Behind the scenes, updates, and visual logs.</div>
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line"><a href="https://youtube.com/@thejohnpolar" target="_blank" style="color:#fff">View YouTube Archive</a></div>
+                <div class="output-line"><a href="https://www.instagram.com/polaraf_/" target="_blank" style="color:#fff">View Instagram Log</a></div>
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
             `
         };
 
