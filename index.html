@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolaRecords - Terminal</title>
+    <title>PolaRecords - System Terminal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="scrolling-header">
-        <span>PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords</span>
+    <div class="terminal-container">
+        <div class="scrolling-header">
+            <span>POLARECORDS OS [Version 1.0.42] - (C) 2026 POLARECORDS CORP. - UNAUTHORIZED ACCESS IS PROHIBITED - POLARECORDS OS [Version 1.0.42]</span>
+        </div>
+
+        <div class="terminal-prompt">
+            <span class="typing-text" id="typewriter"></span>
+        </div>
+
+        <div class="content-section">
+            <h2>> DIRECTORY_LISTING: /PROJECTS</h2>
+            <ul class="menu-list">
+                <li><a href="johnpolar/">JOHN_POLAR.exe</a></li>
+                <li><a href="polaraf/">POLAR_AF.exe</a></li>
+                <li><a href="polarband/">POLAR_BAND.exe</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            [SESSION_ID: 0x8F22A] - [ENCRYPTION: AES-256] - [STATUS: ONLINE]
+        </div>
     </div>
 
-    <div class="terminal-prompt">
-        INITIALIZING POLARECORDS SYSTEM...
-        <br>ACCESS GRANTED.
-    </div>
-
-    <div class="content-section">
-        <h2>SELECT PROJECT:</h2>
-        <ul class="menu-list">
-            <li><a href="johnpolar/">JOHN POLAR</a></li>
-            <li><a href="polaraf/">POLARAF</a></li>
-            <li><a href="polarband/">POLARBAND</a></li>
-        </ul>
-    </div>
-
-    <div class="footer">
-        &copy; 2026 POLARECORDS OS v1.0.0
-    </div>
+    <script>
+        const text = "INITIALIZING BOOT SEQUENCE...\nLOADING CORE KERNEL...\nSYSTEM_CHECK: OK\nACCESS_LEVEL: ADMIN\n\nWELCOME TO POLARECORDS V1.0.42\nSELECT A PROJECT TO EXECUTE:";
+        let i = 0;
+        const speed = 40;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
 </body>
 </html>

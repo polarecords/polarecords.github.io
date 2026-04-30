@@ -1,22 +1,90 @@
 body {
-    background-color: #000000;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
+    background-color: #050505;
+    color: #00ff41; /* Classic Matrix/Terminal Green */
+    font-family: 'Cascadia Code', 'Fira Code', 'Courier New', Courier, monospace;
+    padding: 0;
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.4;
     overflow-x: hidden;
+    position: relative;
+    height: 100vh;
+}
+
+/* Scanline Effect Overlay */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 100;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
+/* CRT Flicker */
+body::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 101;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.27861; }
+    5% { opacity: 0.34769; }
+    10% { opacity: 0.23604; }
+    15% { opacity: 0.90626; }
+    20% { opacity: 0.18128; }
+    25% { opacity: 0.83891; }
+    30% { opacity: 0.65583; }
+    35% { opacity: 0.67807; }
+    40% { opacity: 0.26559; }
+    45% { opacity: 0.84693; }
+    50% { opacity: 0.96019; }
+    55% { opacity: 0.08594; }
+    60% { opacity: 0.20313; }
+    65% { opacity: 0.71988; }
+    70% { opacity: 0.53455; }
+    75% { opacity: 0.37288; }
+    80% { opacity: 0.71428; }
+    85% { opacity: 0.70419; }
+    90% { opacity: 0.7003; }
+    95% { opacity: 0.36108; }
+    100% { opacity: 0.24387; }
+}
+
+.terminal-container {
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
 }
 
 a {
-    color: #00ff00;
+    color: #00ff41;
     text-decoration: none;
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.7);
+    transition: all 0.2s ease;
 }
 
 a:hover {
-    background-color: #00ff00;
-    color: #000000;
+    background-color: #00ff41;
+    color: #050505;
+    box-shadow: 0 0 15px #00ff41;
 }
 
 .scrolling-header {
@@ -24,17 +92,22 @@ a:hover {
     white-space: nowrap;
     overflow: hidden;
     position: relative;
-    border-bottom: 2px solid #00ff00;
+    border: 1px solid #00ff41;
+    background: rgba(0, 255, 65, 0.05);
     margin-bottom: 30px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
 .scrolling-header span {
     display: inline-block;
     padding-left: 100%;
-    animation: marquee 20s linear infinite;
-    font-size: 24px;
+    animation: marquee 25s linear infinite;
+    font-size: 20px;
     font-weight: bold;
+    letter-spacing: 2px;
 }
 
 @keyframes marquee {
@@ -43,11 +116,18 @@ a:hover {
 }
 
 .terminal-prompt {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 1.1em;
 }
 
-.terminal-prompt::before {
-    content: "> ";
+.typing-text {
+    border-right: 0.7em solid #00ff41;
+    animation: caret 1s steps(1) infinite;
+    white-space: pre-wrap;
+}
+
+@keyframes caret {
+    50% { border-color: transparent; }
 }
 
 .menu-list {
@@ -56,28 +136,48 @@ a:hover {
 }
 
 .menu-list li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
 }
 
 .menu-list li::before {
-    content: "[ ] ";
+    content: "[EXE] ";
+    opacity: 0.5;
 }
 
 .content-section {
-    border: 1px solid #00ff00;
-    padding: 15px;
-    margin-top: 20px;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    padding: 20px;
+    margin-top: 30px;
+    background: rgba(0, 255, 65, 0.02);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.05);
 }
 
 h1, h2 {
     text-transform: uppercase;
-    border-bottom: 1px solid #00ff00;
+    border-bottom: 1px solid #00ff41;
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
 }
 
 .footer {
-    margin-top: 40px;
-    font-size: 0.8em;
-    opacity: 0.7;
+    margin-top: 50px;
+    font-size: 0.7em;
+    opacity: 0.5;
+    text-align: center;
+    border-top: 1px solid rgba(0, 255, 65, 0.1);
+    padding-top: 20px;
+}
+
+/* Subpage specific */
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+.back-link::before {
+    content: "< ";
 }
