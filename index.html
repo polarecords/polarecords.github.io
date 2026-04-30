@@ -15,100 +15,47 @@
         <div id="output"></div>
     </div>
 
-    <div id="input-area">
-        <span id="prompt">polar@records:~$</span>
-        <input type="text" id="cmd-input" autofocus spellcheck="false">
-    </div>
-
     <script>
         const output = document.getElementById('output');
-        const input = document.getElementById('cmd-input');
 
         const content = {
             home: `
                 <div class="output-line">Welcome to <span class="highlight">PolaRecords</span>.</div>
-                <div class="output-line">Choose a path to execute:</div>
-                <div class="output-line"> [1] <span class="highlight">John Polar</span> - Songwriter & Performer</div>
-                <div class="output-line"> [2] <span class="highlight">PolarAF</span> - Experimental & Freestyle</div>
-                <div class="output-line"> [3] <span class="highlight">PolarBand</span> - Polar and The Bears</div>
-                <div class="output-line">Type the number or name to navigate.</div>
+                <div class="output-line">Select a project:</div>
+                <div class="nav-link" onclick="show('john')">John Polar</div>
+                <div class="nav-link" onclick="show('polaraf')">PolarAF</div>
+                <div class="nav-link" onclick="show('polarband')">PolarBand</div>
             `,
             john: `
                 <div class="output-line"><span class="highlight">JOHN POLAR</span></div>
-                <div class="output-line">------------------------------------</div>
                 <div class="output-line">Songwriter and performer based in Birmingham, Alabama.</div>
                 <div class="output-line">A regular face at <span class="highlight">The Nick's Songwriters Night</span>, bringing raw, honest performances to the Tuesday night showcase.</div>
                 <div class="output-line">Current project: <span class="highlight">Polar & The Boys</span>.</div>
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Type 'home' to return.</div>
+                <div class="output-line">Connect: <a href="https://www.facebook.com/PolarAFmusic" target="_blank" style="color:#fff">Facebook</a></div>
+                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
             `,
             polaraf: `
                 <div class="output-line"><span class="highlight">POLARAF</span></div>
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">The experimental side of the sound.</div>
-                <div class="output-line">A fusion of melodic rap, singing, and freestyle jams.</div>
-                <div class="output-line">Known for high-energy sets at <span class="highlight">The Nick</span> where local musicians hop up to freestyle sounds while PolarAF freestyle raps.</div>
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Type 'home' to return.</div>
+                <div class="output-line">Experimental melodic rap, singing, and freestyle jams.</div>
+                <div class="output-line">Known for high-energy sets at <span class="highlight">The Nick</span> where local musicians join in to freestyle sounds while PolarAF freestyle raps.</div>
+                <div class="output-line">Connect: <a href="https://www.instagram.com/polaraf_/" target="_blank" style="color:#fff">Instagram</a></div>
+                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
             `,
             polarband: `
                 <div class="output-line"><span class="highlight">POLARBAND</span></div>
-                <div class="output-line">------------------------------------</div>
                 <div class="output-line">AKA <span class="highlight">Polar and The Bears</span>.</div>
-                <div class="output-line">Project sync in progress...</div>
                 <div class="output-line">Full details coming soon.</div>
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Type 'home' to return.</div>
-            `,
-            unknown: `
-                <div class="output-line">Command not found. Type '1', '2', '3', or 'home'.</div>
+                <div class="back-btn" onclick="show('home')">[ Back to Menu ]</div>
             `
         };
 
-        function scrollToBottom() {
-            terminal.scrollTop = terminal.scrollHeight;
+        function show(key) {
+            output.innerHTML = content[key];
+            document.getElementById('terminal').scrollTop = 0;
         }
 
-        function print(text) {
-            output.innerHTML = text;
-            setTimeout(scrollToBottom, 10);
-        }
-
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const val = input.value.toLowerCase().trim();
-                input.value = '';
-
-                if (val === '1' || val === 'john') {
-                    print(content.john);
-                } else if (val === '2' || val === 'polaraf') {
-                    print(content.polaraf);
-                } else if (val === '3' || val === 'polarband') {
-                    print(content.polarband);
-                } else if (val === 'home' || val === 'help' || val === 'menu' || val === '') {
-                    print(content.home);
-                } else if (val === 'clear') {
-                    output.innerHTML = '';
-                    print(content.home);
-                } else {
-                    print(content.unknown);
-                    setTimeout(() => print(content.home), 1500);
-                }
-            }
-        });
-
-        // Initial print
-        print(content.home);
-
-        // Keep input focused but allow scrolling
-        document.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'INPUT') {
-                input.focus();
-            }
-        });
-        
-        // Handle window resizing (like keyboard popping up)
-        window.addEventListener('resize', scrollToBottom);
+        // Initial view
+        show('home');
     </script>
 </body>
 </html>
