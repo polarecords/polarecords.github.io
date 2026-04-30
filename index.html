@@ -65,9 +65,13 @@
             `
         };
 
+        function scrollToBottom() {
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
         function print(text) {
             output.innerHTML = text;
-            input.scrollIntoView();
+            setTimeout(scrollToBottom, 10);
         }
 
         input.addEventListener('keydown', (e) => {
@@ -88,7 +92,7 @@
                     print(content.home);
                 } else {
                     print(content.unknown);
-                    setTimeout(() => print(content.home), 2000);
+                    setTimeout(() => print(content.home), 1500);
                 }
             }
         });
@@ -96,8 +100,15 @@
         // Initial print
         print(content.home);
 
-        // Keep input focused
-        document.addEventListener('click', () => input.focus());
+        // Keep input focused but allow scrolling
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'INPUT') {
+                input.focus();
+            }
+        });
+        
+        // Handle window resizing (like keyboard popping up)
+        window.addEventListener('resize', scrollToBottom);
     </script>
 </body>
 </html>
