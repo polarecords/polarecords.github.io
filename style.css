@@ -60,13 +60,13 @@ body {
     white-space: nowrap;
     font-weight: bold;
     font-size: var(--text-sm);
-    animation: marquee-scroll 60s linear infinite;
+    animation: marquee-scroll 15s linear infinite;
     text-shadow: 0 0 10px var(--primary);
     line-height: 40px;
 }
 
 @keyframes marquee-scroll {
-    0% { transform: translateX(-100vw); }
+    0% { transform: translateX(-100%); }
     100% { transform: translateX(100vw); }
 }
 
@@ -163,9 +163,8 @@ main, .content-body {
     background: rgba(129, 181, 172, 0.05);
     border: 1px dashed var(--primary);
     min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: var(--space-sm);
+    overflow: hidden;
 }
 
 footer {
