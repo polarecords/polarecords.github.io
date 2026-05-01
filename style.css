@@ -418,3 +418,89 @@ footer {
     .nav-links { grid-template-columns: 1fr; }
     .hero-section { height: 70vh; }
 }
+/* Lightbox Modal Poster Effect */
+.lightbox-overlay {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(3, 26, 22, 0.9); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column; 
+    cursor: pointer;
+}
+
+.lightbox-close {
+    position: absolute; 
+    top: 20px; right: 30px; 
+    color: var(--primary); 
+    font-size: 40px; 
+    font-weight: bold; 
+    text-shadow: 0 0 10px var(--primary);
+    z-index: 2001;
+    transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.2);
+}
+
+.lightbox-poster-container {
+    position: relative;
+    display: inline-block;
+    background: #f4f1ea; /* Off-white aged paper color */
+    padding: 10px 10px 35px 10px; /* Polaroid/flyer style border */
+    box-shadow: 2px 10px 25px rgba(0,0,0,0.8), 0 0 40px rgba(129, 181, 172, 0.2);
+    transform: rotate(-2deg); 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lightbox-overlay:hover .lightbox-poster-container {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.lightbox-poster {
+    display: block;
+    max-width: 90vw;
+    max-height: 75vh;
+    width: auto;
+    height: auto;
+    filter: sepia(40%) hue-rotate(5deg) brightness(0.9) contrast(1.2);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.tape {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    height: 25px;
+    width: 120px;
+    z-index: 10;
+}
+
+.top-tape {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+}
+
+.bottom-tape {
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+}
+
+@media (prefers-color-scheme: light) {
+    .lightbox-poster-container {
+        box-shadow: 2px 10px 25px rgba(0,0,0,0.4), 0 0 40px rgba(0, 95, 82, 0.2);
+    }
+    .lightbox-overlay {
+        background-color: rgba(253, 246, 227, 0.9);
+    }
+}
