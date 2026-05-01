@@ -1,0 +1,31 @@
+{
+    "logs": {
+        "john": [
+            {"date": "2026.05.05 // 20:00", "message": "UPCOMING: SONGWRITER NIGHTS @ THE NICK", "highlight": true},
+            {"date": "2025.09.30 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ GATSBY", "highlight": false},
+            {"date": "2025.05.20 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TITUS BOZEMAN BAND", "highlight": false},
+            {"date": "2025.05.08 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ TRUE STORY BREWING CO.", "highlight": false},
+            {"date": "2025.04.15 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TODD SIMPSON", "highlight": false}
+        ],
+        "polaraf": [
+            {"date": "2026.05.05 // 20:00", "message": "UPCOMING: SONGWRITER NIGHTS @ THE NICK", "highlight": true},
+            {"date": "2025.05.08 // ARCHIVE", "message": "SESSION_LOGGED: TRUE STORY BREWING CO.", "highlight": false},
+            {"date": "SYSTEM // AUDIO_LINK", "message": "LOADING EXPERIMENTAL AUDIO PROTOCOLS...", "highlight": false},
+            {"date": "RECOVERY // ARCHIVE", "message": "SESSION @ VOODOO LOUNGE ARCHIVED.", "highlight": false}
+        ],
+        "polarband": [
+            {"date": "2026.05.05 // 20:00", "message": "DETECTION: JOHN_POLAR_LIVE @ THE NICK", "highlight": true}
+        ],
+        "home": [
+            {"date": "2026.05.05 // 20:00", "message": "UPCOMING: SONGWRITER NIGHTS @ THE NICK", "highlight": true},
+            {"date": "SOURCE // RECOVERY", "message": "PERFORMANCE_LOG: BIRMINGHAM_BANDSTAND_SESSION_ARCHIVED", "highlight": false},
+            {"date": "SYSTEM // STATUS", "message": "ALL_UPLINKS_ACTIVE // SIGNAL_STRENGTH_MAXIMIZED", "highlight": false}
+        ]
+    },
+    "media": [
+        {"src": "assets/flyer_20250930.jpg", "alt": "Performance Flyer: Sept 30th 2025", "label": "FL_2025_09_30.FRG"},
+        {"src": "assets/flyer_20250520.jpg", "alt": "Performance Flyer: May 20th 2025", "label": "FL_2025_05_20.FRG"},
+        {"src": "assets/flyer_20250508.jpg", "alt": "Performance Flyer: May 8th 2025", "label": "FL_2025_05_08.FRG"},
+        {"src": "assets/flyer_20250415.png", "alt": "Performance Flyer: April 15th 2025", "label": "FL_2025_04_15.FRG"}
+    ]
+}

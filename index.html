@@ -57,20 +57,7 @@
         </div>
 
         <div class="section-title">Signal Log</div>
-        <div class="log-stream">
-            <div class="log-entry">
-                <span class="log-time">2026.05.05 // 20:00</span>
-                <span class="log-msg highlight">UPCOMING: SONGWRITER NIGHTS @ THE NICK</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-time">SOURCE // RECOVERY</span>
-                <span class="log-msg">PERFORMANCE_LOG: BIRMINGHAM_BANDSTAND_SESSION_ARCHIVED</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-time">SYSTEM // STATUS</span>
-                <span class="log-msg">ALL_UPLINKS_ACTIVE // SIGNAL_STRENGTH_MAXIMIZED</span>
-            </div>
-        </div>
+        <div id="dynamic-log-stream" class="log-stream"></div>
 
         <div class="section-title">Video Log</div>
         <div class="featured-poster" style="aspect-ratio: 16/9; padding: 0;">
@@ -116,6 +103,7 @@
         // Placeholder for future interactivity
         console.log("System initialized...");
     </script>
+    <script src="app.js"></script>
 </body>
 </html>
 old; text-shadow:0 0 10px var(--primary);">&times;</span>
@@ -135,5 +123,6 @@ old; text-shadow:0 0 10px var(--primary);">&times;</span>
         });
         modal.onclick = function() { modal.style.display = "none"; };
     </script>
+    <script src="app.js"></script>
 </body>
 </html>

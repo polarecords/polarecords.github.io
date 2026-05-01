@@ -36,24 +36,7 @@
         </figure>
 
         <div class="section-title">Historical Fragments</div>
-        <div class="media-grid">
-            <figure class="art-fragment">
-                <img src="assets/flyer_20250930.jpg" alt="Performance Flyer: Sept 30th 2025">
-                <figcaption class="art-label">FL_2025_09_30.FRG</figcaption>
-            </figure>
-            <figure class="art-fragment">
-                <img src="assets/flyer_20250520.jpg" alt="Performance Flyer: May 20th 2025">
-                <figcaption class="art-label">FL_2025_05_20.FRG</figcaption>
-            </figure>
-            <figure class="art-fragment">
-                <img src="assets/flyer_20250508.jpg" alt="Performance Flyer: May 8th 2025">
-                <figcaption class="art-label">FL_2025_05_08.FRG</figcaption>
-            </figure>
-            <figure class="art-fragment">
-                <img src="assets/flyer_20250415.png" alt="Performance Flyer: April 15th 2025">
-                <figcaption class="art-label">FL_2025_04_15.FRG</figcaption>
-            </figure>
-        </div>
+        <div id="dynamic-media-grid" class="media-grid"></div>
     </main>
 
     <nav class="bottom-nav">
@@ -101,5 +84,6 @@
         });
         modal.onclick = function() { modal.style.display = "none"; };
     </script>
+    <script src="app.js"></script>
 </body>
 </html>
