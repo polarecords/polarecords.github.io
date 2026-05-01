@@ -38,24 +38,44 @@
         <div class="output-line"><span class="highlight">POLARAF:</span></div>
         <div class="output-line">Experimental melodic rap and freestyle jams. High-energy sets and freestyle flow.</div>
         
-        <div class="log-stream">
-            <div class="log-entry">
-                <span class="log-time">2026.05.05 // 20:00</span>
-                <span class="log-msg highlight">UPCOMING: SONGWRITER NIGHTS @ THE NICK</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-time">2025.05.08 // ARCHIVE</span>
-                <span class="log-msg">SESSION_LOGGED: TRUE STORY BREWING CO.</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-time">SYSTEM // AUDIO_LINK</span>
-                <span class="log-msg">LOADING EXPERIMENTAL AUDIO PROTOCOLS...</span>
-            </div>
-            <div class="log-entry">
-                <span class="log-time">RECOVERY // ARCHIVE</span>
-                <span class="log-msg">SESSION @ VOODOO LOUNGE ARCHIVED.</span>
-            </div>
+        <div class="section-title">Signal Decoder</div>
+        <div id="signal-decoder" style="border: 1px solid var(--primary); padding: var(--space-md); margin: var(--space-md) 0; background: rgba(129, 181, 172, 0.05); cursor: pointer; text-align: center;" onclick="toggleDecoder()">
+            <div id="decoder-status" class="highlight" style="font-size: var(--text-lg); margin-bottom: 10px; animation: flicker 0.15s infinite;">[ AWAITING INPUT ]</div>
+            <div id="decoder-progress" style="font-family: monospace; letter-spacing: 2px;">[░░░░░░░░░░░░░░░░░░░░] 00:00</div>
+            <audio id="decoder-audio" src="" preload="none"></audio>
         </div>
+
+        <script>
+            let isPlaying = false;
+            let progressInterval;
+            
+            function toggleDecoder() {
+                const status = document.getElementById('decoder-status');
+                const progress = document.getElementById('decoder-progress');
+                
+                if (!isPlaying) {
+                    isPlaying = true;
+                    status.textContent = "[ DECODING SIGNAL... ]";
+                    status.style.color = "var(--primary)";
+                    let ticks = 0;
+                    progressInterval = setInterval(() => {
+                        ticks++;
+                        if (ticks > 20) ticks = 1;
+                        let bar = "█".repeat(ticks) + "░".repeat(20 - ticks);
+                        let time = `00:${ticks.toString().padStart(2, '0')}`;
+                        progress.textContent = `[${bar}] ${time}`;
+                    }, 500);
+                } else {
+                    isPlaying = false;
+                    clearInterval(progressInterval);
+                    status.textContent = "[ SIGNAL PAUSED ]";
+                    status.style.color = "var(--highlight)";
+                }
+            }
+        </script>
+
+        <div class="section-title">Transmission Log</div>
+        <div id="dynamic-log-stream" class="log-stream"></div>
 
         <div class="section-title">Connect</div>
         <div class="social-icons" style="justify-content: flex-start; gap: 20px;">
@@ -85,5 +105,6 @@
             <span>Media</span>
         </a>
     </nav>
+    <script src="app.js"></script>
 </body>
 </html>

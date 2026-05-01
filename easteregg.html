@@ -289,30 +289,55 @@ john: `
             }
         }
 
-        // Terminal Command Listener
-        userInput.addEventListener('keydown', (e) => {
+        // Advanced Terminal Command Listener
+        userInput.addEventListener('keydown', async (e) => {
             if (e.key === 'Enter') {
                 const command = userInput.value.trim().toLowerCase();
                 userInput.value = '';
 
+                if (command === '') return;
+
+                // Create echo line
+                const echoDiv = document.createElement('div');
+                echoDiv.className = 'output-line highlight';
+                echoDiv.textContent = `> ${command}`;
+                output.appendChild(echoDiv);
+
+                // Command processing
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'output-line';
+                output.appendChild(responseDiv);
+
+                async function typeResponse(text) {
+                    responseDiv.textContent = '';
+                    for(let i=0; i<text.length; i++) {
+                        responseDiv.textContent += text[i];
+                        await new Promise(r => setTimeout(r, 15));
+                    }
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
+
                 if (command === 'help') {
-                    alert('AVAILABLE COMMANDS: HOME, JOHN, POLARAF, BAND, MEDIA, CLEAR, WHOAMI');
-                } else if (command === 'home') {
-                    show('home');
-                } else if (command === 'john') {
-                    show('john');
-                } else if (command === 'polaraf') {
-                    show('polaraf');
-                } else if (command === 'band') {
-                    show('polarband');
-                } else if (command === 'media') {
-                    show('media');
+                    await typeResponse('AVAILABLE COMMANDS: home, john, polaraf, band, media, clear, whoami, sudo override');
+                } else if (['home', 'john', 'polaraf', 'band', 'media'].includes(command)) {
+                    if (command === 'band') show('polarband');
+                    else show(command);
                 } else if (command === 'clear') {
-                    output.innerHTML = '<div class="output-line">Terminal cleared. Type "HOME" to return.</div>';
+                    output.innerHTML = '';
+                    await typeResponse('Terminal cleared. Type "home" to return.');
                 } else if (command === 'whoami') {
-                    alert('AUTHORIZED GUEST / SIGNAL INTERCEPTOR');
-                } else if (command === 'polarecords') {
-                    alert('STATUS: ACTIVE / LOCATION: BIRMINGHAM, AL / MISSION: FREQUENCY RESONANCE');
+                    await typeResponse('AUTHORIZED GUEST / SIGNAL INTERCEPTOR');
+                } else if (command === 'sudo override') {
+                    document.body.style.backgroundColor = 'var(--primary)';
+                    document.body.style.color = 'var(--terminal-black)';
+                    await typeResponse('CRITICAL: MANUAL OVERRIDE INITIATED. MATRIX BYPASS IN PROGRESS...');
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = '';
+                        document.body.style.color = '';
+                        responseDiv.textContent = 'BYPASS FAILED. INSUFFICIENT CLEARANCE.';
+                    }, 3000);
+                } else {
+                    await typeResponse(`COMMAND_NOT_FOUND: ${command}. Type 'help' for directory.`);
                 }
             }
         });
