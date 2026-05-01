@@ -78,5 +78,24 @@
             <span>Media</span>
         </a>
     </nav>
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background-color:rgba(3, 26, 22, 0.9); backdrop-filter:blur(10px); align-items:center; justify-content:center; flex-direction:column; cursor:pointer;">
+        <span style="position:absolute; top:20px; right:30px; color:var(--primary); font-size:40px; font-weight:bold; text-shadow:0 0 10px var(--primary);">&times;</span>
+        <img id="lightbox-img" style="max-width:95%; max-height:90vh; object-fit:contain; border:2px solid var(--primary); box-shadow:0 0 30px var(--primary); filter:sepia(80%) hue-rotate(90deg) brightness(0.8) contrast(1.2);">
+    </div>
+    <script>
+        const modal = document.getElementById('lightbox-modal');
+        const modalImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('img').forEach(img => {
+            if(img.closest('.featured-poster') || img.closest('.art-fragment')) {
+                img.style.cursor = 'pointer';
+                img.onclick = function() {
+                    modal.style.display = "flex";
+                    modalImg.src = this.src;
+                }
+            }
+        });
+        modal.onclick = function() { modal.style.display = "none"; };
+    </script>
 </body>
 </html>
