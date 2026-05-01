@@ -307,8 +307,8 @@ footer {
 .hero-section {
     position: relative;
     width: 100%;
-    height: 50vh;
-    min-height: 350px;
+    height: 30vh;
+    min-height: 200px;
     overflow: hidden;
     border-bottom: 1px solid var(--primary);
     background: var(--bg);
@@ -322,10 +322,10 @@ footer {
 }
 
 .hero-image {
-    width: 250px;
-    height: 250px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    filter: sepia(100%) hue-rotate(90deg) brightness(0.8) contrast(1.5) drop-shadow(0 0 15px var(--primary));
+    filter: sepia(100%) hue-rotate(90deg) brightness(0.8) contrast(1.5) drop-shadow(0 0 10px var(--primary));
     z-index: 5;
     position: relative;
     image-rendering: pixelated; /* Lean into the lo-fi look */
@@ -369,7 +369,7 @@ footer {
 
 .media-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--space-md);
     margin: var(--space-md) 0;
 }
