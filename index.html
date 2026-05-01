@@ -3,235 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolaRecords OS</title>
+    <meta name="color-scheme" content="light dark">
+    <meta name="darkreader-lock">
+    
+    <!-- SEO & Standards -->
+    <title>PolaRecords | Authorized Signal Hub</title>
+    <meta name="description" content="PolaRecords OS: Authorized signal interceptor and experimental media hub based in Birmingham, AL. Performance logs and visual fragments.">
+    <link rel="canonical" href="https://polarecords.net">
+    
+    <!-- Social / Open Graph -->
+    <meta property="og:title" content="PolaRecords | Authorized Signal Hub">
+    <meta property="og:description" content="Authorized signal interceptor and experimental media hub. Performance logs and visual fragments.">
+    <meta property="og:image" content="assets/flyer_20260505.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polarecords.net">
+    
+    <!-- PWA & Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#031A16">
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script async src="//www.instagram.com/embed.js"></script>
+    
 </head>
 <body>
     <div id="header-marquee">
-        <span>PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords - PolaRecords</span>
+        <span>THIS WEEK: SONGWRITER NIGHTS @ THE NICK</span>
     </div>
 
-    <div id="terminal">
-        <div id="fetching" class="fetching-data">DECRYPTING PolaRecords DATA STREAM</div>
-        <div id="output"></div>
-        <div id="command-line">
-            <span id="prompt">guest@PolaRecords:~$</span>
-            <input type="text" id="user-input" spellcheck="false" autocomplete="off">
-            <span class="cursor"></span>
+    <main class="content-body">
+        <div class="ascii-art">
+██████╗  ██████╗ ██╗      █████╗ ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝
+██████╔╝██║   ██║██║     ███████║██████╔╝█████╗  ██║     ██║   ██║██████╔╝██║  ██║███████╗
+██╔═══╝ ██║   ██║██║     ██╔══██║██╔══██╗██╔══╝  ██║     ██║   ██║██╔══██╗██║  ██║╚════██║
+██║     ╚██████╔╝███████╗██║  ██║██║  ██║███████╗╚██████╗╚██████╔╝██║  ██║██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝
         </div>
-    </div>
+
+        <figure class="featured-poster">
+            <img src="assets/flyer_20260505.jpg" alt="Songwriter Nights Flyer: May 5th 2026 at The Nick">
+            <figcaption class="poster-label">LATEST_FLYER: 05.05.26</figcaption>
+        </figure>
+
+        <div class="social-icons">
+            <a href="https://youtube.com/@thejohnpolar" target="_blank" title="YouTube" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/thejohnpolar/" target="_blank" title="Instagram" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" title="TikTok" aria-label="TikTok Feed"><i class="fab fa-tiktok"></i></a>
+        </div>
+
+
+        <div class="ig-feed">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C6N8Z9rR-vA/" data-instgrm-version="14" style="width:100%;">
+                <a href="https://www.instagram.com/p/C6N8Z9rR-vA/">View Latest Post</a>
+            </blockquote>
+        </div>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="john.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>John</span>
+        </a>
+        <a href="polaraf.html" class="nav-item">
+            <i class="fas fa-bolt"></i>
+            <span>AF</span>
+        </a>
+        <a href="polarband.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Band</span>
+        </a>
+        <a href="media.html" class="nav-item">
+            <i class="fas fa-image"></i>
+            <span>Media</span>
+        </a>
+    </nav>
+
+    <footer>
+        &copy; 2026 PolaRecords | Authorized Signal Only
+    </footer>
 
     <script>
-        const output = document.getElementById('output');
-        const userInput = document.getElementById('user-input');
-
-        const content = {
-            home: `
-                <div class="ascii-art">
-██████╗  ██████╗ ██╗      █████╗ ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ███████╗
-██╔══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝
-██████╔╝██║   ██║██║     ███████║██████╔╝█████╗  ██║     ██║   ██║██████╔╝███████╗
-██╔═══╝ ██║   ██║██║     ██╔══██║██╔══██╗██╔══╝  ██║     ██║   ██║██╔══██╗╚════██║
-██║     ╚██████╔╝███████╗██║  ██║██║  ██║███████╗╚██████╗╚██████╔╝██║  ██║███████║
-╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
-                </div>
-                <div class="output-line">Welcome to <span class="highlight">PolaRecords OS v2.4.0</span>.</div>
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line"><span class="highlight">FEATURED SNEAK PEAK:</span></div>
-                <div class="output-line">THURSDAY 04/09/26 @ TRUE STORY!</div>
-                
-                <div id="player-container" class="player-wrapper video-mode">
-                    <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                <div id="player-status" class="status-msg">System ready...</div>
-
-                <div class="mode-toggle">
-                    <div class="nav-link mode-btn" onclick="togglePlayer('video')">Video Feed</div>
-                    <div class="nav-link mode-btn" onclick="togglePlayer('audio')">Audio Link</div>
-                </div>
-
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Select a path:</div>
-                <div class="nav-link" onclick="show('john')">John Polar</div>
-                <div class="nav-link" onclick="show('polaraf')">PolarAF</div>
-                <div class="nav-link" onclick="show('polarband')">PolarBand</div>
-                <div class="nav-link" onclick="show('media')">Media Archive</div>
-            `,
-            john: `
-                <div class="output-line"><span class="highlight">JOHN POLAR</span></div>
-                <div class="output-line">Songwriter and performer based in Birmingham, Alabama.</div>
-                
-                <div class="log-stream">
-                    <div class="log-entry"><span class="log-time">[04.09]</span> <span class="log-msg">Performance logged: Live @ True Story.</span></div>
-                    <div class="log-entry"><span class="log-time">[11.11]</span> <span class="log-msg">Performance logged: Songwriter's Night @ The Nick.</span></div>
-                    <div class="log-entry"><span class="log-time">[10.28]</span> <span class="log-msg">New material drafted. Birmingham Bandstand session.</span></div>
-                    <div class="log-entry"><span class="log-time">[10.15]</span> <span class="log-msg">Status: Mobile rig deployment successful.</span></div>
-                </div>
-
-                <div class="output-line">Regular at <a href="https://www.thenickrocks.com/" target="_blank" class="highlight" style="text-decoration:none">The Nick's Birmingham Bandstand</a>.</div>
-                <div class="output-line">Current project: <span class="highlight">Polar & The Boys</span>.</div>
-                
-                <div class="output-line">Social Uplinks:</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <a href="https://youtube.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">YouTube</a>
-                    <a href="https://www.instagram.com/thejohnpolar/" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">Instagram</a>
-                    <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">TikTok</a>
-                </div>
-                
-                <div class="back-btn" onclick="show('home')">[ Back ]</div>
-            `,
-            polaraf: `
-                <div class="output-line"><span class="highlight">POLARAF</span></div>
-                <div class="output-line">Experimental melodic rap and freestyle jams.</div>
-                
-                <div class="log-stream">
-                    <div class="log-entry"><span class="log-time">[SYS]</span> <span class="log-msg">Loading experimental audio protocols...</span></div>
-                    <div class="log-entry"><span class="log-time">[REC]</span> <span class="log-msg">Session @ Voodoo Lounge archived.</span></div>
-                </div>
-
-                <div class="output-line">Known for high-energy sets and freestyle flow.</div>
-                <div class="output-line">Connect: <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="highlight" style="text-decoration:none">@polarafmusic</a></div>
-                
-                <div class="back-btn" onclick="show('home')">[ Back ]</div>
-            `,
-            polarband: `
-                <div class="output-line"><span class="highlight">POLARBAND</span></div>
-                <div class="output-line">AKA <span class="highlight">Polar & The Boys</span>.</div>
-                
-                <div style="padding: 40px 0; text-align: center; border: 1px dashed #39ff14; margin: 20px 0;">
-                    <div class="highlight" style="font-size: 24px; animation: pulsate 1s infinite alternate;">[ SIGNAL INTERCEPTED ]</div>
-                    <div style="margin-top: 10px; opacity: 0.6;">Data decryption in progress.</div>
-                    <div style="margin-top: 5px; font-family: monospace;">Estimated completion: Q1 2026</div>
-                </div>
-
-                <div class="back-btn" onclick="show('home')">[ Back ]</div>
-            `,
-            media: `
-                <div class="output-line"><span class="highlight">MEDIA ARCHIVE</span></div>
-                <div class="output-line">Direct uplinks to the latest PolaRecords fragments.</div>
-                
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line"><span class="highlight">INSTAGRAM FEED: @thejohnpolar</span></div>
-                <div class="social-embed-container">
-                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DBI6I8SRO3n/" data-instgrm-version="14"></blockquote>
-                </div>
-
-                <div class="output-line"><span class="highlight">YOUTUBE FRAGMENT:</span></div>
-                <div class="player-wrapper video-mode">
-                    <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allowfullscreen></iframe>
-                </div>
-
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Digital Art & Assets:</div>
-                <div class="media-grid">
-                    <div class="art-fragment">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300" alt="Tech">
-                        <div class="art-label">IMG_0921.LOG</div>
-                    </div>
-                    <div class="art-fragment">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300" alt="Tech">
-                        <div class="art-label">SIGNAL_04.FRG</div>
-                    </div>
-                </div>
-
-                <div class="output-line">------------------------------------</div>
-                <div class="output-line">Social Connection Nodes:</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <a href="https://youtube.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">@thejohnpolar</a>
-                    <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">@polarafmusic</a>
-                </div>
-                
-                <div class="back-btn" onclick="show('home')">[ Back ]</div>
-            `
-        };
-
-        function show(key) {
-            const fetching = document.getElementById('fetching');
-            output.style.display = 'none';
-            fetching.style.display = 'block';
-
-            setTimeout(() => {
-                fetching.style.display = 'none';
-                output.style.display = 'block';
-                output.innerHTML = content[key];
-                document.getElementById('terminal').scrollTop = 0;
-                
-                // Re-process Instagram embeds if they exist in the new content
-                if (window.instgrm) {
-                    window.instgrm.Embeds.process();
-                }
-            }, 600);
-        }
-
-        function togglePlayer(mode) {
-            const container = document.getElementById('player-container');
-            const status = document.getElementById('player-status');
-            
-            const messages = {
-                video: [
-                    "Visual uplink established...",
-                    "Decoding optical data...",
-                    "Syncing frames to terminal...",
-                    "Signal strength: 98%..."
-                ],
-                audio: [
-                    "Diverting power to acoustics...",
-                    "Frequency locked. Visuals offline...",
-                    "Isolating sonic waveforms...",
-                    "Resonating with the void..."
-                ]
-            };
-
-            const randomMsg = messages[mode][Math.floor(Math.random() * messages[mode].length)];
-            status.innerText = randomMsg;
-
-            if (mode === 'audio') {
-                container.classList.remove('video-mode');
-                container.classList.add('audio-mode');
-            } else {
-                container.classList.remove('audio-mode');
-                container.classList.add('video-mode');
-            }
-        }
-
-        // Terminal Command Listener
-        userInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const command = userInput.value.trim().toLowerCase();
-                userInput.value = '';
-
-                if (command === 'help') {
-                    alert('AVAILABLE COMMANDS: HOME, JOHN, POLARAF, BAND, MEDIA, CLEAR, WHOAMI');
-                } else if (command === 'home') {
-                    show('home');
-                } else if (command === 'john') {
-                    show('john');
-                } else if (command === 'polaraf') {
-                    show('polaraf');
-                } else if (command === 'band') {
-                    show('polarband');
-                } else if (command === 'media') {
-                    show('media');
-                } else if (command === 'clear') {
-                    output.innerHTML = '<div class="output-line">Terminal cleared. Type "HOME" to return.</div>';
-                } else if (command === 'whoami') {
-                    alert('AUTHORIZED GUEST / SIGNAL INTERCEPTOR');
-                } else if (command === 'polarecords') {
-                    alert('STATUS: ACTIVE / LOCATION: BIRMINGHAM, AL / MISSION: FREQUENCY RESONANCE');
-                }
-            }
-        });
-
-        // Focus input on terminal click
-        document.getElementById('terminal').addEventListener('click', () => {
-            userInput.focus();
-        });
-
-        // Initial view
-        show('home');
-        userInput.focus();
+        // Placeholder for future interactivity
+        console.log("System initialized...");
     </script>
 </body>
 </html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="darkreader-lock">
+
+    <!-- SEO & Standards -->
+    <title>PolaRecords OS | Restricted Terminal</title>
+    <meta name="description" content="[ RESTRICTED ACCESS ] PolaRecords OS terminal interface. Authorization required.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- PWA & Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#031A16">
+
+    <link rel="stylesheet" href="terminal.css">
+    <script async src="//www.instagram.com/embed.js"></script>
+</head>
+<body>
+    <div id="header-marquee">
+        <span>[ SYSTEM_RESTRICTED_ACCESS ]</span>
+    </div>
+
+    <div id="terminal">
+        <div id="fetching" class="fetching-data">DECRYPTING PolaRecords DATA STREAM</div>
+        <div id="output"></div>
+        <div id="command-line">
+            <span id="prompt">guest@PolaRecords:~$</span>
+            <input type="text" id="user-input" spellcheck="false" autocomplete="off">
+            <span class="cursor"></span>
+        </div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const userInput = document.getElementById('user-input');
+
+        const content = {
+            home: `
+                <div class="ascii-art">
+██████╗  ██████╗ ██╗      █████╗ ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝
+██████╔╝██║   ██║██║     ███████║██████╔╝█████╗  ██║     ██║   ██║██████╔╝██║  ██║███████╗
+██╔═══╝ ██║   ██║██║     ██╔══██║██╔══██╗██╔══╝  ██║     ██║   ██║██╔══██╗██║  ██║╚════██║
+██║     ╚██████╔╝███████╗██║  ██║██║  ██║███████╗╚██████╗╚██████╔╝██║  ██║██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝
+                </div>
+
+                <div class="art-fragment" style="width: 100%; aspect-ratio: unset; height: auto; cursor: default; margin-bottom: 20px;">
+                    <img src="assets/flyer_20260505.jpg" alt="Latest Flyer" style="opacity: 1; filter: sepia(100%) hue-rotate(90deg) brightness(0.9); width: 100%;">
+                    <div class="art-label">ACTIVE_SIGNAL: FRAGMENT_0505.JPG</div>
+                </div>
+
+                <div class="output-line">Welcome to <span class="highlight">PolaRecords OS v2.4.1</span>.</div>
+                <div class="output-line">------------------------------------</div>
+                <div class="log-stream">
+                    <div class="log-entry"><span class="log-time">[TITLE]</span> <span class="log-msg highlight">SONGWRITER NIGHTS @ THE NICK</span></div>
+                    <div class="log-entry"><span class="log-time">[HOST]</span> <span class="log-msg">Presented by Guntrain Productions</span></div>
+                    <div class="log-entry"><span class="log-time">[FEAT]</span> <span class="log-msg">George Scherer, E. Bailey, Guntram Anderlik & John Polar</span></div>
+                    <div class="log-entry"><span class="log-time">[DATA]</span> <span class="log-msg">05.05.26 | 8PM | $10</span></div>
+                </div>
+
+                <div id="player-container" class="player-wrapper video-mode">
+                    <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>`,
+john: `
+    <div class="output-line"><span class="highlight">JOHN POLAR</span></div>
+    <div class="output-line">Songwriter and performer based in Birmingham, Alabama.</div>
+
+    <div class="log-stream">
+        <div class="log-entry"><span class="log-time">[05.05]</span> <span class="log-msg">Upcoming: Songwriter Nights @ The Nick.</span></div>
+        <div class="log-entry"><span class="log-time">[09.30.25]</span> <span class="log-msg">Logged: Songwriter Nights @ The Nick w/ Gatsby.</span></div>
+        <div class="log-entry"><span class="log-time">[05.20.25]</span> <span class="log-msg">Logged: Songwriter Nights @ The Nick w/ Titus Bozeman Band.</span></div>
+        <div class="log-entry"><span class="log-time">[05.08.25]</span> <span class="log-msg">Logged: Songwriter Nights @ True Story Brewing Co.</span></div>
+        <div class="log-entry"><span class="log-time">[04.15.25]</span> <span class="log-msg">Logged: Songwriter Nights @ The Nick w/ Todd Simpson.</span></div>
+        <div class="log-entry"><span class="log-time">[04.09]</span> <span class="log-msg">Performance logged: Live @ True Story.</span></div>
+        <div class="log-entry"><span class="log-time">[11.11]</span> <span class="log-msg">Performance logged: Songwriter's Night @ The Nick.</span></div>
+        <div class="log-entry"><span class="log-time">[10.28]</span> <span class="log-msg">New material drafted. Birmingham Bandstand session.</span></div>
+        <div class="log-entry"><span class="log-time">[10.15]</span> <span class="log-msg">Status: Mobile rig deployment successful.</span></div>
+    </div>
+                <div class="output-line">Regular at <a href="https://www.thenickrocks.com/" target="_blank" class="highlight" style="text-decoration:none">The Nick's Birmingham Bandstand</a>.</div>
+                <div class="output-line">Current project: <span class="highlight">Polar & The Boys</span>.</div>
+                
+                <div class="output-line">Social Uplinks:</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <a href="https://youtube.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">YouTube</a>
+                    <a href="https://www.instagram.com/thejohnpolar/" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">Instagram</a>
+                    <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">TikTok</a>
+                </div>
+                
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
+            `,
+            polaraf: `
+                <div class="output-line"><span class="highlight">POLARAF</span></div>
+                <div class="output-line">Experimental melodic rap and freestyle jams.</div>
+                
+                <div class="log-stream">
+                    <div class="log-entry"><span class="log-time">[05.05]</span> <span class="log-msg">Upcoming: Songwriter Nights @ The Nick.</span></div>
+                    <div class="log-entry"><span class="log-time">[05.08.25]</span> <span class="log-msg">Session logged: True Story Brewing Co.</span></div>
+                    <div class="log-entry"><span class="log-time">[SYS]</span> <span class="log-msg">Loading experimental audio protocols...</span></div>
+                    <div class="log-entry"><span class="log-time">[REC]</span> <span class="log-msg">Session @ Voodoo Lounge archived.</span></div>
+                </div>
+
+                <div class="output-line">Known for high-energy sets and freestyle flow.</div>
+                <div class="output-line">Connect: <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="highlight" style="text-decoration:none">@polarafmusic</a></div>
+                
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
+            `,
+            polarband: `
+                <div class="output-line"><span class="highlight">POLARBAND</span></div>
+                <div class="output-line">AKA <span class="highlight">Polar & The Boys</span>.</div>
+
+                <div class="log-stream">
+                    <div class="log-entry"><span class="log-time">[05.05]</span> <span class="log-msg">Personnel Alert: John Polar live @ The Nick.</span></div>
+                    <div class="log-entry"><span class="log-time">[05.20.25]</span> <span class="log-msg">Detected: Titus Bozeman Band session.</span></div>
+                </div>
+                
+                <div style="padding: 40px 0; text-align: center; border: 1px dashed #39ff14; margin: 20px 0;">
+                    <div class="highlight" style="font-size: 24px; animation: pulsate 1s infinite alternate;">[ SIGNAL INTERCEPTED ]</div>
+                    <div style="margin-top: 10px; opacity: 0.6;">Data decryption in progress.</div>
+                    <div style="margin-top: 5px; font-family: monospace;">Estimated completion: Q1 2026</div>
+                </div>
+
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
+            `,
+            media: `
+                <div class="output-line"><span class="highlight">MEDIA ARCHIVE</span></div>
+                <div class="output-line">Direct uplinks to the latest PolaRecords fragments.</div>
+                
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line"><span class="highlight">LATEST FLYER: 05.05.26</span></div>
+                <div class="art-fragment" style="width: 100%; aspect-ratio: unset; height: auto; cursor: default;">
+                    <img src="assets/flyer_20260505.jpg" alt="Songwriter Nights Flyer" style="opacity: 1; filter: sepia(100%) hue-rotate(90deg) brightness(0.9); width: 100%;">
+                    <div class="art-label">ACTIVE_SIGNAL: FRAGMENT_0505.JPG</div>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line"><span class="highlight">HISTORICAL FRAGMENTS (2025):</span></div>
+                <div class="media-grid">
+                    <div class="art-fragment">
+                        <img src="assets/flyer_20250930.jpg" alt="Flyer 09.30.25">
+                        <div class="art-label">FL_0930.FRG</div>
+                    </div>
+                    <div class="art-fragment">
+                        <img src="assets/flyer_20250520.jpg" alt="Flyer 05.20.25">
+                        <div class="art-label">FL_0520.FRG</div>
+                    </div>
+                    <div class="art-fragment">
+                        <img src="assets/flyer_20250508.jpg" alt="Flyer 05.08.25">
+                        <div class="art-label">FL_0508.FRG</div>
+                    </div>
+                    <div class="art-fragment">
+                        <img src="assets/flyer_20250415.png" alt="Flyer 04.15.25">
+                        <div class="art-label">FL_0415.FRG</div>
+                    </div>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line"><span class="highlight">YOUTUBE FRAGMENT (LIVE @ TRUE STORY):</span></div>
+                <div class="player-wrapper video-mode">
+                    <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allowfullscreen></iframe>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line"><span class="highlight">INSTAGRAM FEED: @thejohnpolar</span></div>
+                <div class="social-embed-container">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DBI6I8SRO3n/" data-instgrm-version="14"></blockquote>
+                </div>
+
+                <div class="output-line"><span class="highlight">YOUTUBE FRAGMENT:</span></div>
+                <div class="player-wrapper video-mode">
+                    <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allowfullscreen></iframe>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Digital Art & Assets:</div>
+                <div class="media-grid">
+                    <div class="art-fragment">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300" alt="Tech">
+                        <div class="art-label">IMG_0921.LOG</div>
+                    </div>
+                    <div class="art-fragment">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300" alt="Tech">
+                        <div class="art-label">SIGNAL_04.FRG</div>
+                    </div>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">Social Connection Nodes:</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <a href="https://youtube.com/@thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">@thejohnpolar</a>
+                    <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">@polarafmusic</a>
+                </div>
+                
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>
+            `
+        };
+
+        function show(key) {
+            const fetching = document.getElementById('fetching');
+            output.style.display = 'none';
+            fetching.style.display = 'block';
+
+            // Add terminal scramble effect to the fetching text
+            const originalText = "DECRYPTING PolaRecords DATA STREAM";
+            const chars = "!@#$%^&*()_+1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let iterations = 0;
+            
+            const interval = setInterval(() => {
+                fetching.innerText = originalText.split("")
+                    .map((char, index) => {
+                        if(index < iterations) return originalText[index];
+                        return chars[Math.floor(Math.random() * chars.length)]
+                    })
+                    .join("");
+                
+                if(iterations >= originalText.length) clearInterval(interval);
+                iterations += 1/3;
+            }, 30);
+
+            setTimeout(() => {
+                fetching.style.display = 'none';
+                output.style.display = 'block';
+                output.innerHTML = content[key];
+                document.getElementById("terminal").className = "theme-" + key;
+                document.getElementById('terminal').scrollTop = 0;
+                
+                // Trigger entry animation for log entries
+                const entries = document.querySelectorAll('.log-entry');
+                entries.forEach((el, i) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateX(-10px)';
+                    el.style.transition = 'all 0.3s ease';
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateX(0)';
+                    }, i * 50);
+                });
+
+                if (window.instgrm) {
+                    window.instgrm.Embeds.process();
+                }
+            }, 800);
+        }
+
+        function togglePlayer(mode) {
+            const container = document.getElementById('player-container');
+            const status = document.getElementById('player-status');
+            
+            const messages = {
+                video: [
+                    "Visual uplink established...",
+                    "Decoding optical data...",
+                    "Syncing frames to terminal...",
+                    "Signal strength: 98%..."
+                ],
+                audio: [
+                    "Diverting power to acoustics...",
+                    "Frequency locked. Visuals offline...",
+                    "Isolating sonic waveforms...",
+                    "Resonating with the void..."
+                ]
+            };
+
+            const randomMsg = messages[mode][Math.floor(Math.random() * messages[mode].length)];
+            status.innerText = randomMsg;
+
+            if (mode === 'audio') {
+                container.classList.remove('video-mode');
+                container.classList.add('audio-mode');
+            } else {
+                container.classList.remove('audio-mode');
+                container.classList.add('video-mode');
+            }
+        }
+
+        // Terminal Command Listener
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = userInput.value.trim().toLowerCase();
+                userInput.value = '';
+
+                if (command === 'help') {
+                    alert('AVAILABLE COMMANDS: HOME, JOHN, POLARAF, BAND, MEDIA, CLEAR, WHOAMI');
+                } else if (command === 'home') {
+                    show('home');
+                } else if (command === 'john') {
+                    show('john');
+                } else if (command === 'polaraf') {
+                    show('polaraf');
+                } else if (command === 'band') {
+                    show('polarband');
+                } else if (command === 'media') {
+                    show('media');
+                } else if (command === 'clear') {
+                    output.innerHTML = '<div class="output-line">Terminal cleared. Type "HOME" to return.</div>';
+                } else if (command === 'whoami') {
+                    alert('AUTHORIZED GUEST / SIGNAL INTERCEPTOR');
+                } else if (command === 'polarecords') {
+                    alert('STATUS: ACTIVE / LOCATION: BIRMINGHAM, AL / MISSION: FREQUENCY RESONANCE');
+                }
+            }
+        });
+
+        // Focus input on terminal click
+        document.getElementById('terminal').addEventListener('click', () => {
+            userInput.focus();
+        });
+
+        // Initial view
+        show('home');
+        userInput.focus();
+    </script>
+</body>
+</html>
