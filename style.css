@@ -88,6 +88,264 @@ body {
     color: #39ff14;
 }
 
+/* Player Styles */
+.player-wrapper {
+    margin: 20px 0;
+    border: 1px solid #39ff14;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+}
+
+/* Scanline Overlay for Mystery */
+.player-wrapper::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+.player-wrapper.video-mode {
+    aspect-ratio: 16 / 9;
+}
+
+.player-wrapper.audio-mode {
+    height: 80px;
+    border-style: double;
+    border-width: 3px;
+    animation: pulsate 2s infinite alternate;
+}
+
+@keyframes pulsate {
+    from { box-shadow: 0 0 5px rgba(57, 255, 20, 0.2); }
+    to { box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); }
+}
+
+.player-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.player-wrapper.audio-mode iframe {
+    transform: translateY(-130px) scale(1.1);
+    filter: sepia(100%) hue-rotate(90deg) brightness(1.2);
+}
+
+.mode-toggle {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    text-align: center;
+    margin-top: 0 !important;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-btn:active {
+    transform: scale(0.95);
+    filter: invert(1);
+}
+
+.status-msg {
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    color: #39ff14;
+}
+
+/* Media & Art Grid */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.art-fragment {
+    aspect-ratio: 1;
+    border: 1px solid #39ff14;
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.art-fragment:hover {
+    box-shadow: 0 0 15px #39ff14;
+    transform: scale(1.03);
+}
+
+.art-fragment img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(100%) hue-rotate(90deg) brightness(0.8) contrast(1.2);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.art-fragment:hover img {
+    opacity: 1;
+    filter: sepia(100%) hue-rotate(90deg) brightness(1.1);
+}
+
+.art-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #39ff14;
+    color: #000;
+    font-size: 10px;
+    padding: 2px 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Simulated Log Stream */
+.log-stream {
+    background: rgba(57, 255, 20, 0.05);
+    border-left: 2px solid #39ff14;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+}
+
+.log-time {
+    color: #fff;
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+.log-msg {
+    color: #39ff14;
+}
+
+/* Social Embed Containers */
+.social-embed-container {
+    margin: 20px 0;
+    border: 1px solid #39ff14;
+    padding: 10px;
+    background: #0a0a0a;
+    position: relative;
+}
+
+.social-embed-container::before {
+    content: " [ EXTERNAL_FEED ] ";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #000;
+    font-size: 10px;
+    padding: 0 5px;
+    color: #39ff14;
+}
+
+/* Simulated Loading Animation */
+.fetching-data {
+    display: none;
+    padding: 20px;
+    text-align: center;
+    font-family: monospace;
+    color: #39ff14;
+}
+
+.fetching-data::after {
+    content: "";
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: "."; }
+    40% { content: ".."; }
+    60% { content: "..."; }
+    80% { content: "...."; }
+    100% { content: "....."; }
+}
+
+/* Instagram specific lo-fi override */
+.instagram-media {
+    margin: 0 auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+}
+
+/* Terminal Input Styles */
+#command-line {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(57, 255, 20, 0.3);
+    padding-top: 20px;
+}
+
+#prompt {
+    color: #39ff14;
+    font-weight: bold;
+}
+
+#user-input {
+    background: transparent;
+    border: none;
+    color: #39ff14;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    outline: none;
+    flex-grow: 1;
+}
+
+/* Blinking Cursor */
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background: #39ff14;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* ASCII Art */
+.ascii-art {
+    white-space: pre;
+    font-size: 8px;
+    line-height: 1.2;
+    color: #39ff14;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
 /* Scrollbar styling */
 #terminal::-webkit-scrollbar {
     width: 6px;
