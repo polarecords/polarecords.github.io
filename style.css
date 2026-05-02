@@ -103,8 +103,8 @@ a:hover { text-shadow: var(--glow-lg); }
 
 /* ─── Keyframes ──────────────────────────────────────────── */
 @keyframes marquee-scroll {
-    0%   { transform: translateX(-100%); }
-    100% { transform: translateX(100vw); }
+    0%   { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
 }
 
 @keyframes float-slow {
