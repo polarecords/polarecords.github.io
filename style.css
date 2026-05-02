@@ -480,7 +480,8 @@ footer {
 
 .hero-content {
     position: absolute;
-    bottom: var(--space-xl);
+    top: 50%;
+    transform: translateY(-50%);
     left: var(--space-md);
     right: var(--space-md);
     z-index: 10;
