@@ -1,6 +1,13 @@
 // CMS and Interactive Logic
 
-// Render logs based on page key — instant render with CSS stagger
+async function typeText(element, text, speed = 15) {
+    element.textContent = "";
+    for (let i = 0; i < text.length; i++) {
+        element.textContent += text.charAt(i);
+        await new Promise(r => setTimeout(r, speed));
+    }
+}
+
 async function renderLogs(pageKey) {
     const container = document.getElementById('dynamic-log-stream');
     if (!container) return;
@@ -14,10 +21,9 @@ async function renderLogs(pageKey) {
 
         container.innerHTML = "";
 
-        logs.forEach((log, i) => {
+        for (const log of logs) {
             const entryDiv = document.createElement('div');
             entryDiv.className = 'log-entry';
-            entryDiv.style.cssText = `animation-delay:${i * 80}ms`;
 
             const timeSpan = document.createElement('span');
             timeSpan.className = 'log-time';
@@ -25,19 +31,19 @@ async function renderLogs(pageKey) {
 
             const msgSpan = document.createElement('span');
             msgSpan.className = 'log-msg' + (log.highlight ? ' highlight' : '');
-            msgSpan.textContent = log.message;
 
             entryDiv.appendChild(timeSpan);
             entryDiv.appendChild(msgSpan);
             container.appendChild(entryDiv);
-        });
+
+            await typeText(msgSpan, log.message, 15);
+        }
 
     } catch (error) {
         console.error("Signal Decryption Error:", error);
     }
 }
 
-// Render media grid
 async function renderMediaGrid() {
     const container = document.getElementById('dynamic-media-grid');
     if (!container) return;
@@ -88,7 +94,6 @@ async function fetchDB() {
     return data;
 }
 
-// Initialize based on body class
 document.addEventListener('DOMContentLoaded', () => {
     const bodyClass = document.body.className;
 
@@ -98,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (!bodyClass || bodyClass === '') renderLogs('home');
 });
 
-// Service Worker Registration
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(() => {});
