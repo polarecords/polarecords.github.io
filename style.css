@@ -24,6 +24,7 @@
     --text-base: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
     --text-lg: clamp(1.15rem, 1.1rem + 0.5vw, 1.35rem);
     --text-xl: clamp(1.4rem, 1.3rem + 0.6vw, 1.7rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
 }
 
 @media (prefers-color-scheme: light) {
@@ -226,7 +227,7 @@ main, .content-body {
     padding: var(--space-md);
     width: 100%;
     box-sizing: border-box;
-    padding-bottom: 100px;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 20px);
 }
 
 /* ─── ASCII Art ──────────────────────────────────────────── */
@@ -298,6 +299,102 @@ main, .content-body {
     font-family: monospace;
 }
 
+/* ─── Show Card ──────────────────────────────────────────── */
+.show-card {
+    border: 1px solid var(--primary);
+    background: var(--terminal-black);
+    box-shadow: var(--glow-sm), inset 0 0 30px rgba(160,160,160,0.03);
+    margin: var(--space-lg) auto;
+    max-width: 480px;
+    position: relative;
+    overflow: hidden;
+}
+
+.show-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 2px,
+        rgba(255, 255, 255, 0.02) 4px
+    );
+    pointer-events: none;
+}
+
+.show-card-header {
+    border-bottom: 1px solid var(--primary);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--primary);
+    color: var(--bg);
+    text-align: center;
+}
+
+.show-status {
+    font-size: var(--text-xs);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.show-poster {
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.show-card-details {
+    padding: var(--space-md);
+    border-top: 1px solid rgba(160,160,160,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.show-title {
+    font-size: var(--text-xl);
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: var(--glow-md);
+    color: var(--highlight);
+}
+
+.show-venue, .show-datetime {
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    letter-spacing: 1px;
+}
+
+.show-venue i, .show-datetime i {
+    margin-right: 6px;
+    opacity: 0.6;
+}
+
+.show-lineup {
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--highlight);
+}
+
+.show-lineup strong {
+    font-size: var(--text-base);
+    text-shadow: var(--glow-md);
+}
+
+.show-countdown {
+    font-size: var(--text-sm);
+    letter-spacing: 3px;
+    opacity: 0.55;
+    margin-top: var(--space-xs);
+}
+
 /* ─── Section Titles ─────────────────────────────────────── */
 .section-title {
     border-bottom: 1px solid var(--primary);
@@ -342,17 +439,6 @@ main, .content-body {
 .social-icons .fa-youtube:hover,   .social-icons .fa-youtube:active   { text-shadow: 0 0 18px var(--yt); }
 .social-icons .fa-instagram:hover, .social-icons .fa-instagram:active { text-shadow: 0 0 18px var(--ig); }
 .social-icons .fa-tiktok:hover,    .social-icons .fa-tiktok:active    { text-shadow: var(--glow-lg); }
-
-/* ─── Behold Feed Override ────────────────────────────────── */
-.ig-feed figure {
-    border: 1px solid var(--primary) !important;
-    filter: sepia(100%) hue-rotate(85deg) saturate(2.5) brightness(0.65) contrast(1.4) !important;
-    box-shadow: var(--glow-sm) !important;
-}
-
-.ig-feed a {
-    color: var(--primary) !important;
-}
 
 
 @media (max-width: 767px) {
@@ -429,7 +515,7 @@ main, .content-body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 80px; /* Increased slightly for safety */
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
     background: var(--glass);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -437,9 +523,10 @@ main, .content-body {
     box-shadow: 0 -2px 20px rgba(0,255,65,0.15);
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    z-index: 9999; /* Ensure it stays on top */
-    padding-bottom: max(env(safe-area-inset-bottom), 10px); /* Better safe area handling */
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    z-index: 9999;
 }
 
 .nav-item {

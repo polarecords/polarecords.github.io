@@ -29,7 +29,7 @@
     <meta name="theme-color" content="#031A16">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="prefetch" href="john.html">
     <link rel="prefetch" href="polaraf.html">
     <link rel="prefetch" href="polarband.html">
@@ -50,10 +50,21 @@
 ╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝
         </div>
 
-        <figure class="featured-poster">
-            <img src="assets/flyer_20260505.jpg" alt="Songwriter Nights Flyer: May 5th 2026 at The Nick">
-            <figcaption class="poster-label">LATEST_FLYER: 2026.05.05</figcaption>
-        </figure>
+        <div class="show-card">
+            <div class="show-card-header">
+                <span class="show-status">// NEXT_SHOW //</span>
+            </div>
+            <figure class="featured-poster show-poster">
+                <img src="assets/flyer_20260505.jpg" alt="Songwriter Nights Flyer: May 5th 2026 at The Nick">
+            </figure>
+            <div class="show-card-details">
+                <div class="show-title">SONGWRITER NIGHTS</div>
+                <div class="show-venue"><i class="fas fa-location-dot"></i> The Nick &mdash; Birmingham, AL</div>
+                <div class="show-datetime"><i class="fas fa-calendar"></i> May 5, 2026 &mdash; Doors 8:00 PM</div>
+                <div class="show-lineup">feat. <strong>JOHN POLAR</strong></div>
+                <div id="event-countdown" class="show-countdown"></div>
+            </div>
+        </div>
 
         <div class="section-title">Signal Log</div>
         <div id="dynamic-log-stream" class="log-stream"></div>
@@ -61,12 +72,6 @@
         <div class="section-title">Video Log</div>
         <div class="featured-poster video-border" style="aspect-ratio: 16/9; padding: 0;">
             <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>
-        </div>
-
-        <div class="section-title">Instagram Uplink</div>
-        <div class="ig-feed">
-            <behold-widget feed-id="4DQL3AO7ovFW2CNrpNGp"></behold-widget>
-            <script type="module" src="https://w.behold.so/widget.js"></script>
         </div>
 
     </main>
