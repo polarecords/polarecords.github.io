@@ -145,6 +145,25 @@ a:hover { text-shadow: var(--glow-lg); }
     99%  { opacity: 1; }
 }
 
+@keyframes ascii-glitch {
+    0%, 91%, 100% {
+        text-shadow: var(--glow-md);
+        transform: none;
+    }
+    92% {
+        text-shadow: 3px 0 rgba(255,0,0,0.6), -3px 0 rgba(0,255,255,0.6), var(--glow-sm);
+        transform: translateX(2px);
+    }
+    93% {
+        text-shadow: -2px 0 rgba(255,0,0,0.5), 2px 0 rgba(0,255,255,0.5);
+        transform: translateX(-1px);
+    }
+    94% {
+        text-shadow: var(--glow-md);
+        transform: none;
+    }
+}
+
 /* ─── Layout ─────────────────────────────────────────────── */
 main, .content-body {
     flex: 1;
@@ -166,7 +185,7 @@ main, .content-body {
     text-shadow: var(--glow-md);
     overflow-x: auto;
     scrollbar-width: none;
-    animation: crt-flicker 8s linear infinite;
+    animation: ascii-glitch 9s linear infinite;
 }
 .ascii-art::-webkit-scrollbar { display: none; }
 

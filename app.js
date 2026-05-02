@@ -1,14 +1,14 @@
-// ─── Matrix Rain ─────────────────────────────────────────────────────────────
+// ─── Subtle matrix atmosphere (background, very low opacity) ─────────────────
 function initMatrixRain() {
     const canvas = document.createElement('canvas');
     canvas.id = 'matrix-rain';
     canvas.style.cssText =
-        'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.09;pointer-events:none;';
+        'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.035;pointer-events:none;';
     document.body.insertBefore(canvas, document.body.firstChild);
 
     const ctx = canvas.getContext('2d');
-    const CHARS = 'ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEF><{}[];:=+';
-    const FS = 14;
+    const CHARS = 'ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
+    const FS = 16;
 
     let cols, drops;
 
@@ -29,7 +29,7 @@ function initMatrixRain() {
     const rainColor = themeColors[document.body.className] || '#00FF41';
 
     function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillStyle = 'rgba(0,0,0,0.06)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = rainColor;
         ctx.font = FS + 'px monospace';
@@ -41,8 +41,46 @@ function initMatrixRain() {
         }
     }
 
-    // ~20 fps — readable, not a battery killer
-    setInterval(draw, 50);
+    // ~12 fps — subtle drift, not distracting
+    setInterval(draw, 85);
+}
+
+// ─── Text scramble: decodes from random chars to real text ────────────────────
+const SCRAMBLE_CHARS = 'ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ01234567';
+
+function scrambleDecode(el, delay = 0) {
+    const original = el.textContent.trim();
+    if (!original) return;
+
+    const FRAMES = 16;
+    const INTERVAL = 35;
+    let frame = 0;
+
+    setTimeout(() => {
+        const tick = setInterval(() => {
+            const resolved = Math.floor((frame / FRAMES) * original.length);
+            el.textContent = original.split('').map((ch, i) => {
+                if (ch === ' ' || ch === '/' || ch === '>' || ch === '_' || ch === '[' || ch === ']') return ch;
+                if (i < resolved) return ch;
+                return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+            }).join('');
+            frame++;
+            if (frame > FRAMES) {
+                el.textContent = original;
+                clearInterval(tick);
+            }
+        }, INTERVAL);
+    }, delay);
+}
+
+function initScramble() {
+    // Section titles decode in on load, staggered
+    document.querySelectorAll('.section-title').forEach((el, i) => {
+        scrambleDecode(el, i * 120);
+    });
+    // Hero title if present
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) scrambleDecode(heroTitle, 100);
 }
 
 // ─── Typing effect with cursor blink ─────────────────────────────────────────
@@ -70,10 +108,10 @@ async function renderLogs(pageKey) {
         container.innerHTML = '';
 
         for (const log of logs) {
-            const entryDiv  = document.createElement('div');
+            const entryDiv = document.createElement('div');
             entryDiv.className = 'log-entry';
 
-            const timeSpan  = document.createElement('span');
+            const timeSpan = document.createElement('span');
             timeSpan.className   = 'log-time';
             timeSpan.textContent = log.date;
 
@@ -146,12 +184,13 @@ async function fetchDB() {
 // ─── Boot ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     initMatrixRain();
+    initScramble();
 
     const bodyClass = document.body.className;
-    if      (bodyClass === 'theme-john')      renderLogs('john');
-    else if (bodyClass === 'theme-polaraf')   renderLogs('polaraf');
-    else if (bodyClass === 'theme-media')     renderMediaGrid();
-    else if (!bodyClass || bodyClass === '')  renderLogs('home');
+    if      (bodyClass === 'theme-john')     renderLogs('john');
+    else if (bodyClass === 'theme-polaraf')  renderLogs('polaraf');
+    else if (bodyClass === 'theme-media')    renderMediaGrid();
+    else if (!bodyClass || bodyClass === '') renderLogs('home');
 });
 
 if ('serviceWorker' in navigator) {
