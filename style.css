@@ -49,7 +49,7 @@ body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%);
     pointer-events: none;
     z-index: 9998;
 }
@@ -371,6 +371,7 @@ footer {
 
 .nav-soon {
     display: block;
+    text-align: center;
     font-size: 0.5rem;
     opacity: 0.65;
     letter-spacing: 0.5px;
