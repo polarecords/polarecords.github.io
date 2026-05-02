@@ -130,17 +130,48 @@ async function renderLogs(pageKey) {
 }
 
 // ─── Render media grid ────────────────────────────────────────────────────────
+async function fetchBeholdFeed() {
+    const BEHOLD_URL = 'https://feeds.behold.so/riZpEiNKDSOVy8PPU6UM';
+    try {
+        const response = await fetch(BEHOLD_URL);
+        if (!response.ok) return [];
+        const data = await response.json();
+        return data.map(post => ({
+            src: post.mediaUrl || post.thumbnailUrl,
+            alt: post.caption || 'Instagram Post',
+            label: `IG_${post.timestamp.split('T')[0].replace(/-/g, '_')}.FRG`,
+            date: post.timestamp
+        }));
+    } catch (err) {
+        console.error('Behold Uplink Error:', err);
+        return [];
+    }
+}
+
 async function renderMediaGrid() {
     const container = document.getElementById('dynamic-media-grid');
     if (!container) return;
 
     try {
-        const cached = sessionStorage.getItem('pola-db');
-        const data   = cached ? JSON.parse(cached) : await fetchDB();
+        const [dbData, beholdData] = await Promise.all([
+            fetchDB(),
+            fetchBeholdFeed()
+        ]);
 
         container.innerHTML = '';
 
-        data.media.forEach(item => {
+        // Combine and sort by date
+        const dbMedia = dbData.media.map(item => ({
+            ...item,
+            sortDate: item.label.match(/\d{4}_\d{2}_\d{2}/) ? item.label.match(/\d{4}_\d{2}_\d{2}/)[0].replace(/_/g, '-') : '1970-01-01'
+        }));
+
+        const combinedMedia = [
+            ...beholdData.map(item => ({ ...item, sortDate: item.date })),
+            ...dbMedia
+        ].sort((a, b) => new Date(b.sortDate) - new Date(a.sortDate));
+
+        combinedMedia.forEach(item => {
             const figure = document.createElement('figure');
             figure.className = 'art-fragment';
 

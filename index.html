@@ -55,6 +55,18 @@
             <figcaption class="poster-label">LATEST_FLYER: 2026.05.05</figcaption>
         </figure>
 
+        <div class="section-title">Signal Manifesto</div>
+        <div class="log-stream">
+            <div class="log-entry">
+                <span class="log-time">IDENTITY // CORE</span>
+                <span class="log-msg">We are Technomads. We find color in binary noise, truth in analog static, and grounding in the high trees of the digital age.</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">MISSION // ARCHIVE</span>
+                <span class="log-msg">This hub is an interceptor for real-world vibrations—live jams, songwriter nights, and visual fragments. Nothing is filtered. Everything is logged.</span>
+            </div>
+        </div>
+
         <div class="section-title">Signal Log</div>
         <div id="dynamic-log-stream" class="log-stream"></div>
 
@@ -63,17 +75,10 @@
             <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>
         </div>
 
-        <div class="section-title">Instagram</div>
-        <div class="ig-feed" id="ig-embed-container">
-            <blockquote class="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/p/C6N8Z9rR-vA/"
-                data-instgrm-version="14"
-                style="background:#000; border:1px solid var(--primary); margin:0; max-width:100%; width:100%;">
-                <a href="https://www.instagram.com/thejohnpolar/" target="_blank"
-                   style="color:var(--primary); font-weight:bold; text-decoration:none;">
-                    [ VIEW @THEJOHNPOLAR ON INSTAGRAM ]
-                </a>
-            </blockquote>
+        <div class="section-title">Instagram Uplink</div>
+        <div class="ig-feed">
+            <figure data-behold-id="riZpEiNKDSOVy8PPU6UM"></figure>
+            <script src="https://w.behold.so/widget.js" type="module"></script>
         </div>
 
     </main>
@@ -106,16 +111,5 @@
     </footer>
 
     <script src="app.js"></script>
-    <!-- Load Instagram embed after page is ready, then manually process -->
-    <script>
-        (function() {
-            var s = document.createElement('script');
-            s.src = 'https://www.instagram.com/embed.js';
-            s.onload = function() {
-                if (window.instgrm) window.instgrm.Embeds.process();
-            };
-            document.body.appendChild(s);
-        })();
-    </script>
 </body>
 </html>
