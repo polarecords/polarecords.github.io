@@ -179,7 +179,6 @@ main, .content-body {
     position: relative;
     overflow: hidden;
     max-width: 480px;
-    /* subtle tilt for that lo-fi flyer feel */
     transform: rotate(-0.5deg);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -187,6 +186,15 @@ main, .content-body {
 .featured-poster:hover {
     transform: rotate(0deg) scale(1.01);
     box-shadow: 0 0 35px rgba(0,255,65,0.45), 0 0 80px rgba(0,255,65,0.15);
+}
+
+/* Media page: full-width posters, no tilt */
+.theme-media .featured-poster {
+    max-width: 100%;
+    transform: none;
+}
+.theme-media .featured-poster:hover {
+    transform: scale(1.01);
 }
 
 .featured-poster img {
@@ -504,7 +512,7 @@ footer {
 }
 
 .art-fragment {
-    aspect-ratio: 1;
+    aspect-ratio: 3 / 4;
     border: 1px solid var(--primary);
     position: relative;
     overflow: hidden;
