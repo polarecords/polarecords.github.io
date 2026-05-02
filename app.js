@@ -30,6 +30,12 @@ function initCountdown() {
     }, 1000); // Update every second
 }
 
+// ─── Cursor Spotlight ────────────────────────────────────────────────────────
+document.addEventListener('mousemove', e => {
+    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+});
+
 // Initialize countdown when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initCountdown();
