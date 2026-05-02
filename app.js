@@ -21,10 +21,17 @@ function initMatrixRain() {
     resize();
     window.addEventListener('resize', resize);
 
+    const themeColors = {
+        'theme-john':      '#81B5AC',
+        'theme-polaraf':   '#FF3333',
+        'theme-polarband': '#ffffff',
+    };
+    const rainColor = themeColors[document.body.className] || '#00FF41';
+
     function draw() {
         ctx.fillStyle = 'rgba(0,0,0,0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#00FF41';
+        ctx.fillStyle = rainColor;
         ctx.font = FS + 'px monospace';
         for (let i = 0; i < cols; i++) {
             const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
