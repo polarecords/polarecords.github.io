@@ -18,11 +18,13 @@
         ],
         "home": [
             {"date": "2026.05.05 // 20:00", "message": "UPCOMING: SONGWRITER NIGHTS @ THE NICK", "highlight": true},
+            {"date": "SIGNAL // ESTABLISHED", "message": "RE-TUNING FREQUENCIES TO ANALOG // VIBRATION_INTENSITY_OPTIMIZED", "highlight": false},
             {"date": "SOURCE // RECOVERY", "message": "PERFORMANCE_LOG: BIRMINGHAM_BANDSTAND_SESSION_ARCHIVED", "highlight": false},
             {"date": "SYSTEM // STATUS", "message": "ALL_UPLINKS_ACTIVE // SIGNAL_STRENGTH_MAXIMIZED", "highlight": false}
         ]
     },
     "media": [
+        {"src": "assets/flyer_20260505.jpg", "alt": "Songwriter Nights Flyer: May 5th 2026", "label": "FL_2026_05_05.FRG"},
         {"src": "assets/flyer_20250930.jpg", "alt": "Performance Flyer: Sept 30th 2025", "label": "FL_2025_09_30.FRG"},
         {"src": "assets/flyer_20250520.jpg", "alt": "Performance Flyer: May 20th 2025", "label": "FL_2025_05_20.FRG"},
         {"src": "assets/flyer_20250508.jpg", "alt": "Performance Flyer: May 8th 2025", "label": "FL_2025_05_08.FRG"},
