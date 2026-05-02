@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="darkreader-lock">
-    
+
     <!-- SEO & Standards -->
     <title>PolaRecords | Authorized Signal Hub</title>
     <meta name="description" content="PolaRecords OS: Authorized signal interceptor and experimental media hub based in Birmingham, AL. Performance logs and visual fragments.">
     <link rel="canonical" href="https://polarecords.net">
-    
+
     <!-- Social / Open Graph -->
     <meta property="og:title" content="PolaRecords | Authorized Signal Hub">
     <meta property="og:description" content="Authorized signal interceptor and experimental media hub. Performance logs and visual fragments.">
     <meta property="og:image" content="assets/flyer_20260505.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://polarecords.net">
-    
+
     <!-- PWA & Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -31,8 +31,6 @@
     <link rel="prefetch" href="polaraf.html">
     <link rel="prefetch" href="polarband.html">
     <link rel="prefetch" href="media.html">
-    <script async src="https://www.instagram.com/embed.js"></script>
-    
 </head>
 <body>
     <div id="header-marquee">
@@ -62,9 +60,16 @@
             <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>
         </div>
 
-        <div class="ig-feed">
-            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C6N8Z9rR-vA/" data-instgrm-version="14" style="width:100%;">
-                <a href="https://www.instagram.com/p/C6N8Z9rR-vA/" style="color:var(--primary); font-weight:bold; text-decoration:underline;">[ INSTAGRAM FEED - CLICK TO VIEW ]</a>
+        <div class="section-title">Instagram</div>
+        <div class="ig-feed" id="ig-embed-container">
+            <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/C6N8Z9rR-vA/"
+                data-instgrm-version="14"
+                style="background:#000; border:1px solid var(--primary); margin:0; max-width:100%; width:100%;">
+                <a href="https://www.instagram.com/thejohnpolar/" target="_blank"
+                   style="color:var(--primary); font-weight:bold; text-decoration:none;">
+                    [ VIEW @THEJOHNPOLAR ON INSTAGRAM ]
+                </a>
             </blockquote>
         </div>
 
@@ -97,30 +102,17 @@
         &copy; 2026 PolaRecords | Authorized Signal Only
     </footer>
 
-    <script>
-        // Placeholder for future interactivity
-        console.log("System initialized...");
-    </script>
     <script src="app.js"></script>
-</body>
-</html>
-old; text-shadow:0 0 10px var(--primary);">&times;</span>
-        <img id="lightbox-img" style="max-width:95%; max-height:90vh; object-fit:contain; border:2px solid var(--primary); box-shadow:0 0 30px var(--primary); filter:sepia(80%) hue-rotate(90deg) brightness(0.8) contrast(1.2);">
-    </div>
+    <!-- Load Instagram embed after page is ready, then manually process -->
     <script>
-        const modal = document.getElementById('lightbox-modal');
-        const modalImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('img').forEach(img => {
-            if(img.closest('.featured-poster') || img.closest('.art-fragment')) {
-                img.style.cursor = 'pointer';
-                img.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
-            }
-        });
-        modal.onclick = function() { modal.style.display = "none"; };
+        (function() {
+            var s = document.createElement('script');
+            s.src = 'https://www.instagram.com/embed.js';
+            s.onload = function() {
+                if (window.instgrm) window.instgrm.Embeds.process();
+            };
+            document.body.appendChild(s);
+        })();
     </script>
-    <script src="app.js"></script>
 </body>
 </html>
