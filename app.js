@@ -69,6 +69,63 @@ function renderMediaGrid(media) {
     }
 }
 
+// ─── Marquee Builder ─────────────────────────────────────────────────────────
+function getNextWeekday(targetDay) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let diff = targetDay - today.getDay();
+    if (diff < 0) diff += 7;
+    today.setDate(today.getDate() + diff);
+    return today;
+}
+
+function fmtMarqueeDate(date) {
+    const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    const today = new Date();
+    const isToday = date.toDateString() === today.toDateString();
+    return isToday ? `TONIGHT` : `${days[date.getDay()]} ${y}.${m}.${d}`;
+}
+
+function buildMarqueeEvents(events) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const segments = [];
+
+    events.forEach(event => {
+        if (event.type === 'show') {
+            const eventDate = new Date(event.date + 'T00:00:00');
+            if (eventDate >= today) {
+                segments.push(`UPCOMING: ${event.title} @ ${event.venue} // ${fmtMarqueeDate(eventDate)} // ${event.time}`);
+            }
+        } else if (event.type === 'recurring' && event.recurrence === 'weekly') {
+            const nextDate = getNextWeekday(event.day);
+            const label = fmtMarqueeDate(nextDate);
+            segments.push(`${event.note}: ${event.title} @ ${event.venue} // ${label} // ${event.time}–${event.endTime}`);
+        }
+    });
+
+    return segments;
+}
+
+function updateMarquee(events) {
+    const span = document.querySelector('#header-marquee span');
+    if (!span || !events || !events.length) return;
+
+    const segments = buildMarqueeEvents(events);
+    if (!segments.length) return;
+
+    const staticText = span.textContent.trim();
+    const full = [staticText, ...segments].join(' ✦ ');
+    span.textContent = full;
+
+    // Scale scroll speed to content length so it doesn't rush or crawl
+    const duration = Math.max(20, Math.round(full.length * 0.12));
+    span.style.animationDuration = duration + 's';
+}
+
 async function loadData() {
     try {
         const res = await fetch('database.json');
@@ -81,6 +138,10 @@ async function loadData() {
 
         if (data.media) {
             renderMediaGrid(data.media);
+        }
+
+        if (data.events) {
+            updateMarquee(data.events);
         }
     } catch (e) {
         console.warn('Could not load data:', e);
