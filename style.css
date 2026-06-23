@@ -147,6 +147,38 @@ body {
 a { color: var(--primary); }
 a:hover { text-shadow: var(--glow-lg); }
 
+/* ─── Bandstand Bar (home only) ─────────────────────────────── */
+#bandstand-bar {
+    border-bottom: 1px solid var(--primary);
+    background: var(--terminal-black);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: var(--text-sm);
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: var(--glow-md);
+    padding: 0 var(--space-md);
+    overflow: hidden;
+}
+
+.bandstand-name {
+    color: var(--highlight);
+    white-space: nowrap;
+}
+
+.bandstand-detail {
+    color: var(--primary);
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+.bandstand-sep {
+    opacity: 0.4;
+}
+
 /* ─── Header Marquee ─────────────────────────────────────── */
 #header-marquee {
     border-bottom: 1px solid var(--primary);
