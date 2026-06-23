@@ -52,35 +52,6 @@
             <audio id="decoder-audio" src="" preload="none"></audio>
         </div>
 
-        <script>
-            let isPlaying = false;
-            let progressInterval;
-            
-            function toggleDecoder() {
-                const status = document.getElementById('decoder-status');
-                const progress = document.getElementById('decoder-progress');
-                
-                if (!isPlaying) {
-                    isPlaying = true;
-                    status.textContent = "[ DECODING SIGNAL... ]";
-                    status.style.color = "var(--primary)";
-                    let ticks = 0;
-                    progressInterval = setInterval(() => {
-                        ticks++;
-                        if (ticks > 20) ticks = 1;
-                        let bar = "█".repeat(ticks) + "░".repeat(20 - ticks);
-                        let time = `00:${ticks.toString().padStart(2, '0')}`;
-                        progress.textContent = `[${bar}] ${time}`;
-                    }, 500);
-                } else {
-                    isPlaying = false;
-                    clearInterval(progressInterval);
-                    status.textContent = "[ SIGNAL PAUSED ]";
-                    status.style.color = "var(--highlight)";
-                }
-            }
-        </script>
-
         <div class="section-title">Transmission Log</div>
         <div id="dynamic-log-stream" class="log-stream"></div>
 
