@@ -36,13 +36,15 @@
             "type": "recurring",
             "recurrence": "weekly",
             "day": 1,
-            "note": "EVERY MONDAY"
+            "note": "EVERY MONDAY",
+            "image": "assets/photo_20260623.jpg",
+            "lineup": "feat. JOHN POLAR + OPEN MIC SHOWCASE"
         }
     ],
     "media": [
-        {"src": "assets/flyer_20260505.jpg", "alt": "Songwriter Nights Flyer: May 5th 2026", "label": "FL_2026_05_05.FRG"},
-        {"src": "assets/photo_20260623.jpg", "alt": "The Nick Marquee: Rest Easy Nathan Songwriter's Night ft. E. Bailey, John Polar & George Scherer — May 5th 2026", "label": "MARQUEE_THE_NICK_2026_05_05.FRG"},
         {"src": "assets/photo_20260607.jpg", "alt": "True Story Songwriter Nights Flyer: June 11th 2026 ft. John Polar", "label": "FL_2026_06_11.FRG"},
+        {"src": "assets/photo_20260623.jpg", "alt": "The Nick Marquee: Rest Easy Nathan Songwriter's Night ft. E. Bailey, John Polar & George Scherer — May 5th 2026", "label": "MARQUEE_THE_NICK_2026_05_05.FRG"},
+        {"src": "assets/flyer_20260505.jpg", "alt": "Songwriter Nights Flyer: May 5th 2026", "label": "FL_2026_05_05.FRG"},
         {"src": "assets/flyer_20250930.jpg", "alt": "Performance Flyer: Sept 30th 2025", "label": "FL_2025_09_30.FRG"},
         {"src": "assets/flyer_20250520.jpg", "alt": "Performance Flyer: May 20th 2025", "label": "FL_2025_05_20.FRG"},
         {"src": "assets/flyer_20250508.jpg", "alt": "Performance Flyer: May 8th 2025", "label": "FL_2025_05_08.FRG"},

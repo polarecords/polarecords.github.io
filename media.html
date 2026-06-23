@@ -38,10 +38,7 @@
         
         <div class="section-title">Latest Flyers</div>
         <div class="media-grid">
-            <figure class="featured-poster" style="margin:0;">
-                <img src="assets/flyer_20260505.jpg" alt="Songwriter Nights Flyer: May 5th 2026 at The Nick">
-                <figcaption class="poster-label">FRAGMENT_2026_05_05.JPG</figcaption>
-            </figure>
+            <figure id="featured-media-item" class="featured-poster" style="margin:0;"></figure>
         </div>
 
         <div class="section-title">Historical Fragments</div>
@@ -79,20 +76,6 @@
             <img id="lightbox-img" class="lightbox-poster">
         </div>
     </div>
-    <script>
-        const modal = document.getElementById('lightbox-modal');
-        const modalImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('img').forEach(img => {
-            if(img.closest('.featured-poster') || img.closest('.art-fragment')) {
-                img.style.cursor = 'pointer';
-                img.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
-            }
-        });
-        modal.onclick = function() { modal.style.display = "none"; };
-    </script>
     <script src="app.js"></script>
 </body>
 </html>
