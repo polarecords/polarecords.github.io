@@ -11,8 +11,15 @@
 
     <!-- SEO & Standards -->
     <title>PolarAF | PolaRecords Uplink</title>
-    <meta name="description" content="PolarAF: Experimental melodic rap and freestyle jams. High-energy sets and freestyle flow from the Birmingham underground.">
-    
+    <meta name="description" content="PolarAF: Experimental melodic rap and freestyle jams from the Birmingham underground.">
+
+    <!-- Social / Open Graph -->
+    <meta property="og:title" content="PolarAF | PolaRecords">
+    <meta property="og:description" content="Experimental melodic rap and freestyle jams from Birmingham, AL. High-energy sets and raw frequency.">
+    <meta property="og:image" content="assets/photo_20260607.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polarecords.net/polaraf.html">
+
     <!-- PWA & Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -46,10 +53,13 @@
         <div class="output-line">Experimental melodic rap and freestyle jams. High-energy sets and freestyle flow.</div>
         
         <div class="section-title">Signal Decoder</div>
-        <div id="signal-decoder" style="border: 1px solid var(--primary); padding: var(--space-md); margin: var(--space-md) 0; background: rgba(129, 181, 172, 0.05); cursor: pointer; text-align: center;" onclick="toggleDecoder()">
-            <div id="decoder-status" class="highlight" style="font-size: var(--text-lg); margin-bottom: 10px; animation: flicker 0.15s infinite;">[ AWAITING INPUT ]</div>
-            <div id="decoder-progress" style="font-family: monospace; letter-spacing: 2px;">[░░░░░░░░░░░░░░░░░░░░] 00:00</div>
-            <audio id="decoder-audio" src="" preload="none"></audio>
+        <div id="signal-decoder" class="decoder-panel" onclick="toggleDecoder()">
+            <div id="decoder-status" class="highlight decoder-status">[ AWAITING INPUT — TAP TO DECODE ]</div>
+            <div id="decoder-progress" class="decoder-progress">[░░░░░░░░░░░░░░░░░░░░] 00:00</div>
+            <div id="decoder-links" class="decoder-links" style="display:none;">
+                <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="highlight" style="text-decoration:none;"><i class="fab fa-instagram"></i> @polarafmusic</a>
+                <a href="https://youtube.com/@thejohnpolar" target="_blank" class="highlight" style="text-decoration:none;"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
         </div>
 
         <div class="section-title">Transmission Log</div>
@@ -84,6 +94,9 @@
             <span>Media</span>
         </a>
     </nav>
+    <footer>
+        &copy; 2026 PolaRecords | Authorized Signal Only
+    </footer>
     <script src="app.js"></script>
 </body>
 </html>
