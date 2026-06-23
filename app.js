@@ -195,23 +195,31 @@ function updateMarquee(events) {
 function toggleDecoder() {
     const status   = document.getElementById('decoder-status');
     const progress = document.getElementById('decoder-progress');
+    const links    = document.getElementById('decoder-links');
     if (!status || !progress) return;
 
-    if (!window._decoderActive) {
-        window._decoderActive = true;
-        status.textContent = '[ DECODING SIGNAL... ]';
-        status.style.color = 'var(--primary)';
-        let ticks = 0;
-        window._decoderInterval = setInterval(() => {
-            ticks = (ticks % 20) + 1;
-            progress.textContent = `[${'█'.repeat(ticks)}${'░'.repeat(20 - ticks)}] 00:${String(ticks).padStart(2, '0')}`;
-        }, 500);
-    } else {
+    if (window._decoderActive) {
         window._decoderActive = false;
         clearInterval(window._decoderInterval);
-        status.textContent = '[ SIGNAL PAUSED ]';
-        status.style.color = 'var(--highlight)';
+        status.textContent = '[ SIGNAL PAUSED — TAP TO RESUME ]';
+        return;
     }
+
+    window._decoderActive = true;
+    if (links) links.style.display = 'none';
+    status.textContent = '[ DECODING SIGNAL... ]';
+    let ticks = 0;
+    window._decoderInterval = setInterval(() => {
+        ticks++;
+        progress.textContent = `[${'█'.repeat(ticks)}${'░'.repeat(20 - ticks)}] 00:${String(ticks).padStart(2, '0')}`;
+        if (ticks >= 20) {
+            clearInterval(window._decoderInterval);
+            window._decoderActive = false;
+            status.textContent = '[ SIGNAL DECODED // ACCESS GRANTED ]';
+            progress.textContent = '[████████████████████] COMPLETE';
+            if (links) links.style.display = 'flex';
+        }
+    }, 150);
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
