@@ -1,15 +1,15 @@
 /* Updated interface theme - less green */
 :root {
     color-scheme: dark light;
-    --primary: #A0A0A0;      /* Muted silver */
-    --accent: #D0D0D0;       /* Lighter accent */
-    --bg: #0A0A0A;           /* Deep black-gray */
-    --glass: rgba(15, 15, 15, 0.95);
+    --primary: #00F0FF;      /* Cyber cyan */
+    --accent: #B388FF;       /* Soft violet */
+    --bg: #0A0A12;           /* Deep navy black */
+    --glass: rgba(10, 10, 18, 0.85); /* Blurred glass backdrop */
     --highlight: #FFFFFF;    /* Pure white */
-    --terminal-black: #050505;
-    --glow-sm: 0 0 4px rgba(160,160,160,0.3);
-    --glow-md: 0 0 8px rgba(160,160,160,0.4);
-    --glow-lg: 0 0 16px rgba(255,255,255,0.2);
+    --terminal-black: #06060A;
+    --glow-sm: 0 0 4px rgba(0,240,255,0.3);
+    --glow-md: 0 0 8px rgba(0,240,255,0.4), 0 0 16px rgba(179,136,255,0.2);
+    --glow-lg: 0 0 12px rgba(0,240,255,0.5), 0 0 24px rgba(179,136,255,0.3);
 
     /* Spacing Scale - Improved Vertical Rhythm */
     --space-xs: 6px;
@@ -73,7 +73,7 @@ body::after {
 
 /* ─── Holographic Depth Shadow ───────────────────────────── */
 .content-body, .featured-poster {
-    box-shadow: 0 0 20px rgba(0,0,0,0.8), 0 0 50px rgba(160,160,160,0.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.8), 0 0 50px rgba(0, 240, 255,0.05);
 }
 
 /* ─── Data Stream (Matrix-Lite) ─────────────────────────── */
@@ -81,7 +81,7 @@ body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(160,160,160,0.03) 50%, transparent 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255,0.03) 50%, transparent 100%);
     background-size: 100% 200%;
     animation: data-stream 20s linear infinite;
     pointer-events: none;
@@ -127,7 +127,7 @@ body {
     min-height: 100vh;
     text-shadow: var(--glow-sm);
     /* Enhanced atmospheric filter */
-    filter: sepia(10%) contrast(1.05) brightness(0.95) saturate(1.1);
+    filter: sepia(20%) hue-rotate(180deg) contrast(1.05) brightness(0.95) saturate(1.2);
     transition: filter 0.5s ease;
     /* Mysterious pulse */
     animation: ambient-pulse 10s ease-in-out infinite;
@@ -182,7 +182,7 @@ a:hover { text-shadow: var(--glow-lg); }
 /* ─── Header Marquee ─────────────────────────────────────── */
 #header-marquee {
     border-bottom: 1px solid var(--primary);
-    box-shadow: 0 1px 0 rgba(160, 160, 160,0.2), 0 2px 8px rgba(160, 160, 160,0.1);
+    box-shadow: 0 1px 0 rgba(0, 240, 255,0.2), 0 2px 8px rgba(0, 240, 255,0.1);
     height: 40px;
     overflow: hidden;
     background: var(--terminal-black);
@@ -246,8 +246,8 @@ a:hover { text-shadow: var(--glow-lg); }
 }
 
 @keyframes ambient-pulse {
-    0%, 100% { filter: sepia(10%) contrast(1.05) brightness(0.95) saturate(1.1); }
-    50% { filter: sepia(15%) contrast(1.1) brightness(0.9) saturate(1.2); }
+    0%, 100% { filter: sepia(20%) hue-rotate(180deg) contrast(1.05) brightness(0.95) saturate(1.2); }
+    50% { filter: sepia(30%) hue-rotate(190deg) contrast(1.1) brightness(0.9) saturate(1.4); }
 }
 
 
@@ -335,7 +335,7 @@ main, .content-body {
 .show-card {
     border: 1px solid var(--primary);
     background: var(--terminal-black);
-    box-shadow: var(--glow-sm), inset 0 0 30px rgba(160,160,160,0.03);
+    box-shadow: var(--glow-sm), inset 0 0 30px rgba(0, 240, 255,0.03);
     margin: var(--space-lg) auto;
     max-width: 480px;
     position: relative;
@@ -381,7 +381,7 @@ main, .content-body {
 
 .show-card-details {
     padding: var(--space-md);
-    border-top: 1px solid rgba(160,160,160,0.2);
+    border-top: 1px solid rgba(0, 240, 255,0.2);
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
@@ -430,7 +430,7 @@ main, .content-body {
 /* ─── Section Titles ─────────────────────────────────────── */
 .section-title {
     border-bottom: 1px solid var(--primary);
-    box-shadow: 0 1px 8px rgba(160, 160, 160,0.15);
+    box-shadow: 0 1px 8px rgba(0, 240, 255,0.15);
     margin: var(--space-xl) 0 var(--space-md);
     padding-bottom: var(--space-xs);
     font-weight: bold;
@@ -552,7 +552,7 @@ main, .content-body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-top: 1px solid var(--primary);
-    box-shadow: 0 -2px 20px rgba(160, 160, 160,0.15);
+    box-shadow: 0 -2px 20px rgba(0, 240, 255,0.15);
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -619,9 +619,9 @@ main, .content-body {
 
 /* ─── Log Stream ─────────────────────────────────────────── */
 .log-stream {
-    background: rgba(160, 160, 160, 0.02);
+    background: rgba(0, 240, 255, 0.02);
     border-left: 2px solid var(--primary);
-    box-shadow: -2px 0 12px rgba(160, 160, 160,0.1);
+    box-shadow: -2px 0 12px rgba(0, 240, 255,0.1);
     padding: var(--space-md);
     margin: var(--space-md) 0;
     font-size: var(--text-sm);
@@ -674,7 +674,7 @@ main, .content-body {
 .log-msg {
     color: var(--highlight);
     line-height: 1.4;
-    text-shadow: 0 0 3px rgba(160, 160, 160,0.4);
+    text-shadow: 0 0 3px rgba(0, 240, 255,0.4);
 }
 
 .log-msg.highlight {
@@ -705,11 +705,11 @@ main, .content-body {
     min-height: 200px;
     overflow: hidden;
     border-bottom: 1px solid var(--primary);
-    box-shadow: 0 2px 20px rgba(160, 160, 160,0.1);
+    box-shadow: 0 2px 20px rgba(0, 240, 255,0.1);
     background: var(--bg);
     background-image:
-        linear-gradient(rgba(160, 160, 160,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(160, 160, 160,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(0, 240, 255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255,0.04) 1px, transparent 1px);
     background-size: 20px 20px;
     display: flex;
     align-items: center;
@@ -720,7 +720,7 @@ main, .content-body {
     width: 60px;
     height: 60px;
     object-fit: contain;
-    filter: grayscale(100%) contrast(1.2) brightness(1.2)
+    filter: sepia(100%) hue-rotate(180deg) saturate(3) brightness(1.2) contrast(1.3)
             drop-shadow(0 0 12px var(--primary));
     z-index: 5;
     position: relative;
@@ -783,20 +783,20 @@ main, .content-body {
 }
 
 .art-fragment:hover {
-    box-shadow: 0 0 20px rgba(160, 160, 160,0.5), inset 0 0 20px rgba(160, 160, 160,0.05);
+    box-shadow: 0 0 20px rgba(0, 240, 255,0.5), inset 0 0 20px rgba(0, 240, 255,0.05);
     transform: scale(1.03);
 }
 
 .art-fragment img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(80%) brightness(0.8) contrast(1.2);
+    filter: sepia(80%) hue-rotate(180deg) saturate(1.5) brightness(0.8) contrast(1.2);
     opacity: 0.6;
     transition: all 0.3s ease;
 }
 
 .art-fragment:hover img {
     opacity: 1;
-    filter: grayscale(0%) brightness(1.1) contrast(1.1);
+    filter: sepia(0%) brightness(1.1) contrast(1.2);
 }
 
 .art-label {
@@ -879,7 +879,7 @@ footer {
     padding: var(--space-md);
     font-size: var(--text-xs);
     opacity: 0.4;
-    border-top: 1px solid rgba(160,160,160,0.1);
+    border-top: 1px solid rgba(0, 240, 255,0.1);
     letter-spacing: 1px;
 }
 
@@ -924,7 +924,7 @@ footer {
     display: inline-block;
     background: #f4f1ea;
     padding: 10px 10px 35px 10px;
-    box-shadow: 2px 10px 25px rgba(0,0,0,0.9), 0 0 40px rgba(160, 160, 160,0.15);
+    box-shadow: 2px 10px 25px rgba(0,0,0,0.9), 0 0 40px rgba(0, 240, 255,0.15);
     transform: rotate(-2deg);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -939,7 +939,7 @@ footer {
     max-height: 75vh;
     width: auto;
     height: auto;
-    filter: grayscale(20%) brightness(1.1) contrast(1.1);
+    filter: sepia(20%) hue-rotate(220deg) brightness(1.1) contrast(1.2);
     border: 1px solid rgba(0,0,0,0.1);
 }
 
