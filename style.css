@@ -126,6 +126,22 @@ body {
     flex-direction: column;
     min-height: 100vh;
     text-shadow: var(--glow-sm);
+}
+
+/* ─── CRT Frame ──────────────────────────────────────────────
+   Wraps everything except .bottom-nav. A filter/animation on
+   this element (rather than on <body>) keeps the atmospheric
+   look without turning <body> into a containing block for its
+   position:fixed descendants — putting filter/transform/etc. on
+   an ancestor of .bottom-nav makes "fixed" resolve against that
+   ancestor's box instead of the viewport, so the nav ends up
+   pinned to the bottom of the full document (scrolls with the
+   page) instead of the bottom of the screen. */
+.crt-frame {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100vh;
     /* Enhanced atmospheric filter */
     filter: sepia(20%) hue-rotate(180deg) contrast(1.05) brightness(0.95) saturate(1.2);
     transition: filter 0.5s ease;
@@ -475,7 +491,7 @@ main, .content-body {
 
 @media (max-width: 767px) {
     /* Reduce intensity of ambient pulse */
-    body {
+    .crt-frame {
         animation-duration: 15s; /* Make pulse slower */
         filter: sepia(5%) contrast(1.02) brightness(0.97) saturate(1.05); /* Lighter filter */
     }
