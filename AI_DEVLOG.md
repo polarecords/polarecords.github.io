@@ -36,11 +36,22 @@ Single source of truth for cross-session continuity.
 - `sw.js` — flipped fetch handler to network-first with offline cache fallback; bumped `CACHE_NAME` to v3; fixed a stale pinned Font Awesome version (6.0.0) in the precache list that didn't match the 6.5.2 actually loaded by the pages.
 - `index.html`, `john.html`, `media.html`, `polaraf.html`, `polarband.html` — restructured so `<nav class="bottom-nav">` (and, on media.html, `#lightbox-modal`) sit outside `.crt-frame` as direct `<body>` children, no longer nested inside a filtered ancestor.
 - Ran a full spec audit across all 6 pages (including `easteregg.html`/`terminal.css`, which didn't have this bug and was left alone) — all passed independent re-verification.
-- Not yet committed/pushed — pending confirmation since this repo deploys straight to the live site.
+- Committed (`4d71112`) and pushed to `origin/main` — live on polarecords.net. Termux clone (`~/polarecords.github.io`) pulled to match; its own separate uncommitted `database.json` edit (media ordering) was left untouched.
 
 **Notes:**
-- Both local clones (`/root/polarecords.net` and Termux `~/polarecords.github.io`) were already in sync at commit `7382758`; only this PRoot clone was edited this session.
+- Both local clones (`/root/polarecords.net` and Termux `~/polarecords.github.io`) were already in sync at commit `7382758` before this session; only this PRoot clone was edited.
 - See Open Backlog above for the four follow-up items surfaced while investigating (home marquee vs bandstand bar, hardcoded glow colors, inline style sprawl, containing-block bug class watch-item).
+
+### 2026-07-03 21:48–21:50 — Antigravity CLI [session 1d311cb7]
+
+**Commits:** `ff3d7b1`, `7382758`
+
+**Done:**
+- **Color cleanup** (`ff3d7b1`) — removed legacy green filters and hardcoded colors
+- **Cyber-cyan + violet palette** (`7382758`) — creative color enhancement; all social media icon links verified wired
+
+**Notes:**
+- Ran in the Termux clone (`~/polarecords.github.io`); this entry was only just folded back into the canonical devlog (2026-07-28) after the two clones' devlogs were reconciled — they'd been tracking commit history independently for a while. Also touched The Nick event data; was told not to use placeholders.
 
 ### 2026-06-23 — Claude Code (Sonnet 4.6)
 
