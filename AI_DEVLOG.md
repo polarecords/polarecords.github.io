@@ -22,6 +22,15 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-10-25 — Claude Code & Antigravity CLI
+
+**Work done:**
+- **Media & Content:** Added live performance photo by @through_rebeseyes (`assets/photo_rebe_20260628.jpg`) as featured media in `database.json`; added live stage clip (`assets/live_clip.mp4` / `assets/live_clip.jpg`) to homepage; added John Polar Instagram bio log entry in `database.json`.
+- **Birmingham Bandstand updates:** Added 7:00 PM sign-up time to event card (`app.js`) and top banner (`index.html`); replaced stale marquee photo reference with `live_clip.jpg`.
+- **Responsive scrolling banner:** Added `.bandstand-track` in `style.css` with mobile marquee scroll animation so expanded show/sign-up text doesn't clip on small screens.
+- **Service Worker:** Bumped `CACHE_NAME` to `polarecords-cache-v4` in `sw.js`.
+- **Repository hygiene:** Restored all missing flyer/photo assets in shared storage clone; set `core.fileMode = false` to prevent Android FUSE permission churn.
+
 ### 2026-07-28 — Claude Code (Sonnet 5)
 
 **Reported bugs:** bottom tab nav scrolled with the page on mobile instead of staying pinned above the browser chrome/OS nav bar; header marquee "seemed broken, didn't move or update."

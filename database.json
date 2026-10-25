@@ -1,6 +1,7 @@
 {
     "logs": {
         "john": [
+            {"date": "BIO // INSTAGRAM @THEJOHNPOLAR", "message": "FREESTYLIST ABSORBED IN THE ART OF MUSICAL EXPRESSION. SOMETIMES I DO LONGBOARD THINGS TOO.", "highlight": true},
             {"date": "2026.06.11 // ARCHIVE", "message": "LOGGED: TRUE STORY SONGWRITER NIGHTS @ TRUE STORY BREWING W/ BRADLEY BELL, CRAIG MCREE & MORE", "highlight": false},
             {"date": "2026.05.05 // ARCHIVE", "message": "LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false},
             {"date": "2025.09.30 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ GATSBY", "highlight": false},
@@ -29,19 +30,21 @@
             "title": "OPEN MIC NIGHT // BIRMINGHAM BANDSTAND",
             "venue": "THE NICK",
             "city": "BIRMINGHAM, AL",
+            "signup": "7:00 PM",
             "time": "20:00",
             "endTime": "02:00",
             "type": "recurring",
             "recurrence": "weekly",
             "day": 1,
             "note": "EVERY MONDAY",
-            "image": "assets/photo_20260623.jpg",
+            "image": "assets/live_clip.jpg",
             "lineup": "feat. JOHN POLAR + OPEN MIC SHOWCASE"
         }
     ],
     "media": [
-        {"src": "assets/photo_20260607.jpg", "alt": "True Story Songwriter Nights Flyer: June 11th 2026 ft. John Polar", "label": "FL_2026_06_11.FRG"},
+        {"src": "assets/photo_rebe_20260628.jpg", "alt": "John Polar live on stage in a fedora — photo by @through_rebeseyes", "label": "LIVE_JOHN_POLAR.FRG // PHOTO: @THROUGH_REBESEYES"},
         {"src": "assets/photo_20260623.jpg", "alt": "The Nick Marquee: Rest Easy Nathan Songwriter's Night ft. E. Bailey, John Polar & George Scherer — May 5th 2026", "label": "MARQUEE_THE_NICK_2026_05_05.FRG"},
+        {"src": "assets/photo_20260607.jpg", "alt": "True Story Songwriter Nights Flyer: June 11th 2026 ft. John Polar", "label": "FL_2026_06_11.FRG"},
         {"src": "assets/flyer_20260505.jpg", "alt": "Songwriter Nights Flyer: May 5th 2026", "label": "FL_2026_05_05.FRG"},
         {"src": "assets/flyer_20250930.jpg", "alt": "Performance Flyer: Sept 30th 2025", "label": "FL_2025_09_30.FRG"},
         {"src": "assets/flyer_20250520.jpg", "alt": "Performance Flyer: May 20th 2025", "label": "FL_2025_05_20.FRG"},

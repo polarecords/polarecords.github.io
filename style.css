@@ -180,6 +180,29 @@ a:hover { text-shadow: var(--glow-lg); }
     overflow: hidden;
 }
 
+.bandstand-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 767px) {
+    #bandstand-bar {
+        justify-content: flex-start;
+        position: relative;
+    }
+    .bandstand-track {
+        position: absolute;
+        white-space: nowrap;
+        line-height: 40px;
+        animation: marquee-scroll 18s linear infinite;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bandstand-track { animation: none !important; position: static !important; }
+}
+
 .bandstand-name {
     color: var(--highlight);
     white-space: nowrap;
