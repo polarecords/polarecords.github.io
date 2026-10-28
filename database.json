@@ -4,7 +4,9 @@
             {"date": "BIO // INSTAGRAM @THEJOHNPOLAR", "message": "FREESTYLIST ABSORBED IN THE ART OF MUSICAL EXPRESSION. SOMETIMES I DO LONGBOARD THINGS TOO.", "highlight": true},
             {"date": "2026.06.11 // ARCHIVE", "message": "LOGGED: TRUE STORY SONGWRITER NIGHTS @ TRUE STORY BREWING W/ BRADLEY BELL, CRAIG MCREE & MORE", "highlight": false},
             {"date": "2026.05.05 // ARCHIVE", "message": "LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false},
+            {"date": "2025.11.11 // VIDEO_LOG", "message": "LOGGED: SONGWRITER'S NIGHT @ THE NICK (ROCKS) — FULL SET ON YOUTUBE @THEJOHNPOLAR", "highlight": false},
             {"date": "2025.09.30 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ GATSBY", "highlight": false},
+            {"date": "2025.06.19 // VIDEO_LOG", "message": "UPLOADED: JP LIVE — TOO HARD (ON OURSELVES) + ELEMENTS OF LONELINESS", "highlight": false},
             {"date": "2025.05.20 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TITUS BOZEMAN BAND", "highlight": false},
             {"date": "2025.05.08 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ TRUE STORY BREWING CO.", "highlight": false},
             {"date": "2025.04.15 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TODD SIMPSON", "highlight": false}
@@ -13,6 +15,7 @@
             {"date": "2026.06.11 // ARCHIVE", "message": "SESSION_LOGGED: TRUE STORY BREWING CO. W/ BRADLEY BELL, CRAIG MCREE & MORE", "highlight": false},
             {"date": "2026.05.05 // ARCHIVE", "message": "SESSION_LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false},
             {"date": "2025.05.08 // ARCHIVE", "message": "SESSION_LOGGED: TRUE STORY BREWING CO.", "highlight": false},
+            {"date": "2025.06.14 // VIDEO_LOG", "message": "STREAM_LOGGED: FREESTYLE FRIDAY LIVESTREAM + FRIDAY'S FREESTYLE FLOWS PRACTICE", "highlight": false},
             {"date": "SYSTEM // AUDIO_LINK", "message": "LOADING EXPERIMENTAL AUDIO PROTOCOLS...", "highlight": false},
             {"date": "RECOVERY // ARCHIVE", "message": "SESSION @ VOODOO LOUNGE ARCHIVED.", "highlight": false}
         ],
@@ -31,6 +34,7 @@
             "venue": "THE NICK",
             "city": "BIRMINGHAM, AL",
             "signup": "7:00 PM",
+            "admission": "21+ · $5/yr Nick membership card + ID",
             "time": "20:00",
             "endTime": "02:00",
             "type": "recurring",

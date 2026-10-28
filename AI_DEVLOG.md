@@ -10,7 +10,9 @@ Single source of truth for cross-session continuity.
 ### Content
 - [ ] **Upcoming event dates** — update `database.json` as new songwriter nights are booked
 - [ ] **Easteregg terminal** — decoder now reveals social links; verify all links are live
-- [ ] **Home marquee vs static bandstand bar** — home page uses a hardcoded `#bandstand-bar` instead of the dynamic `#header-marquee` + `updateMarquee()` the other pages use (sourced from `database.json`). This was a deliberate choice (`f9b5b5e`) at a time the marquee had other problems; now that the fixed-nav bug is resolved sitewide, revisit whether home should go back to the dynamic marquee so a schedule change doesn't require editing index.html markup directly.
+- [x] ~~**Home marquee vs static bandstand bar**~~ — decided: home keeps the static `#bandstand-bar` (user, 2026-07-24: "home should not have the marquee on it anymore just bandstand info"). Dynamic marquee stays on sub-pages only. Rest Easy Nathan marquee photo is no longer used on home (show card + og:image); it remains in the Media archive and john/polarband og:image.
+- [ ] **Instagram data** — logged-out scraping (instaloader/gallery-dl/web_profile_info API) is blocked. Needs an IG data export zip, post links (`/p/<code>/embed`), or a user-run `instaloader --login` session in a real Termux tab.
+- [ ] **Guntram Anderlik / Crier** — songwriter-night host and Bham events poster; need exact IG handles from the user.
 
 ### Infrastructure
 - [x] ~~Service worker cache — bump cache version on major updates~~ — replaced the discipline requirement: `sw.js` is now network-first (always fetches live, falls back to cache only when offline), so stale mobile caches can no longer happen regardless of whether `CACHE_NAME` gets bumped.
@@ -21,6 +23,18 @@ Single source of truth for cross-session continuity.
 ---
 
 ## Session History (newest first)
+
+### 2026-10-28 — Claude Code (Opus 5.5)
+
+**Review:** cross-checked Claude sessions (Jul 24, Jul 28, Oct 13) and Antigravity sessions (`1d311cb7`, `296bc00e`, `b6fab653`) against the repo. All prior work was in `49c45e7` and live on Pages; both clones (`~/projects/`, `/sdcard/Documents/`) clean, nothing stashed or unpushed.
+
+**Done:**
+- `johnpolar.html` — redirect to `john.html`; `polarecords.net/johnpolar` (the link in @thejohnpolar's IG bio) was a 404.
+- `index.html` — og:image switched from the old June 11 flyer to the @through_rebeseyes live photo.
+- `database.json` / `app.js` — new `admission` field on events, rendered on the home show card (21+, $5/yr Nick membership card + ID, per thenickrocks.com).
+- `database.json` logs — added YouTube @thejohnpolar uploads: 2025.11.11 Songwriter's Night @ The Nick (Rocks) (already embedded as the home Video Log), 2025.06.19 "JP Live — Too Hard (On Ourselves)" + "Elements of Loneliness", 2025.06.14 Freestyle Friday livestream (PolarAF log).
+
+**Notes:** The Nick's calendar lists Bandstand every Monday through Dec 7, doors 7PM, $4.60 cover; Nov 16 has a special appearance by The Lowliest One / Fire Camino. TikTok @thejohnpolar exposes no posts logged-out.
 
 ### 2026-10-25 — Claude Code & Antigravity CLI
 

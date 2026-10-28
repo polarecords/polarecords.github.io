@@ -141,6 +141,7 @@ function renderShowCard(events) {
             <div class="show-title">${nextEvent.title}</div>
             <div class="show-venue"><i class="fas fa-location-dot"></i> ${nextEvent.venue} &mdash; ${nextEvent.city}</div>
             <div class="show-datetime"><i class="fas fa-calendar"></i> ${fmtShowCardDate(nextDate)} &mdash; ${nextEvent.signup ? `Sign-up ${nextEvent.signup} · Show ` : 'Doors '}${nextEvent.time}</div>
+            ${nextEvent.admission ? `<div class="show-venue"><i class="fas fa-id-card"></i> ${nextEvent.admission}</div>` : ''}
             ${nextEvent.lineup ? `<div class="show-lineup">${nextEvent.lineup}</div>` : ''}
             <div id="event-countdown" class="show-countdown"></div>
         </div>
