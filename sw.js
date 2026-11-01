@@ -1,11 +1,11 @@
-const CACHE_NAME = 'polarecords-cache-v4';
+const CACHE_NAME = 'polarecords-cache-v5';
 const urlsToCache = [
     './',
     './index.html',
     './john.html',
     './polaraf.html',
-    './polarband.html',
     './media.html',
+    './archive.html',
     './style.css',
     './app.js',
     './database.json',
@@ -39,9 +39,8 @@ self.addEventListener('fetch', event => {
                 if (cached) return cached;
                 if (event.request.headers.get('accept')?.includes('text/html')) {
                     return new Response(
-                        `<div style="background:#031A16;color:#81B5AC;font-family:monospace;padding:20px;">
-                            [ OFFLINE MODE: CACHED SIGNALS ONLY ]<br><br>
-                            Signal lost. Reconnect to uplink.
+                        `<div style="background:#0f0c0a;color:#f1e8da;font-family:sans-serif;padding:20px;">
+                            You're offline. Reconnect and refresh to see PolaRecords.
                         </div>`,
                         { headers: { 'Content-Type': 'text/html' } }
                     );

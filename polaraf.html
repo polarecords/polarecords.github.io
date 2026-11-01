@@ -4,102 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="color-scheme" content="dark">
-    <meta name="darkreader-lock">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>PolarAF · PolaRecords</title>
+    <meta name="description" content="Melodic rap and freestyle out of Birmingham, AL.">
+    <link rel="canonical" href="https://polarecords.net/polaraf.html">
 
-    <!-- SEO & Standards -->
-    <title>PolarAF | PolaRecords Uplink</title>
-    <meta name="description" content="PolarAF: Experimental melodic rap and freestyle jams from the Birmingham underground.">
-
-    <!-- Social / Open Graph -->
-    <meta property="og:title" content="PolarAF | PolaRecords">
-    <meta property="og:description" content="Experimental melodic rap and freestyle jams from Birmingham, AL. High-energy sets and raw frequency.">
-    <meta property="og:image" content="assets/photo_20260607.jpg">
+    <meta property="og:title" content="PolarAF · PolaRecords">
+    <meta property="og:description" content="Melodic rap and freestyle out of Birmingham, AL.">
+    <meta property="og:image" content="https://polarecords.net/assets/live_clip.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://polarecords.net/polaraf.html">
 
-    <!-- PWA & Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#1a0000">
+    <meta name="theme-color" content="#0f0c0a">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="prefetch" href="index.html">
-    <link rel="prefetch" href="john.html">
-    <link rel="prefetch" href="polarband.html">
-    <link rel="prefetch" href="media.html">
+    <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
-<body class="theme-polaraf">
-    <div class="crt-frame">
-    <div id="header-marquee">
-        <span>RED_ALERT: EXPERIMENTAL_AUDIO_LINK_ACTIVE</span>
-    </div>
+<body data-artist="polaraf">
+    <a class="strip" href="https://www.thenickrocks.com/" target="_blank" rel="noopener">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>Birmingham Bandstand</b> · every Monday at The Nick · sign-up 7 PM, music 8 PM–2 AM
+    </a>
 
-    <main class="content-body">
-        <div class="ascii-art">
-██████╗  ██████╗ ██╗      █████╗ ██████╗  █████╗ ███████╗
-██╔══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔══██╗██╔════╝
-██████╔╝██║   ██║██║     ███████║██████╔╝███████║█████╗  
-██╔═══╝ ██║   ██║██║     ██╔══██║██╔══██╗██╔══██║██╔══╝  
-██║     ╚██████╔╝███████╗██║  ██║██║  ██║██║  ██║██║     
-╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     
+    <header class="site-header">
+        <div class="wrap">
+            <a class="logo" href="index.html"><img src="assets/hat.png" alt="" width="34" height="34">PolaRecords</a>
+            <nav class="site-nav" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="john.html">John Polar</a>
+            <a href="polaraf.html" aria-current="page">PolarAF</a>
+            <a href="archive.html">Archive</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="output-line"><span class="highlight">POLARAF:</span></div>
-        <div class="output-line">Experimental melodic rap and freestyle jams. High-energy sets and freestyle flow.</div>
-        
-        <div class="section-title">Signal Decoder</div>
-        <div id="signal-decoder" class="decoder-panel" onclick="toggleDecoder()">
-            <div id="decoder-status" class="highlight decoder-status">[ AWAITING INPUT — TAP TO DECODE ]</div>
-            <div id="decoder-progress" class="decoder-progress">[░░░░░░░░░░░░░░░░░░░░] 00:00</div>
-            <div id="decoder-links" class="decoder-links" style="display:none;">
-                <a href="https://www.instagram.com/polarafmusic/" target="_blank" class="highlight" style="text-decoration:none;"><i class="fab fa-instagram"></i> @polarafmusic</a>
-                <a href="https://youtube.com/@thejohnpolar" target="_blank" class="highlight" style="text-decoration:none;"><i class="fab fa-youtube"></i> YouTube</a>
+    <main>
+        <div class="wrap artist-head">
+            <figure>
+                <img src="assets/live_clip.jpg" alt="Performer at the mic under red stage light">
+            </figure>
+            <div class="prose">
+                <span class="eyebrow">Birmingham, AL</span>
+                <h1>PolarAF</h1>
+                <p>Melodic rap and freestyle. The sets run loose and loud, and the Freestyle Friday streams go up on the @thejohnpolar YouTube channel.</p>
+                <ul class="links">
+                    <li><a href="https://www.instagram.com/polarafmusic/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> @polarafmusic</a></li>
+                    <li><a href="https://www.facebook.com/PolarAFmusic" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
             </div>
         </div>
 
-        <div class="section-title">Transmission Log</div>
-        <div id="dynamic-log-stream" class="log-stream"></div>
+        <section class="wrap" id="catch-us-live" data-hide-if-empty hidden>
+            <div class="section-head" data-reveal><h2>Catch us live</h2></div>
+            <ul id="upcoming" class="shows upcoming" hidden></ul>
+        </section>
 
-        <div class="section-title">Connect</div>
-        <div class="social-icons" style="justify-content: flex-start; gap: 20px;">
-            <a href="https://www.facebook.com/PolarAFmusic" target="_blank" title="Facebook" aria-label="PolarAF Facebook Profile"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/polarafmusic/" target="_blank" title="Instagram" aria-label="PolarAF Instagram Profile"><i class="fab fa-instagram"></i></a>
-        </div>
+        <section class="wrap" id="watch">
+            <div class="section-head" data-reveal><h2>Watch</h2><a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener">YouTube</a></div>
+            <div id="videos" class="videos"></div>
+        </section>
 
+        <section class="wrap" id="past-shows">
+            <div class="section-head" data-reveal><h2>Past shows</h2></div>
+            <ul id="shows" class="shows"></ul>
+        </section>
     </main>
 
-    <footer>
-        &copy; 2026 PolaRecords | Authorized Signal Only
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <div>PolaRecords · Birmingham, Alabama</div>
+                <a href="mailto:john@polarecords.net">john@polarecords.net</a>
+            </div>
+            <div class="social">
+                <a href="https://www.instagram.com/thejohnpolar/" target="_blank" rel="noopener" aria-label="John Polar on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/PolarAFmusic" target="_blank" rel="noopener" aria-label="PolarAF on Facebook"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="muted small">&copy; 2026 PolaRecords · <a class="muted" href="archive/terminal-2026/index.html">old site</a></div>
+        </div>
     </footer>
-    </div>
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="john.html" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>John</span>
-        </a>
-        <a href="polaraf.html" class="nav-item active">
-            <i class="fas fa-bolt"></i>
-            <span>AF</span>
-        </a>
-        <a href="polarband.html" class="nav-item">
-            <i class="fas fa-users"></i>
-            <span>Band<span class="nav-soon">Coming Soon</span></span>
-        </a>
-        <a href="media.html" class="nav-item">
-            <i class="fas fa-image"></i>
-            <span>Media</span>
-        </a>
-    </nav>
+
     <script src="app.js"></script>
 </body>
 </html>
