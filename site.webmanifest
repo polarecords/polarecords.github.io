@@ -1,7 +1,7 @@
 {
     "name": "PolaRecords",
     "short_name": "PolaRecords",
-    "description": "Authorized Signal Interceptor & Media Hub",
+    "description": "Independent label in Birmingham, Alabama",
     "icons": [
         {
             "src": "assets/icon-192.png",
@@ -14,9 +14,9 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#0D0D0D",
-    "background_color": "#0D0D0D",
-    "display": "fullscreen",
+    "theme_color": "#0f0c0a",
+    "background_color": "#0f0c0a",
+    "display": "standalone",
     "orientation": "portrait",
     "start_url": "./index.html",
     "scope": "./"

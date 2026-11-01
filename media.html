@@ -4,90 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="color-scheme" content="dark">
-    <meta name="darkreader-lock">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>Photos & Flyers · PolaRecords</title>
+    <meta name="description" content="Live photos and show flyers from PolaRecords artists.">
+    <link rel="canonical" href="https://polarecords.net/media.html">
 
-    <!-- SEO & Standards -->
-    <title>Media Archive | PolaRecords Uplink</title>
-    <meta name="description" content="Media Archive: Visual fragments and performance flyers from the PolaRecords repository.">
-
-    <!-- Social / Open Graph -->
-    <meta property="og:title" content="Media Archive | PolaRecords">
-    <meta property="og:description" content="Visual fragments and performance flyers from the PolaRecords repository. Birmingham, AL.">
-    <meta property="og:image" content="assets/photo_20260607.jpg">
+    <meta property="og:title" content="Photos & Flyers · PolaRecords">
+    <meta property="og:description" content="Live photos and show flyers from PolaRecords artists.">
+    <meta property="og:image" content="https://polarecords.net/assets/photo_20260623.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://polarecords.net/media.html">
 
-    <!-- PWA & Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#031A16">
+    <meta name="theme-color" content="#0f0c0a">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="prefetch" href="index.html">
-    <link rel="prefetch" href="john.html">
-    <link rel="prefetch" href="polaraf.html">
-    <link rel="prefetch" href="polarband.html">
+    <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
-<body class="theme-media">
-    <div class="crt-frame">
-    <div id="header-marquee">
-        <span>ARCHIVE: VISUAL_FRAGMENT_REPOSITORY</span>
-    </div>
+<body data-artist="">
+    <a class="strip" href="https://www.thenickrocks.com/" target="_blank" rel="noopener">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>Birmingham Bandstand</b> · every Monday at The Nick · sign-up 7 PM, music 8 PM–2 AM
+    </a>
 
-    <main class="content-body">
-        <div class="output-line"><span class="highlight">MEDIA ARCHIVE</span></div>
-        <div class="output-line">Direct uplinks to PolaRecords fragments.</div>
-
-        <div class="section-title">Latest Flyers</div>
-        <div class="media-grid">
-            <figure id="featured-media-item" class="featured-poster" style="margin:0;"></figure>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="logo" href="index.html"><img src="assets/hat.png" alt="" width="34" height="34">PolaRecords</a>
+            <nav class="site-nav" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="john.html">John Polar</a>
+            <a href="polaraf.html">PolarAF</a>
+            <a href="archive.html" aria-current="page">Archive</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="section-title">Historical Fragments</div>
-        <div id="dynamic-media-grid" class="media-grid"></div>
+    <main>
+        <section class="wrap" id="photos-and-flyers">
+            <div class="section-head" data-reveal><h2>Photos &amp; flyers</h2></div>
+            <div id="media-grid" class="media-grid"></div>
+        </section>
     </main>
 
-    <footer>
-        &copy; 2026 PolaRecords | Authorized Signal Only
-    </footer>
-    </div>
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="john.html" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>John</span>
-        </a>
-        <a href="polaraf.html" class="nav-item">
-            <i class="fas fa-bolt"></i>
-            <span>AF</span>
-        </a>
-        <a href="polarband.html" class="nav-item">
-            <i class="fas fa-users"></i>
-            <span>Band<span class="nav-soon">Coming Soon</span></span>
-        </a>
-        <a href="media.html" class="nav-item active">
-            <i class="fas fa-image"></i>
-            <span>Media</span>
-        </a>
-    </nav>
-    <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="lightbox-overlay">
-        <span class="lightbox-close">&times;</span>
-        <div class="lightbox-poster-container">
-            <div class="tape top-tape"></div>
-            <div class="tape bottom-tape"></div>
-            <img id="lightbox-img" class="lightbox-poster">
+    <footer class="site-footer">
+        <div class="wrap">
+            <div>
+                <div>PolaRecords · Birmingham, Alabama</div>
+                <a href="mailto:john@polarecords.net">john@polarecords.net</a>
+            </div>
+            <div class="social">
+                <a href="https://www.instagram.com/thejohnpolar/" target="_blank" rel="noopener" aria-label="John Polar on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/PolarAFmusic" target="_blank" rel="noopener" aria-label="PolarAF on Facebook"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="muted small">&copy; 2026 PolaRecords · <a class="muted" href="archive/terminal-2026/index.html">old site</a></div>
         </div>
+    </footer>
+
+    <div id="lightbox" class="lightbox" hidden>
+        <figure><img src="" alt=""><figcaption></figcaption></figure>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>

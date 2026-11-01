@@ -1,58 +1,446 @@
 {
-    "logs": {
-        "john": [
-            {"date": "BIO // INSTAGRAM @THEJOHNPOLAR", "message": "FREESTYLIST ABSORBED IN THE ART OF MUSICAL EXPRESSION. SOMETIMES I DO LONGBOARD THINGS TOO.", "highlight": true},
-            {"date": "2026.06.11 // ARCHIVE", "message": "LOGGED: TRUE STORY SONGWRITER NIGHTS @ TRUE STORY BREWING W/ BRADLEY BELL, CRAIG MCREE & MORE", "highlight": false},
-            {"date": "2026.05.05 // ARCHIVE", "message": "LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false},
-            {"date": "2025.11.11 // VIDEO_LOG", "message": "LOGGED: SONGWRITER'S NIGHT @ THE NICK (ROCKS) — FULL SET ON YOUTUBE @THEJOHNPOLAR", "highlight": false},
-            {"date": "2025.09.30 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ GATSBY", "highlight": false},
-            {"date": "2025.06.19 // VIDEO_LOG", "message": "UPLOADED: JP LIVE — TOO HARD (ON OURSELVES) + ELEMENTS OF LONELINESS", "highlight": false},
-            {"date": "2025.05.20 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TITUS BOZEMAN BAND", "highlight": false},
-            {"date": "2025.05.08 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ TRUE STORY BREWING CO.", "highlight": false},
-            {"date": "2025.04.15 // ARCHIVE", "message": "LOGGED: SONGWRITER NIGHTS @ THE NICK W/ TODD SIMPSON", "highlight": false}
-        ],
-        "polaraf": [
-            {"date": "2026.06.11 // ARCHIVE", "message": "SESSION_LOGGED: TRUE STORY BREWING CO. W/ BRADLEY BELL, CRAIG MCREE & MORE", "highlight": false},
-            {"date": "2026.05.05 // ARCHIVE", "message": "SESSION_LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false},
-            {"date": "2025.05.08 // ARCHIVE", "message": "SESSION_LOGGED: TRUE STORY BREWING CO.", "highlight": false},
-            {"date": "2025.06.14 // VIDEO_LOG", "message": "STREAM_LOGGED: FREESTYLE FRIDAY LIVESTREAM + FRIDAY'S FREESTYLE FLOWS PRACTICE", "highlight": false},
-            {"date": "SYSTEM // AUDIO_LINK", "message": "LOADING EXPERIMENTAL AUDIO PROTOCOLS...", "highlight": false},
-            {"date": "RECOVERY // ARCHIVE", "message": "SESSION @ VOODOO LOUNGE ARCHIVED.", "highlight": false}
-        ],
-        "polarband": [
-            {"date": "2026.05.05 // ARCHIVE", "message": "LOGGED: REST EASY NATHAN — SONGWRITER'S NIGHT @ THE NICK W/ E. BAILEY & GEORGE SCHERER", "highlight": false}
-        ],
-        "home": [
-            {"date": "SIGNAL // ESTABLISHED", "message": "RE-TUNING FREQUENCIES TO ANALOG // VIBRATION_INTENSITY_OPTIMIZED", "highlight": false},
-            {"date": "SOURCE // RECOVERY", "message": "PERFORMANCE_LOG: BIRMINGHAM_BANDSTAND_SESSION_ARCHIVED", "highlight": false},
-            {"date": "SYSTEM // STATUS", "message": "ALL_UPLINKS_ACTIVE // SIGNAL_STRENGTH_MAXIMIZED", "highlight": false}
-        ]
+    "residency": {
+        "name": "Birmingham Bandstand",
+        "kind": "Open mic",
+        "venue": "The Nick",
+        "city": "Birmingham, AL",
+        "url": "https://www.thenickrocks.com/",
+        "day": 1,
+        "signup": "7 PM",
+        "show": "8 PM",
+        "end": "2 AM",
+        "admission": "21+. $4.60 cover. Bring ID and a Nick membership card ($5 a year)."
     },
-    "events": [
+    "quotes": [
         {
-            "title": "OPEN MIC NIGHT // BIRMINGHAM BANDSTAND",
-            "venue": "THE NICK",
-            "city": "BIRMINGHAM, AL",
-            "signup": "7:00 PM",
-            "admission": "21+ · $5/yr Nick membership card + ID",
-            "time": "20:00",
-            "endTime": "02:00",
-            "type": "recurring",
-            "recurrence": "weekly",
-            "day": 1,
-            "note": "EVERY MONDAY",
-            "image": "assets/live_clip.jpg",
-            "lineup": "feat. JOHN POLAR + OPEN MIC SHOWCASE"
+            "text": "John Polar has a way of making a room feel like it stumbled into something rare. His set at True Story Thursday had that strange, beautiful thing good songs have, where it feels personal but everybody in the room can still find themselves in it.",
+            "by": "Guntram Anderlik",
+            "role": "Songwriter, True Story Songwriter Nights",
+            "url": "https://www.facebook.com/guntram/posts/john-polar-has-a-way-of-making-a-room-feel-like-it-stumbled-into-something-rareh/10243480721822288/",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "text": "Thoughtful, creative original songwriting.",
+            "by": "Birmingham Songwriter Nights",
+            "role": "Dave's Pub lineup, Oct 13, 2026",
+            "url": "https://www.instagram.com/p/DeckFCDhmEW/",
+            "artists": [
+                "john"
+            ]
+        }
+    ],
+    "posts": [
+        {
+            "url": "https://www.instagram.com/p/DeckFCDhmEW/",
+            "date": "2026-10-13",
+            "by": "@bhm_songwriternights",
+            "about": "Songwriter night at Dave's Pub",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "url": "https://www.instagram.com/p/Dc1ZHHONqHN/",
+            "date": "2026-09-10",
+            "by": "@bhm_songwriternights",
+            "about": "Songwriter night at True Story Brewing",
+            "artists": [
+                "john"
+            ]
+        }
+    ],
+    "milestones": [
+        {
+            "date": "2026-11-01",
+            "title": "New site",
+            "text": "polarecords.net gets its current look.",
+            "link": "archive/terminal-2026/index.html",
+            "linkText": "See the old one"
+        },
+        {
+            "date": "2025-11-30",
+            "title": "polarecords.net goes up",
+            "text": "First version of the site: one line, \"Official website coming soon.\""
+        }
+    ],
+    "shows": [
+        {
+            "date": "2026-10-13",
+            "title": "Birmingham Songwriter's Night",
+            "venue": "Dave's Pub",
+            "with": "Guntram & The Firefly Weather, Blair Duluoz, Slap Out!",
+            "artists": [
+                "john"
+            ],
+            "note": "Moved to Dave's on short notice after a triple booking at The Nick. Four artists, 30 minutes each, free.",
+            "link": "https://www.instagram.com/p/DeckFCDhmEW/",
+            "linkText": "Instagram post"
+        },
+        {
+            "date": "2026-09-28",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2026-09-10",
+            "title": "Birmingham Songwriter Nights",
+            "venue": "True Story Brewing Co.",
+            "with": "Guntram, Nick T., Kenan Blair, George Scherer, Michael Bush, Music Married, Gatsby",
+            "artists": [
+                "john"
+            ],
+            "link": "https://www.instagram.com/p/Dc1ZHHONqHN/",
+            "linkText": "Instagram post"
+        },
+        {
+            "date": "2026-08-10",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2026-06-23",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone",
+            "note": "Surprise late set, on at 9:30."
+        },
+        {
+            "date": "2026-06-11",
+            "title": "True Story Songwriter Nights",
+            "venue": "True Story Brewing Co.",
+            "with": "Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, Skylar Phillips, Leesus Cries, Slap Out",
+            "artists": [
+                "john",
+                "polaraf"
+            ]
+        },
+        {
+            "date": "2026-05-05",
+            "title": "Rest Easy Nathan: Songwriter Nights",
+            "venue": "The Nick",
+            "with": "George Scherer, E. Bailey, Guntram Anderlik",
+            "artists": [
+                "john",
+                "polaraf"
+            ]
+        },
+        {
+            "date": "2026-03-24",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-12-04",
+            "title": "Open mic",
+            "venue": "Voodoo Lounge, Huntsville",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-12-02",
+            "title": "December jam",
+            "venue": "Dave's Pub",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-11-11",
+            "title": "Songwriter's Night",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "date": "2025-11-04",
+            "title": "Jam night",
+            "venue": "Dave's Pub",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-10-14",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-10-13",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-09-30",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "Gatsby",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "date": "2025-09-01",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-08-12",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-07-01",
+            "title": "Songwriter's Night",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-06-02",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-05-20",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "Titus Bozeman Band",
+            "artists": [
+                "john"
+            ],
+            "note": "Gig number three."
+        },
+        {
+            "date": "2025-05-08",
+            "title": "Songwriter Nights",
+            "venue": "True Story Brewing Co.",
+            "with": "",
+            "artists": [
+                "john",
+                "polaraf"
+            ],
+            "note": "Gig number two."
+        },
+        {
+            "date": "2025-04-15",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "with": "Todd Simpson",
+            "artists": [
+                "john"
+            ],
+            "note": "First songwriter's night set, name on the flyer."
+        },
+        {
+            "date": "2025-04-07",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone"
+        },
+        {
+            "date": "2023-02-06",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "",
+            "artists": [
+                "john"
+            ],
+            "source": "phone",
+            "note": "Earliest open mic on record."
+        },
+        {
+            "date": "",
+            "title": "Live session",
+            "venue": "Voodoo Lounge",
+            "with": "",
+            "artists": [
+                "polaraf"
+            ]
+        }
+    ],
+    "videos": [
+        {
+            "id": "RE_9SyZ0PFE",
+            "date": "2025-11-12",
+            "title": "Songwriter's Night @ The Nick (Rocks) [11.11.25]",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "id": "XOd7uAHNCzw",
+            "date": "2025-06-19",
+            "title": "JP Live: Too Hard (On Ourselves)",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "id": "BalaciICTr8",
+            "date": "2025-06-19",
+            "title": "Elements of Loneliness",
+            "artists": [
+                "john"
+            ]
+        },
+        {
+            "id": "C9v_wpbpG_M",
+            "date": "2025-06-14",
+            "title": "Freestyle Friday Livestream",
+            "artists": [
+                "polaraf"
+            ]
+        },
+        {
+            "id": "269iu4AWOBQ",
+            "date": "2025-06-14",
+            "title": "[FF_Practice-02] Friday's Freestyle Flows",
+            "artists": [
+                "polaraf"
+            ]
+        },
+        {
+            "id": "YvG4pQ7og1o",
+            "date": "2025-06-14",
+            "title": "freestyle friday babyyy",
+            "artists": [
+                "polaraf"
+            ]
+        },
+        {
+            "id": "c-oD0slTiN4",
+            "date": "2025-03-21",
+            "title": "John Polar Live Stream",
+            "artists": [
+                "john"
+            ]
         }
     ],
     "media": [
-        {"src": "assets/photo_rebe_20260628.jpg", "alt": "John Polar live on stage in a fedora — photo by @through_rebeseyes", "label": "LIVE_JOHN_POLAR.FRG // PHOTO: @THROUGH_REBESEYES"},
-        {"src": "assets/photo_20260623.jpg", "alt": "The Nick Marquee: Rest Easy Nathan Songwriter's Night ft. E. Bailey, John Polar & George Scherer — May 5th 2026", "label": "MARQUEE_THE_NICK_2026_05_05.FRG"},
-        {"src": "assets/photo_20260607.jpg", "alt": "True Story Songwriter Nights Flyer: June 11th 2026 ft. John Polar", "label": "FL_2026_06_11.FRG"},
-        {"src": "assets/flyer_20260505.jpg", "alt": "Songwriter Nights Flyer: May 5th 2026", "label": "FL_2026_05_05.FRG"},
-        {"src": "assets/flyer_20250930.jpg", "alt": "Performance Flyer: Sept 30th 2025", "label": "FL_2025_09_30.FRG"},
-        {"src": "assets/flyer_20250520.jpg", "alt": "Performance Flyer: May 20th 2025", "label": "FL_2025_05_20.FRG"},
-        {"src": "assets/flyer_20250508.jpg", "alt": "Performance Flyer: May 8th 2025", "label": "FL_2025_05_08.FRG"},
-        {"src": "assets/flyer_20250415.png", "alt": "Performance Flyer: April 15th 2025", "label": "FL_2025_04_15.FRG"}
+        {
+            "src": "assets/flyer_20261013.jpg",
+            "thumb": "assets/thumbs/flyer_20261013.jpg",
+            "date": "2026-10-13",
+            "alt": "Flyer: Listening Tree Corp. presents Birmingham Songwriter's Night at Dave's Pub, Tuesday Oct 13, 8–10 PM, featuring Guntram & The Firefly Weather, John Polar, Blair Duluoz, Slap Out!",
+            "caption": "Birmingham Songwriter's Night at Dave's Pub, Oct 13, 2026"
+        },
+        {
+            "src": "assets/photo_rebe_20260628.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20260628.jpg",
+            "alt": "John Polar on stage in a fedora, singing into a mic under orange and teal lights",
+            "caption": "Live",
+            "credit": "@through_rebeseyes"
+        },
+        {
+            "src": "assets/photo_20260623.jpg",
+            "thumb": "assets/thumbs/photo_20260623.jpg",
+            "alt": "The Nick's marquee: Rest Easy Nathan Songwriter's Night with E. Bailey, John Polar and George Scherer",
+            "caption": "The Nick marquee, May 5, 2026",
+            "date": "2026-05-05"
+        },
+        {
+            "src": "assets/photo_20260607.jpg",
+            "thumb": "assets/thumbs/photo_20260607.jpg",
+            "alt": "True Story Songwriter Nights flyer for June 11, 2026: Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, John Polar, Skylar Phillips, Leesus Cries, Slap Out",
+            "caption": "True Story Songwriter Nights, June 11, 2026",
+            "date": "2026-06-11"
+        },
+        {
+            "src": "assets/flyer_20260505.jpg",
+            "thumb": "assets/thumbs/flyer_20260505.jpg",
+            "alt": "Songwriter Nights flyer for May 5, 2026 at The Nick: George Scherer, E. Bailey, Guntram Anderlik, John Polar",
+            "caption": "Songwriter Nights at The Nick, May 5, 2026",
+            "date": "2026-05-05"
+        },
+        {
+            "src": "assets/flyer_20250930.jpg",
+            "thumb": "assets/thumbs/flyer_20250930.jpg",
+            "alt": "Show flyer for September 30, 2025 at The Nick",
+            "caption": "The Nick, Sept 30, 2025",
+            "date": "2025-09-30"
+        },
+        {
+            "src": "assets/flyer_20250520.jpg",
+            "thumb": "assets/thumbs/flyer_20250520.jpg",
+            "alt": "Show flyer for May 20, 2025 at The Nick",
+            "caption": "The Nick, May 20, 2025",
+            "date": "2025-05-20"
+        },
+        {
+            "src": "assets/flyer_20250508.jpg",
+            "thumb": "assets/thumbs/flyer_20250508.jpg",
+            "alt": "Show flyer for May 8, 2025 at True Story Brewing Co.",
+            "caption": "True Story Brewing, May 8, 2025",
+            "date": "2025-05-08"
+        },
+        {
+            "src": "assets/flyer_20250415.png",
+            "thumb": "assets/thumbs/flyer_20250415.jpg",
+            "alt": "Show flyer for April 15, 2025 at The Nick",
+            "caption": "The Nick, April 15, 2025",
+            "date": "2025-04-15"
+        }
     ]
 }
