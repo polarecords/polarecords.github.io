@@ -15,7 +15,6 @@ Single source of truth for cross-session continuity.
 - [ ] **Guntram Anderlik / Crier** — songwriter-night host and Bham events poster; need exact IG handles from the user.
 
 - [ ] **More history (John is collecting)** — open leads:
-  - The Jul 1, 2025 venue (The Nick) is an inference. Confirm it.
   - One friend's chat thread is RCS, which phone tools can't read. Ask John for screenshots.
   - A Google Photos + Timeline Takeout would fill gaps.
   - Rerun `scripts/find_appearances.py --calendar --texts` once Shizuku is back, to refresh the calendar cache.
