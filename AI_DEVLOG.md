@@ -11,18 +11,50 @@ Single source of truth for cross-session continuity.
 - [ ] **Upcoming event dates** — update `database.json` as new songwriter nights are booked
 - [ ] **Easteregg terminal** — decoder now reveals social links; verify all links are live
 - [x] ~~**Home marquee vs static bandstand bar**~~ — decided: home keeps the static `#bandstand-bar` (user, 2026-07-24: "home should not have the marquee on it anymore just bandstand info"). Dynamic marquee stays on sub-pages only. Rest Easy Nathan marquee photo is no longer used on home (show card + og:image); it remains in the Media archive and john/polarband og:image.
-- [ ] **Instagram data** — logged-out scraping (instaloader/gallery-dl/web_profile_info API) is blocked. Needs an IG data export zip, post links (`/p/<code>/embed`), or a user-run `instaloader --login` session in a real Termux tab.
+- [x] ~~**Instagram data**~~ — resolved by embedding posts (`posts` in database.json, tap-to-load). Original item: logged-out scraping (instaloader/gallery-dl/web_profile_info API) is blocked. Needs an IG data export zip, post links (`/p/<code>/embed`), or a user-run `instaloader --login` session in a real Termux tab.
 - [ ] **Guntram Anderlik / Crier** — songwriter-night host and Bham events poster; need exact IG handles from the user.
+
+- [ ] **More history (John is collecting)** — open leads:
+  - The Jul 1, 2025 venue (The Nick) is an inference. Confirm it.
+  - One friend's chat thread is RCS, which phone tools can't read. Ask John for screenshots.
+  - A Google Photos + Timeline Takeout would fill gaps.
+  - Rerun `scripts/find_appearances.py --calendar --texts` once Shizuku is back, to refresh the calendar cache.
+  - @bhm_songwriternights likely has more posts listing John. Add them by URL to `posts` and as `link` on the matching show.
+- [ ] **Pages are hand-maintained** — the generator used during the redesign is gone. The header, nav and footer are duplicated across index/john/polaraf/media/archive. `media.html` marks "Archive" as current. Edit all five when the nav changes.
 
 ### Infrastructure
 - [x] ~~Service worker cache — bump cache version on major updates~~ — replaced the discipline requirement: `sw.js` is now network-first (always fetches live, falls back to cache only when offline), so stale mobile caches can no longer happen regardless of whether `CACHE_NAME` gets bumped.
-- [ ] **Hardcoded glow colors** — `style.css` has ~16 literal `rgba(0, 240, 255, …)` values (e.g. `.content-body`/`.featured-poster` box-shadow, `.lightbox-poster-container` box-shadow) duplicating the `--primary`/`--glow-*` custom properties already in `:root`. A future palette change (like `7382758`) will silently miss these.
-- [ ] **Inline `style="..."` sprawl** — one-off inline position/opacity/animation styles on john.html, polarband.html, easteregg.html duplicate patterns that already have CSS classes elsewhere; worth consolidating into named classes, partly so future containing-block audits (see below) don't have to also grep inline `position:`/`transform:` attributes.
-- [ ] **Watch for the containing-block bug reappearing** — any `filter`/`transform`/`perspective`/`will-change:transform` on an ancestor of a `position: fixed` element (`.bottom-nav`, `#lightbox-modal`, `body::before`/`::after`) makes "fixed" resolve against that ancestor's box instead of the viewport. New atmospheric/visual effects should go on `.crt-frame` (or another wrapper that excludes `.bottom-nav` and `#lightbox-modal`), never on `<body>` directly.
+- [x] ~~**Hardcoded glow colors**~~ — moot after the 2026-11-01 redesign (new `style.css` uses tokens only). Original item:  — `style.css` has ~16 literal `rgba(0, 240, 255, …)` values (e.g. `.content-body`/`.featured-poster` box-shadow, `.lightbox-poster-container` box-shadow) duplicating the `--primary`/`--glow-*` custom properties already in `:root`. A future palette change (like `7382758`) will silently miss these.
+- [x] ~~**Inline `style="..."` sprawl**~~ — moot after the 2026-11-01 redesign (only easteregg.html keeps its own inline styles). Original item:  — one-off inline position/opacity/animation styles on john.html, polarband.html, easteregg.html duplicate patterns that already have CSS classes elsewhere; worth consolidating into named classes, partly so future containing-block audits (see below) don't have to also grep inline `position:`/`transform:` attributes.
+- [ ] **Watch for the containing-block bug reappearing** — any `filter`/`transform`/`perspective`/`will-change:transform` on an ancestor of a `position: fixed` element makes "fixed" resolve against that ancestor's box instead of the viewport. In the current design the only fixed element is `#lightbox` (direct child of `<body>`); keep it that way.
+- [ ] **sw.js is never registered** — nothing calls `navigator.serviceWorker.register`, so the cache list is dead weight. Either register it or delete it; if kept, every `urlsToCache` entry must exist or install fails.
+- [ ] **Open questions for the user** — how PolarAF relates to John (copy is written neutrally); whether Polar & The Boys should be mentioned anywhere now that the band page is gone; whether the PolarAF photo (`live_clip.jpg`) is the right image for that act.
 
 ---
 
 ## Session History (newest first)
+
+### 2026-11-01 — Claude Code (Opus 5.5)
+
+**Redesign:** replaced the terminal/CRT "signal hub" look with a plain music-label site.
+
+- **Archive:** old design frozen at `archive/terminal-2026/` (pages, `style.css`, `app.js`, snapshot of the old `database.json`; asset paths rewritten to `../../assets/`, `noindex`, banner linking back). Git tag `design-terminal-2026` → `01039ef`. Linked as "old site" in the footer.
+- **Structure:** Home, John Polar, PolarAF, Photos. Band page dropped; `polarband.html` is now a redirect to home (same pattern as `johnpolar.html`). Bottom tab nav, marquee, ASCII art, countdown, decoder and CRT effects removed. Static Bandstand strip kept at the top of every page.
+- **Look:** warm black + cream + stage-light amber (from the live photos), Anton / IBM Plex Sans / IBM Plex Mono via Google Fonts, hat mark inverted as logo. Color tokens only.
+- **Adding a show:** add an entry to `shows` with a future `date` (YYYY-MM-DD) and `artists`; it appears under "Catch us live" until the date passes, then moves to "Past shows" automatically.
+- **Data:** `database.json` restructured into `residency`, `shows` (merged John/PolarAF duplicates, artist tags), `videos`, `media` (captions + credit + `thumb`). Grid thumbnails in `assets/thumbs/` (720px, the 2.6 MB flyer PNG → 185 KB).
+- **Copy:** plain sentence case; only facts already in the repo (IG bio quote, venues, dates, co-bills from flyers). Photo credit to @through_rebeseyes shown on hero and grid.
+- `easteregg.html` / `terminal.css` left untouched (unlinked, self-contained).
+- `sw.js` list updated (no polarband), `CACHE_NAME` v5; manifest description/colors updated.
+- **Round 2 (same day):**
+  - Animations: hero photo drift + headline rise, scroll-reveal on sections/rows/cards (IntersectionObserver, `.js` class set in `<head>`, all gated on `prefers-reduced-motion`), nav underline slide, card hover zoom, pulsing dot when Bandstand is tonight, equalizer bars in the strip, lightbox fade, cross-page `@view-transition`.
+  - Videos are click-to-load YouTube cards (real IDs from the channel RSS); Guntram Anderlik's Facebook post added as a quote (home + John page).
+  - **Archive page** (`archive.html`, nav item replaces Photos): one timeline of shows, videos, photos and milestones grouped by year, filters + newest/oldest toggle; flyers attach to the show on the same date (media items now carry `date`). `milestones` array added to `database.json`.
+  - Shows marked `"source": "phone"` came from John's own records, not public listings.
+  - `scripts/sync_youtube.py` + `.github/workflows/sync-youtube.yml` (weekly, commits new uploads). `scripts/find_appearances.py` writes its output outside the repo. `_config.yml` keeps `scripts/` and this devlog out of the published site.
+- **Instagram:** `posts` in `database.json` render as tap-to-load embeds (Instagram's `embed.js` only loads on tap, since it tracks visitors). Show entries whose `link` is an Instagram post get the same button in the archive. Embeds render fine logged out.
+- **Research notes:** public search turns up almost nothing for John Polar/PolarAF, and Facebook/Instagram need a login. Some shows come from John's own records (`"source": "phone"`); see `scripts/find_appearances.py`. Private notes stay outside the repo. `find_appearances.py --calendar --texts` also reads calendar events and your own sent texts through Shizuku (`rish`); Dave's Pub, Dobber's Five Points Pub and Voodoo Lounge (Huntsville) are known venues now; Shizuku-backed sources fall back to a cache in the output folder when rish is down.
+
 
 ### 2026-10-28 — Claude Code (Opus 5.5)
 
