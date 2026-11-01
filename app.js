@@ -230,7 +230,7 @@ function timelineItems(data) {
         pics.forEach(m => used.add(m));
         items.push({ kind: 'show', date: s.date, title: s.title,
             meta: `${s.venue}${s.with ? ` · with ${s.with}` : ''}`, note: s.note, artists: s.artists, pics,
-            link: s.link, linkText: s.linkText });
+            link: s.link, linkText: s.linkText, clip: s.clip });
     });
     (data.videos || []).forEach(v => items.push({ kind: 'video', date: v.date, title: v.title, artists: v.artists,
         video: v.id }));
@@ -264,6 +264,7 @@ function timelineEntry(it) {
                 ${it.link && /instagram\.com\/p\//.test(it.link) ? igButton(it.link) : it.link ? `<p><a href="${esc(it.link)}"${/^https?:/.test(it.link) ? ' target="_blank" rel="noopener"' : ''}>${esc(it.linkText || 'Open')}</a></p>` : ''}
                 ${tags ? `<div class="show-tags">${tags}</div>` : ''}
                 ${video}
+                ${it.clip ? `<video class="tl-clip" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster)}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
                 ${pics ? `<div class="tl-pics">${pics}</div>` : ''}
             </div>
         </li>`;

@@ -527,6 +527,7 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     background: var(--amber); color: var(--on-amber); font-size: 12px;
 }
 .tl-video:hover img { opacity: 1; }
+.tl-clip { display: block; width: min(280px, 100%); aspect-ratio: 9 / 16; object-fit: cover; margin-top: 14px; background: var(--bg-raised); }
 
 @media (max-width: 720px) {
     .tl-year { grid-template-columns: 1fr; }

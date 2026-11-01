@@ -246,7 +246,12 @@
             "artists": [
                 "john"
             ],
-            "source": "phone"
+            "source": "phone",
+            "clip": {
+                "src": "assets/video_20250701.mp4",
+                "poster": "assets/thumbs/video_20250701.jpg",
+                "caption": "From the stage, 7 min"
+            }
         },
         {
             "date": "2025-06-02",
