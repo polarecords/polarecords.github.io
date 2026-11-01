@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="darkreader-lock">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- SEO & Standards -->
+    <title>PolaRecords | Authorized Signal Hub</title>
+    <meta name="description" content="PolaRecords OS: Authorized signal interceptor and experimental media hub based in Birmingham, AL. Performance logs and visual fragments.">
+
+    <!-- Social / Open Graph -->
+    <meta property="og:title" content="PolaRecords | Authorized Signal Hub">
+    <meta property="og:description" content="Authorized signal interceptor and experimental media hub. Performance logs and visual fragments.">
+    <meta property="og:image" content="../../assets/photo_rebe_20260628.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polarecords.net">
+
+    <!-- PWA & Icons -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+    <meta name="theme-color" content="#031A16">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <a href="../../index.html" style="display:block;position:relative;z-index:9999;background:#000;color:#ccc;font:12px/1.4 monospace;text-align:center;padding:6px 10px;text-decoration:none;border-bottom:1px solid #333">Archived design (2025–2026) · back to the current site →</a>
+    <div class="crt-frame">
+    <a href="https://www.thenickrocks.com/" target="_blank" id="bandstand-bar" style="text-decoration:none;">
+        <span class="bandstand-track">
+        <span class="bandstand-name">BIRMINGHAM BANDSTAND</span>
+        <span class="bandstand-sep">✦</span>
+        <span class="bandstand-detail">EVERY MONDAY @ THE NICK</span>
+        <span class="bandstand-sep">|</span>
+        <span class="bandstand-detail">SIGN-UP 7PM</span>
+        <span class="bandstand-sep">|</span>
+        <span class="bandstand-detail">SHOW 8PM – 2AM</span>
+        </span>
+    </a>
+
+    <main class="content-body">
+        <div class="ascii-art">
+██████╗  ██████╗ ██╗      █████╗ ██████╗ ███████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝
+██████╔╝██║   ██║██║     ███████║██████╔╝█████╗  ██║     ██║   ██║██████╔╝██║  ██║███████╗
+██╔═══╝ ██║   ██║██║     ██╔══██║██╔══██╗██╔══╝  ██║     ██║   ██║██╔══██╗██║  ██║╚════██║
+██║     ╚██████╔╝███████╗██║  ██║██║  ██║███████╗╚██████╗╚██████╔╝██║  ██║██████╔╝███████║
+╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝
+        </div>
+
+        <div id="dynamic-show-card" class="show-card"></div>
+
+        <div class="section-title">Signal Log</div>
+        <div id="dynamic-log-stream" class="log-stream"></div>
+
+        <div class="section-title">Live Clip</div>
+        <div class="featured-poster video-border" style="padding: 0;">
+            <video src="../../assets/live_clip.mp4" poster="../../assets/live_clip.jpg" controls playsinline preload="none" style="width:100%; display:block;"></video>
+        </div>
+
+        <div class="section-title">Video Log</div>
+        <div class="featured-poster video-border" style="aspect-ratio: 16/9; padding: 0;">
+            <iframe src="https://www.youtube.com/embed/RE_9SyZ0PFE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2026 PolaRecords | Authorized Signal Only
+    </footer>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="john.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>John</span>
+        </a>
+        <a href="polaraf.html" class="nav-item">
+            <i class="fas fa-bolt"></i>
+            <span>AF</span>
+        </a>
+        <a href="polarband.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Band<span class="nav-soon">Coming Soon</span></span>
+        </a>
+        <a href="media.html" class="nav-item">
+            <i class="fas fa-image"></i>
+            <span>Media</span>
+        </a>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
