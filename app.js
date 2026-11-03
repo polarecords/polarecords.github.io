@@ -973,3 +973,12 @@ async function loadData() {
 
 document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', () => { observeReveals(); loadData(); });
+
+// ─── Service Worker Registration (PWA & Offline Support) ───────────────────
+if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(err => {
+            console.debug('Service Worker registration skipped or failed:', err);
+        });
+    });
+}
