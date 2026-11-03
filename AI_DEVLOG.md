@@ -35,6 +35,22 @@ Single source of truth for cross-session continuity.
 
 ### 2026-11-03 — Antigravity CLI
 
+**Full Focus on John Polar & Soulful/Jazzy/Funky Rebranding:**
+- **Hide PolarAF Persona & Elevate John Polar:**
+  - Removed PolarAF from top navigation (`index.html`, `john.html`, `archive.html`, `media.html`) and footer social links (removed `PolarAF on Facebook`).
+  - Set up `polaraf.html` as an immediate client-side redirect to `john.html`.
+  - Filtered out standalone PolarAF melodic rap freestyle livestreams from `forArtist` and `timelineItems` in `app.js`.
+  - Suppressed redundant artist tags on single-artist shows in `showRow` and `timelineEntry` for a cleaner, spacious layout.
+- **Home Page Polish & Artistic Copy:**
+  - Updated hero copy on `index.html` to highlight John's actual musical identity: *"Home of singer-songwriter John Polar. Soulful, expressive songwriting with jazzy hooks and funky rhythm, born out of Birmingham songwriter nights and open mics."*
+  - Updated bio on `john.html` to highlight soulful, expressive, and jazzy sounds.
+- **Artist Spotlight (`#about-john`):**
+  - Replaced the 2-card "Artists" roster with a dedicated, elevated `.artist-spotlight` feature card on `index.html`, including stage photography, bio quote, and an invitation to explore John Polar's full profile and music.
+- **Live Performances & Word of Mouth:**
+  - Removed the old PolarAF rap freestyle clip (`live_clip.mp4`) from the home page.
+  - Formatted `#watch` into a live songwriting video section featuring John's YouTube sets, immediately followed by a dedicated `#word-of-mouth` section featuring Guntram Anderlik's testimonial.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v9` in `sw.js`.
+
 **PWA Activation, Lightbox Accessibility, Social Cards & Media Grid Polish:**
 - **Service Worker Registration Activated (`sw.js`):**
   - Registered `sw.js` in `app.js` on HTTPS and localhost. Offline caching, network-first updates, and full PWA web app installability are now active.
