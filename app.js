@@ -275,19 +275,122 @@ function getShowMediaItems(s, data) {
     return items;
 }
 
-function renderShowDropdown(s, mediaItems, venueInfo, tags) {
+function renderShowDropdown(s, mediaItems, venueInfo, tags, isUpcoming = false) {
     const photos = mediaItems.filter(m => m.type === 'photo');
     const clips = mediaItems.filter(m => m.type === 'clip');
     const videos = mediaItems.filter(m => m.type === 'video');
-    const hasMedia = mediaItems.length > 0;
 
-    let mediaHtml = '';
-    if (hasMedia) {
-        let photosHtml = '';
-        if (photos.length) {
-            photosHtml = `
+    // Primary poster/photo displayed on the right side of the card
+    const primaryPhoto = photos.length > 0 ? photos[0] : null;
+    const remainingPhotos = photos.slice(1);
+    const hasExtraMedia = remainingPhotos.length > 0 || clips.length > 0 || videos.length > 0;
+
+    let detailsHtml = '';
+    if (s.note || s.with || s.time || s.cover || s.address || s.source === 'phone' || tags) {
+        const metaPills = [];
+        if (s.time) metaPills.push(`<span class="show-meta-pill"><i class="fas fa-clock" aria-hidden="true"></i> ${esc(s.time)}</span>`);
+        if (s.cover || s.age) metaPills.push(`<span class="show-meta-pill"><i class="fas fa-ticket" aria-hidden="true"></i> ${[s.cover, s.age].filter(Boolean).map(esc).join(' · ')}</span>`);
+        if (s.address) metaPills.push(`<span class="show-meta-pill"><i class="fas fa-location-dot" aria-hidden="true"></i> ${esc(s.address)}</span>`);
+
+        detailsHtml = `
+            <div class="show-dropdown-details">
+                ${tags ? `<div class="show-dropdown-tags">${tags}</div>` : ''}
+                ${s.with ? `<p class="show-dropdown-with"><b>With:</b> ${esc(s.with)}</p>` : ''}
+                ${metaPills.length ? `<div class="show-dropdown-meta-row">${metaPills.join('')}</div>` : ''}
+                ${s.note ? `<p class="show-dropdown-note"><i class="fas fa-quote-left" aria-hidden="true"></i> ${esc(s.note)}</p>` : ''}
+                ${s.source === 'phone' ? `<p class="show-dropdown-source muted small"><i class="fas fa-phone-flip" aria-hidden="true"></i> From John Polar's archive records</p>` : ''}
+            </div>`;
+    }
+
+    let linksHtml = '';
+    const fbEventUrl = s.facebookEvent || (s.link && /facebook\.com/.test(s.link) ? s.link : '');
+    const venueFbUrl = s.venueFacebook || (s.venue && s.venue.includes('The Nick') ? 'https://www.facebook.com/thenickrocks' : '');
+    const gcalUrl = isUpcoming ? buildGCalUrl(s) : '';
+
+    const linkItems = [];
+    if (isUpcoming) {
+        if (fbEventUrl) {
+            linkItems.push(`
+                <a href="${esc(fbEventUrl)}" target="_blank" rel="noopener" class="show-link-pill fb-pill" aria-label="RSVP on Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                    <span>RSVP on Facebook</span>
+                </a>`);
+        }
+        if (venueFbUrl) {
+            linkItems.push(`
+                <a href="${esc(venueFbUrl)}" target="_blank" rel="noopener" class="show-link-pill fb-checkin-pill" aria-label="Check in at ${esc(s.venue || 'venue')} on Facebook">
+                    <i class="fas fa-location-dot" aria-hidden="true"></i>
+                    <span>Check in at ${esc(s.venue || 'The Nick')}</span>
+                </a>`);
+        }
+        if (gcalUrl) {
+            linkItems.push(`
+                <a href="${esc(gcalUrl)}" target="_blank" rel="noopener" class="show-link-pill cal-pill" aria-label="Add event to Google Calendar">
+                    <i class="fab fa-google" aria-hidden="true"></i>
+                    <span>Google Calendar</span>
+                </a>`);
+        }
+        if (s.date) {
+            linkItems.push(`
+                <button type="button" class="show-link-pill ics-pill download-show-ics-btn" data-date="${esc(s.date)}" aria-label="Download .ics for Apple / Outlook / Phone Calendar">
+                    <i class="fas fa-calendar-arrow-down" aria-hidden="true"></i>
+                    <span>Add to Calendar (.ics)</span>
+                </button>`);
+        }
+    }
+
+    if (venueInfo.url) {
+        linkItems.push(`
+            <a href="${esc(venueInfo.url)}" target="_blank" rel="noopener" class="show-link-pill">
+                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                <span>${esc(venueInfo.name)} website${venueInfo.host ? ` (${esc(venueInfo.host)})` : ''}</span>
+            </a>`);
+    }
+    if (s.link && !fbEventUrl) {
+        linkItems.push(`
+            <a href="${esc(s.link)}" target="_blank" rel="noopener" class="show-link-pill ${/instagram\.com/.test(s.link) ? 'ig-pill' : ''}">
+                <i class="${/instagram\.com/.test(s.link) ? 'fab fa-instagram' : 'fas fa-link'}" aria-hidden="true"></i>
+                <span>${esc(s.linkText || 'Event listing')}</span>
+            </a>`);
+    }
+
+    if (linkItems.length) {
+        linksHtml = `<div class="show-dropdown-links">${linkItems.join('')}</div>`;
+    }
+
+    let fbEmbedHtml = '';
+    if (isUpcoming && fbEventUrl) {
+        fbEmbedHtml = `
+            <div class="show-dropdown-section fb-embed-section">
+                <div class="show-dropdown-heading"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook Event &amp; Check-In</div>
+                <div class="fb-embed-container">
+                    <button type="button" class="fb-load-btn" data-url="${esc(fbEventUrl)}">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                        <span>Show Facebook Event &amp; RSVP Embed</span>
+                    </button>
+                </div>
+            </div>`;
+    }
+
+    let primaryMediaHtml = '';
+    if (primaryPhoto) {
+        primaryMediaHtml = `
+            <div class="show-dropdown-media-side">
+                <button type="button" class="show-dropdown-poster-btn show-dropdown-thumb" data-src="${esc(primaryPhoto.src)}" data-caption="${esc(primaryPhoto.caption || '')}${primaryPhoto.credit ? ` · photo ${esc(primaryPhoto.credit)}` : ''}" data-alt="${esc(primaryPhoto.alt || '')}" aria-label="Enlarge flyer: ${esc(primaryPhoto.caption || primaryPhoto.alt)}">
+                    <img src="${esc(primaryPhoto.thumb || primaryPhoto.src)}" alt="${esc(primaryPhoto.alt)}" loading="lazy">
+                    <span class="poster-zoom-badge" aria-hidden="true"><i class="fas fa-magnifying-glass-plus"></i> View</span>
+                </button>
+                ${primaryPhoto.caption ? `<span class="show-dropdown-poster-caption">${esc(primaryPhoto.caption)}</span>` : ''}
+            </div>`;
+    }
+
+    let extraMediaHtml = '';
+    if (hasExtraMedia) {
+        let extraPhotosHtml = '';
+        if (remainingPhotos.length) {
+            extraPhotosHtml = `
                 <div class="show-dropdown-gallery">
-                    ${photos.map(p => `
+                    ${remainingPhotos.map(p => `
                         <button type="button" class="show-dropdown-thumb" data-src="${esc(p.src)}" data-caption="${esc(p.caption || '')}${p.credit ? ` · photo ${esc(p.credit)}` : ''}" data-alt="${esc(p.alt || '')}" aria-label="Enlarge photo: ${esc(p.caption || p.alt)}">
                             <img src="${esc(p.thumb || p.src)}" alt="${esc(p.alt)}" loading="lazy">
                             ${p.caption ? `<span class="show-dropdown-caption">${esc(p.caption)}</span>` : ''}
@@ -318,86 +421,26 @@ function renderShowDropdown(s, mediaItems, venueInfo, tags) {
                 </div>`;
         }
 
-        mediaHtml = `
-            <div class="show-dropdown-section">
-                <div class="show-dropdown-heading"><i class="fas fa-camera-retro" aria-hidden="true"></i> Media from the night</div>
-                ${photosHtml}
+        extraMediaHtml = `
+            <div class="show-dropdown-section show-dropdown-extra-media">
+                <div class="show-dropdown-heading"><i class="fas fa-photo-film" aria-hidden="true"></i> More media from this night</div>
+                ${extraPhotosHtml}
                 ${clipsHtml}
             </div>`;
     }
 
-    let detailsHtml = '';
-    if (s.note || s.with || s.time || s.cover || s.address || s.source === 'phone') {
-        detailsHtml = `
-            <div class="show-dropdown-details">
-                ${s.note ? `<p class="show-dropdown-note"><i class="fas fa-quote-left" aria-hidden="true"></i> ${esc(s.note)}</p>` : ''}
-                ${s.with ? `<p class="show-dropdown-with"><b>With:</b> ${esc(s.with)}</p>` : ''}
-                ${(s.time || s.cover || s.age) ? `<p class="show-dropdown-with"><b>Details:</b> ${[s.time, s.cover, s.age].filter(Boolean).map(esc).join(' · ')}</p>` : ''}
-                ${s.address ? `<p class="show-dropdown-with"><b>Address:</b> ${esc(s.address)}</p>` : ''}
-                ${s.source === 'phone' ? `<p class="show-dropdown-source muted small"><i class="fas fa-phone-flip" aria-hidden="true"></i> From John Polar's archive records</p>` : ''}
-            </div>`;
-    }
-
-    let linksHtml = '';
-    const fbEventUrl = s.facebookEvent || (s.link && /facebook\.com/.test(s.link) ? s.link : '');
-    const venueFbUrl = s.venueFacebook || (s.venue && s.venue.includes('The Nick') ? 'https://www.facebook.com/thenickrocks' : '');
-    const gcalUrl = buildGCalUrl(s);
-
-    if (venueInfo.url || s.link || fbEventUrl || venueFbUrl || gcalUrl) {
-        linksHtml = `
-            <div class="show-dropdown-links">
-                ${fbEventUrl ? `
-                    <a href="${esc(fbEventUrl)}" target="_blank" rel="noopener" class="show-link-pill fb-pill" aria-label="RSVP on Facebook">
-                        <i class="fab fa-facebook" aria-hidden="true"></i>
-                        <span>RSVP on Facebook</span>
-                    </a>` : ''}
-                ${venueFbUrl ? `
-                    <a href="${esc(venueFbUrl)}" target="_blank" rel="noopener" class="show-link-pill fb-checkin-pill" aria-label="Check in at ${esc(s.venue || 'venue')} on Facebook">
-                        <i class="fas fa-location-dot" aria-hidden="true"></i>
-                        <span>Check in at ${esc(s.venue || 'The Nick')}</span>
-                    </a>` : ''}
-                ${gcalUrl ? `
-                    <a href="${esc(gcalUrl)}" target="_blank" rel="noopener" class="show-link-pill cal-pill" aria-label="Add event to Google Calendar">
-                        <i class="fab fa-google" aria-hidden="true"></i>
-                        <span>Google Calendar</span>
-                    </a>` : ''}
-                ${s.date ? `
-                    <button type="button" class="show-link-pill ics-pill download-show-ics-btn" data-date="${esc(s.date)}" aria-label="Download .ics for Apple / Outlook / Phone Calendar">
-                        <i class="fas fa-calendar-arrow-down" aria-hidden="true"></i>
-                        <span>Add to Calendar (.ics)</span>
-                    </button>` : ''}
-                ${venueInfo.url ? `
-                    <a href="${esc(venueInfo.url)}" target="_blank" rel="noopener" class="show-link-pill">
-                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        <span>${esc(venueInfo.name)} website${venueInfo.host ? ` (${esc(venueInfo.host)})` : ''}</span>
-                    </a>` : ''}
-                ${s.link && !fbEventUrl ? `
-                    <a href="${esc(s.link)}" target="_blank" rel="noopener" class="show-link-pill ${/instagram\.com/.test(s.link) ? 'ig-pill' : ''}">
-                        <i class="${/instagram\.com/.test(s.link) ? 'fab fa-instagram' : 'fas fa-link'}" aria-hidden="true"></i>
-                        <span>${esc(s.linkText || 'Event listing')}</span>
-                    </a>` : ''}
-            </div>`;
-    }
-
-    let fbEmbedHtml = '';
-    if (fbEventUrl) {
-        fbEmbedHtml = `
-            <div class="show-dropdown-section fb-embed-section">
-                <div class="show-dropdown-heading"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook Event &amp; Check-In</div>
-                <div class="fb-embed-container">
-                    <button type="button" class="fb-load-btn" data-url="${esc(fbEventUrl)}">
-                        <i class="fab fa-facebook" aria-hidden="true"></i>
-                        <span>Show Facebook Event &amp; RSVP Embed</span>
-                    </button>
-                </div>
-            </div>`;
-    }
-
     return `
-        ${mediaHtml}
-        ${detailsHtml}
-        ${linksHtml}
-        ${fbEmbedHtml}
+        <div class="show-dropdown-layout">
+            <div class="show-dropdown-top">
+                <div class="show-dropdown-info">
+                    ${detailsHtml}
+                    ${linksHtml}
+                    ${fbEmbedHtml}
+                </div>
+                ${primaryMediaHtml}
+            </div>
+            ${extraMediaHtml}
+        </div>
     `;
 }
 
@@ -436,18 +479,21 @@ function showRow(s, artist, data, isUpcoming = false) {
     }
 
     const venueInfo = getVenueInfo(s, data);
-    const dropdownHtml = renderShowDropdown(s, mediaItems, venueInfo, tags);
+    const dropdownHtml = renderShowDropdown(s, mediaItems, venueInfo, tags, isUpcoming);
     const showId = `show-detail-${++showRowCounter}`;
     const willOpen = isUpcoming;
 
     return `
         <li class="show-row ${hasMedia ? 'has-media' : ''} ${willOpen ? 'is-open is-upcoming' : ''}" data-reveal>
             <div class="show-row-main" role="button" tabindex="0" aria-expanded="${willOpen ? 'true' : 'false'}" aria-controls="${showId}" aria-label="${esc(s.title)}, ${d ? `${MONTHS[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}` : 'Earlier'}. View event details.">
-                <span class="show-date">${d ? `<b>${MONTHS[d.getMonth()]} ${d.getDate()}</b> ${d.getFullYear()}` : '<b>Earlier</b>'}${badgeHtml}</span>
-                <span class="show-info">
-                    <span class="show-title">${esc(s.title)}</span>
+                <span class="show-date">${d ? `<b>${MONTHS[d.getMonth()]} ${d.getDate()}</b> ${d.getFullYear()}` : '<b>Earlier</b>'}</span>
+                <div class="show-info">
+                    <div class="show-title-line">
+                        <span class="show-title">${esc(s.title)}</span>
+                        ${badgeHtml}
+                    </div>
                     <span class="show-meta">${esc(s.venue)}${s.with ? ` · with ${esc(s.with)}` : ''}</span>
-                </span>
+                </div>
                 <div class="show-side">
                     ${tags ? `<span class="show-tags">${tags}</span>` : ''}
                     ${cardsHtml}
@@ -475,9 +521,14 @@ function renderShows(shows, artist, data) {
         up.hidden = !upcoming.length;
         const section = up.closest('[data-hide-if-empty]');
         if (section) section.hidden = !upcoming.length;
+        const header = up.parentElement?.querySelector?.('[data-upcoming-header]');
+        if (header) header.hidden = !upcoming.length;
     }
     const el = document.getElementById('shows');
-    if (el) el.innerHTML = past.map(s => showRow(s, artist, data, false)).join('');
+    if (el) {
+        const limit = Number(el.dataset.limit) || past.length;
+        el.innerHTML = past.slice(0, limit).map(s => showRow(s, artist, data, false)).join('');
+    }
 }
 
 // ─── Quotes ──────────────────────────────────────────────────────────────────
