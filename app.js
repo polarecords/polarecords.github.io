@@ -18,6 +18,113 @@ function forArtist(list, artist) {
 }
 
 // ─── Residency (next Monday at The Nick) ─────────────────────────────────────
+function buildResidencyGCalUrl(r) {
+    const now  = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    next.setDate(next.getDate() + ((r.day - next.getDay() + 7) % 7));
+    const pad = n => String(n).padStart(2, '0');
+    const y = next.getFullYear();
+    const m = pad(next.getMonth() + 1);
+    const day = pad(next.getDate());
+    const dateStr = `${y}${m}${day}`;
+
+    const title = encodeURIComponent(`${r.name} (${r.kind}) - ${r.venue}`);
+    const location = encodeURIComponent(`${r.venue}, ${r.city}`);
+    const details = encodeURIComponent(`Sign-up at ${r.signup}, music from ${r.show} until ${r.end}.\n\nAdmission: ${r.admission}\nWebsite: ${r.url}`);
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dateStr}T190000/${dateStr}T235900&details=${details}&location=${location}&ctz=America/Chicago`;
+}
+
+function buildResidencyIcs(r) {
+    const now  = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    next.setDate(next.getDate() + ((r.day - next.getDay() + 7) % 7));
+    const pad = n => String(n).padStart(2, '0');
+    const y = next.getFullYear();
+    const m = pad(next.getMonth() + 1);
+    const day = pad(next.getDate());
+
+    const title = `${r.name} (${r.kind}) - ${r.venue}`;
+    const location = `${r.venue}, ${r.city}`;
+    const desc = `Sign-up at ${r.signup}, music from ${r.show} until ${r.end}.\\n\\nAdmission: ${r.admission}\\nWebsite: ${r.url}`;
+
+    return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//PolaRecords//ResidencyCalendar//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:residency-${y}${m}${day}@polarecords.net`,
+        `DTSTAMP:${y}${m}${day}T000000Z`,
+        `DTSTART;TZID=America/Chicago:${y}${m}${day}T190000`,
+        `DTEND;TZID=America/Chicago:${y}${m}${day}T235900`,
+        `SUMMARY:${title.replace(/[,;\n\r]/g, ' ')}`,
+        `DESCRIPTION:${desc.replace(/\r?\n/g, '\\n')}`,
+        `LOCATION:${location.replace(/[,;\n\r]/g, ' ')}`,
+        `URL:${r.url}`,
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].filter(Boolean).join('\r\n');
+}
+
+function downloadIcsFile(filename, content) {
+    const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename.endsWith('.ics') ? filename : `${filename}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function buildShowIcs(s) {
+    const d = parseDate(s.date);
+    if (!d) return null;
+    const pad = n => String(n).padStart(2, '0');
+    const y = d.getFullYear();
+    const m = pad(d.getMonth() + 1);
+    const day = pad(d.getDate());
+
+    let dtstart = `${y}${m}${day}T190000`;
+    let dtend = `${y}${m}${day}T220000`;
+    if (s.time && s.time.includes('7') && s.time.includes('10')) {
+        dtstart = `${y}${m}${day}T190000`;
+        dtend = `${y}${m}${day}T220000`;
+    }
+
+    const title = s.title + (s.with ? ` (with ${s.with})` : '');
+    const location = `${s.venue || ''}${s.address ? `, ${s.address}` : ''}`;
+    const desc = [
+        s.note || s.title,
+        s.time ? `Time: ${s.time}` : '',
+        s.cover ? `Admission: ${s.cover} (${s.age || '21+'})` : '',
+        s.facebookEvent || s.link || ''
+    ].filter(Boolean).join('\\n\\n');
+
+    return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//PolaRecords//ShowCalendar//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:show-${s.date}-${Date.now()}@polarecords.net`,
+        `DTSTAMP:${y}${m}${day}T000000Z`,
+        `DTSTART;TZID=America/Chicago:${dtstart}`,
+        `DTEND;TZID=America/Chicago:${dtend}`,
+        `SUMMARY:${title.replace(/[,;\n\r]/g, ' ')}`,
+        `DESCRIPTION:${desc.replace(/\r?\n/g, '\\n')}`,
+        `LOCATION:${location.replace(/[,;\n\r]/g, ' ')}`,
+        s.facebookEvent || s.link ? `URL:${s.facebookEvent || s.link}` : '',
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].filter(Boolean).join('\r\n');
+}
+
 function renderResidency(r) {
     const el = document.getElementById('residency');
     if (!el || !r) return;
@@ -27,6 +134,7 @@ function renderResidency(r) {
     next.setDate(next.getDate() + ((r.day - next.getDay() + 7) % 7));
     const isTonight = next.toDateString() === now.toDateString();
     const when = isTonight ? 'Tonight' : `${DAYS[next.getDay()].slice(0, 3)}, ${MONTHS[next.getMonth()]} ${next.getDate()}`;
+    const gcalUrl = buildResidencyGCalUrl(r);
 
     el.innerHTML = `
         <div class="residency-when">
@@ -38,6 +146,16 @@ function renderResidency(r) {
             <p>Every ${esc(DAYS[r.day])} at <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.venue)}</a>, ${esc(r.city)}.
                Sign-up at ${esc(r.signup)}, music from ${esc(r.show)} until ${esc(r.end)}.</p>
             <p class="muted small">${esc(r.admission)}</p>
+            <div class="residency-actions">
+                <a href="${esc(gcalUrl)}" target="_blank" rel="noopener" class="show-link-pill cal-pill" aria-label="Add next Bandstand to Google Calendar">
+                    <i class="fab fa-google" aria-hidden="true"></i>
+                    <span>Google Calendar</span>
+                </a>
+                <button type="button" class="show-link-pill ics-pill download-residency-ics-btn" aria-label="Download next Bandstand .ics for Apple / Outlook / Phone Calendar">
+                    <i class="fas fa-calendar-arrow-down" aria-hidden="true"></i>
+                    <span>Add to Calendar (.ics)</span>
+                </button>
+            </div>
         </div>
     `;
 }
@@ -239,10 +357,15 @@ function renderShowDropdown(s, mediaItems, venueInfo, tags) {
                         <span>Check in at ${esc(s.venue || 'The Nick')}</span>
                     </a>` : ''}
                 ${gcalUrl ? `
-                    <a href="${esc(gcalUrl)}" target="_blank" rel="noopener" class="show-link-pill cal-pill" aria-label="Add event to Calendar">
-                        <i class="fas fa-calendar-plus" aria-hidden="true"></i>
-                        <span>Add to Calendar</span>
+                    <a href="${esc(gcalUrl)}" target="_blank" rel="noopener" class="show-link-pill cal-pill" aria-label="Add event to Google Calendar">
+                        <i class="fab fa-google" aria-hidden="true"></i>
+                        <span>Google Calendar</span>
                     </a>` : ''}
+                ${s.date ? `
+                    <button type="button" class="show-link-pill ics-pill download-show-ics-btn" data-date="${esc(s.date)}" aria-label="Download .ics for Apple / Outlook / Phone Calendar">
+                        <i class="fas fa-calendar-arrow-down" aria-hidden="true"></i>
+                        <span>Add to Calendar (.ics)</span>
+                    </button>` : ''}
                 ${venueInfo.url ? `
                     <a href="${esc(venueInfo.url)}" target="_blank" rel="noopener" class="show-link-pill">
                         <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
@@ -451,7 +574,7 @@ function setupShowsInteractions() {
             return;
         }
 
-        if (e.target.closest('a, button, video, audio, .ig-load, .fb-load-btn, .fb-embed-wrapper, .tl-video, .show-dropdown-thumb')) {
+        if (e.target.closest('a, button, video, audio, .ig-load, .fb-load-btn, .download-show-ics-btn, .download-residency-ics-btn, .fb-embed-wrapper, .tl-video, .show-dropdown-thumb')) {
             return;
         }
 
@@ -555,6 +678,28 @@ document.addEventListener('click', e => {
 
     const fbBtn = e.target.closest('.fb-load-btn');
     if (fbBtn) loadFacebookEmbed(fbBtn);
+
+    const icsShowBtn = e.target.closest('.download-show-ics-btn');
+    if (icsShowBtn) {
+        e.stopPropagation();
+        const date = icsShowBtn.dataset.date;
+        const show = (window.GLOBAL_DATA?.shows || []).find(s => s.date === date);
+        if (show) {
+            const ics = buildShowIcs(show);
+            if (ics) downloadIcsFile(`show-${date}.ics`, ics);
+        }
+        return;
+    }
+
+    const icsResidencyBtn = e.target.closest('.download-residency-ics-btn');
+    if (icsResidencyBtn) {
+        e.stopPropagation();
+        if (window.GLOBAL_DATA?.residency) {
+            const ics = buildResidencyIcs(window.GLOBAL_DATA.residency);
+            if (ics) downloadIcsFile('birmingham-bandstand.ics', ics);
+        }
+        return;
+    }
 });
 
 function renderPosts(posts, artist) {
@@ -747,6 +892,7 @@ async function loadData() {
     try {
         const res  = await fetch('database.json', { cache: 'no-cache' });
         const data = await res.json();
+        window.GLOBAL_DATA = data;
         const artist = document.body.dataset.artist || '';
 
         renderResidency(data.residency);

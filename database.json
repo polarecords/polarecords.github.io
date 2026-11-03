@@ -86,7 +86,8 @@
             "age": "21+",
             "with": "Blair Duluoz (Featured Headliner), Guntram (Opener)",
             "artists": [
-                "john"
+                "john",
+                "polaraf"
             ],
             "note": "Birmingham Songwriter Nights at The Nick. Featured Headliner: Blair Duluoz. Openers: Guntram, John Polar. 7–10 PM · $10 · 21+.",
             "link": "https://www.facebook.com/events/2059285578058333/",
@@ -172,11 +173,12 @@
             "date": "2026-03-24",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
+            "with": "Guntram Anderlik",
             "artists": [
                 "john"
             ],
-            "source": "phone"
+            "source": "phone",
+            "note": "Joined Guntram for his set at Songwriter's Night."
         },
         {
             "date": "2025-12-04",
@@ -265,7 +267,8 @@
             "artists": [
                 "john"
             ],
-            "source": "phone"
+            "source": "phone",
+            "note": "8:00 PM show, set at 8:20."
         },
         {
             "date": "2025-07-01",
@@ -306,12 +309,12 @@
             "date": "2025-05-08",
             "title": "Songwriter Nights",
             "venue": "True Story Brewing Co.",
-            "with": "",
+            "with": "Guntram & friends",
             "artists": [
                 "john",
                 "polaraf"
             ],
-            "note": "Gig number two."
+            "note": "Gig number two. With Guntram Anderlik and friends, 7–10 PM, $10 cover."
         },
         {
             "date": "2025-04-15",
