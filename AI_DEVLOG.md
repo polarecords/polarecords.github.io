@@ -26,7 +26,7 @@ Single source of truth for cross-session continuity.
 - [x] ~~**Hardcoded glow colors**~~ — moot after the 2026-11-01 redesign (new `style.css` uses tokens only). Original item:  — `style.css` has ~16 literal `rgba(0, 240, 255, …)` values (e.g. `.content-body`/`.featured-poster` box-shadow, `.lightbox-poster-container` box-shadow) duplicating the `--primary`/`--glow-*` custom properties already in `:root`. A future palette change (like `7382758`) will silently miss these.
 - [x] ~~**Inline `style="..."` sprawl**~~ — moot after the 2026-11-01 redesign (only easteregg.html keeps its own inline styles). Original item:  — one-off inline position/opacity/animation styles on john.html, polarband.html, easteregg.html duplicate patterns that already have CSS classes elsewhere; worth consolidating into named classes, partly so future containing-block audits (see below) don't have to also grep inline `position:`/`transform:` attributes.
 - [ ] **Watch for the containing-block bug reappearing** — any `filter`/`transform`/`perspective`/`will-change:transform` on an ancestor of a `position: fixed` element makes "fixed" resolve against that ancestor's box instead of the viewport. In the current design the only fixed element is `#lightbox` (direct child of `<body>`); keep it that way.
-- [ ] **sw.js is never registered** — nothing calls `navigator.serviceWorker.register`, so the cache list is dead weight. Either register it or delete it; if kept, every `urlsToCache` entry must exist or install fails.
+- [x] ~~**sw.js is never registered**~~ — resolved: `app.js` now registers `sw.js` on HTTPS and localhost, enabling offline caching and PWA installation.
 - [ ] **Open questions for the user** — how PolarAF relates to John (copy is written neutrally); whether Polar & The Boys should be mentioned anywhere now that the band page is gone; whether the PolarAF photo (`live_clip.jpg`) is the right image for that act.
 
 ---
@@ -34,6 +34,21 @@ Single source of truth for cross-session continuity.
 ## Session History (newest first)
 
 ### 2026-11-03 — Antigravity CLI
+
+**PWA Activation, Lightbox Accessibility, Social Cards & Media Grid Polish:**
+- **Service Worker Registration Activated (`sw.js`):**
+  - Registered `sw.js` in `app.js` on HTTPS and localhost. Offline caching, network-first updates, and full PWA web app installability are now active.
+- **Accessible Lightbox Close Controls:**
+  - Added a touch-friendly, high-contrast circular close button (`.lightbox-close`) to `#lightbox` across all pages (`index.html`, `john.html`, `polaraf.html`, `archive.html`, `media.html`), providing an unmistakable target on mobile devices alongside the existing background-tap and Escape-key dismissals.
+- **Photos & Flyers (`media.html`) Polish:**
+  - Added a matching `.page-head` header block with page description and a navigation link back to the timeline archive (`archive.html`).
+  - Removed misleading `aria-current="page"` from Archive on `media.html`.
+- **Social Sharing & Twitter Cards:**
+  - Added `twitter:card` (`summary_large_image`), `twitter:title`, `twitter:description`, and `twitter:image` tags across all 5 HTML pages, ensuring rich image embeds when shared on X/Twitter, Discord, Slack, iMessage, and Telegram.
+- **Accessibility & Focus Indicators:**
+  - Added clear `:focus-visible` outline indicators to links, buttons, show link pills, and archive buttons.
+- **Section Heading Accuracy (`john.html`):**
+  - Renamed `<h2>On Instagram</h2>` to `<h2>From the community</h2>` to reflect the multi-platform mix of Instagram posts and Facebook event posts.
 
 **Mobile Viewport Optimization, Split Layout, Calendar Cleanup & Live Ordering:**
 - **Mobile Viewport & Screen Overflow Fixes:**
