@@ -33,6 +33,16 @@
     ],
     "posts": [
         {
+            "url": "https://www.facebook.com/events/2059285578058333/",
+            "date": "2026-11-03",
+            "by": "Birmingham Songwriter Nights",
+            "about": "Songwriter night at The Nick featuring Blair Duluoz with John Polar & Guntram",
+            "platform": "facebook",
+            "artists": [
+                "john"
+            ]
+        },
+        {
             "url": "https://www.instagram.com/p/DeckFCDhmEW/",
             "date": "2026-10-13",
             "by": "@bhm_songwriternights",
@@ -66,6 +76,24 @@
         }
     ],
     "shows": [
+        {
+            "date": "2026-11-03",
+            "title": "Birmingham Songwriter Nights at The Nick",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "time": "7:00 PM – 10:00 PM",
+            "cover": "$10",
+            "age": "21+",
+            "with": "Blair Duluoz (Featured Headliner), Guntram (Opener)",
+            "artists": [
+                "john"
+            ],
+            "note": "Birmingham Songwriter Nights at The Nick. Featured Headliner: Blair Duluoz. Openers: Guntram, John Polar. 7–10 PM · $10 · 21+.",
+            "link": "https://www.facebook.com/events/2059285578058333/",
+            "linkText": "Facebook Event & RSVP",
+            "facebookEvent": "https://www.facebook.com/events/2059285578058333/",
+            "venueFacebook": "https://www.facebook.com/thenickrocks"
+        },
         {
             "date": "2026-10-13",
             "title": "Birmingham Songwriter's Night",
@@ -177,7 +205,8 @@
             "with": "",
             "artists": [
                 "john"
-            ]
+            ],
+            "video": "RE_9SyZ0PFE"
         },
         {
             "date": "2025-11-04",
@@ -384,6 +413,13 @@
         }
     ],
     "media": [
+        {
+            "src": "assets/flyer_20261103.jpg",
+            "thumb": "assets/thumbs/flyer_20261103.jpg",
+            "date": "2026-11-03",
+            "alt": "Flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz, with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+. 2514 10th Ave. S., Birmingham, AL",
+            "caption": "Songwriter Nights at The Nick, Nov 3, 2026"
+        },
         {
             "src": "assets/flyer_20261013.jpg",
             "thumb": "assets/thumbs/flyer_20261013.jpg",

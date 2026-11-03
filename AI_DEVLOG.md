@@ -33,6 +33,36 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-03 — Antigravity CLI
+
+**Upcoming Performance & Facebook Event / RSVP / Check-in Integration:**
+- **New Upcoming Performance Added (Tonight, Nov 3, 2026):**
+  - Event: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz (headliner) with Guntram and John Polar (openers).
+  - Time & Admission: 7–10 PM · $10 · 21+ at 2514 10th Ave. S., Birmingham, AL.
+  - Flyer: Copied full flyer from user pictures to `assets/flyer_20261103.jpg` and created optimized 720px thumbnail in `assets/thumbs/flyer_20261103.jpg`.
+  - Linked flyer in `database.json`'s `media` list and added event to `database.json`'s `shows` and `posts`.
+- **Upcoming Performance UX:**
+  - Upcoming shows automatically display at the top under "Catch us live" on Home and John Polar pages.
+  - Active upcoming show rows start expanded by default so visitors immediately see the poster, lineup, time, cover, RSVP button, and venue details.
+  - Dynamic "Tonight" glowing badge (`.tonight-badge`) with lightning bolt indicator for same-day shows.
+- **Facebook Event & Check-In Integration:**
+  - **Direct Facebook RSVP Button (`.fb-pill`):** Direct link to `https://www.facebook.com/events/2059285578058333/` for instant one-tap RSVP (Interested / Going).
+  - **Venue Check-in Button (`.fb-checkin-pill`):** Direct link to The Nick Rocks Facebook page (`https://www.facebook.com/thenickrocks`) for visitor check-ins.
+  - **Add to Calendar Button (`.cal-pill`):** Generates pre-filled Google Calendar event with exact show times, venue address, lineup details, and RSVP links.
+  - **Tap-to-Load Facebook Event Embed:** Added lightweight click-to-load Facebook widget button (`.fb-load-btn`) that dynamically embeds the Facebook event plugin iframe inside the accordion dropdown, respecting visitor privacy until activated.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v7` in `sw.js`.
+
+### 2026-11-02 — Antigravity CLI
+
+**Past Shows Media Cards & Specialized Drop-down:**
+- **Fanned Playing Cards Overlay:** Shows in the past shows list that have media (flyers, photos, stage clips, YouTube recordings) now display a compact fanned card deck indicator on the right of the row. Multiple media items (e.g. marquee photo + flyer, or flyer + video) are overlaid and rotated like someone holding a hand of playing cards (with interactive hover spreading and video play badges).
+- **Specialized Event Drop-down:** Clicking any past show row opens an accordion drop-down with:
+  - High-res photo/flyer gallery from that night with captions and tap-to-open lightbox support across all pages (`index.html`, `john.html`, `polaraf.html`).
+  - Playable video clips / stage recordings inline.
+  - Lineup notes, artist tags, and special show details.
+  - Direct links to the venue website hosting event data (e.g., The Nick at `thenickrocks.com`, Dave's Pub, True Story Brewing) as well as direct Instagram event listings.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v6` in `sw.js`.
+
 ### 2026-11-01 — Claude Code (Opus 5.5)
 
 **Redesign:** replaced the terminal/CRT "signal hub" look with a plain music-label site.
