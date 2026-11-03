@@ -35,6 +35,26 @@ Single source of truth for cross-session continuity.
 
 ### 2026-11-03 — Antigravity CLI
 
+**Mobile Viewport Optimization, Split Layout, Calendar Cleanup & Live Ordering:**
+- **Mobile Viewport & Screen Overflow Fixes:**
+  - Resolved mobile horizontal width blowout: added `min-width: 0;` and word-wrap rules to `.show-info` and title lines.
+  - Separated `.tonight-badge` out of the fixed 72px `.show-date` column into `.show-title-line` (`flex-wrap: wrap; gap: 6px 10px;`) so the badge never squashes the date or overflows on narrow viewports.
+  - On viewports `<= 560px`, artist tags are hidden from the collapsed row (`.show-side .show-tags { display: none; }`) to give maximum scanability to show titles and venues, while tags remain fully visible inside the expanded card (`.show-dropdown-tags`).
+- **Calendar Links Only on Upcoming Shows & Residency:**
+  - Removed calendar clutter (.ics downloads and Google Calendar pills) from past/old events.
+  - Calendar export options (`.cal-pill` and `.download-show-ics-btn`) and Facebook RSVP/check-in buttons are now exclusively active on upcoming performances and the weekly Bandstand open mic residency.
+- **Split Poster / Detail Layout (Right-Side Image Placement):**
+  - Updated show accordion dropdowns to place the primary flyer/photo thumbnail cleanly on the right side (`.show-dropdown-media-side`) with an interactive zoom badge ("View" icon) opening into the lightbox.
+  - Details (with, lineup, time, cover, location, address) and link pills remain prominently readable on the left (`.show-dropdown-info`), with secondary clips and videos flowing beneath (`.show-dropdown-extra-media`).
+  - Added responsive scaling for the right-side media block (140px on desktop -> 105px on tablet -> 88px on phone).
+- **Home Page Length & Archive Flow:**
+  - Prevented 24+ show scroll fatigue on `index.html`, `john.html`, and `polaraf.html` by setting `data-limit="5"` on the past shows list.
+  - Added an "Explore full archive & timeline" CTA button (`.shows-more-btn`) leading seamlessly to `archive.html`.
+- **Chronological Weekly Live Ordering (Open Mic Ahead of Songwriter Night):**
+  - In `#catch-us-live` / `#catch-him-live`, reordered elements so John's weekly open mic residency (Mondays at The Nick) leads first as the anchor weekly event, followed immediately by featured upcoming showcases (e.g. Tuesday Nov 3 Songwriter Night at The Nick).
+  - Added section subheader copy (`.section-sub`) clarifying the weekly Monday residency and upcoming showcase appearances.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v8` in `sw.js`.
+
 **Upcoming Performance, Calendar Export & Cross-Page Site Completeness:**
 - **New Upcoming Performance Added (Tonight, Nov 3, 2026):**
   - Event: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz (headliner) with Guntram and John Polar (openers).

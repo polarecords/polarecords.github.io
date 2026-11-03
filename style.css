@@ -304,9 +304,22 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
 }
 .show-date { font: 400 14px/1.3 var(--mono); color: var(--muted); }
 .show-date b { display: block; font: 400 22px/1.1 var(--display); color: var(--text); text-transform: uppercase; letter-spacing: .02em; }
-.show-info { display: flex; flex-direction: column; }
-.show-title { font-weight: 600; }
-.show-meta { color: var(--muted); font-size: 15px; }
+.show-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.show-title-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    min-width: 0;
+}
+.show-title { font-weight: 600; min-width: 0; }
+.show-meta { color: var(--muted); font-size: 15px; min-width: 0; }
 .show-side {
     display: flex;
     align-items: center;
@@ -449,6 +462,114 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     animation: fade-in .2s ease-out;
 }
 .show-dropdown[hidden] { display: none !important; }
+
+/* ─── Show Dropdown Split Layout (Text Left / Primary Image Right) ────── */
+.show-dropdown-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.show-dropdown-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: start;
+}
+.show-dropdown-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+.show-dropdown-media-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    flex-shrink: 0;
+}
+.show-dropdown-poster-btn {
+    position: relative;
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0;
+    cursor: zoom-in;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.show-dropdown-poster-btn:hover {
+    border-color: var(--amber);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+.show-dropdown-poster-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.poster-zoom-badge {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: rgba(15, 12, 10, 0.85);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font: 500 10px/1 var(--mono);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    pointer-events: none;
+}
+.show-dropdown-poster-caption {
+    margin-top: 6px;
+    font: 400 11px/1.3 var(--mono);
+    color: var(--muted);
+    text-align: center;
+    word-break: break-word;
+}
+.show-dropdown-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin-top: 2px;
+}
+.show-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font: 400 12px/1.2 var(--mono);
+    color: var(--muted);
+}
+.show-meta-pill i {
+    color: var(--amber);
+    font-size: 11px;
+}
+.show-dropdown-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+}
+.show-dropdown-extra-media {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: 4px;
+}
 .show-dropdown-heading {
     display: flex;
     align-items: center;
@@ -531,9 +652,6 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     border: 1px solid var(--line);
 }
 .show-dropdown-details {
-    margin-top: 10px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -689,6 +807,63 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
 }
 .fb-embed-fallback a {
     color: var(--amber);
+}
+
+.section-sub {
+    margin: -8px 0 20px;
+    font: 400 15px/1.5 var(--sans);
+    color: var(--muted);
+    max-width: 60ch;
+}
+
+.upcoming-wrap {
+    margin-top: 24px;
+    margin-bottom: 28px;
+}
+.upcoming-header {
+    margin-bottom: 12px;
+}
+.upcoming-header .eyebrow {
+    color: var(--amber);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    letter-spacing: .08em;
+}
+
+.shows-more-wrap {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-start;
+}
+.shows-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--text);
+    font: 500 13px/1 var(--mono);
+    text-decoration: none;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.shows-more-btn:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: var(--bg);
+}
+.shows-more-btn i {
+    color: var(--amber);
+    font-size: 13px;
+    transition: transform .15s ease;
+}
+.shows-more-btn:hover i {
+    transform: translateX(4px);
 }
 
 .upcoming { margin-bottom: 24px; border-top: 2px solid var(--amber); }
@@ -977,12 +1152,24 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     .show-cards { width: 44px; height: 42px; }
     .show-card { width: 28px; height: 38px; }
     .show-dropdown { padding: 14px 14px 16px; }
+    .show-dropdown-top { gap: 14px; }
+    .show-dropdown-media-side { width: 105px; }
+    .poster-zoom-badge { padding: 2px 5px; font-size: 9px; }
     .show-dropdown-thumb { width: 95px; }
     .show-dropdown-clip video { max-width: 100%; }
     .show-dropdown-video { max-width: 100%; }
     .clip-row { grid-template-columns: 1fr; }
     .clip-row video { max-width: 300px; }
     .hero { min-height: min(72vh, 640px); }
+}
+
+@media (max-width: 560px) {
+    .show-side .show-tags { display: none; }
+}
+
+@media (max-width: 420px) {
+    .show-row-main { gap: 6px 8px; }
+    .show-dropdown-media-side { width: 88px; }
 }
 
 /* ─── Motion ───────────────────────────────────────────────────────────── */

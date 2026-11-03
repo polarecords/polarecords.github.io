@@ -1,4 +1,4 @@
-const CACHE_NAME = 'polarecords-cache-v7';
+const CACHE_NAME = 'polarecords-cache-v8';
 const urlsToCache = [
     './',
     './index.html',
