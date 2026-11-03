@@ -14,7 +14,8 @@ function parseDate(iso) {
 }
 
 function forArtist(list, artist) {
-    return artist ? list.filter(item => item.artists?.includes(artist)) : list;
+    if (artist) return list.filter(item => item.artists?.includes(artist));
+    return list.filter(item => !item.artists || item.artists.includes('john') || !item.artists.includes('polaraf'));
 }
 
 // ─── Residency (next Monday at The Nick) ─────────────────────────────────────
@@ -457,7 +458,8 @@ function showRow(s, artist, data, isUpcoming = false) {
     const d = parseDate(s.date);
     const now = new Date();
     const isToday = isSameDay(d, now);
-    const tags = artist ? '' : (s.artists || []).map(a => `<span class="tag">${esc(ARTIST_NAMES[a] || a)}</span>`).join('');
+    const activeArtists = (s.artists || []).filter(a => a !== 'polaraf' && a !== 'john');
+    const tags = (artist || !activeArtists.length) ? '' : activeArtists.map(a => `<span class="tag">${esc(ARTIST_NAMES[a] || a)}</span>`).join('');
     const mediaItems = getShowMediaItems(s, data);
     const hasMedia = mediaItems.length > 0;
 
@@ -806,14 +808,14 @@ function timelineItems(data) {
     const used = new Set();
     const items = [];
 
-    (data.shows || []).forEach(s => {
+    (data.shows || []).filter(s => !s.artists || s.artists.includes('john') || !s.artists.includes('polaraf')).forEach(s => {
         const pics = media.filter(m => m.date && m.date === s.date);
         pics.forEach(m => used.add(m));
         items.push({ kind: 'show', date: s.date, title: s.title,
             meta: `${s.venue}${s.with ? ` · with ${s.with}` : ''}`, note: s.note, artists: s.artists, pics,
             link: s.link, linkText: s.linkText, clip: s.clip, facebookEvent: s.facebookEvent });
     });
-    (data.videos || []).forEach(v => items.push({ kind: 'video', date: v.date, title: v.title, artists: v.artists,
+    (data.videos || []).filter(v => !v.artists || v.artists.includes('john') || !v.artists.includes('polaraf')).forEach(v => items.push({ kind: 'video', date: v.date, title: v.title, artists: v.artists,
         video: v.id }));
     media.filter(m => m.date && !used.has(m)).forEach(m => items.push({ kind: 'photo', date: m.date, title: m.caption, pics: [m] }));
     (data.milestones || []).forEach(m => items.push({ kind: 'milestone', date: m.date, title: m.title, meta: m.text,
@@ -824,7 +826,8 @@ function timelineItems(data) {
 function timelineEntry(it) {
     const d = parseDate(it.date);
     const k = KIND[it.kind];
-    const tags = (it.artists || []).map(a => `<span class="tag">${esc(ARTIST_NAMES[a] || a)}</span>`).join('');
+    const activeArtists = (it.artists || []).filter(a => a !== 'polaraf' && a !== 'john');
+    const tags = activeArtists.map(a => `<span class="tag">${esc(ARTIST_NAMES[a] || a)}</span>`).join('');
     const pics = (it.pics || []).map(m => `
         <button type="button" class="tl-pic" data-src="${esc(m.src)}" data-caption="${esc(m.caption)}" aria-label="Open: ${esc(m.caption)}">
             <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
