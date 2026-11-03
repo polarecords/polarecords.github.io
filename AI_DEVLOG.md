@@ -55,8 +55,9 @@ Single source of truth for cross-session continuity.
   - Added section subheader copy (`.section-sub`) clarifying the weekly Monday residency and upcoming showcase appearances.
 - **Service Worker:** Bumped cache version to `polarecords-cache-v8` in `sw.js`.
 
-**Upcoming Performance, Calendar Export & Cross-Page Site Completeness:**
-- **New Upcoming Performance Added (Tonight, Nov 3, 2026):**
+- **Context-Aware Date Badges ("Tonight" vs "Tomorrow" vs "Upcoming"):**
+  - Added `isTomorrow` calculation and `.tomorrow-badge` styling. In Central Time (Birmingham, AL), when visiting on Monday evening (Nov 2), Birmingham Bandstand correctly displays as "Tonight" while the Tuesday Nov 3 songwriter showcase displays as "Tomorrow". At midnight Central Time, Nov 3 seamlessly flips to "Tonight".
+- **Upcoming Performance Added (Tuesday, Nov 3, 2026):**
   - Event: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz (headliner) with Guntram and John Polar (openers).
   - Time & Admission: 7–10 PM · $10 · 21+ at 2514 10th Ave. S., Birmingham, AL.
   - Flyer: Copied full flyer from user pictures to `assets/flyer_20261103.jpg` and created optimized 720px thumbnail in `assets/thumbs/flyer_20261103.jpg`.

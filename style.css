@@ -882,10 +882,26 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     font: 600 11px/1 var(--mono);
     text-transform: uppercase;
     letter-spacing: .05em;
-    margin-left: 8px;
     vertical-align: middle;
 }
 .tonight-badge i {
+    font-size: 10px;
+}
+.tomorrow-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(226, 125, 96, 0.12);
+    border: 1px solid rgba(226, 125, 96, 0.55);
+    color: var(--amber);
+    font: 600 11px/1 var(--mono);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    vertical-align: middle;
+}
+.tomorrow-badge i {
     font-size: 10px;
 }
 .upcoming-badge {
@@ -899,7 +915,6 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     font: 500 11px/1 var(--mono);
     text-transform: uppercase;
     letter-spacing: .05em;
-    margin-left: 8px;
     vertical-align: middle;
 }
 

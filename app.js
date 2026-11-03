@@ -176,6 +176,12 @@ function isSameDay(d1, d2) {
            d1.getDate() === d2.getDate();
 }
 
+function isTomorrow(d1, now) {
+    if (!d1 || !now) return false;
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    return isSameDay(d1, tomorrow);
+}
+
 function buildGCalUrl(s) {
     if (!s || !s.date) return '';
     const title = encodeURIComponent(s.title + (s.with ? ` (with ${s.with})` : ''));
@@ -459,6 +465,8 @@ function showRow(s, artist, data, isUpcoming = false) {
     if (isUpcoming) {
         if (isToday) {
             badgeHtml = `<span class="tonight-badge"><i class="fas fa-bolt" aria-hidden="true"></i> Tonight</span>`;
+        } else if (isTomorrow(d, now)) {
+            badgeHtml = `<span class="tomorrow-badge"><i class="fas fa-calendar-day" aria-hidden="true"></i> Tomorrow</span>`;
         } else {
             badgeHtml = `<span class="upcoming-badge">Upcoming</span>`;
         }
