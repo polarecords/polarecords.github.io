@@ -35,21 +35,23 @@ Single source of truth for cross-session continuity.
 
 ### 2026-11-03 — Antigravity CLI
 
-**Upcoming Performance & Facebook Event / RSVP / Check-in Integration:**
+**Upcoming Performance, Calendar Export & Cross-Page Site Completeness:**
 - **New Upcoming Performance Added (Tonight, Nov 3, 2026):**
   - Event: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz (headliner) with Guntram and John Polar (openers).
   - Time & Admission: 7–10 PM · $10 · 21+ at 2514 10th Ave. S., Birmingham, AL.
   - Flyer: Copied full flyer from user pictures to `assets/flyer_20261103.jpg` and created optimized 720px thumbnail in `assets/thumbs/flyer_20261103.jpg`.
-  - Linked flyer in `database.json`'s `media` list and added event to `database.json`'s `shows` and `posts`.
-- **Upcoming Performance UX:**
-  - Upcoming shows automatically display at the top under "Catch us live" on Home and John Polar pages.
-  - Active upcoming show rows start expanded by default so visitors immediately see the poster, lineup, time, cover, RSVP button, and venue details.
-  - Dynamic "Tonight" glowing badge (`.tonight-badge`) with lightning bolt indicator for same-day shows.
+  - Linked flyer in `database.json`'s `media` list and added event to `database.json`'s `shows` (tagged `["john", "polaraf"]` so it appears on all artist and home pages) and `posts`.
+- **Universal Add to Calendar Integration (.ics & Google Calendar):**
+  - **Client-Side .ics Generator (`.ics-pill` / `downloadIcsFile`):** Full RFC 5545 iCalendar standard generation for native Apple Calendar (iOS/macOS), Android calendar apps, Samsung Calendar, and Outlook with accurate start/end times (`America/Chicago`), address, and RSVP links.
+  - **Show Actions:** Both Google Calendar web links and direct `.ics` download buttons are available on all show dropdowns.
+  - **Weekly Residency Calendar Action:** The Birmingham Bandstand strip card on Home, John Polar, and PolarAF pages now features direct "Google Calendar" and "Add to Calendar (.ics)" action buttons for the upcoming Monday session.
+- **Cross-Page Consistency & Verified Phone Knowledge:**
+  - `polaraf.html` updated with `#residency` block and upcoming show section so all artist pages maintain structural parity with Home and John Polar.
+  - Verified past show entries updated with Guntram co-bill notes from archive records: 2026-03-24 (joined Guntram set at The Nick), 2025-05-08 (with Guntram & friends at True Story), 2025-08-12 (8 PM show at The Nick).
 - **Facebook Event & Check-In Integration:**
   - **Direct Facebook RSVP Button (`.fb-pill`):** Direct link to `https://www.facebook.com/events/2059285578058333/` for instant one-tap RSVP (Interested / Going).
   - **Venue Check-in Button (`.fb-checkin-pill`):** Direct link to The Nick Rocks Facebook page (`https://www.facebook.com/thenickrocks`) for visitor check-ins.
-  - **Add to Calendar Button (`.cal-pill`):** Generates pre-filled Google Calendar event with exact show times, venue address, lineup details, and RSVP links.
-  - **Tap-to-Load Facebook Event Embed:** Added lightweight click-to-load Facebook widget button (`.fb-load-btn`) that dynamically embeds the Facebook event plugin iframe inside the accordion dropdown, respecting visitor privacy until activated.
+  - **Tap-to-Load Facebook Event Embed:** Added lightweight click-to-load Facebook widget button (`.fb-load-btn`) that dynamically embeds the Facebook event plugin iframe inside the accordion dropdown, respecting visitor privacy until activated without slowing initial page loads.
 - **Service Worker:** Bumped cache version to `polarecords-cache-v7` in `sw.js`.
 
 ### 2026-11-02 — Antigravity CLI

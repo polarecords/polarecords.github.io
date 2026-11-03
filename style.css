@@ -617,6 +617,26 @@ blockquote cite { display: block; margin-top: 8px; font: 400 13px/1.4 var(--mono
     border-color: #4285f4;
     color: #4285f4;
 }
+.show-link-pill.ics-pill {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    font-family: inherit;
+}
+.show-link-pill.ics-pill i {
+    color: var(--amber);
+}
+.show-link-pill.ics-pill:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: var(--bg-raised);
+}
+.residency-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
 
 .fb-embed-section {
     margin-top: 14px;
