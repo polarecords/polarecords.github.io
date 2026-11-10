@@ -45,8 +45,16 @@ Single source of truth for cross-session continuity.
   - Added milestone for `2025-02-17` ("The Name's Polar. John Polar." relaunch & announcement).
   - Recovered and optimized high-resolution Instagram Story flyer asset for the Nov 3, 2026 show (`assets/flyer_story_20261103.jpg` and thumbnail), featuring Blair Duluoz, Guntram, and John Polar at The Nick.
   - Added story flyer to `database.json` media registry, enabling multi-card fanned preview on the past show entry and gallery inclusion.
+- **Metadata & Persona Alignment:**
+  - Removed remaining PolarAF mentions in meta descriptions across `index.html`, `john.html`, and `media.html` in favor of John Polar's singer-songwriter focus.
+  - Marked `Archive` as `aria-current="page"` on `media.html` for navigation clarity.
+- **Terminal Easter Egg Sync:**
+  - Updated `easteregg.html` retro terminal log streams with latest shows (`2026.11.03`, `2026.10.13`, `2026.09.10`) and featured the new show flyers in the decrypt visual fragment registry.
+- **Typography & Lightbox Polish:**
+  - Widened `.quote blockquote` constraints from restrictive `30ch` to flexible `clamp(32ch, 100%, 50ch)` with tailored font sizing so community testimonials read cleanly without excessive vertical height.
+  - Standardized lightbox opening across `renderTimeline` to use `openLightbox()` and `setupLightbox()`.
 - **Cache & Performance:**
-  - Bumped Service Worker cache version to `polarecords-cache-v10`.
+  - Bumped Service Worker cache version to `polarecords-cache-v11`.
 
 ### 2026-11-03 — Antigravity CLI
 

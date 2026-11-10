@@ -911,19 +911,13 @@ function renderTimeline(data) {
     }
 
     // Pictures open in the shared lightbox
-    const box = document.getElementById('lightbox');
+    setupLightbox();
     el.addEventListener('click', e => {
         const b = e.target.closest('.tl-pic');
-        if (!b || !box) return;
-        box.querySelector('img').src = b.dataset.src;
-        box.querySelector('img').alt = b.querySelector('img').alt;
-        box.querySelector('figcaption').textContent = b.dataset.caption;
-        box.hidden = false;
+        if (!b) return;
+        const img = b.querySelector('img');
+        openLightbox(b.dataset.src, img ? img.alt : '', b.dataset.caption || '');
     });
-    if (box && !document.getElementById('media-grid')) {
-        box.addEventListener('click', () => { box.hidden = true; });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') box.hidden = true; });
-    }
 
     draw();
 }
