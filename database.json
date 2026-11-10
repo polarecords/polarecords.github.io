@@ -73,9 +73,26 @@
             "date": "2025-11-30",
             "title": "polarecords.net goes up",
             "text": "First version of the site: one line, \"Official website coming soon.\""
+        },
+        {
+            "date": "2025-02-17",
+            "title": "The Name's Polar. John Polar.",
+            "text": "Official artist announcement and relaunch of @thejohnpolar: 'Prepare to see and hear the sounds of my revival.'"
         }
     ],
     "shows": [
+        {
+            "date": "2026-11-09",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "time": "Sign-up 7:00 PM · Music 8:00 PM–2:00 AM",
+            "artists": [
+                "john"
+            ],
+            "source": "phone",
+            "note": "Monday open mic residency session at The Nick."
+        },
         {
             "date": "2026-11-03",
             "title": "Birmingham Songwriter Nights at The Nick",
@@ -86,14 +103,35 @@
             "age": "21+",
             "with": "Blair Duluoz (Featured Headliner), Guntram (Opener)",
             "artists": [
-                "john",
-                "polaraf"
+                "john"
             ],
             "note": "Birmingham Songwriter Nights at The Nick. Featured Headliner: Blair Duluoz. Openers: Guntram, John Polar. 7–10 PM · $10 · 21+.",
             "link": "https://www.facebook.com/events/2059285578058333/",
             "linkText": "Facebook Event & RSVP",
             "facebookEvent": "https://www.facebook.com/events/2059285578058333/",
             "venueFacebook": "https://www.facebook.com/thenickrocks"
+        },
+        {
+            "date": "2026-10-26",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "artists": [
+                "john"
+            ],
+            "source": "phone",
+            "note": "Monday open mic residency session at The Nick."
+        },
+        {
+            "date": "2026-10-19",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "artists": [
+                "john"
+            ],
+            "source": "phone",
+            "note": "Monday open mic residency session at The Nick."
         },
         {
             "date": "2026-10-13",
@@ -155,8 +193,7 @@
             "venue": "True Story Brewing Co.",
             "with": "Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, Skylar Phillips, Leesus Cries, Slap Out",
             "artists": [
-                "john",
-                "polaraf"
+                "john"
             ]
         },
         {
@@ -165,8 +202,7 @@
             "venue": "The Nick",
             "with": "George Scherer, E. Bailey, Guntram Anderlik",
             "artists": [
-                "john",
-                "polaraf"
+                "john"
             ]
         },
         {
@@ -311,8 +347,7 @@
             "venue": "True Story Brewing Co.",
             "with": "Guntram & friends",
             "artists": [
-                "john",
-                "polaraf"
+                "john"
             ],
             "note": "Gig number two. With Guntram Anderlik and friends, 7–10 PM, $10 cover."
         },
@@ -337,6 +372,28 @@
             "source": "phone"
         },
         {
+            "date": "2024-09-23",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "artists": [
+                "john"
+            ],
+            "source": "notes",
+            "note": "Bandstand session at The Nick with Alex & Friends."
+        },
+        {
+            "date": "2024-06-17",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "address": "2514 10th Ave. S., Birmingham, AL 35205",
+            "artists": [
+                "john"
+            ],
+            "source": "notes",
+            "note": "Bandstand open mic set featuring Movin' & Groovin' and Kendrick cover."
+        },
+        {
             "date": "2023-02-06",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
@@ -346,15 +403,6 @@
             ],
             "source": "phone",
             "note": "Earliest open mic on record."
-        },
-        {
-            "date": "",
-            "title": "Live session",
-            "venue": "Voodoo Lounge",
-            "with": "",
-            "artists": [
-                "polaraf"
-            ]
         }
     ],
     "videos": [
@@ -422,6 +470,13 @@
             "date": "2026-11-03",
             "alt": "Flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz, with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+. 2514 10th Ave. S., Birmingham, AL",
             "caption": "Songwriter Nights at The Nick, Nov 3, 2026"
+        },
+        {
+            "src": "assets/flyer_story_20261103.jpg",
+            "thumb": "assets/thumbs/flyer_story_20261103.jpg",
+            "date": "2026-11-03",
+            "alt": "Instagram Story flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+.",
+            "caption": "Songwriter Nights at The Nick (Story Flyer), Nov 3, 2026"
         },
         {
             "src": "assets/flyer_20261013.jpg",
