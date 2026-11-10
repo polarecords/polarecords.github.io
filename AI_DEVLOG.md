@@ -53,8 +53,15 @@ Single source of truth for cross-session continuity.
 - **Typography & Lightbox Polish:**
   - Widened `.quote blockquote` constraints from restrictive `30ch` to flexible `clamp(32ch, 100%, 50ch)` with tailored font sizing so community testimonials read cleanly without excessive vertical height.
   - Standardized lightbox opening across `renderTimeline` to use `openLightbox()` and `setupLightbox()`.
+- **Authentic Voice & Lyrical Perspective Infusion:**
+  - Analyzed recent voice memos, lyric notebooks, and artist statements (*Polar Social Intro*, *Static Buzz*, *Manvolves' Mourning Dove* reflections).
+  - Rewrote hero and artist spotlight copy on `index.html` and bio on `john.html` in John's authentic, grounded, first-person voice (*"Becoming something new, and simultaneously becoming everything I've ever been"*).
+  - Added John Polar's artist statement quote to `database.json` quotes registry alongside Guntram Anderlik's and Birmingham Songwriter Nights' testimonials.
+- **SSL / Dual-Domain SAN Certificate Provisioning:**
+  - Resolved `NET::ERR_CERT_COMMON_NAME_INVALID` error (where Chrome Canary visiting `www.polarecords.net` was served generic `*.github.io` fallback).
+  - Updated `CNAME` in repo and GitHub Pages to `www.polarecords.net`, initiating Let's Encrypt joint SAN certificate generation covering both `www.polarecords.net` and `polarecords.net`.
 - **Cache & Performance:**
-  - Bumped Service Worker cache version to `polarecords-cache-v11`.
+  - Bumped Service Worker cache version to `polarecords-cache-v12`.
 
 ### 2026-11-03 — Antigravity CLI
 
