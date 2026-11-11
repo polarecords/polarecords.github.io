@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Add new @thejohnpolar uploads to database.json from the channel's public RSS feed.
 
-Existing entries (and their artist tags) are left alone; only unseen video IDs are
-added. Titles mentioning "freestyle" are tagged PolarAF, everything else John Polar.
+Existing entries are left alone; only unseen video IDs are added.
 The feed only lists the latest 15 uploads, so run it regularly (the GitHub Action
 does this weekly).
 """
@@ -10,6 +9,7 @@ import json, re, sys, urllib.request
 from pathlib import Path
 
 CHANNEL_ID = 'UC_1_DnmZ-2uQdvtQQ48jnJQ'  # youtube.com/@thejohnpolar
+SKIP_IDS = {'C9v_wpbpG_M', '269iu4AWOBQ', 'YvG4pQ7og1o'}
 DB = Path(__file__).resolve().parent.parent / 'database.json'
 
 
@@ -19,11 +19,12 @@ def fetch_feed():
         xml = r.read().decode()
     for entry in re.findall(r'<entry>(.*?)</entry>', xml, re.S):
         vid = re.search(r'<yt:videoId>(.*?)</yt:videoId>', entry).group(1)
+        if vid in SKIP_IDS:
+            continue
         title = re.search(r'<title>(.*?)</title>', entry).group(1)
         title = title.replace('&amp;', '&').replace('&quot;', '"').replace('&#39;', "'")
         date = re.search(r'<published>(.*?)</published>', entry).group(1)[:10]
-        yield {'id': vid, 'date': date, 'title': title,
-               'artists': ['polaraf'] if 'freestyle' in title.lower() else ['john']}
+        yield {'id': vid, 'date': date, 'title': title}
 
 
 def main():

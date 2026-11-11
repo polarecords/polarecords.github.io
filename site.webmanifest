@@ -1,7 +1,7 @@
 {
     "name": "PolaRecords",
     "short_name": "PolaRecords",
-    "description": "Independent label in Birmingham, Alabama",
+    "description": "John Polar · Birmingham, Alabama. Making sense of the madness through the music.",
     "icons": [
         {
             "src": "assets/icon-192.png",
@@ -14,8 +14,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#0f0c0a",
-    "background_color": "#0f0c0a",
+    "theme_color": "#0c0a08",
+    "background_color": "#0c0a08",
     "display": "standalone",
     "orientation": "portrait",
     "start_url": "./index.html",
