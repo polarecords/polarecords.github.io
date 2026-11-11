@@ -209,3 +209,5 @@ body::before {
 /* Theme Overrides (Dynamic JS injection) */
 .theme-polaraf { --primary: #ff0000; --bg: #1a0000; }
 .theme-polarband { --primary: #ffffff; --bg: #000000; }
+.theme-project { --primary: #aeb2d2; --bg: #090a10; }
+.theme-rebe { --primary: #e06d2b; --bg: #0c0a08; }
