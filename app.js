@@ -364,6 +364,37 @@ async function loadData() {
     if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }
 
+// ─── Easter egg trigger: key sequence 'polar', '~', or 5 taps on the logo ──
+(function setupEasterEggTrigger() {
+    let keyBuffer = '';
+    window.addEventListener('keydown', e => {
+        if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+        if (e.key === '`' || e.key === '~') {
+            window.location.href = 'easteregg.html';
+            return;
+        }
+        keyBuffer = (keyBuffer + e.key.toLowerCase()).slice(-5);
+        if (keyBuffer === 'polar') {
+            window.location.href = 'easteregg.html';
+        }
+    });
+
+    let logoClicks = 0;
+    let logoTimer = null;
+    document.addEventListener('click', e => {
+        const logo = e.target.closest('.site-header .logo');
+        if (!logo) return;
+        logoClicks++;
+        clearTimeout(logoTimer);
+        if (logoClicks >= 5) {
+            e.preventDefault();
+            window.location.href = 'easteregg.html';
+        } else {
+            logoTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+        }
+    });
+})();
+
 document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', () => { observeReveals(); loadData(); });
 

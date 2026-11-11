@@ -33,6 +33,27 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-11 (Part 2) — Antigravity CLI
+
+**Five-Year Lore Integration, ReBe Loves Galleries & Retro Terminal Polish:**
+- **Google Keep & Half-Decade Archival Extraction:**
+  - Analyzed 425 Keep notes matching polar, music, stylization, and philosophy from the 2,320-note Obsidian export.
+  - Verified project genesis: early songwriting & freestyle sessions in 2019, concept formalization June 30, 2020 as `Pølarbær` ("Vocals. The mind."), progressing to `PolarX` ("The vibe") and `PolarAF`.
+  - Confirmed 1,633 voice notes and demo recordings in `/storage/emulated/0/Recordings/Voice Recorder` matching the "over 1,000 songs recorded" milestone.
+  - Extracted core philosophy and stylization: *"To escape the noise in your mind and in your life you must first be quiet"*, *"There's a method to the madness 'til the methods fade away... making sense of the madness through the music"*, and persona meaning behind the hat and glasses ("not hiding who I am, but stepping into the character").
+- **John Polar Profile Refinement (`john.html`):**
+  - Added quiet, understated prose describing the five-year path from 2019 to present, the 1,000+ voice recordings, and the transition into character.
+- **Terminal Easter Egg Overhaul (`easteregg.html` & `terminal.css`):**
+  - Upgraded header and prompt to authentic stylizations: `PØLARECØRDS_OS_v2.5.0 // THE_POLAR_PROJECT` and `guest@PølaRecørds:~$`.
+  - Added `project` / `lore` command featuring the authentic 2019–2026 timeline and Keep philosophy extract.
+  - Added `rebe` / `photos` command celebrating collaborator & stage photographer ReBe Loves (@through_rebeseyes / Pixieset) with links to her 7 Birmingham galleries.
+  - Added ReBe's live stage shots (`photo_rebe_20260628.jpg`, `photo_rebe_202605_sunglasses.jpg`, `photo_rebe_202605_profile.jpg`, `photo_rebe_20250701_guitar.jpg`) to the terminal `media` archive alongside the show flyers.
+  - Styled new themes `.theme-project` (using John's `#090A10` dark navy and `#aeb2d2` whiteish palette) and `.theme-rebe` (stage amber).
+- **Easter Egg Discovery Triggers (`app.js`):**
+  - Added listeners to trigger `/easteregg.html` via typing `polar` anywhere on page, pressing backtick/tilde (`~`), or tapping the header hat logo 5 times in quick succession.
+- **HTTPS & Remote Sync:**
+  - Fixed apex HTTPS configuration for `polarecords.net`, cleared edge redirect, and bumped Service Worker to `polarecords-cache-v18`.
+
 ### 2026-11-11 — Antigravity CLI
 
 **De-bloating, Mysterious Direction & Google Photos / Video / Audio Show Analysis:**
