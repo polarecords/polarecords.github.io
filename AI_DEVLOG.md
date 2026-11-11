@@ -33,6 +33,24 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-11 (Part 4) — Antigravity CLI
+
+**Thumbnail Positioning & Aspect Ratio Optimization Across Site & Terminal:**
+- **Video Card Framing (`.video-thumb`, `.tl-video`, `.tl-clip`):**
+  - Resolved decapitation/cropping on 9:16 vertical video posters (`live_clip.jpg`, `video_20250701.jpg`) displayed in 16:9 `.video-thumb` cards by targeting `.video-thumb.is-vertical img` with `object-position: center 22%`, preserving John Polar's fedora, face, and microphone.
+  - Upgraded YouTube video thumbnails in timeline cards to `hqdefault.jpg` with `object-fit: cover; object-position: center center;`, cleanly stripping top/bottom letterbox bars on retina displays.
+  - Added subtle hover borders and micro-zoom effects (`transform: scale(1.03)`) consistent with the dark aesthetic.
+- **Media Archive & Timeline Photos (`media.html`, `archive.html`, `app.js`, `style.css`):**
+  - Implemented dynamic media category tagging (`getMediaCategory`: `flyer`, `stage`, `landscape`).
+  - Flyers & Marquee photos (`is-flyer`): styled with `object-position: top center;` so event headlines, venue names, and dates remain clearly readable.
+  - Stage Photography (`is-stage`, ReBe Loves gallery): styled with `object-position: center 20%;` so John's fedora and face are in the top-third and guitar/hands remain visible without being shoved off the bottom.
+  - Horizontal Photos (`is-landscape`, `photo_20250602_*`): styled with true `aspect-ratio: 4 / 3; object-position: center center;` instead of forcing them into 4:5 vertical boxes that chopped off 40% of the stage.
+- **Retro Terminal Visual Gallery (`easteregg.html`, `terminal.css`):**
+  - Added complete responsive styling for `.media-grid`, `.art-fragment`, and `.art-label` directly in `terminal.css`.
+  - Configured cyber-CRT scanline filter effects with `object-position: center 20%` for stage fragments and `top center` for decrypted flyer fragments.
+- **Service Worker Cache:**
+  - Bumped cache to `polarecords-cache-v20` in `sw.js`.
+
 ### 2026-11-11 (Part 3) — Antigravity CLI
 
 **Bandstand Live Audio Archive, Set Trims, Preview Clips & Section Cue Markers:**

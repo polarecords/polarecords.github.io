@@ -69,10 +69,11 @@ function renderVideos(videos) {
     el.innerHTML = videos.slice(0, limit).map(v => {
         const d = parseDate(v.date);
         const thumb = v.poster || `https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg`;
+        const isVertical = Boolean(v.poster && /live_clip|video_20250701/.test(v.poster));
         return `
         <figure class="video" data-reveal>
-            <button type="button" class="video-thumb" data-id="${esc(v.id || '')}" data-src="${esc(v.src || '')}" data-poster="${esc(v.poster || '')}" data-start="${esc(v.start || '')}" aria-label="Play: ${esc(v.title)}">
-                <img src="${esc(thumb)}" alt="" loading="lazy">
+            <button type="button" class="video-thumb ${isVertical ? 'is-vertical' : 'is-youtube'}" data-id="${esc(v.id || '')}" data-src="${esc(v.src || '')}" data-poster="${esc(v.poster || '')}" data-start="${esc(v.start || '')}" aria-label="Play: ${esc(v.title)}">
+                <img src="${esc(thumb)}" alt="${esc(v.title)}" loading="lazy">
                 <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
             </button>
             <figcaption>
@@ -281,20 +282,30 @@ function setupLightbox() {
     });
 }
 
+function getMediaCategory(src) {
+    if (!src) return 'stage';
+    if (/photo_20250602/.test(src)) return 'landscape';
+    if (/flyer|marquee|20260623/.test(src)) return 'flyer';
+    return 'stage';
+}
+
 // ─── Media grid + lightbox ───────────────────────────────────────────────────
 function renderMedia(media) {
     const grid = document.getElementById('media-grid');
     if (!grid || !media) return;
     const limit = Number(grid.dataset.limit) || media.length;
 
-    grid.innerHTML = media.slice(0, limit).map((m, i) => `
-        <figure class="media-item" data-reveal>
+    grid.innerHTML = media.slice(0, limit).map((m, i) => {
+        const cat = getMediaCategory(m.src);
+        return `
+        <figure class="media-item is-${cat}" data-type="${cat}" data-reveal>
             <button type="button" data-index="${i}" aria-label="Open: ${esc(m.caption)}">
                 <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
             </button>
             <figcaption>${esc(m.caption)}${m.credit ? ` <span class="muted">· photo ${m.creditUrl ? `<a href="${esc(m.creditUrl)}" target="_blank" rel="noopener">${esc(m.credit)}</a>` : esc(m.credit)}</span>` : ''}</figcaption>
         </figure>
-    `).join('');
+    `;
+    }).join('');
 
     setupLightbox();
     grid.addEventListener('click', e => {
@@ -375,13 +386,16 @@ function timelineEntry(it) {
     const k = KIND[it.kind] || { label: 'Item', icon: 'fa-circle' };
     const hasVideo = Boolean(it.kind === 'video' || it.video || it.clip);
     const hasPhoto = Boolean(it.kind === 'photo' || (it.pics && it.pics.length));
-    const pics = (it.pics || []).map(m => `
-        <button type="button" class="tl-pic" data-src="${esc(m.src)}" data-caption="${esc(m.caption + (m.credit ? ` · photo ${m.credit}` : ''))}" aria-label="Open: ${esc(m.caption)}">
+    const pics = (it.pics || []).map(m => {
+        const cat = getMediaCategory(m.src);
+        return `
+        <button type="button" class="tl-pic is-${cat}" data-type="${cat}" data-src="${esc(m.src)}" data-caption="${esc(m.caption + (m.credit ? ` · photo ${m.credit}` : ''))}" aria-label="Open: ${esc(m.caption)}">
             <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
-        </button>`).join('');
+        </button>`;
+    }).join('');
     const video = it.video ? `
-        <a class="tl-video" href="https://www.youtube.com/watch?v=${esc(it.video)}" target="_blank" rel="noopener">
-            <img src="https://i.ytimg.com/vi/${esc(it.video)}/mqdefault.jpg" alt="" loading="lazy">
+        <a class="tl-video" href="https://www.youtube.com/watch?v=${esc(it.video)}" target="_blank" rel="noopener" aria-label="Watch video: ${esc(it.title)}">
+            <img src="https://i.ytimg.com/vi/${esc(it.video)}/hqdefault.jpg" alt="${esc(it.title)}" loading="lazy">
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </a>` : '';
     const audio = it.audioItem ? `
