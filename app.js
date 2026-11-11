@@ -1,3 +1,13 @@
+// Ensure HTTPS and canonical domain (polarecords.net)
+(function() {
+    if (typeof location === 'undefined') return;
+    const h = location.hostname;
+    if (h === 'localhost' || h === '127.0.0.1') return;
+    if (location.protocol === 'http:' || h.startsWith('www.')) {
+        location.replace('https://polarecords.net' + location.pathname + location.search + location.hash);
+    }
+})();
+
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

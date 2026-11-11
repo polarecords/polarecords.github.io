@@ -212,6 +212,8 @@ body::before {
 .theme-project { --primary: #aeb2d2; --bg: #090a10; }
 .theme-rebe { --primary: #e06d2b; --bg: #0c0a08; }
 .theme-audio { --primary: #6fd6c8; --bg: #031a16; }
+.theme-memos { --primary: #ffd166; --bg: #141108; }
+.theme-philosophy { --primary: #06d6a0; --bg: #041410; }
 
 /* Media & Art Fragments in Retro Terminal */
 .media-grid {
