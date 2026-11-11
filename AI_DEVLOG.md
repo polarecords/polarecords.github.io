@@ -33,6 +33,30 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-11 (Part 3) — Antigravity CLI
+
+**Bandstand Live Audio Archive, Set Trims, Preview Clips & Section Cue Markers:**
+- **Live Audio Discovery & Inspection:**
+  - Audited on-device recordings across Monday Bandstand nights (The Nick, 8PM–2AM) and Tuesday Songwriter Nights.
+  - Selected 5 standout historical nights:
+    1. `2026-10-26`: Bandstand w/ Gatsby (`Voice 261026_184524.m4a`).
+    2. `2026-09-28`: Bandstand Acoustic Guitar set (`Voice 260928_233130.m4a`).
+    3. `2026-08-18`: Bandstand Live Stage Jam (`Voice 260818_012712.m4a`).
+    4. `2026-07-28`: Bandstand Late-Night vocal set (`Voice 260728_020759.m4a`).
+    5. `2023-01-24`: Genesis open mic set at The Nick (`open mic @ the nick [Voice 342 - edit].m4a`).
+- **Precision Trimming & Preview Clip Generation:**
+  - Removed all pre-set setup noise, mic checks, bar chatter, and post-set ambient room audio.
+  - Applied subtle 0.5s fade-ins and 1.0s fade-outs to prevent boundary pops.
+  - Exported 5 trimmed full sets (`assets/audio/*_set.m4a`) and 5 preview clips (`assets/audio/*_preview.m4a`) totaling ~27 MB.
+- **Section Markers & Cue Points:**
+  - Added timestamped markers for key musical and lyrical moments (e.g. `[0:00 Beat In]`, `[5:35 Climax: Make It Make Sense]`, `[0:12 Distraction Brings Attraction]`, `[1:30 Fingerpicking Shift]`).
+  - Added interactive marker pills: clicking any marker immediately jumps the audio player to that cue point.
+- **UI Player & Timeline Integration:**
+  - Added `#bandstand-archives` section to `john.html` with preview buttons, full set toggles, and cue pills.
+  - Integrated `audio` as a first-class timeline item type (`KIND.audio`) in `archive.html`.
+  - Added `audio` command to retro terminal (`easteregg.html`) with inline preview streams.
+  - Bumped service worker cache to `polarecords-cache-v19`.
+
 ### 2026-11-11 (Part 2) — Antigravity CLI
 
 **Five-Year Lore Integration, ReBe Loves Galleries & Retro Terminal Polish:**
