@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script>if(location.hostname!=='localhost'&&location.hostname!=='127.0.0.1'&&(location.protocol==='http:'||location.hostname.startsWith('www.')))location.replace('https://polarecords.net'+location.pathname+location.search+location.hash);</script>
     <meta name="color-scheme" content="dark">
     <meta name="darkreader-lock">
     <meta name="robots" content="noindex, nofollow">
@@ -357,6 +359,60 @@
                     <a href="https://www.facebook.com/thejohnpolar" target="_blank" class="nav-link" style="margin-top:0; padding: 5px 10px;">Facebook</a>
                 </div>
 
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>`,
+
+            memos: `
+                <div class="output-line"><span class="highlight">VOICE NOTE ARCHIVES // 2020–2026 DEVELOPMENT PROTOCOL</span></div>
+                <div class="output-line">"Over 1,600 voice memos, freestyle sessions, and late-night recordings."</div>
+                <div class="output-line">------------------------------------</div>
+
+                <div class="log-stream">
+                    <div class="log-entry">
+                        <span class="log-time">VOICE 223 // GENESIS</span>
+                        <span class="log-msg highlight">"Snowy Skies" — Early Flight Recording (Pre-Rec ATL Airport)</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">VOICE 559 // IDENTITY</span>
+                        <span class="log-msg">"Who I Am" — Melodic Vocal Arcs & Airport Cadences</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">VOICE 590 // TURNING POINT</span>
+                        <span class="log-msg highlight">"Pain · Strain · Disdain" — "Tired of the rage, this is your stage."</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">VOICE 672 // FREESTYLE</span>
+                        <span class="log-msg">Raw Acoustic Melody & Vocal Sketches</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">VOICE 751 // MOVEMENT</span>
+                        <span class="log-msg">"Move (Groove)" / "Davy Jones Rap"</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">DEVELOPMENT ERAS</span>
+                        <span class="log-msg">XC Travel → Uber Nights → Auctioneer's Assistant → Birmingham Bandstand</span>
+                    </div>
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">ARCHIVE REGISTER: Verified across 1,633 local catalogued audio files.</div>
+                <div class="back-btn" onclick="show('home')">[ Back ]</div>`,
+
+            philosophy: `
+                <div class="output-line"><span class="highlight">POLAR PHILOSOPHY & MANIFESTO</span></div>
+                <div class="output-line">"To escape the noise in your mind and in your life you must first be quiet."</div>
+                <div class="output-line">------------------------------------</div>
+
+                <div style="background: rgba(111, 214, 200, 0.05); border-left: 2px solid var(--primary); padding: 14px 18px; margin: 14px 0; font-size: 14px; line-height: 1.7;">
+                    "Time. Peace. Patience. Tranquility. Stillness. Quiet.<br><br>
+                    Synchronicity is taking shape — the patterns and parallels have run their course.
+                    We reached a crossroads, and it became time to see where the music could go.
+                    The hat and dark sunglasses mark the transition from everyday noise into the character:
+                    making room for contrast, raw sound, and authentic expression.<br><br>
+                    Just a guy making sense of the madness through the music."
+                </div>
+
+                <div class="output-line">------------------------------------</div>
+                <div class="output-line">AUTHOR: <span class="highlight">John Polar / thejaustin</span></div>
                 <div class="back-btn" onclick="show('home')">[ Back ]</div>`
         };
 
@@ -429,6 +485,12 @@
                 history: 'project',
                 audio: 'audio',
                 tracks: 'audio',
+                memos: 'memos',
+                voicenotes: 'memos',
+                notes: 'memos',
+                philosophy: 'philosophy',
+                quotes: 'philosophy',
+                manifesto: 'philosophy',
                 rebe: 'rebe',
                 photos: 'rebe',
                 polaraf: 'polaraf',
@@ -437,7 +499,7 @@
             };
 
             if (command === 'help') {
-                await typeResponse('AVAILABLE COMMANDS: home, john, project, audio, rebe, polaraf, band, media, clear, whoami, sudo override');
+                await typeResponse('AVAILABLE COMMANDS: home, john, project, audio, memos, philosophy, rebe, polaraf, band, media, clear, whoami, sudo override');
             } else if (commands[command]) {
                 show(commands[command]);
             } else if (command === 'clear') {

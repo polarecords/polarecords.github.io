@@ -33,6 +33,20 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-11 (Part 5) — Antigravity CLI
+
+**HTTPS Canonical Domain Enforcement & Google Keep Half-Decade Lore Integration:**
+- **HTTPS & Domain Security (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`, `app.js`):**
+  - Identified root cause of Chrome's red crossed-out HTTPS warning: `https_enforced` is `false` on GitHub Pages (`html_url: "http://polarecords.net/"`), and `https://www.polarecords.net` serves a `*.github.io` certificate resulting in `NET::ERR_CERT_COMMON_NAME_INVALID`.
+  - Added `<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">` across all `<head>` tags to force all navigations and subresources to HTTPS.
+  - Added instant inline pre-render `<script>` redirect in `<head>` and `app.js` that catches non-HTTPS (`http:`) and `www.` traffic, immediately bouncing users to canonical `https://polarecords.net` before browser warnings or insecure assets can display.
+- **Google Keep Lore & Half-Decade Archive Synthesis (`easteregg.html`, `terminal.css`):**
+  - Located Austin's authentic Obsidian/Google Keep development archive (`/storage/emulated/0/Documents/Obsidian/Google Keep`).
+  - Catalogued key notes: `Polar Social Intro v3 [Final]` (transition to John Polar), `The Polar Project (Making Progress)` (2020+ eras: XC Travel, Uber, College, Auctioneer's Assistant, OilLife), `Polarz Philosophical Madness` ("to escape the noise in your mind and in your life you must first be quiet..."), and `Potential Polar Pieces 4 John` (voice memos `Voice 223 snowy skies`, `who i am v559`, `Voice 590`, `Voice 672`, `Voice 751`).
+  - Added new retro terminal commands `memos` (or `voicenotes`) and `philosophy` (or `manifesto`) with dedicated CRT color themes (`.theme-memos`, `.theme-philosophy`).
+- **Service Worker Cache:**
+  - Bumped to `polarecords-cache-v21` in `sw.js`.
+
 ### 2026-11-11 (Part 4) — Antigravity CLI
 
 **Thumbnail Positioning & Aspect Ratio Optimization Across Site & Terminal:**
