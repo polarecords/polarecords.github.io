@@ -1,155 +1,44 @@
 {
-    "residency": {
-        "name": "Birmingham Bandstand",
-        "kind": "Open mic",
-        "venue": "The Nick",
-        "city": "Birmingham, AL",
-        "url": "https://www.thenickrocks.com/",
-        "day": 1,
-        "signup": "7 PM",
-        "show": "8 PM",
-        "end": "2 AM",
-        "admission": "21+. $4.60 cover. Bring ID and a Nick membership card ($5 a year)."
-    },
-    "quotes": [
-        {
-            "text": "John Polar has a way of making a room feel like it stumbled into something rare. His set at True Story Thursday had that strange, beautiful thing good songs have, where it feels personal but everybody in the room can still find themselves in it.",
-            "by": "Guntram Anderlik",
-            "role": "Songwriter, True Story Songwriter Nights",
-            "url": "https://www.facebook.com/guntram/posts/john-polar-has-a-way-of-making-a-room-feel-like-it-stumbled-into-something-rareh/10243480721822288/",
-            "artists": [
-                "john"
-            ]
-        },
-        {
-            "text": "Thoughtful, creative original songwriting.",
-            "by": "Birmingham Songwriter Nights",
-            "role": "Dave's Pub lineup, Oct 13, 2026",
-            "url": "https://www.instagram.com/p/DeckFCDhmEW/",
-            "artists": [
-                "john"
-            ]
-        },
-        {
-            "text": "I'm becoming something new, and simultaneously becoming everything I've ever been... grounded back on earth, making music that defines my moments.",
-            "by": "John Polar",
-            "role": "Artist statement",
-            "artists": [
-                "john"
-            ]
-        }
-    ],
-    "posts": [
-        {
-            "url": "https://www.facebook.com/events/2059285578058333/",
-            "date": "2026-11-03",
-            "by": "Birmingham Songwriter Nights",
-            "about": "Songwriter night at The Nick featuring Blair Duluoz with John Polar & Guntram",
-            "platform": "facebook",
-            "artists": [
-                "john"
-            ]
-        },
-        {
-            "url": "https://www.instagram.com/p/DeckFCDhmEW/",
-            "date": "2026-10-13",
-            "by": "@bhm_songwriternights",
-            "about": "Songwriter night at Dave's Pub",
-            "artists": [
-                "john"
-            ]
-        },
-        {
-            "url": "https://www.instagram.com/p/Dc1ZHHONqHN/",
-            "date": "2026-09-10",
-            "by": "@bhm_songwriternights",
-            "about": "Songwriter night at True Story Brewing",
-            "artists": [
-                "john"
-            ]
-        }
-    ],
-    "milestones": [
-        {
-            "date": "2026-11-01",
-            "title": "New site",
-            "text": "polarecords.net gets its current look.",
-            "link": "archive/terminal-2026/index.html",
-            "linkText": "See the old one"
-        },
-        {
-            "date": "2025-11-30",
-            "title": "polarecords.net goes up",
-            "text": "First version of the site: one line, \"Official website coming soon.\""
-        },
-        {
-            "date": "2025-02-17",
-            "title": "The Name's Polar. John Polar.",
-            "text": "Official artist announcement and relaunch of @thejohnpolar: 'Prepare to see and hear the sounds of my revival.'"
-        }
-    ],
     "shows": [
         {
             "date": "2026-11-09",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "time": "Sign-up 7:00 PM · Music 8:00 PM–2:00 AM",
-            "artists": [
-                "john"
-            ],
-            "source": "phone",
-            "note": "Monday open mic residency session at The Nick."
+            "source": "phone"
         },
         {
             "date": "2026-11-03",
-            "title": "Birmingham Songwriter Nights at The Nick",
+            "title": "Songwriter Nights",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "time": "7:00 PM – 10:00 PM",
-            "cover": "$10",
-            "age": "21+",
-            "with": "Blair Duluoz (Featured Headliner), Guntram (Opener)",
-            "artists": [
-                "john"
-            ],
-            "note": "Birmingham Songwriter Nights at The Nick. Featured Headliner: Blair Duluoz. Openers: Guntram, John Polar. 7–10 PM · $10 · 21+.",
+            "with": "Blair Duluoz, Guntram",
             "link": "https://www.facebook.com/events/2059285578058333/",
-            "linkText": "Facebook Event & RSVP",
-            "facebookEvent": "https://www.facebook.com/events/2059285578058333/",
-            "venueFacebook": "https://www.facebook.com/thenickrocks"
+            "linkText": "Event page"
+        },
+        {
+            "date": "2026-11-02",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2026-10-26",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "artists": [
-                "john"
-            ],
             "source": "phone",
-            "note": "Monday open mic residency session at The Nick."
+            "with": "Gatsby"
         },
         {
             "date": "2026-10-19",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "artists": [
-                "john"
-            ],
-            "source": "phone",
-            "note": "Monday open mic residency session at The Nick."
+            "source": "phone"
         },
         {
             "date": "2026-10-13",
-            "title": "Birmingham Songwriter's Night",
+            "title": "Songwriter Nights",
             "venue": "Dave's Pub",
             "with": "Guntram & The Firefly Weather, Blair Duluoz, Slap Out!",
-            "artists": [
-                "john"
-            ],
-            "note": "Moved to Dave's on short notice after a triple booking at The Nick. Four artists, 30 minutes each, free.",
+            "note": "Moved from The Nick to Dave's on short notice.",
             "link": "https://www.instagram.com/p/DeckFCDhmEW/",
             "linkText": "Instagram post"
         },
@@ -157,186 +46,329 @@
             "date": "2026-09-28",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2026-09-21",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-09-14",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone"
         },
         {
             "date": "2026-09-10",
-            "title": "Birmingham Songwriter Nights",
+            "title": "Songwriter Nights",
             "venue": "True Story Brewing Co.",
             "with": "Guntram, Nick T., Kenan Blair, George Scherer, Michael Bush, Music Married, Gatsby",
-            "artists": [
-                "john"
-            ],
             "link": "https://www.instagram.com/p/Dc1ZHHONqHN/",
             "linkText": "Instagram post"
+        },
+        {
+            "date": "2026-09-07",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-09-01",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-08-25",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-08-17",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2026-08-10",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2026-07-28",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-07-27",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone",
+            "clip": {
+                "src": "assets/live_clip.mp4",
+                "poster": "assets/live_clip.jpg",
+                "caption": "From the stage, 55 sec"
+            }
+        },
+        {
+            "date": "2026-07-14",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-07-13",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-07-06",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-06-30",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-06-29",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone"
         },
         {
             "date": "2026-06-23",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone",
-            "note": "Surprise late set, on at 9:30."
+            "note": "Surprise 9:30 PM set."
+        },
+        {
+            "date": "2026-06-22",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-06-15",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2026-06-11",
             "title": "True Story Songwriter Nights",
             "venue": "True Story Brewing Co.",
-            "with": "Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, Skylar Phillips, Leesus Cries, Slap Out",
-            "artists": [
-                "john"
-            ]
+            "with": "Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, Skylar Phillips, Leesus Cries, Slap Out"
+        },
+        {
+            "date": "2026-06-09",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-06-01",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "Guntram Anderlik",
+            "source": "phone"
         },
         {
             "date": "2026-05-05",
-            "title": "Rest Easy Nathan: Songwriter Nights",
+            "title": "Songwriter Nights",
             "venue": "The Nick",
             "with": "George Scherer, E. Bailey, Guntram Anderlik",
-            "artists": [
-                "john"
-            ]
+            "note": "Rest Easy Nathan tribute night."
+        },
+        {
+            "date": "2026-04-27",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-04-23",
+            "title": "Open mic",
+            "venue": "Voodoo Lounge, Huntsville",
+            "source": "phone"
+        },
+        {
+            "date": "2026-04-20",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-04-12",
+            "title": "Blues jam",
+            "venue": "Voodoo Lounge, Huntsville",
+            "source": "phone"
+        },
+        {
+            "date": "2026-04-06",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-03-30",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-03-26",
+            "title": "Open mic",
+            "venue": "Voodoo Lounge, Huntsville",
+            "source": "phone"
         },
         {
             "date": "2026-03-24",
             "title": "Songwriter Nights",
             "venue": "The Nick",
             "with": "Guntram Anderlik",
-            "artists": [
-                "john"
-            ],
-            "source": "phone",
-            "note": "Joined Guntram for his set at Songwriter's Night."
+            "source": "phone"
+        },
+        {
+            "date": "2026-02-17",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-02-02",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2026-01-27",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2025-12-04",
             "title": "Open mic",
             "venue": "Voodoo Lounge, Huntsville",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone"
         },
         {
             "date": "2025-12-02",
             "title": "December jam",
             "venue": "Dave's Pub",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-11-27",
+            "title": "Open mic",
+            "venue": "Voodoo Lounge, Huntsville",
+            "source": "phone"
+        },
+        {
+            "date": "2025-11-23",
+            "title": "Blues jam",
+            "venue": "Voodoo Lounge, Huntsville",
             "source": "phone"
         },
         {
             "date": "2025-11-11",
-            "title": "Songwriter's Night",
+            "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "video": "RE_9SyZ0PFE"
         },
         {
             "date": "2025-11-04",
             "title": "Jam night",
             "venue": "Dave's Pub",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-10-27",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone"
         },
         {
             "date": "2025-10-14",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone"
         },
         {
             "date": "2025-10-13",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone"
         },
         {
             "date": "2025-09-30",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "Gatsby",
-            "artists": [
-                "john"
-            ]
+            "with": "Gatsby"
         },
         {
             "date": "2025-09-01",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-08-25",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone"
         },
         {
             "date": "2025-08-12",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone",
-            "note": "8:00 PM show, set at 8:20."
+            "note": "8:20 PM set.",
+            "with": "Bradley Bell, Andrew Bobulinski, Kurt & Rad",
+            "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/august122025/",
+            "galleryText": "Photo gallery · ReBe Loves"
+        },
+        {
+            "date": "2025-08-11",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2025-08-04",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2025-07-01",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone",
             "clip": {
                 "src": "assets/video_20250701.mp4",
                 "poster": "assets/thumbs/video_20250701.jpg",
-                "caption": "From the stage, 7 min"
-            }
+                "caption": "From the stage, 5 min"
+            },
+            "with": "Anthony Nelson & Guntram Anderlik",
+            "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/july12025/",
+            "galleryText": "Photo gallery · ReBe Loves"
         },
         {
             "date": "2025-06-02",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
             "source": "phone"
         },
         {
@@ -344,161 +376,228 @@
             "title": "Songwriter Nights",
             "venue": "The Nick",
             "with": "Titus Bozeman Band",
-            "artists": [
-                "john"
-            ],
-            "note": "Gig number three."
+            "note": "Third billed set.",
+            "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/may2020251/",
+            "galleryText": "Photo gallery · ReBe Loves"
+        },
+        {
+            "date": "2025-05-19",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone",
+            "gallery": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/",
+            "galleryText": "Photo gallery · ReBe Loves"
+        },
+        {
+            "date": "2025-05-12",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
         },
         {
             "date": "2025-05-08",
             "title": "Songwriter Nights",
             "venue": "True Story Brewing Co.",
-            "with": "Guntram & friends",
-            "artists": [
-                "john"
-            ],
-            "note": "Gig number two. With Guntram Anderlik and friends, 7–10 PM, $10 cover."
+            "with": "Bradley Bell, Andrew Bobulinski, Guntram Anderlik & Todd Simpson",
+            "note": "Second billed set.",
+            "gallery": "https://shoprebeloves.pixieset.com/songwritersnightstruestory/may82025/",
+            "galleryText": "Photo gallery · ReBe Loves"
+        },
+        {
+            "date": "2025-05-05",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2025-04-28",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone",
+            "note": "10:00 PM set."
         },
         {
             "date": "2025-04-15",
             "title": "Songwriter Nights",
             "venue": "The Nick",
-            "with": "Todd Simpson",
-            "artists": [
-                "john"
-            ],
-            "note": "First songwriter's night set, name on the flyer."
+            "with": "Todd Simpson, Guntram Anderlik, Kurt & Rad",
+            "note": "First billed set.",
+            "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/april152025/",
+            "galleryText": "Photo gallery · ReBe Loves"
         },
         {
             "date": "2025-04-07",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2025-02-11",
+            "title": "Songwriter Nights",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2025-02-06",
+            "title": "Open mic",
+            "venue": "Voodoo Lounge, Huntsville",
+            "source": "phone"
+        },
+        {
+            "date": "2025-01-27",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone"
         },
         {
             "date": "2024-09-23",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "artists": [
-                "john"
-            ],
-            "source": "notes",
-            "note": "Bandstand session at The Nick with Alex & Friends."
+            "with": "Alex & Friends",
+            "source": "phone"
+        },
+        {
+            "date": "2024-08-05",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone"
+        },
+        {
+            "date": "2024-07-22",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "source": "phone",
+            "note": "8:40 PM set."
         },
         {
             "date": "2024-06-17",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "address": "2514 10th Ave. S., Birmingham, AL 35205",
-            "artists": [
-                "john"
-            ],
-            "source": "notes",
-            "note": "Bandstand open mic set featuring Movin' & Groovin' and Kendrick cover."
+            "source": "phone"
+        },
+        {
+            "date": "2023-03-20",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "Alex & Friends",
+            "source": "phone"
         },
         {
             "date": "2023-02-06",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "with": "",
-            "artists": [
-                "john"
-            ],
+            "source": "phone"
+        },
+        {
+            "date": "2023-01-23",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
             "source": "phone",
             "note": "Earliest open mic on record."
         }
     ],
     "videos": [
         {
+            "src": "assets/live_clip.mp4",
+            "poster": "assets/live_clip.jpg",
+            "date": "2026-07-27",
+            "title": "Birmingham Bandstand at The Nick"
+        },
+        {
             "id": "RE_9SyZ0PFE",
             "date": "2025-11-12",
-            "title": "Songwriter's Night @ The Nick (Rocks) [11.11.25]",
-            "artists": [
-                "john"
-            ]
+            "title": "Songwriter Nights at The Nick"
+        },
+        {
+            "src": "assets/video_20250701.mp4",
+            "poster": "assets/thumbs/video_20250701.jpg",
+            "date": "2025-07-01",
+            "title": "Songwriter Nights at The Nick (5 min)"
         },
         {
             "id": "XOd7uAHNCzw",
             "date": "2025-06-19",
-            "title": "JP Live: Too Hard (On Ourselves)",
-            "artists": [
-                "john"
-            ]
+            "title": "Too Hard (On Ourselves)"
         },
         {
             "id": "BalaciICTr8",
             "date": "2025-06-19",
-            "title": "Elements of Loneliness",
-            "artists": [
-                "john"
-            ]
-        },
-        {
-            "id": "C9v_wpbpG_M",
-            "date": "2025-06-14",
-            "title": "Freestyle Friday Livestream",
-            "artists": [
-                "polaraf"
-            ]
-        },
-        {
-            "id": "269iu4AWOBQ",
-            "date": "2025-06-14",
-            "title": "[FF_Practice-02] Friday's Freestyle Flows",
-            "artists": [
-                "polaraf"
-            ]
-        },
-        {
-            "id": "YvG4pQ7og1o",
-            "date": "2025-06-14",
-            "title": "freestyle friday babyyy",
-            "artists": [
-                "polaraf"
-            ]
+            "title": "Elements of Loneliness"
         },
         {
             "id": "c-oD0slTiN4",
             "date": "2025-03-21",
-            "title": "John Polar Live Stream",
-            "artists": [
-                "john"
-            ]
+            "title": "March 2025 Livestream"
         }
     ],
     "media": [
+        {
+            "src": "assets/photo_rebe_20260628.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20260628.jpg",
+            "alt": "John Polar on stage in a fedora, singing into a mic under orange and teal lights",
+            "caption": "Live",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/"
+        },
+        {
+            "src": "assets/photo_20261101_woods.jpg",
+            "thumb": "assets/thumbs/photo_20261101_woods.jpg",
+            "date": "2026-11-03",
+            "alt": "John Polar in the woods wearing a straw fedora with a wooden birdhouse balanced on top and a finger held to his lips",
+            "caption": "Nov 2026"
+        },
         {
             "src": "assets/flyer_20261103.jpg",
             "thumb": "assets/thumbs/flyer_20261103.jpg",
             "date": "2026-11-03",
             "alt": "Flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz, with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+. 2514 10th Ave. S., Birmingham, AL",
-            "caption": "Songwriter Nights at The Nick, Nov 3, 2026"
-        },
-        {
-            "src": "assets/flyer_story_20261103.jpg",
-            "thumb": "assets/thumbs/flyer_story_20261103.jpg",
-            "date": "2026-11-03",
-            "alt": "Instagram Story flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+.",
-            "caption": "Songwriter Nights at The Nick (Story Flyer), Nov 3, 2026"
+            "caption": "The Nick, Nov 3, 2026"
         },
         {
             "src": "assets/flyer_20261013.jpg",
             "thumb": "assets/thumbs/flyer_20261013.jpg",
             "date": "2026-10-13",
             "alt": "Flyer: Listening Tree Corp. presents Birmingham Songwriter's Night at Dave's Pub, Tuesday Oct 13, 8–10 PM, featuring Guntram & The Firefly Weather, John Polar, Blair Duluoz, Slap Out!",
-            "caption": "Birmingham Songwriter's Night at Dave's Pub, Oct 13, 2026"
+            "caption": "Dave's Pub, Oct 13, 2026"
         },
         {
-            "src": "assets/photo_rebe_20260628.jpg",
-            "thumb": "assets/thumbs/photo_rebe_20260628.jpg",
-            "alt": "John Polar on stage in a fedora, singing into a mic under orange and teal lights",
-            "caption": "Live",
-            "credit": "@through_rebeseyes"
+            "src": "assets/flyer_20260910.jpg",
+            "thumb": "assets/thumbs/flyer_20260910.jpg",
+            "date": "2026-09-10",
+            "alt": "Flyer: Birmingham Songwriter Nights at True Story Brewing, Thursday, September 10th, 7–11 PM, featuring Guntram, Nick T., Kenan Blair, George Scherer, Michael Bush, John Polar, Music Married, Gatsby",
+            "caption": "True Story Brewing, Sept 10, 2026"
+        },
+        {
+            "src": "assets/live_clip.jpg",
+            "thumb": "assets/thumbs/live_clip.jpg",
+            "date": "2026-07-27",
+            "alt": "John Polar at the mic under red stage light at The Nick",
+            "caption": "The Nick, July 27, 2026"
+        },
+        {
+            "src": "assets/photo_20260607.jpg",
+            "thumb": "assets/thumbs/photo_20260607.jpg",
+            "alt": "True Story Songwriter Nights flyer for June 11, 2026: Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, John Polar, Skylar Phillips, Leesus Cries, Slap Out",
+            "caption": "True Story Brewing, June 11, 2026",
+            "date": "2026-06-11"
+        },
+        {
+            "src": "assets/photo_rebe_202605_sunglasses.jpg",
+            "thumb": "assets/thumbs/photo_rebe_202605_sunglasses.jpg",
+            "date": "2026-05-25",
+            "alt": "John Polar in a black pinstripe fedora and round dark sunglasses at the microphone at The Nick",
+            "caption": "Birmingham Bandstand at The Nick, May 2026",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/birminghambandstands2026/may/"
+        },
+        {
+            "src": "assets/photo_rebe_202605_profile.jpg",
+            "thumb": "assets/thumbs/photo_rebe_202605_profile.jpg",
+            "date": "2026-05-25",
+            "alt": "Side profile of John Polar in a black fedora under blue stage lights at The Nick",
+            "caption": "The Nick, May 2026",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/birminghambandstands2026/may/"
         },
         {
             "src": "assets/photo_20260623.jpg",
@@ -508,17 +607,10 @@
             "date": "2026-05-05"
         },
         {
-            "src": "assets/photo_20260607.jpg",
-            "thumb": "assets/thumbs/photo_20260607.jpg",
-            "alt": "True Story Songwriter Nights flyer for June 11, 2026: Guntram Anderlik, Bradley Bell, Craig McRee, Cooper Green, John Polar, Skylar Phillips, Leesus Cries, Slap Out",
-            "caption": "True Story Songwriter Nights, June 11, 2026",
-            "date": "2026-06-11"
-        },
-        {
             "src": "assets/flyer_20260505.jpg",
             "thumb": "assets/thumbs/flyer_20260505.jpg",
             "alt": "Songwriter Nights flyer for May 5, 2026 at The Nick: George Scherer, E. Bailey, Guntram Anderlik, John Polar",
-            "caption": "Songwriter Nights at The Nick, May 5, 2026",
+            "caption": "The Nick, May 5, 2026",
             "date": "2026-05-05"
         },
         {
@@ -529,11 +621,70 @@
             "date": "2025-09-30"
         },
         {
+            "src": "assets/photo_rebe_20250812.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250812.jpg",
+            "date": "2025-08-12",
+            "alt": "John Polar on a barstool in a fedora with arms wide open on stage at The Nick",
+            "caption": "Songwriter Nights at The Nick, Aug 12, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/august122025/"
+        },
+        {
+            "src": "assets/photo_rebe_20250701_guitar.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250701_guitar.jpg",
+            "date": "2025-07-01",
+            "alt": "John Polar in a fedora playing acoustic guitar under blue stage lights at The Nick",
+            "caption": "Songwriter Nights at The Nick, July 1, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/july12025/"
+        },
+        {
+            "src": "assets/photo_rebe_20250701_stage.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250701_stage.jpg",
+            "date": "2025-07-01",
+            "alt": "John Polar in a fedora with arms spread wide under purple stage lights at The Nick",
+            "caption": "The Nick, July 1, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/july12025/"
+        },
+        {
+            "src": "assets/photo_20250602_guitar.jpg",
+            "thumb": "assets/thumbs/photo_20250602_guitar.jpg",
+            "date": "2025-06-02",
+            "alt": "John Polar on a stool on stage at The Nick, head bowed under a fedora, playing acoustic guitar under red stage light",
+            "caption": "The Nick, June 2, 2025"
+        },
+        {
+            "src": "assets/photo_20250602_stage.jpg",
+            "thumb": "assets/thumbs/photo_20250602_stage.jpg",
+            "date": "2025-06-02",
+            "alt": "John Polar standing at the mic in a fedora and vest under red stage light at The Nick",
+            "caption": "The Nick, June 2, 2025"
+        },
+        {
             "src": "assets/flyer_20250520.jpg",
             "thumb": "assets/thumbs/flyer_20250520.jpg",
             "alt": "Show flyer for May 20, 2025 at The Nick",
             "caption": "The Nick, May 20, 2025",
             "date": "2025-05-20"
+        },
+        {
+            "src": "assets/photo_rebe_20250520_keys.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250520_keys.jpg",
+            "date": "2025-05-20",
+            "alt": "John Polar in a white fedora and dark blazer sitting at his keyboard setup at The Nick",
+            "caption": "Songwriter Nights at The Nick, May 20, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/may2020251/"
+        },
+        {
+            "src": "assets/photo_rebe_20250519_shadow.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250519_shadow.jpg",
+            "date": "2025-05-19",
+            "alt": "John Polar in silhouette under a fedora brim with a cyan spotlight beam and amber stage lights at The Nick",
+            "caption": "Birmingham Bandstand at The Nick, May 19, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/"
         },
         {
             "src": "assets/flyer_20250508.jpg",
@@ -543,11 +694,29 @@
             "date": "2025-05-08"
         },
         {
+            "src": "assets/photo_rebe_20250508_duet.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250508_duet.jpg",
+            "date": "2025-05-08",
+            "alt": "John Polar singing on stage alongside an acoustic guitarist at True Story Brewing",
+            "caption": "Songwriter Nights at True Story Brewing, May 8, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightstruestory/may82025/"
+        },
+        {
             "src": "assets/flyer_20250415.png",
             "thumb": "assets/thumbs/flyer_20250415.jpg",
             "alt": "Show flyer for April 15, 2025 at The Nick",
             "caption": "The Nick, April 15, 2025",
             "date": "2025-04-15"
+        },
+        {
+            "src": "assets/photo_rebe_20250415_keys.jpg",
+            "thumb": "assets/thumbs/photo_rebe_20250415_keys.jpg",
+            "date": "2025-04-15",
+            "alt": "John Polar playing an Alesis V49 keyboard on stage at The Nick",
+            "caption": "Songwriter Nights at The Nick, April 15, 2025",
+            "credit": "@through_rebeseyes",
+            "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/april152025/"
         }
     ]
 }

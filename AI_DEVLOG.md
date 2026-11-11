@@ -17,7 +17,7 @@ Single source of truth for cross-session continuity.
 - [ ] **More history (John is collecting)** — open leads:
   - One friend's chat thread is RCS, which phone tools can't read. Ask John for screenshots.
   - A Google Photos + Timeline Takeout would fill gaps.
-  - Rerun `scripts/find_appearances.py --calendar --texts` once Shizuku is back, to refresh the calendar cache.
+  - [x] ~~Rerun `scripts/find_appearances.py --calendar --texts` once Shizuku is back, to refresh the calendar cache.~~ — resolved: `scripts/find_appearances.py` now uses ADB loopback (`127.0.0.1:5555`) with fallback to `rish`, and `calendar_cache.json` + `texts_cache.json` are refreshed.
   - @bhm_songwriternights likely has more posts listing John. Add them by URL to `posts` and as `link` on the matching show.
 - [ ] **Pages are hand-maintained** — the generator used during the redesign is gone. The header, nav and footer are duplicated across index/john/polaraf/media/archive. `media.html` marks "Archive" as current. Edit all five when the nav changes.
 
@@ -32,6 +32,45 @@ Single source of truth for cross-session continuity.
 ---
 
 ## Session History (newest first)
+
+### 2026-11-11 — Antigravity CLI
+
+**De-bloating, Mysterious Direction & Google Photos / Video / Audio Show Analysis:**
+- **Removed Genre Labels & Press-Release Copy:**
+  - Stripped "singer-songwriter", "freestylist", "Independent label", and genre buzzwords across `index.html`, `john.html`, `media.html`, `easteregg.html`, `site.webmanifest`, and meta/OG/Twitter descriptions.
+  - Replaced hero lede and bio with plain framing: *"Making sense of the madness through the music"* and *"Just a guy making sense of the madness through the music."*
+- **Cut Page, Code & Data Bloat:**
+  - Removed the duplicate `#about-john` (`.artist-spotlight`) card, `#residency` box (redundant with the top `.strip` bar), and `#photos-and-flyers` grid from `index.html`.
+  - Removed duplicated residency, quotes, past-shows, and `#from-the-community` (`Around town`) sections from `john.html` so it holds just the photo, bio, links, and recordings.
+  - Removed `.ics` / Google Calendar buttons, Facebook RSVP/check-in pills, fanned playing-card thumbnails, accordion dropdowns, and dead `polaraf` / `milestone` filtering (`app.js` reduced from 981 to 344 lines; `style.css` reduced from 1,327 to 546 lines; `database.json` stripped of redundant `artists` arrays and unreachable `polaraf`-only video entries).
+  - Removed self-quote, flyer blurb, and meta site-launch milestones from `database.json` so the archive timeline is strictly music, shows, recordings, and photos.
+  - Removed duplicate `flyer_story_20261103.jpg` and its thumbnail, and shortened `media` captions so they don't repeat flyer text word-for-word.
+- **Google Photos `"fedora"`, Local Video/Audio & ADB Calendar/SMS/MMS Analysis:**
+  - Analyzed 1,325 cloud-indexed Google Photos & Videos matching `"fedora"` across 198 distinct days (137 evening/night sessions) and cross-referenced them with local videos (`Movies/Instagram/*.mp4`, `DCIM/Camera/*.mp4`), embedded `ffprobe` audio creation timestamps (`Recordings/`), and live ADB loopback queries (`content://com.android.calendar/events`, `content://sms`, `content://mms/part`).
+  - Updated `scripts/find_appearances.py` to support ADB loopback (`127.0.0.1:5555`) alongside `rish` and to match first-person stage/open-mic texts (`TEXT_SOLO`) even when the venue name isn't repeated in the same message bubble; refreshed `~/polar-private/calendar_cache.json`, `texts_cache.json`, and `appearances.md`.
+  - Updated `scripts/sync_youtube.py` to skip the removed `polaraf` livestream IDs and omit the deprecated `artists` field so the weekly GitHub Action stays clean.
+  - Expanded `database.json` from 30 to **75 verified shows**, pushing the earliest documented Nick open mic back to `2023-01-23` (`open mic @ the nick [Voice 342 - edit].m4a`), and adding 45 corroborated nights across The Nick and Voodoo Lounge (`2023-01-23`, `2023-03-20`, `2024-07-22`, `2024-08-05`, `2025-01-27`, `2025-02-06`, `2025-02-11`, `2025-04-28`, `2025-05-05`, `2025-05-12`, `2025-05-19`, `2025-08-04`, `2025-08-11`, `2025-08-25`, `2025-10-27`, `2025-11-23`, `2025-11-27`, `2026-01-27`, `2026-02-02`, `2026-02-17`, `2026-03-26`, `2026-03-30`, `2026-04-06`, `2026-04-12`, `2026-04-20`, `2026-04-23`, `2026-04-27`, `2026-06-01`, `2026-06-09`, `2026-06-15`, `2026-06-22`, `2026-06-29`, `2026-06-30`, `2026-07-06`, `2026-07-13`, `2026-07-14`, `2026-07-27`, `2026-07-28`, `2026-08-17`, `2026-08-25`, `2026-09-01`, `2026-09-07`, `2026-09-14`, `2026-09-21`, `2026-11-02`), plus noting `"with": "Gatsby"` on `2026-10-26`.
+  - Recovered 4 new visual assets from MMS (`content://mms/part`):
+    - `assets/flyer_20260910.jpg`: Official True Story Brewing Songwriter Nights flyer for Sept 10, 2026 (`2026-09-10`).
+    - `assets/photo_20261101_woods.jpg`: Promo portrait in the woods (`2026-11-01`, straw fedora with birdhouse balanced on top, finger to lips).
+    - `assets/photo_20250602_guitar.jpg` & `assets/photo_20250602_stage.jpg`: Live stage photos from June 2, 2025 (`2025-06-02`) at The Nick under red stage light.
+  - Traced `assets/live_clip.mp4` / `assets/live_clip.jpg` to the July 27, 2026 (`2026-07-27`) Birmingham Bandstand set at The Nick, attached the clip to `2026-07-27` in `database.json`, and updated `renderVideos()` in `app.js` so native stage videos (`assets/live_clip.mp4`, `assets/video_20250701.mp4`) are playable directly in the `Recordings` grid on `index.html` and `john.html`.
+  - Fixed Archive timeline filters (`Videos` and `Photos` filter buttons now match show entries that have attached clips or photos/flyers) and fixed double-escaped `&amp;amp;` in `timelineItems()` `s.with` strings.
+  - Expanded social links across `index.html`, `john.html`, `archive.html`, `media.html`, and `easteregg.html` to include Threads (`@thejohnpolar`), Facebook (`thejohnpolar`), and `@polarafmusic` on Instagram.
+  - **ReBe Loves (`@through_rebeseyes` / `shoprebeloves.pixieset.com`) Gallery Discovery & Integration:**
+    - Located Rebe's music photography client gallery website (`https://shoprebeloves.pixieset.com/` and `https://linktr.ee/shop_rebeloves`) via `@through_rebeseyes` metadata and indexed 57 live stage photos of John Polar across 7 Birmingham sets (`2025-04-15`, `2025-05-08`, `2025-05-19`, `2025-05-20`, `2025-07-01`, `2025-08-12`, and `2026-05-25`).
+    - Added 9 curated live stage photos and thumbnails (`photo_rebe_202605_sunglasses.jpg`, `photo_rebe_202605_profile.jpg`, `photo_rebe_20250812.jpg`, `photo_rebe_20250701_guitar.jpg`, `photo_rebe_20250701_stage.jpg`, `photo_rebe_20250520_keys.jpg`, `photo_rebe_20250519_shadow.jpg`, `photo_rebe_20250508_duet.jpg`, `photo_rebe_20250415_keys.jpg`) to `assets/`, `assets/thumbs/`, and `database.json` (totaling 24 media items).
+    - Wired `creditUrl` in `renderMedia()` and `gallery` links in `timelineEntry()` (`app.js`), plus updated `john.html` and `media.html` captions to link both `@through_rebeseyes` on Instagram and Rebe's Pixieset galleries (`https://shoprebeloves.pixieset.com/`).
+    - Enriched `database.json` co-bills (`with`) on `2025-04-15`, `2025-05-08`, `2025-07-01`, and `2025-08-12` using verified performer rosters from Rebe's galleries.
+  - **Video Pre-Set Trimming (`assets/video_20250701.mp4`):**
+    - Trimmed the opening 2m 17s of PA house music, phone setup, and mic check from `assets/video_20250701.mp4` via lossless keyframe stream copy (`-ss 137.709 -c copy`), starting right on the acoustic guitar intro (`5m 24s`, reduced from `14.08 MB` to `8.91 MB`) and refreshed `assets/thumbs/video_20250701.jpg`.
+  - **HTTPS & Custom Domain Certificate Resolution:**
+    - Diagnosed the crossed-out red HTTPS lock: an earlier session had switched `CNAME` to `www.polarecords.net`, triggering an edge 301 redirect to `www` while GitHub Pages only had an active Let's Encrypt certificate for the apex domain `polarecords.net` (`CN=polarecords.net`, expires Jan 5 2027). The edge router was serving fallback `*.github.io` certificates on `www.polarecords.net`, throwing `NET::ERR_CERT_COMMON_NAME_INVALID`.
+    - Switched the custom domain back to apex `polarecords.net` in GitHub Pages API and updated `CNAME`, clearing the 301 redirect.
+    - Verified `https://polarecords.net/` now responds with `HTTP/2 200` directly with the valid Let's Encrypt TLS certificate.
+- **Moodier Visual Tone:**
+  - Switched the top `.strip` banner from bright orange to a dark bar (`--bg-raised`), aligned `<meta name="theme-color">`, `site.webmanifest`, and redirect stubs (`johnpolar.html`, `polaraf.html`, `polarband.html`) to `#0c0a08` / `#d89b3c`, and deepened the hero vignette/scrim.
+  - Bumped Service Worker cache to `polarecords-cache-v17`.
 
 ### 2026-11-10 — Antigravity CLI
 

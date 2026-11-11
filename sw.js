@@ -1,9 +1,8 @@
-const CACHE_NAME = 'polarecords-cache-v12';
+const CACHE_NAME = 'polarecords-cache-v17';
 const urlsToCache = [
     './',
     './index.html',
     './john.html',
-    './polaraf.html',
     './media.html',
     './archive.html',
     './style.css',
@@ -39,7 +38,7 @@ self.addEventListener('fetch', event => {
                 if (cached) return cached;
                 if (event.request.headers.get('accept')?.includes('text/html')) {
                     return new Response(
-                        `<div style="background:#0f0c0a;color:#f1e8da;font-family:sans-serif;padding:20px;">
+                        `<div style="background:#0c0a08;color:#f1e8da;font-family:sans-serif;padding:20px;">
                             You're offline. Reconnect and refresh to see PolaRecords.
                         </div>`,
                         { headers: { 'Content-Type': 'text/html' } }

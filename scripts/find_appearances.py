@@ -108,12 +108,24 @@ def load_timeline(path):
     return visits
 
 
+def shell_exec(cmd, timeout=30):
+    """Run a shell command via local ADB loopback (`127.0.0.1:5555`) or Shizuku (`rish`)."""
+    for argv in (['adb', '-s', '127.0.0.1:5555', 'shell', cmd], ['rish', '-c', cmd]):
+        try:
+            r = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
+            if r.returncode == 0 and r.stdout and 'Waiting for Shizuku' not in r.stdout:
+                return r.stdout
+        except (subprocess.TimeoutExpired, OSError):
+            continue
+    raise OSError('Neither adb loopback nor rish responded')
+
+
 def load_calendar():
-    """Calendar events that look like open mics/songwriter nights, via Shizuku (`rish`).
+    """Calendar events that look like open mics/songwriter nights, via ADB/Shizuku.
     Returns {date: [titles]}. Recurring events are expanded up to today (or UNTIL).
     These are plans, not proof, so they only add +1."""
-    out = subprocess.run(['rish', '-c', 'content query --uri content://com.android.calendar/events '
-                          '--projection title:dtstart:rrule:allDay'], capture_output=True, text=True, timeout=25).stdout
+    out = shell_exec('content query --uri content://com.android.calendar/events '
+                     '--projection title:dtstart:rrule:allDay', timeout=25)
     nights = defaultdict(set)
     today = datetime.now().date()
     for line in out.splitlines():
@@ -150,11 +162,12 @@ def load_calendar():
 
 TEXT_VENUE = re.compile(r"\b(the nick|nick rocks|true story|dobber'?s?|dave'?s|voodoo|bandstand)\b", re.I)
 TEXT_PLAY = re.compile(r"\b(perform(ed|ing)?|played|playing|my set|a set|on stage|signed up|gig|open ?mic|songwriter'?s?|bandstand)\b", re.I)
+TEXT_SOLO = re.compile(r"\b(on stage|my set|rockin a set|i'?m up at \d|(at|headed to|getting ready for|preppin'? for) open ?mic|open ?mic (tn|tonight)|rushing to a blues jam)\b", re.I)
 
 
 def rish_rows(uri, projection, where=None):
     cmd = f'content query --uri {uri} --projection {projection}' + (f' --where "{where}"' if where else '')
-    out = subprocess.run(['rish', '-c', cmd], capture_output=True, text=True, timeout=40).stdout
+    out = shell_exec(cmd, timeout=40)
     return [c for c in re.split(r'(?m)^Row: \d+ ', out) if c.strip()]
 
 
@@ -164,7 +177,7 @@ def load_texts():
     nights = defaultdict(list)
 
     def add(ms, body):
-        if TEXT_VENUE.search(body) and TEXT_PLAY.search(body):
+        if (TEXT_VENUE.search(body) and TEXT_PLAY.search(body)) or TEXT_SOLO.search(body):
             local = to_central(datetime.fromtimestamp(ms / 1000, timezone.utc))
             d = (local - timedelta(days=1)).date() if local.hour < 4 else local.date()
             nights[d].append(re.sub(r'\s+', ' ', body)[:120])
