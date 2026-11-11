@@ -70,7 +70,7 @@ function renderQuotes(quotes) {
     if (section) section.hidden = !quotes.length;
 }
 
-// ─── Videos: thumbnail cards that swap to an embed on tap ───────────────────
+// ─── Videos: direct links for YouTube, inline player for local MP4 ─────────
 function renderVideos(videos) {
     const el = document.getElementById('videos');
     if (!el || !videos) return;
@@ -80,51 +80,174 @@ function renderVideos(videos) {
         const d = parseDate(v.date);
         const thumb = v.poster || `https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg`;
         const isVertical = Boolean(v.poster && /live_clip|video_20250701/.test(v.poster));
+        if (v.src) {
+            return `
+            <figure class="video" data-reveal>
+                <button type="button" class="video-thumb ${isVertical ? 'is-vertical' : ''}" data-src="${esc(v.src)}" data-poster="${esc(v.poster || '')}" aria-label="Play: ${esc(v.title)}">
+                    <img src="${esc(thumb)}" alt="${esc(v.title)}" loading="lazy">
+                    <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                </button>
+                <figcaption>
+                    <span>${esc(v.title)}</span>
+                    <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''}</span>
+                </figcaption>
+            </figure>`;
+        }
         return `
         <figure class="video" data-reveal>
-            <button type="button" class="video-thumb ${isVertical ? 'is-vertical' : 'is-youtube'}" data-id="${esc(v.id || '')}" data-src="${esc(v.src || '')}" data-poster="${esc(v.poster || '')}" data-start="${esc(v.start || '')}" aria-label="Play: ${esc(v.title)}">
+            <a class="video-thumb is-youtube" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener" aria-label="Watch on YouTube: ${esc(v.title)}">
                 <img src="${esc(thumb)}" alt="${esc(v.title)}" loading="lazy">
                 <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
-            </button>
+            </a>
             <figcaption>
                 <span>${esc(v.title)}</span>
-                <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''}</span>
+                <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''} · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">YouTube</a></span>
             </figcaption>
         </figure>`;
     }).join('');
 
     el.addEventListener('click', e => {
-        const btn = e.target.closest('.video-thumb');
+        const btn = e.target.closest('button.video-thumb[data-src]');
         if (!btn) return;
-        if (btn.dataset.src) {
-            const vid = document.createElement('video');
-            vid.src = btn.dataset.src;
-            if (btn.dataset.poster) vid.poster = btn.dataset.poster;
-            vid.controls = true;
-            vid.autoplay = true;
-            vid.playsInline = true;
-            btn.replaceWith(vid);
-            return;
-        }
-        const startParam = btn.dataset.start ? `&start=${btn.dataset.start}` : '';
-        const frame = document.createElement('iframe');
-        frame.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1&rel=0${startParam}`;
-        frame.title = btn.getAttribute('aria-label').replace(/^Play: /, '');
-        frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-        frame.allowFullscreen = true;
-        btn.replaceWith(frame);
+        const vid = document.createElement('video');
+        vid.src = btn.dataset.src;
+        if (btn.dataset.poster) vid.poster = btn.dataset.poster;
+        vid.controls = true;
+        vid.autoplay = true;
+        vid.playsInline = true;
+        btn.replaceWith(vid);
     });
 }
 
-// ─── Live Audio Archives (Bandstand trimmed sets + previews + markers) ──────
+// ─── Themed Audio Player Component ──────────────────────────────────────────
 function formatTime(s) {
+    if (!s || isNaN(s)) return '0:00';
     const m = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
     return `${m}:${sec.toString().padStart(2, '0')}`;
 }
 
 let activeAudio = null;
-let activeCard = null;
+
+function initAudioCard(card) {
+    if (card.dataset.initAudio) return;
+    card.dataset.initAudio = 'true';
+
+    const audio = card.querySelector('audio');
+    const playBtn = card.querySelector('.themed-play-btn');
+    const playIcon = playBtn ? playBtn.querySelector('i') : null;
+    const scrubber = card.querySelector('.themed-scrubber');
+    const progress = card.querySelector('.themed-progress');
+    const buffered = card.querySelector('.themed-buffered');
+    const timeCurr = card.querySelector('.themed-time-curr');
+    const timeDur = card.querySelector('.themed-time-dur');
+    const muteBtn = card.querySelector('.themed-mute-btn');
+    const modeBtns = card.querySelectorAll('.audio-mode-toggle button');
+    const markers = card.querySelectorAll('.marker-pill');
+
+    let currentMode = 'set';
+    if (!audio.src) audio.src = card.dataset.set;
+
+    function setMode(mode) {
+        currentMode = mode;
+        modeBtns.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+        const wasPlaying = !audio.paused;
+        const targetSrc = mode === 'preview' ? card.dataset.preview : card.dataset.set;
+        if (!audio.src.endsWith(targetSrc)) {
+            audio.src = targetSrc;
+            if (wasPlaying) audio.play();
+        }
+        if (progress) progress.style.width = '0%';
+        if (timeCurr) timeCurr.textContent = '0:00';
+    }
+
+    modeBtns.forEach(btn => {
+        btn.addEventListener('click', () => setMode(btn.dataset.mode));
+    });
+
+    if (playBtn) {
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                if (activeAudio && activeAudio !== audio) {
+                    activeAudio.pause();
+                }
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+    }
+
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            muteBtn.querySelector('i').className = audio.muted ? 'fas fa-volume-xmark' : 'fas fa-volume-high';
+        });
+    }
+
+    audio.addEventListener('play', () => {
+        activeAudio = audio;
+        card.classList.add('is-playing');
+        if (playIcon) playIcon.className = 'fas fa-pause';
+    });
+
+    audio.addEventListener('pause', () => {
+        card.classList.remove('is-playing');
+        if (playIcon) playIcon.className = 'fas fa-play';
+    });
+
+    audio.addEventListener('ended', () => {
+        card.classList.remove('is-playing');
+        if (playIcon) playIcon.className = 'fas fa-play';
+        if (progress) progress.style.width = '0%';
+        if (timeCurr) timeCurr.textContent = '0:00';
+        markers.forEach(m => m.classList.remove('active'));
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        const cur = audio.currentTime;
+        const dur = audio.duration || 1;
+        const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+        if (progress) progress.style.width = `${pct}%`;
+        if (timeCurr) timeCurr.textContent = formatTime(cur);
+        if (timeDur && audio.duration) timeDur.textContent = formatTime(audio.duration);
+
+        markers.forEach(m => {
+            const t = Number(m.dataset.time);
+            m.classList.toggle('active', cur >= t && cur < t + 25);
+        });
+    });
+
+    audio.addEventListener('progress', () => {
+        if (audio.buffered.length > 0 && audio.duration) {
+            const bufEnd = audio.buffered.end(audio.buffered.length - 1);
+            const pct = Math.min(100, (bufEnd / audio.duration) * 100);
+            if (buffered) buffered.style.width = `${pct}%`;
+        }
+    });
+
+    if (scrubber) {
+        const seek = e => {
+            const rect = scrubber.getBoundingClientRect();
+            const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        };
+        scrubber.addEventListener('click', seek);
+    }
+
+    markers.forEach(m => {
+        m.addEventListener('click', () => {
+            const time = Number(m.dataset.time);
+            if (currentMode !== 'set') setMode('set');
+            if (activeAudio && activeAudio !== audio) activeAudio.pause();
+            audio.currentTime = time;
+            audio.play();
+            markers.forEach(pill => pill.classList.toggle('active', pill === m));
+        });
+    });
+}
 
 function renderAudio(tracks) {
     const el = document.getElementById('audio-tracks');
@@ -141,124 +264,48 @@ function renderAudio(tracks) {
             <article class="audio-card" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
                 <div class="audio-card-head">
                     <div class="audio-title-group">
-                        <h3>${esc(t.title)}</h3>
+                        <div class="audio-title-row">
+                            <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> LIVE CUT</span>
+                            <h3>${esc(t.title)}</h3>
+                        </div>
                         <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
                     </div>
-                    <div class="audio-controls">
-                        <button type="button" class="audio-btn btn-preview" data-mode="preview" aria-label="Play ${esc(t.title)} preview">
-                            <i class="fas fa-play" aria-hidden="true"></i> Preview (${t.previewDuration}s)
-                        </button>
-                        <button type="button" class="audio-btn btn-set" data-mode="set" aria-label="Play ${esc(t.title)} full set">
-                            <i class="fas fa-play" aria-hidden="true"></i> Full Set (${formatTime(t.duration)})
-                        </button>
+                    <div class="audio-mode-toggle">
+                        <button type="button" class="active" data-mode="set">Full Set (${formatTime(t.duration)})</button>
+                        <button type="button" data-mode="preview">Preview (${t.previewDuration}s)</button>
                     </div>
                 </div>
-                <audio class="audio-player-element" preload="none" controls hidden></audio>
+
+                <div class="themed-player">
+                    <button type="button" class="themed-play-btn" aria-label="Play / Pause ${esc(t.title)}">
+                        <i class="fas fa-play" aria-hidden="true"></i>
+                    </button>
+                    <div class="themed-track-wrap">
+                        <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                            <div class="themed-buffered" style="width: 0%;"></div>
+                            <div class="themed-progress" style="width: 0%;"></div>
+                        </div>
+                        <div class="themed-time-row">
+                            <span class="themed-time-curr">0:00</span>
+                            <span class="themed-time-dur">${formatTime(t.duration)}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="themed-mute-btn" aria-label="Mute / Unmute">
+                        <i class="fas fa-volume-high" aria-hidden="true"></i>
+                    </button>
+                </div>
+
                 ${markersHtml ? `
                     <div class="audio-markers">
                         <span class="audio-markers-label">Cues:</span>
                         ${markersHtml}
                     </div>` : ''}
+
+                <audio class="audio-player-element" preload="none" style="display:none;"></audio>
             </article>`;
     }).join('');
 
-    el.addEventListener('click', e => {
-        const btn = e.target.closest('.audio-btn');
-        const marker = e.target.closest('.marker-pill');
-        const card = e.target.closest('.audio-card');
-        if (!card) return;
-
-        const audio = card.querySelector('audio');
-        if (!audio) return;
-
-        if (btn) {
-            const mode = btn.dataset.mode;
-            const src = mode === 'preview' ? card.dataset.preview : card.dataset.set;
-
-            if (activeAudio === audio && audio.src.endsWith(src)) {
-                if (audio.paused) {
-                    audio.play();
-                    btn.classList.add('active');
-                    btn.querySelector('i').className = 'fas fa-pause';
-                    card.classList.add('playing');
-                } else {
-                    audio.pause();
-                    btn.classList.remove('active');
-                    btn.querySelector('i').className = 'fas fa-play';
-                    card.classList.remove('playing');
-                }
-                return;
-            }
-
-            if (activeAudio && activeAudio !== audio) {
-                activeAudio.pause();
-                if (activeCard) {
-                    activeCard.classList.remove('playing');
-                    activeCard.querySelectorAll('.audio-btn').forEach(b => {
-                        b.classList.remove('active');
-                        b.querySelector('i').className = 'fas fa-play';
-                    });
-                }
-            }
-
-            audio.src = src;
-            audio.hidden = false;
-            audio.play();
-            activeAudio = audio;
-            activeCard = card;
-
-            card.classList.add('playing');
-            card.querySelectorAll('.audio-btn').forEach(b => {
-                b.classList.remove('active');
-                b.querySelector('i').className = 'fas fa-play';
-            });
-            btn.classList.add('active');
-            btn.querySelector('i').className = 'fas fa-pause';
-
-            audio.onended = () => {
-                btn.classList.remove('active');
-                btn.querySelector('i').className = 'fas fa-play';
-                card.classList.remove('playing');
-            };
-            return;
-        }
-
-        if (marker) {
-            const time = Number(marker.dataset.time);
-            const setBtn = card.querySelector('.btn-set');
-
-            if (!audio.src.endsWith(card.dataset.set)) {
-                if (activeAudio && activeAudio !== audio) {
-                    activeAudio.pause();
-                    if (activeCard) {
-                        activeCard.classList.remove('playing');
-                        activeCard.querySelectorAll('.audio-btn').forEach(b => {
-                            b.classList.remove('active');
-                            b.querySelector('i').className = 'fas fa-play';
-                        });
-                    }
-                }
-                audio.src = card.dataset.set;
-                audio.hidden = false;
-                activeAudio = audio;
-                activeCard = card;
-                card.classList.add('playing');
-                card.querySelectorAll('.audio-btn').forEach(b => {
-                    b.classList.remove('active');
-                    b.querySelector('i').className = 'fas fa-play';
-                });
-                if (setBtn) {
-                    setBtn.classList.add('active');
-                    setBtn.querySelector('i').className = 'fas fa-pause';
-                }
-            }
-
-            audio.currentTime = time;
-            if (audio.paused) audio.play();
-
-            card.querySelectorAll('.marker-pill').forEach(m => m.classList.toggle('active', m === marker));
-        }
-    });
+    el.querySelectorAll('.audio-card').forEach(initAudioCard);
 }
 
 // ─── Shared Lightbox ────────────────────────────────────────────────────────
@@ -409,13 +456,28 @@ function timelineEntry(it) {
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </a>` : '';
     const audio = it.audioItem ? `
-        <div class="tl-audio" style="margin-top:12px;">
-            <audio src="${esc(it.audioItem.setSrc)}" preload="none" controls class="audio-player-element"></audio>
+        <div class="audio-card tl-audio" data-id="${esc(it.audioItem.id)}" data-set="${esc(it.audioItem.setSrc)}" data-preview="${esc(it.audioItem.previewSrc)}" style="margin-top:14px; padding:16px;">
+            <div class="themed-player" style="padding:8px 12px;">
+                <button type="button" class="themed-play-btn" style="width:36px;height:36px;font-size:13px;" aria-label="Play ${esc(it.audioItem.title)}">
+                    <i class="fas fa-play" aria-hidden="true"></i>
+                </button>
+                <div class="themed-track-wrap">
+                    <div class="themed-scrubber" role="progressbar">
+                        <div class="themed-buffered" style="width:0%;"></div>
+                        <div class="themed-progress" style="width:0%;"></div>
+                    </div>
+                    <div class="themed-time-row">
+                        <span class="themed-time-curr">0:00</span>
+                        <span class="themed-time-dur">${formatTime(it.audioItem.duration)}</span>
+                    </div>
+                </div>
+            </div>
             ${(it.audioItem.markers || []).length ? `
                 <div class="audio-markers" style="margin-top:8px;">
                     <span class="audio-markers-label">Cues:</span>
-                    ${it.audioItem.markers.map(m => `<button type="button" class="marker-pill" onclick="const a=this.closest('.tl-audio').querySelector('audio');a.currentTime=${m.time};a.play();"><span>${formatTime(m.time)}</span> ${esc(m.label)}</button>`).join('')}
+                    ${it.audioItem.markers.map(m => `<button type="button" class="marker-pill" data-time="${m.time}"><span>${formatTime(m.time)}</span> ${esc(m.label)}</button>`).join('')}
                 </div>` : ''}
+            <audio class="audio-player-element" preload="none" style="display:none;"></audio>
         </div>` : '';
     return `
         <li class="tl-entry tl-${it.kind}" data-kind="${it.kind}" data-has-video="${hasVideo}" data-has-photo="${hasPhoto}" data-reveal>
@@ -460,6 +522,7 @@ function renderTimeline(data) {
             </section>`).join('');
         applyFilter();
         observeReveals();
+        el.querySelectorAll('.audio-card').forEach(initAudioCard);
     }
 
     // Filters
