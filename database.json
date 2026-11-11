@@ -523,11 +523,6 @@
             "id": "BalaciICTr8",
             "date": "2025-06-19",
             "title": "Elements of Loneliness"
-        },
-        {
-            "id": "c-oD0slTiN4",
-            "date": "2025-03-21",
-            "title": "March 2025 Livestream"
         }
     ],
     "media": [
@@ -745,6 +740,34 @@
                 {
                     "time": 210,
                     "label": "Outro & Applause"
+                }
+            ]
+        },
+        {
+            "id": "genesis_20221106",
+            "title": "Snowy Skies (Pre-Flight Sketch)",
+            "date": "2022-11-06",
+            "venue": "ATL Airport Pre-Flight",
+            "setSrc": "assets/audio/genesis_20221106_snowy_skies_full.m4a",
+            "previewSrc": "assets/audio/genesis_20221106_snowy_skies_preview.m4a",
+            "duration": 180,
+            "previewDuration": 40,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Vocal Cadence"
+                },
+                {
+                    "time": 45,
+                    "label": "Melodic Ascent"
+                },
+                {
+                    "time": 95,
+                    "label": "Acoustic Progression"
+                },
+                {
+                    "time": 140,
+                    "label": "Resolution"
                 }
             ]
         }
