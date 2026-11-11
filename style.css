@@ -293,6 +293,101 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
 
 .caption { margin: 8px 0 0; font: 400 13px/1.4 var(--mono); color: var(--muted); }
 
+/* ─── Audio archives ───────────────────────────────────────────────────── */
+.audio-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.audio-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    padding: clamp(16px, 3vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color .2s ease;
+}
+.audio-card:focus-within, .audio-card.playing {
+    border-color: var(--amber);
+}
+.audio-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+.audio-title-group h3 {
+    font: 600 18px/1.3 var(--sans);
+    color: var(--text);
+    margin: 0;
+}
+.audio-meta {
+    font: 400 13px/1.4 var(--mono);
+    color: var(--muted);
+}
+.audio-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 7px 13px;
+    font: 500 13px/1 var(--mono);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.audio-btn:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+}
+.audio-btn.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--on-amber);
+}
+.audio-player-element {
+    width: 100%;
+    height: 38px;
+    outline: none;
+    accent-color: var(--amber);
+}
+.audio-markers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+.audio-markers-label {
+    font: 500 11px/1 var(--mono);
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+.marker-pill {
+    background: transparent;
+    border: 1px dashed var(--line);
+    color: var(--muted);
+    padding: 4px 10px;
+    font: 400 12px/1 var(--mono);
+    cursor: pointer;
+    transition: all .15s ease;
+}
+.marker-pill:hover, .marker-pill.active {
+    border-style: solid;
+    border-color: var(--teal);
+    color: var(--text);
+}
+
 /* ─── Quotes ───────────────────────────────────────────────────────────── */
 .quote {
     margin: 0;

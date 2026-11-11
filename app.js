@@ -105,6 +105,151 @@ function renderVideos(videos) {
     });
 }
 
+// ─── Live Audio Archives (Bandstand trimmed sets + previews + markers) ──────
+function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+}
+
+let activeAudio = null;
+let activeCard = null;
+
+function renderAudio(tracks) {
+    const el = document.getElementById('audio-tracks');
+    if (!el || !tracks) return;
+
+    el.innerHTML = tracks.map(t => {
+        const markersHtml = (t.markers || []).map(m => `
+            <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
+                <span>${formatTime(m.time)}</span> ${esc(m.label)}
+            </button>
+        `).join('');
+
+        return `
+            <article class="audio-card" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
+                <div class="audio-card-head">
+                    <div class="audio-title-group">
+                        <h3>${esc(t.title)}</h3>
+                        <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
+                    </div>
+                    <div class="audio-controls">
+                        <button type="button" class="audio-btn btn-preview" data-mode="preview" aria-label="Play ${esc(t.title)} preview">
+                            <i class="fas fa-play" aria-hidden="true"></i> Preview (${t.previewDuration}s)
+                        </button>
+                        <button type="button" class="audio-btn btn-set" data-mode="set" aria-label="Play ${esc(t.title)} full set">
+                            <i class="fas fa-play" aria-hidden="true"></i> Full Set (${formatTime(t.duration)})
+                        </button>
+                    </div>
+                </div>
+                <audio class="audio-player-element" preload="none" controls hidden></audio>
+                ${markersHtml ? `
+                    <div class="audio-markers">
+                        <span class="audio-markers-label">Cues:</span>
+                        ${markersHtml}
+                    </div>` : ''}
+            </article>`;
+    }).join('');
+
+    el.addEventListener('click', e => {
+        const btn = e.target.closest('.audio-btn');
+        const marker = e.target.closest('.marker-pill');
+        const card = e.target.closest('.audio-card');
+        if (!card) return;
+
+        const audio = card.querySelector('audio');
+        if (!audio) return;
+
+        if (btn) {
+            const mode = btn.dataset.mode;
+            const src = mode === 'preview' ? card.dataset.preview : card.dataset.set;
+
+            if (activeAudio === audio && audio.src.endsWith(src)) {
+                if (audio.paused) {
+                    audio.play();
+                    btn.classList.add('active');
+                    btn.querySelector('i').className = 'fas fa-pause';
+                    card.classList.add('playing');
+                } else {
+                    audio.pause();
+                    btn.classList.remove('active');
+                    btn.querySelector('i').className = 'fas fa-play';
+                    card.classList.remove('playing');
+                }
+                return;
+            }
+
+            if (activeAudio && activeAudio !== audio) {
+                activeAudio.pause();
+                if (activeCard) {
+                    activeCard.classList.remove('playing');
+                    activeCard.querySelectorAll('.audio-btn').forEach(b => {
+                        b.classList.remove('active');
+                        b.querySelector('i').className = 'fas fa-play';
+                    });
+                }
+            }
+
+            audio.src = src;
+            audio.hidden = false;
+            audio.play();
+            activeAudio = audio;
+            activeCard = card;
+
+            card.classList.add('playing');
+            card.querySelectorAll('.audio-btn').forEach(b => {
+                b.classList.remove('active');
+                b.querySelector('i').className = 'fas fa-play';
+            });
+            btn.classList.add('active');
+            btn.querySelector('i').className = 'fas fa-pause';
+
+            audio.onended = () => {
+                btn.classList.remove('active');
+                btn.querySelector('i').className = 'fas fa-play';
+                card.classList.remove('playing');
+            };
+            return;
+        }
+
+        if (marker) {
+            const time = Number(marker.dataset.time);
+            const setBtn = card.querySelector('.btn-set');
+
+            if (!audio.src.endsWith(card.dataset.set)) {
+                if (activeAudio && activeAudio !== audio) {
+                    activeAudio.pause();
+                    if (activeCard) {
+                        activeCard.classList.remove('playing');
+                        activeCard.querySelectorAll('.audio-btn').forEach(b => {
+                            b.classList.remove('active');
+                            b.querySelector('i').className = 'fas fa-play';
+                        });
+                    }
+                }
+                audio.src = card.dataset.set;
+                audio.hidden = false;
+                activeAudio = audio;
+                activeCard = card;
+                card.classList.add('playing');
+                card.querySelectorAll('.audio-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.querySelector('i').className = 'fas fa-play';
+                });
+                if (setBtn) {
+                    setBtn.classList.add('active');
+                    setBtn.querySelector('i').className = 'fas fa-pause';
+                }
+            }
+
+            audio.currentTime = time;
+            if (audio.paused) audio.play();
+
+            card.querySelectorAll('.marker-pill').forEach(m => m.classList.toggle('active', m === marker));
+        }
+    });
+}
+
 // ─── Shared Lightbox ────────────────────────────────────────────────────────
 function openLightbox(src, alt = '', caption = '') {
     const box = document.getElementById('lightbox');
@@ -194,6 +339,7 @@ document.addEventListener('click', e => {
 const KIND = {
     show:  { label: 'Show',  icon: 'fa-microphone' },
     video: { label: 'Video', icon: 'fa-play' },
+    audio: { label: 'Audio', icon: 'fa-headphones' },
     photo: { label: 'Photo', icon: 'fa-image' },
 };
 
@@ -216,13 +362,17 @@ function timelineItems(data) {
         items.push({ kind: 'video', date: v.date, title: v.title,
             video: v.id, clip: v.src ? { src: v.src, poster: v.poster } : null });
     });
+    (data.audio || []).forEach(a => {
+        items.push({ kind: 'audio', date: a.date, title: a.title,
+            meta: `${a.venue} · Bandstand Live Cut`, audioItem: a });
+    });
     media.filter(m => m.date && !used.has(m)).forEach(m => items.push({ kind: 'photo', date: m.date, title: m.caption, pics: [m] }));
     return items;
 }
 
 function timelineEntry(it) {
     const d = parseDate(it.date);
-    const k = KIND[it.kind];
+    const k = KIND[it.kind] || { label: 'Item', icon: 'fa-circle' };
     const hasVideo = Boolean(it.kind === 'video' || it.video || it.clip);
     const hasPhoto = Boolean(it.kind === 'photo' || (it.pics && it.pics.length));
     const pics = (it.pics || []).map(m => `
@@ -234,6 +384,15 @@ function timelineEntry(it) {
             <img src="https://i.ytimg.com/vi/${esc(it.video)}/mqdefault.jpg" alt="" loading="lazy">
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </a>` : '';
+    const audio = it.audioItem ? `
+        <div class="tl-audio" style="margin-top:12px;">
+            <audio src="${esc(it.audioItem.setSrc)}" preload="none" controls class="audio-player-element"></audio>
+            ${(it.audioItem.markers || []).length ? `
+                <div class="audio-markers" style="margin-top:8px;">
+                    <span class="audio-markers-label">Cues:</span>
+                    ${it.audioItem.markers.map(m => `<button type="button" class="marker-pill" onclick="const a=this.closest('.tl-audio').querySelector('audio');a.currentTime=${m.time};a.play();"><span>${formatTime(m.time)}</span> ${esc(m.label)}</button>`).join('')}
+                </div>` : ''}
+        </div>` : '';
     return `
         <li class="tl-entry tl-${it.kind}" data-kind="${it.kind}" data-has-video="${hasVideo}" data-has-photo="${hasPhoto}" data-reveal>
             <span class="tl-dot" aria-hidden="true"><i class="fas ${k.icon}"></i></span>
@@ -245,6 +404,7 @@ function timelineEntry(it) {
                 ${it.link && /instagram\.com\/p\//.test(it.link) ? igButton(it.link) : it.link ? `<p><a href="${esc(it.link)}"${/^https?:/.test(it.link) ? ' target="_blank" rel="noopener"' : ''}>${esc(it.linkText || 'Open')}</a></p>` : ''}
                 ${it.gallery ? `<p class="small"><a href="${esc(it.gallery)}" target="_blank" rel="noopener">${esc(it.galleryText || 'Photo gallery · ReBe Loves')}</a></p>` : ''}
                 ${video}
+                ${audio}
                 ${it.clip ? `<video class="tl-clip" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster)}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
                 ${pics ? `<div class="tl-pics">${pics}</div>` : ''}
             </div>
@@ -282,6 +442,7 @@ function renderTimeline(data) {
     const counts = {
         show: items.filter(it => it.kind === 'show').length,
         video: items.filter(it => it.kind === 'video' || it.video || it.clip).length,
+        audio: items.filter(it => it.kind === 'audio').length,
         photo: items.filter(it => it.kind === 'photo' || (it.pics && it.pics.length)).length,
     };
     const bar = document.getElementById('timeline-filters');
@@ -354,6 +515,7 @@ async function loadData() {
         renderShows(data.shows);
         renderQuotes(data.quotes);
         renderVideos(data.videos);
+        renderAudio(data.audio);
         renderMedia(data.media);
         renderTimeline(data);
         setupLightbox();

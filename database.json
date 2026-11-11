@@ -337,7 +337,7 @@
             "note": "8:20 PM set.",
             "with": "Bradley Bell, Andrew Bobulinski, Kurt & Rad",
             "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/august122025/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-08-11",
@@ -363,7 +363,7 @@
             },
             "with": "Anthony Nelson & Guntram Anderlik",
             "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/july12025/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-06-02",
@@ -378,7 +378,7 @@
             "with": "Titus Bozeman Band",
             "note": "Third billed set.",
             "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/may2020251/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-05-19",
@@ -386,7 +386,7 @@
             "venue": "The Nick",
             "source": "phone",
             "gallery": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-05-12",
@@ -401,7 +401,7 @@
             "with": "Bradley Bell, Andrew Bobulinski, Guntram Anderlik & Todd Simpson",
             "note": "Second billed set.",
             "gallery": "https://shoprebeloves.pixieset.com/songwritersnightstruestory/may82025/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-05-05",
@@ -423,7 +423,7 @@
             "with": "Todd Simpson, Guntram Anderlik, Kurt & Rad",
             "note": "First billed set.",
             "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/april152025/",
-            "galleryText": "Photo gallery · ReBe Loves"
+            "galleryText": "Photo gallery \u00b7 ReBe Loves"
         },
         {
             "date": "2025-04-07",
@@ -550,21 +550,21 @@
             "src": "assets/flyer_20261103.jpg",
             "thumb": "assets/thumbs/flyer_20261103.jpg",
             "date": "2026-11-03",
-            "alt": "Flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz, with openers Guntram and John Polar. Tuesday, November 3, 7–10 PM, $10, 21+. 2514 10th Ave. S., Birmingham, AL",
+            "alt": "Flyer: Birmingham Songwriter Nights at The Nick featuring Blair Duluoz, with openers Guntram and John Polar. Tuesday, November 3, 7\u201310 PM, $10, 21+. 2514 10th Ave. S., Birmingham, AL",
             "caption": "The Nick, Nov 3, 2026"
         },
         {
             "src": "assets/flyer_20261013.jpg",
             "thumb": "assets/thumbs/flyer_20261013.jpg",
             "date": "2026-10-13",
-            "alt": "Flyer: Listening Tree Corp. presents Birmingham Songwriter's Night at Dave's Pub, Tuesday Oct 13, 8–10 PM, featuring Guntram & The Firefly Weather, John Polar, Blair Duluoz, Slap Out!",
+            "alt": "Flyer: Listening Tree Corp. presents Birmingham Songwriter's Night at Dave's Pub, Tuesday Oct 13, 8\u201310 PM, featuring Guntram & The Firefly Weather, John Polar, Blair Duluoz, Slap Out!",
             "caption": "Dave's Pub, Oct 13, 2026"
         },
         {
             "src": "assets/flyer_20260910.jpg",
             "thumb": "assets/thumbs/flyer_20260910.jpg",
             "date": "2026-09-10",
-            "alt": "Flyer: Birmingham Songwriter Nights at True Story Brewing, Thursday, September 10th, 7–11 PM, featuring Guntram, Nick T., Kenan Blair, George Scherer, Michael Bush, John Polar, Music Married, Gatsby",
+            "alt": "Flyer: Birmingham Songwriter Nights at True Story Brewing, Thursday, September 10th, 7\u201311 PM, featuring Guntram, Nick T., Kenan Blair, George Scherer, Michael Bush, John Polar, Music Married, Gatsby",
             "caption": "True Story Brewing, Sept 10, 2026"
         },
         {
@@ -717,6 +717,144 @@
             "caption": "Songwriter Nights at The Nick, April 15, 2025",
             "credit": "@through_rebeseyes",
             "creditUrl": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/april152025/"
+        }
+    ],
+    "audio": [
+        {
+            "id": "bandstand_20261026",
+            "title": "Birmingham Bandstand (w/ Gatsby)",
+            "date": "2026-10-26",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20261026_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20261026_preview.m4a",
+            "duration": 378,
+            "previewDuration": 40,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Beat In / Flow"
+                },
+                {
+                    "time": 108,
+                    "label": "Vocal Cadence"
+                },
+                {
+                    "time": 210,
+                    "label": "Live Rhythm Shift"
+                },
+                {
+                    "time": 335,
+                    "label": "Climax: Make It Make Sense"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20260928",
+            "title": "Birmingham Bandstand (Acoustic Guitar)",
+            "date": "2026-09-28",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20260928_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20260928_preview.m4a",
+            "duration": 245,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Acoustic Progression"
+                },
+                {
+                    "time": 90,
+                    "label": "Fingerpicking Shift"
+                },
+                {
+                    "time": 150,
+                    "label": "Dynamic Cadence"
+                },
+                {
+                    "time": 220,
+                    "label": "Outro Strum"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20260818",
+            "title": "Birmingham Bandstand (Live Stage Jam)",
+            "date": "2026-08-18",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20260818_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20260818_preview.m4a",
+            "duration": 196,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Stage Intro"
+                },
+                {
+                    "time": 43,
+                    "label": "Tempo Build"
+                },
+                {
+                    "time": 95,
+                    "label": "Peak Energy"
+                },
+                {
+                    "time": 165,
+                    "label": "Stage Resolution"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20260728",
+            "title": "Birmingham Bandstand (Late-Night Set)",
+            "date": "2026-07-28",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20260728_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20260728_preview.m4a",
+            "duration": 88,
+            "previewDuration": 43,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Vocal Intro"
+                },
+                {
+                    "time": 12,
+                    "label": "Distraction Brings Attraction"
+                },
+                {
+                    "time": 52,
+                    "label": "Contemplation / Resolution"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20230124",
+            "title": "Early Bandstand Genesis",
+            "date": "2023-01-24",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20230124_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20230124_preview.m4a",
+            "duration": 234,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Early Rhythm"
+                },
+                {
+                    "time": 75,
+                    "label": "Vocal Hook"
+                },
+                {
+                    "time": 150,
+                    "label": "Bridge"
+                },
+                {
+                    "time": 210,
+                    "label": "Outro & Applause"
+                }
+            ]
         }
     ]
 }
