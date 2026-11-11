@@ -33,6 +33,27 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-11 (Part 6) — Antigravity CLI
+
+**Custom Themed Audio Player, Audio Archive Curation, & Nov 12 Video Embed Fix:**
+- **Audio Archive Filtering (`database.json`, `easteregg.html`):**
+  - Removed non-stage recordings per user verification: Oct 26 (car audio), Sep 28 (stage setup), Aug 18 (recording of another set), July 28 (non-stage set).
+  - Preserved authentic stage performance: `bandstand_20230124` ("Early Bandstand Genesis at The Nick", 2023-01-24) with full trimmed set, 45s preview, and cue markers.
+- **Custom Themed Audio Player Component (`style.css`, `app.js`):**
+  - Replaced native generic browser controls with custom PolaRecords player console:
+    - Master play/pause button with animated `.eq` visualizer bars.
+    - Custom gradient scrubber track with buffered progress and interactive touch/click seeking.
+    - Monospace time counter (`0:00 / 3:54`) tracking playback in real time.
+    - Mode toggle between Full Set and Preview with duration indicators.
+    - Synchronized cue pills that highlight dynamically as the track passes each timestamp.
+    - Built-in mute button and singleton audio playback (pausing any other active track on the site).
+  - Applied unified player console to both `#audio-tracks` on `john.html` and timeline audio cards on `archive.html`.
+- **Nov 12 Video Fix (`app.js`):**
+  - Fixed issue where clicking the Nov 12 video card failed to play and redirected to Google: YouTube videos in `renderVideos` now link directly to `https://www.youtube.com/watch?v=${v.id}` (`target="_blank" rel="noopener"`), launching the YouTube app or mobile web player cleanly without getting trapped by iframe embedding restrictions.
+  - Retained in-place video playback for local MP4 files (`live_clip.mp4`, `video_20250701.mp4`).
+- **Service Worker Cache:**
+  - Bumped to `polarecords-cache-v22` in `sw.js`.
+
 ### 2026-11-11 (Part 5) — Antigravity CLI
 
 **HTTPS Canonical Domain Enforcement & Google Keep Half-Decade Lore Integration:**
