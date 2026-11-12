@@ -33,6 +33,22 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-12 (Part 2) — Antigravity CLI
+
+**Integrated Four Authenticated Live Open Mic Recordings & Confirmed Voice 342 Live Stage Performance:**
+- **Audited & Verified Live Stage Audio:**
+  - Audited `open mic @ the nick [Voice 342 - edit].m4a` with speech transcription (`faster-whisper`): confirmed live stage mic check (*"Testing testing. Cool. Okay. Alright so I go by the name Polar AF..."*), stage performance, and closing audience cheering (*"Woo! Thank you! Thank you! Thank you!"*). Verified 100% as an authentic live open mic set at The Nick.
+  - Audited `open mic - Austin & Ala.m4a` (Oct 13, 2025): Austin Polar & Ala percussion groove (*"Just gonna be some drum beats... That was our music and sounds and stuff. Thank you."*).
+  - Audited `kirbolar.m4a` (July 15, 2024): Kirby & Polar live duo stage set (*"You're a lion... Stay with your heart on my mind... That's when we play together, it's Kirbolar!"*). Added corroborated show date `2024-07-15` to `database.json`.
+  - Audited `openmic @alex&friends [Voice 420].m4a` (March 20, 2023): Alex & Friends Open Mic stage set (*"Bottom of the wall... And you're still the devil when you walk away"*).
+- **Mastered & Exported Audio Assets:**
+  - Applied subtle 0.5s fade-ins and 1.0s fade-outs with `+faststart` AAC container optimization.
+  - Exported trimmed full sets (`assets/audio/*_set.m4a`) and 45s preview clips (`assets/audio/*_preview.m4a`) for all tracks.
+- **Configured Metadata & UI Players:**
+  - Added timestamped cue points for each track in `database.json`.
+  - Updated retro terminal `audio` command in `easteregg.html` with preview streams and cue info.
+  - Bumped Service Worker cache to `polarecords-cache-v25`.
+
 ### 2026-11-12 — Antigravity CLI
 
 **Diagnosed and Resolved Broken Flyer Images on Media & Archive Pages:**

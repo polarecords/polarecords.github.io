@@ -309,7 +309,9 @@
             "date": "2025-10-13",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
-            "source": "phone"
+            "with": "Ala",
+            "source": "phone",
+            "note": "Open mic set with Austin & Ala."
         },
         {
             "date": "2025-09-30",
@@ -470,6 +472,14 @@
             "note": "8:40 PM set."
         },
         {
+            "date": "2024-07-15",
+            "title": "Birmingham Bandstand",
+            "venue": "The Nick",
+            "with": "Kirby",
+            "source": "recording",
+            "note": "Kirbolar duo set with Kirby & Polar."
+        },
+        {
             "date": "2024-06-17",
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
@@ -480,7 +490,8 @@
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
             "with": "Alex & Friends",
-            "source": "phone"
+            "source": "phone",
+            "note": "Open mic night (Voice 420)."
         },
         {
             "date": "2023-02-06",
@@ -493,7 +504,7 @@
             "title": "Birmingham Bandstand",
             "venue": "The Nick",
             "source": "phone",
-            "note": "Earliest open mic on record."
+            "note": "Earliest open mic on record (Voice 342 live cut)."
         }
     ],
     "videos": [
@@ -716,30 +727,130 @@
     ],
     "audio": [
         {
-            "id": "bandstand_20230124",
-            "title": "Early Bandstand Genesis",
-            "date": "2023-01-24",
+            "id": "bandstand_20251013_austin_ala",
+            "title": "Austin & Ala (Open Mic Set)",
+            "date": "2025-10-13",
             "venue": "The Nick",
-            "setSrc": "assets/audio/bandstand_20230124_set.m4a",
-            "previewSrc": "assets/audio/bandstand_20230124_preview.m4a",
-            "duration": 234,
+            "setSrc": "assets/audio/bandstand_20251013_austin_ala_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20251013_austin_ala_preview.m4a",
+            "duration": 845,
             "previewDuration": 45,
             "markers": [
                 {
                     "time": 0,
-                    "label": "Early Rhythm"
+                    "label": "Setup & Groove"
+                },
+                {
+                    "time": 180,
+                    "label": "Rhythm Pocket"
+                },
+                {
+                    "time": 460,
+                    "label": "Drum Beats & Vocal Run"
+                },
+                {
+                    "time": 620,
+                    "label": "Freestyle Jam"
+                },
+                {
+                    "time": 800,
+                    "label": "Outro & Thanks"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20240715_kirbolar",
+            "title": "Kirbolar (Kirby & Polar Live Set)",
+            "date": "2024-07-15",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20240715_kirbolar_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20240715_kirbolar_preview.m4a",
+            "duration": 835,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Beat In"
                 },
                 {
                     "time": 75,
-                    "label": "Vocal Hook"
+                    "label": "Lion & Sky Harmony"
                 },
                 {
-                    "time": 150,
-                    "label": "Bridge"
+                    "time": 255,
+                    "label": "Say Hi to John"
                 },
                 {
-                    "time": 210,
-                    "label": "Outro & Applause"
+                    "time": 435,
+                    "label": "Mid-Set Groove"
+                },
+                {
+                    "time": 795,
+                    "label": "Polar Kirbolar Demise"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20230320_alex_friends",
+            "title": "Open Mic @ Alex & Friends (Voice 420)",
+            "date": "2023-03-20",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20230320_alex_friends_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20230320_alex_friends_preview.m4a",
+            "duration": 680,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Stage Intro"
+                },
+                {
+                    "time": 180,
+                    "label": "Vocal Build"
+                },
+                {
+                    "time": 380,
+                    "label": "Bottom of the Wall"
+                },
+                {
+                    "time": 520,
+                    "label": "Resolution & Climax"
+                },
+                {
+                    "time": 635,
+                    "label": "Final Applause"
+                }
+            ]
+        },
+        {
+            "id": "bandstand_20230124",
+            "title": "Bandstand Genesis (Voice 342 Live Cut)",
+            "date": "2023-01-23",
+            "venue": "The Nick",
+            "setSrc": "assets/audio/bandstand_20230124_set.m4a",
+            "previewSrc": "assets/audio/bandstand_20230124_preview.m4a",
+            "duration": 997,
+            "previewDuration": 45,
+            "markers": [
+                {
+                    "time": 0,
+                    "label": "Polar AF Mic Check"
+                },
+                {
+                    "time": 130,
+                    "label": "Make This World"
+                },
+                {
+                    "time": 300,
+                    "label": "Sunset & Crossing The Line"
+                },
+                {
+                    "time": 600,
+                    "label": "Proud of Your Passion"
+                },
+                {
+                    "time": 940,
+                    "label": "Reaching To The End & Applause"
                 }
             ]
         },
