@@ -33,6 +33,21 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-12 — Antigravity CLI
+
+**Diagnosed and Resolved Broken Flyer Images on Media & Archive Pages:**
+- **On-Device ADB & DevTools Inspection:**
+  - Connected to device via ADB loopback (`127.0.0.1:5555`) and attached DevTools to active Chrome Canary instance.
+  - Inspected DOM and visual rendering on `media.html` and `archive.html`: confirmed that `assets/thumbs/flyer_20261103.jpg` (Nov 3, 2026 @ The Nick) and `assets/thumbs/flyer_20261013.jpg` (Oct 13, 2026 @ Dave's Pub) initially produced broken image icon states due to unhandled Service Worker offline fetch rejections returning `undefined` (`net::ERR_FAILED`).
+  - Purged legacy stale cache namespaces (`polarecords-cache-v10`, `v18`, `v20`) in Chrome CacheStorage.
+- **Thumbnail Optimization:**
+  - Re-encoded `assets/thumbs/flyer_20261103.jpg` (reduced from 298 KB to 225 KB) and `assets/thumbs/flyer_20261013.jpg` as clean, progressive sRGB JPEGs with normalized JFIF markers using Pillow.
+- **Service Worker Hardening (`sw.js`):**
+  - Upgraded cache namespace to `polarecords-cache-v24`.
+  - Added safe catch-handler fallback returning HTTP 408 rather than unhandled undefined promises on missing network responses, preventing Chrome image decoding lockup.
+- **Visual Verification:**
+  - Verified across multiple live on-device screenshot captures that both flyers now render crisply and seamlessly in Chrome Canary.
+
 ### 2026-11-11 (Part 7) — Antigravity CLI
 
 **March 2025 Video Resolution & Voice 223 (Snowy Skies) Genesis Audio Integration:**

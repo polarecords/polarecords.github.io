@@ -1,4 +1,4 @@
-const CACHE_NAME = 'polarecords-cache-v23';
+const CACHE_NAME = 'polarecords-cache-v24';
 const urlsToCache = [
     './',
     './index.html',
@@ -33,19 +33,19 @@ self.addEventListener('fetch', event => {
                 caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
             }
             return networkResponse;
-        }).catch(() =>
-            caches.match(event.request).then(cached => {
-                if (cached) return cached;
-                if (event.request.headers.get('accept')?.includes('text/html')) {
-                    return new Response(
-                        `<div style="background:#0c0a08;color:#f1e8da;font-family:sans-serif;padding:20px;">
-                            You're offline. Reconnect and refresh to see PolaRecords.
-                        </div>`,
-                        { headers: { 'Content-Type': 'text/html' } }
-                    );
-                }
-            })
-        )
+        }).catch(async () => {
+            const cached = await caches.match(event.request);
+            if (cached) return cached;
+            if (event.request.headers.get('accept')?.includes('text/html')) {
+                return new Response(
+                    `<div style="background:#0c0a08;color:#f1e8da;font-family:sans-serif;padding:20px;">
+                        You're offline. Reconnect and refresh to see PolaRecords.
+                    </div>`,
+                    { headers: { 'Content-Type': 'text/html' } }
+                );
+            }
+            return new Response('', { status: 408, statusText: 'Request Timed Out / Offline' });
+        })
     );
 });
 
