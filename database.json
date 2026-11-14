@@ -541,7 +541,7 @@
             "src": "assets/photo_rebe_20260628.jpg",
             "thumb": "assets/thumbs/photo_rebe_20260628.jpg",
             "alt": "John Polar on stage in a fedora, singing into a mic under orange and teal lights",
-            "caption": "Live",
+            "caption": "Live at The Nick",
             "credit": "@through_rebeseyes",
             "creditUrl": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/"
         },
@@ -770,23 +770,55 @@
             "markers": [
                 {
                     "time": 0,
-                    "label": "Beat In"
+                    "label": "Mic Check & Beat In"
                 },
                 {
-                    "time": 75,
-                    "label": "Lion & Sky Harmony"
+                    "time": 74,
+                    "label": "Red Skies & Capes"
                 },
                 {
-                    "time": 255,
-                    "label": "Say Hi to John"
+                    "time": 108,
+                    "label": "Holding Onto Mine"
                 },
                 {
-                    "time": 435,
-                    "label": "Mid-Set Groove"
+                    "time": 130,
+                    "label": "Out in the Woods"
                 },
                 {
-                    "time": 795,
-                    "label": "Polar Kirbolar Demise"
+                    "time": 205,
+                    "label": "The Scientist & The Stranger"
+                },
+                {
+                    "time": 245,
+                    "label": "Play By Ear (Banter)"
+                },
+                {
+                    "time": 288,
+                    "label": "Red Rover / Stranger Danger"
+                },
+                {
+                    "time": 366,
+                    "label": "Peace of Mind"
+                },
+                {
+                    "time": 418,
+                    "label": "Consistency is a Mystery"
+                },
+                {
+                    "time": 510,
+                    "label": "Shadow in the Darkness"
+                },
+                {
+                    "time": 550,
+                    "label": "Shaggy Lawnmower (Banter)"
+                },
+                {
+                    "time": 635,
+                    "label": "One More Jam / Reckoning"
+                },
+                {
+                    "time": 770,
+                    "label": "Grand Finale & Outro"
                 }
             ]
         },

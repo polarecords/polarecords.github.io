@@ -33,6 +33,37 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-14 — Antigravity CLI
+
+**Deep Transcription of Kirbolar Duo Set, Popping Audio Cue Badges, Inline YouTube Embeds, & Image Authenticity Verification:**
+- **Purged Unverified Media & Preserved Authentic Stage Photography:**
+  - Audited recent image additions against user confirmation: purged unverified night shot (`20261110_190641.jpg`) and napkin setlist screenshot.
+  - Confirmed 100% authentic live stage photography for John Polar by ReBe Loves (@through_rebeseyes / Pixieset) performing live at The Nick Bandstand: hero image (`assets/photo_rebe_20260628.jpg`) and About page portrait (`assets/photo_rebe_202605_sunglasses.jpg`).
+  - Removed duplicate Oct 13 Dave's Pub story flyer (`flyer_story_20261013.jpg`) from media and database; preserved canonical `flyer_20261013.jpg`.
+- **Deep Transcription & Cue Expansion for Kirbolar (July 15, 2024 at The Nick):**
+  - Ran deep `faster-whisper` transcription across the full 835s live recording of Kirby & Polar.
+  - Expanded `bandstand_20240715_kirbolar` cue points in `database.json` to 13 distinct musical movements, collaborative jams, and comedic stage banter moments:
+    * `0:00`: "Mic Check & Beat In"
+    * `1:14`: "Red Skies & Capes"
+    * `1:48`: "Holding Onto Mine"
+    * `2:10`: "Out in the Woods"
+    * `3:25`: "The Scientist & The Stranger"
+    * `4:05`: "Play By Ear (Banter)"
+    * `4:48`: "Red Rover / Stranger Danger"
+    * `6:06`: "Peace of Mind"
+    * `6:58`: "Consistency is a Mystery"
+    * `8:30`: "Shadow in the Darkness"
+    * `9:10`: "Shaggy Lawnmower (Banter)"
+    * `10:35`: "One More Jam / Reckoning"
+    * `12:50`: "Grand Finale & Outro"
+- **Interactive Audio Cue Badges UI:**
+  - Redesigned `.audio-markers` and `.marker-pill` into warm glowing pill capsules with distinct badge counter pills (`.marker-pill span`).
+  - Added dynamic real-time tracking in `app.js` with active teal aura (`.marker-pill.active`) highlighting the current playing song/banter segment.
+- **Inline YouTube Video Playback:**
+  - Replaced video external outbound links on `media.html` and `archive.html` timeline with responsive tap-to-play `<iframe>` embeds (`youtube-nocookie.com`), keeping visitors seamlessly on polarecords.net while maintaining fallback external text links.
+- **Service Worker & Cache:**
+  - Bumped Service Worker cache to `polarecords-cache-v26`.
+
 ### 2026-11-12 (Part 2) — Antigravity CLI
 
 **Integrated Four Authenticated Live Open Mic Recordings & Confirmed Voice 342 Live Stage Performance:**

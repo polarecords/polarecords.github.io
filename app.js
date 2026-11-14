@@ -95,10 +95,10 @@ function renderVideos(videos) {
         }
         return `
         <figure class="video" data-reveal>
-            <a class="video-thumb is-youtube" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener" aria-label="Watch on YouTube: ${esc(v.title)}">
+            <button type="button" class="video-thumb is-youtube" data-video-id="${esc(v.id)}" data-title="${esc(v.title)}" aria-label="Play: ${esc(v.title)}">
                 <img src="${esc(thumb)}" alt="${esc(v.title)}" loading="lazy">
                 <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
-            </a>
+            </button>
             <figcaption>
                 <span>${esc(v.title)}</span>
                 <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''} · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">YouTube</a></span>
@@ -107,15 +107,28 @@ function renderVideos(videos) {
     }).join('');
 
     el.addEventListener('click', e => {
-        const btn = e.target.closest('button.video-thumb[data-src]');
-        if (!btn) return;
-        const vid = document.createElement('video');
-        vid.src = btn.dataset.src;
-        if (btn.dataset.poster) vid.poster = btn.dataset.poster;
-        vid.controls = true;
-        vid.autoplay = true;
-        vid.playsInline = true;
-        btn.replaceWith(vid);
+        const mp4Btn = e.target.closest('button.video-thumb[data-src]');
+        if (mp4Btn) {
+            const vid = document.createElement('video');
+            vid.src = mp4Btn.dataset.src;
+            if (mp4Btn.dataset.poster) vid.poster = mp4Btn.dataset.poster;
+            vid.controls = true;
+            vid.autoplay = true;
+            vid.playsInline = true;
+            mp4Btn.replaceWith(vid);
+            return;
+        }
+        const ytBtn = e.target.closest('button.video-thumb[data-video-id]');
+        if (ytBtn) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytBtn.dataset.videoId)}?autoplay=1&playsinline=1`;
+            iframe.title = ytBtn.dataset.title || 'YouTube video';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.className = 'video-thumb';
+            iframe.style.border = '0';
+            ytBtn.replaceWith(iframe);
+        }
     });
 }
 
@@ -212,9 +225,17 @@ function initAudioCard(card) {
         if (timeCurr) timeCurr.textContent = formatTime(cur);
         if (timeDur && audio.duration) timeDur.textContent = formatTime(audio.duration);
 
-        markers.forEach(m => {
-            const t = Number(m.dataset.time);
-            m.classList.toggle('active', cur >= t && cur < t + 25);
+        const sortedMarkers = Array.from(markers).sort((a, b) => Number(a.dataset.time) - Number(b.dataset.time));
+        let activeIdx = -1;
+        for (let i = 0; i < sortedMarkers.length; i++) {
+            if (cur >= Number(sortedMarkers[i].dataset.time)) {
+                activeIdx = i;
+            } else {
+                break;
+            }
+        }
+        sortedMarkers.forEach((m, idx) => {
+            m.classList.toggle('active', idx === activeIdx);
         });
     });
 
@@ -451,10 +472,10 @@ function timelineEntry(it) {
         </button>`;
     }).join('');
     const video = it.video ? `
-        <a class="tl-video" href="https://www.youtube.com/watch?v=${esc(it.video)}" target="_blank" rel="noopener" aria-label="Watch video: ${esc(it.title)}">
+        <button type="button" class="tl-video is-youtube" data-video-id="${esc(it.video)}" data-title="${esc(it.title)}" aria-label="Play video: ${esc(it.title)}">
             <img src="https://i.ytimg.com/vi/${esc(it.video)}/hqdefault.jpg" alt="${esc(it.title)}" loading="lazy">
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
-        </a>` : '';
+        </button>` : '';
     const audio = it.audioItem ? `
         <div class="audio-card tl-audio" data-id="${esc(it.audioItem.id)}" data-set="${esc(it.audioItem.setSrc)}" data-preview="${esc(it.audioItem.previewSrc)}" style="margin-top:14px; padding:16px;">
             <div class="themed-player" style="padding:8px 12px;">
@@ -563,9 +584,22 @@ function renderTimeline(data) {
         });
     }
 
-    // Pictures open in the shared lightbox
+    // Pictures open in the shared lightbox, videos embed inline
     setupLightbox();
     el.addEventListener('click', e => {
+        const yt = e.target.closest('button.tl-video[data-video-id]');
+        if (yt) {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt.dataset.videoId)}?autoplay=1&playsinline=1`;
+            iframe.title = yt.dataset.title || 'YouTube video';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.className = 'tl-video';
+            iframe.style.aspectRatio = '16 / 9';
+            iframe.style.border = '0';
+            yt.replaceWith(iframe);
+            return;
+        }
         const b = e.target.closest('.tl-pic');
         if (!b) return;
         const img = b.querySelector('img');
