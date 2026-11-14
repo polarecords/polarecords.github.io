@@ -35,34 +35,31 @@ Single source of truth for cross-session continuity.
 
 ### 2026-11-14 — Antigravity CLI
 
-**Deep Transcription of Kirbolar Duo Set, Popping Audio Cue Badges, Inline YouTube Embeds, & Image Authenticity Verification:**
-- **Purged Unverified Media & Preserved Authentic Stage Photography:**
-  - Audited recent image additions against user confirmation: purged unverified night shot (`20261110_190641.jpg`) and napkin setlist screenshot.
-  - Confirmed 100% authentic live stage photography for John Polar by ReBe Loves (@through_rebeseyes / Pixieset) performing live at The Nick Bandstand: hero image (`assets/photo_rebe_20260628.jpg`) and About page portrait (`assets/photo_rebe_202605_sunglasses.jpg`).
-  - Removed duplicate Oct 13 Dave's Pub story flyer (`flyer_story_20261013.jpg`) from media and database; preserved canonical `flyer_20261013.jpg`.
-- **Deep Transcription & Cue Expansion for Kirbolar (July 15, 2024 at The Nick):**
-  - Ran deep `faster-whisper` transcription across the full 835s live recording of Kirby & Polar.
-  - Expanded `bandstand_20240715_kirbolar` cue points in `database.json` to 13 distinct musical movements, collaborative jams, and comedic stage banter moments:
-    * `0:00`: "Mic Check & Beat In"
-    * `1:14`: "Red Skies & Capes"
-    * `1:48`: "Holding Onto Mine"
-    * `2:10`: "Out in the Woods"
-    * `3:25`: "The Scientist & The Stranger"
-    * `4:05`: "Play By Ear (Banter)"
-    * `4:48`: "Red Rover / Stranger Danger"
-    * `6:06`: "Peace of Mind"
-    * `6:58`: "Consistency is a Mystery"
-    * `8:30`: "Shadow in the Darkness"
-    * `9:10`: "Shaggy Lawnmower (Banter)"
-    * `10:35`: "One More Jam / Reckoning"
-    * `12:50`: "Grand Finale & Outro"
-- **Interactive Audio Cue Badges UI:**
-  - Redesigned `.audio-markers` and `.marker-pill` into warm glowing pill capsules with distinct badge counter pills (`.marker-pill span`).
-  - Added dynamic real-time tracking in `app.js` with active teal aura (`.marker-pill.active`) highlighting the current playing song/banter segment.
-- **Inline YouTube Video Playback:**
-  - Replaced video external outbound links on `media.html` and `archive.html` timeline with responsive tap-to-play `<iframe>` embeds (`youtube-nocookie.com`), keeping visitors seamlessly on polarecords.net while maintaining fallback external text links.
-- **Service Worker & Cache:**
-  - Bumped Service Worker cache to `polarecords-cache-v26`.
+**Modern Mobile Quality Optimizations & Deep Live Audio Cue Expansions Across Sets:**
+- **Modern Mobile Display & Touch Ergonomics Audit:**
+  - Added `viewport-fit=cover` across all pages (`polaraf.html`, `johnpolar.html`, `polarband.html`, `easteregg.html`).
+  - Implemented safe area insets (`env(safe-area-inset-*)`) for headers, footers, strip, lightbox, and fixed elements, ensuring comfortable layout around notches, dynamic islands, and home indicator gesture bars on iPhone and modern Android devices.
+  - Upgraded viewports to Dynamic Viewport Height (`dvh`) with `vh` fallbacks on `.hero`, `.hero.hero-sub`, and `.lightbox`, eliminating scroll jump and clipping from mobile browser address bars.
+  - Extended touch targets for mobile thumb ergonomics: navigation links (`min-height: 44px`), audio scrubbers (expanded 36px touch zone via `::before`), mode toggles (`min-height: 38px`), cue pills (`min-height: 36px`), timeline filter buttons (`min-height: 42px`), social/link buttons (`min-height: 42px`), and lightbox close button (`48x48px`).
+  - Added mobile gallery 2-column layout (`@media (max-width: 580px)`) for `.media-grid`, providing clean photo browsing without massive single-column scroll fatigue.
+  - Added background scroll lock prevention on mobile when lightbox is open.
+- **Deep Live Audio Analysis & Cue Expansion:**
+  - **Bandstand Genesis (Voice 342 Live Cut, Jan 23, 2023)**: Transcribed and expanded to 10 distinct milestones:
+    * `0:00`: "Polar AF Mic Check"
+    * `1:19`: "Through the Woods"
+    * `2:24`: "Crossing The Line"
+    * `2:58`: "Walking for a Mile"
+    * `4:08`: "Inner Child & Time Travel"
+    * `4:28`: "Song 1 Applause"
+    * `4:41`: "Worked On With A Friend"
+    * `7:40`: "Proud of Your Passion"
+    * `11:35`: "Two Mics Up (Stage Banter)"
+    * `15:40`: "Grand Finale & Outro Thanks"
+  - **Austin & Ala Open Mic Set (Oct 13, 2025)**: Updated with verified cues including "Rhythm Pocket (Ala Percussion)" and "Freestyle Jam & Pocket Shift" through the 13:48 outro.
+  - **Open Mic @ Alex & Friends (Voice 420, March 20, 2023)**: Refined cues for acoustic tuning, vocal build, "Bottom of the Wall", and final resolution.
+  - **Kirbolar (July 15, 2024 at The Nick)**: 13 cues covering all collaborative jams, freestyle verses, and banter.
+- **Service Worker & Offline Cache:**
+  - Added `polaraf.html` and `easteregg.html` to offline cache and bumped to `polarecords-cache-v27`.
 
 ### 2026-11-12 (Part 2) — Antigravity CLI
 

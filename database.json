@@ -738,11 +738,11 @@
             "markers": [
                 {
                     "time": 0,
-                    "label": "Setup & Groove"
+                    "label": "Setup & Intro"
                 },
                 {
                     "time": 180,
-                    "label": "Rhythm Pocket"
+                    "label": "Rhythm Pocket (Ala Percussion)"
                 },
                 {
                     "time": 460,
@@ -750,11 +750,11 @@
                 },
                 {
                     "time": 620,
-                    "label": "Freestyle Jam"
+                    "label": "Freestyle Jam & Pocket Shift"
                 },
                 {
-                    "time": 800,
-                    "label": "Outro & Thanks"
+                    "time": 828,
+                    "label": "Outro & Banter Thanks"
                 }
             ]
         },
@@ -834,11 +834,11 @@
             "markers": [
                 {
                     "time": 0,
-                    "label": "Stage Intro"
+                    "label": "Stage Intro & Acoustic Tuning"
                 },
                 {
                     "time": 180,
-                    "label": "Vocal Build"
+                    "label": "Vocal Build & Cadence"
                 },
                 {
                     "time": 380,
@@ -849,8 +849,8 @@
                     "label": "Resolution & Climax"
                 },
                 {
-                    "time": 635,
-                    "label": "Final Applause"
+                    "time": 669,
+                    "label": "Final Applause & Thank You"
                 }
             ]
         },
@@ -869,20 +869,40 @@
                     "label": "Polar AF Mic Check"
                 },
                 {
-                    "time": 130,
-                    "label": "Make This World"
+                    "time": 79,
+                    "label": "Through the Woods"
                 },
                 {
-                    "time": 300,
-                    "label": "Sunset & Crossing The Line"
+                    "time": 144,
+                    "label": "Crossing The Line"
                 },
                 {
-                    "time": 600,
+                    "time": 178,
+                    "label": "Walking for a Mile"
+                },
+                {
+                    "time": 248,
+                    "label": "Inner Child & Time Travel"
+                },
+                {
+                    "time": 268,
+                    "label": "Song 1 Applause"
+                },
+                {
+                    "time": 281,
+                    "label": "Worked On With A Friend"
+                },
+                {
+                    "time": 460,
                     "label": "Proud of Your Passion"
                 },
                 {
+                    "time": 695,
+                    "label": "Two Mics Up (Stage Banter)"
+                },
+                {
                     "time": 940,
-                    "label": "Reaching To The End & Applause"
+                    "label": "Grand Finale & Outro Thanks"
                 }
             ]
         },

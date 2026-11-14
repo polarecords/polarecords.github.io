@@ -343,6 +343,7 @@ function openLightbox(src, alt = '', caption = '') {
         boxCap.textContent = caption;
     }
     box.hidden = false;
+    document.body.style.overflow = 'hidden';
 }
 
 function setupLightbox() {
@@ -351,6 +352,7 @@ function setupLightbox() {
     box.dataset.ready = 'true';
     const close = () => {
         box.hidden = true;
+        document.body.style.overflow = '';
         const img = box.querySelector('img');
         if (img) img.src = '';
     };
