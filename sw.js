@@ -1,10 +1,12 @@
-const CACHE_NAME = 'polarecords-cache-v26';
+const CACHE_NAME = 'polarecords-cache-v27';
 const urlsToCache = [
     './',
     './index.html',
     './john.html',
+    './polaraf.html',
     './media.html',
     './archive.html',
+    './easteregg.html',
     './style.css',
     './app.js',
     './database.json',
