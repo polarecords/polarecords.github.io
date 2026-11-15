@@ -29,7 +29,7 @@ def fetch_feed():
 
 def main():
     data = json.loads(DB.read_text())
-    known = {v['id'] for v in data.get('videos', [])}
+    known = {v['id'] for v in data.get('videos', []) if 'id' in v}
     new = [v for v in fetch_feed() if v['id'] not in known]
     if not new:
         print('No new uploads.')
