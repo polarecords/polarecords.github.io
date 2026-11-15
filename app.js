@@ -623,8 +623,8 @@ function setupLightbox() {
 
 function getMediaCategory(src) {
     if (!src) return 'stage';
-    if (/photo_20250602/.test(src)) return 'landscape';
-    if (/flyer|marquee|20260623/.test(src)) return 'flyer';
+    if (/woods|outdoor|portrait/i.test(src)) return 'portrait';
+    if (/flyer|marquee|20260623|20260607/i.test(src)) return 'flyer';
     return 'stage';
 }
 
@@ -646,7 +646,9 @@ function renderMedia(media) {
 
     const homeGrid = document.getElementById('home-media-grid');
     if (homeGrid) {
-        const homeMedia = media.slice(0, 4);
+        // "Stage Dispatches" on homepage strictly features live stage performance photography
+        const stageMedia = media.filter(m => getMediaCategory(m.src) === 'stage');
+        const homeMedia = stageMedia.slice(0, 4);
         homeGrid.innerHTML = homeMedia.map(mediaFigureHtml).join('');
         homeGrid.addEventListener('click', e => {
             const btn = e.target.closest('button[data-index]');
@@ -675,7 +677,8 @@ function renderMedia(media) {
     if (filterBar) {
         const counts = {
             all: visibleMedia.length,
-            stage: visibleMedia.filter(m => getMediaCategory(m.src) === 'stage' || getMediaCategory(m.src) === 'landscape').length,
+            stage: visibleMedia.filter(m => getMediaCategory(m.src) === 'stage').length,
+            portrait: visibleMedia.filter(m => getMediaCategory(m.src) === 'portrait').length,
             flyer: visibleMedia.filter(m => getMediaCategory(m.src) === 'flyer').length
         };
         filterBar.querySelectorAll('.media-filter').forEach(btn => {
@@ -692,7 +695,7 @@ function renderMedia(media) {
                 const items = grid.querySelectorAll('.media-item');
                 items.forEach(it => {
                     const itType = it.dataset.type;
-                    const match = type === 'all' || (type === 'stage' && (itType === 'stage' || itType === 'landscape')) || (type === 'flyer' && itType === 'flyer');
+                    const match = type === 'all' || itType === type;
                     it.classList.toggle('is-filtered-out', !match);
                 });
             });
@@ -995,7 +998,7 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// ─── Easter egg trigger: key sequence 'polar', '~', or 5 taps on the logo ──
+// ─── Easter egg trigger: key sequence 'polar', '~', or 5 taps on the hat ────
 (function setupEasterEggTrigger() {
     let keyBuffer = '';
     window.addEventListener('keydown', e => {
@@ -1010,20 +1013,30 @@ window.addEventListener('scroll', () => {
         }
     });
 
-    let logoClicks = 0;
-    let logoTimer = null;
+    let hatClicks = 0;
+    let hatTimer = null;
     document.addEventListener('click', e => {
-        const logo = e.target.closest('.site-header .logo');
-        if (!logo) return;
-        logoClicks++;
-        clearTimeout(logoTimer);
-        if (logoClicks >= 5) {
+        const hatTarget = e.target.closest('.logo-hat, .logo img, .footer-logo img, .node-pill');
+        if (hatTarget) {
             e.preventDefault();
-            window.location.href = 'easteregg.html';
-        } else {
-            logoTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+            e.stopPropagation();
+            hatClicks++;
+
+            // Visual feedback: playful tilt
+            const img = hatTarget.querySelector('img') || hatTarget;
+            const tilt = (hatClicks % 2 === 0 ? 1 : -1) * Math.min(22, 8 + hatClicks * 3);
+            img.style.transform = `rotate(${tilt}deg) scale(1.15)`;
+            setTimeout(() => { img.style.transform = ''; }, 220);
+
+            clearTimeout(hatTimer);
+            if (hatClicks >= 5 || hatTarget.classList.contains('node-pill')) {
+                hatClicks = 0;
+                window.location.href = 'easteregg.html';
+            } else {
+                hatTimer = setTimeout(() => { hatClicks = 0; }, 2200);
+            }
         }
-    });
+    }, true);
 })();
 
 document.documentElement.classList.add('js');

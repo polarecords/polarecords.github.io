@@ -472,6 +472,20 @@ Single source of truth for cross-session continuity.
 - **Service Worker:** Bumped `CACHE_NAME` to `polarecords-cache-v4` in `sw.js`.
 - **Repository hygiene:** Restored all missing flyer/photo assets in shared storage clone; set `core.fileMode = false` to prevent Android FUSE permission churn.
 
+### 2026-11-15 — Antigravity CLI
+
+**Reported issues:**
+1. "I don't actually have a residency and pressing the hat just redirects to website."
+2. "media page has a broken view where a media element goes on too wide."
+3. "it also has some sorting incorrect like an outdoor pic labeled as stage shot."
+
+**Done:**
+- **Accurate Venue Presence (No Residency claims):** Removed all "Weekly Residency" mentions across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`). Replaced footer badge with `Birmingham Bandstand · Mondays @ The Nick (8 PM–2 AM)` styled cleanly under `.footer-venue` & `.venue-dot`.
+- **Easter Egg Hat Tap Capture:** Hat icon inside `.logo` is now isolated in `.logo-hat`. Attached capture-phase click listener in `app.js` with `e.preventDefault()` and `e.stopPropagation()` so tapping the hat gives animated tilt feedback and navigates to `easteregg.html` on tap 5 without prematurely triggering default anchor navigation to `index.html`.
+- **Media Sorting Correction:** Updated `getMediaCategory` in `app.js` to categorize `/woods|outdoor|portrait/i` as `'portrait'`. Added discrete "Outdoors & Portraits" filter on `media.html` (`data-filter="portrait"`) alongside "All", "Live Stage", and "Flyers & Marquees". Home "Stage Dispatches" grid now strictly filters for authentic stage shots.
+- **Media Card Symmetry & Overflow Guard:** Eliminated distorted horizontal aspect ratio on landscape photos (`aspect-ratio: 4 / 3`) in favor of uniform `aspect-ratio: 4 / 5; object-fit: cover;`. Applied `min-width: 0; max-width: 100%; overflow: hidden;` to `.media-item` and `.media-item button` along with `word-break: break-word` on `figcaption` to prevent wide grid blowout.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v31`.
+
 ### 2026-07-28 — Claude Code (Sonnet 5)
 
 **Reported bugs:** bottom tab nav scrolled with the page on mobile instead of staying pinned above the browser chrome/OS nav bar; header marquee "seemed broken, didn't move or update."
