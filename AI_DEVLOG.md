@@ -478,13 +478,17 @@ Single source of truth for cross-session continuity.
 1. "I don't actually have a residency and pressing the hat just redirects to website."
 2. "media page has a broken view where a media element goes on too wide."
 3. "it also has some sorting incorrect like an outdoor pic labeled as stage shot."
+4. "I don't like the photo on John polar either it's an awkward angle and photo when we have better photos"
+5. "texture doesn't look that great either"
 
 **Done:**
 - **Accurate Venue Presence (No Residency claims):** Removed all "Weekly Residency" mentions across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`). Replaced footer badge with `Birmingham Bandstand · Mondays @ The Nick (8 PM–2 AM)` styled cleanly under `.footer-venue` & `.venue-dot`.
 - **Easter Egg Hat Tap Capture:** Hat icon inside `.logo` is now isolated in `.logo-hat`. Attached capture-phase click listener in `app.js` with `e.preventDefault()` and `e.stopPropagation()` so tapping the hat gives animated tilt feedback and navigates to `easteregg.html` on tap 5 without prematurely triggering default anchor navigation to `index.html`.
 - **Media Sorting Correction:** Updated `getMediaCategory` in `app.js` to categorize `/woods|outdoor|portrait/i` as `'portrait'`. Added discrete "Outdoors & Portraits" filter on `media.html` (`data-filter="portrait"`) alongside "All", "Live Stage", and "Flyers & Marquees". Home "Stage Dispatches" grid now strictly filters for authentic stage shots.
 - **Media Card Symmetry & Overflow Guard:** Eliminated distorted horizontal aspect ratio on landscape photos (`aspect-ratio: 4 / 3`) in favor of uniform `aspect-ratio: 4 / 5; object-fit: cover;`. Applied `min-width: 0; max-width: 100%; overflow: hidden;` to `.media-item` and `.media-item button` along with `word-break: break-word` on `figcaption` to prevent wide grid blowout.
-- **Service Worker:** Bumped cache version to `polarecords-cache-v31`.
+- **John Polar Portrait & Mobile Framing Fix:** Replaced awkward low-angle sunglasses shot (`photo_rebe_202605_sunglasses.jpg`) on `john.html` with verified high-res stage portrait (`photo_rebe_20260628.jpg`). In `style.css`, replaced squat `aspect-ratio: 4 / 3` mobile override on `.artist-head img` with flattering `4 / 5` vertical framing (`max-height: min(72vh, 560px)`), eliminating head and fedora clipping on mobile devices.
+- **Texture Cleanup:** Removed `body::after` procedural SVG turbulence fractal noise texture overlay from `style.css` to restore deep, crisp, velvety dark background aesthetics without grainy artifacts.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v32`.
 
 ### 2026-07-28 — Claude Code (Sonnet 5)
 
