@@ -42,6 +42,20 @@ body {
     color: var(--text);
     font: 400 17px/1.6 var(--sans);
     overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 90% 50% at 50% -10%, rgba(224, 109, 43, 0.08), transparent 70%),
+        radial-gradient(circle at 100% 100%, rgba(111, 214, 200, 0.04), transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(224, 109, 43, 0.03), transparent 50%);
+    opacity: 0.95;
 }
 
 img, video, iframe { display: block; max-width: 100%; }
@@ -54,11 +68,21 @@ a {
 }
 a:hover { color: var(--amber); }
 
-h1, h2, h3 {
+h1, h2, h3, .tl-when, .page-head h1 {
     margin: 0;
     font-weight: 400;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    text-wrap: balance;
+}
+
+.prose p, .tl-body p, .quote blockquote, figcaption {
+    text-wrap: pretty;
+}
+
+.themed-time-row, .marker-pill span, .show-date, .tl-when, .audio-meta, .lightbox-counter {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
 }
 
 .wrap {
@@ -493,6 +517,10 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
     cursor: pointer;
     border-radius: 4px;
     touch-action: none;
+    outline: none;
+}
+.themed-scrubber:focus-visible {
+    box-shadow: 0 0 0 2px var(--amber);
 }
 .themed-scrubber::before {
     content: '';
@@ -519,6 +547,24 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
     border-radius: 4px;
     background: linear-gradient(90deg, var(--teal), var(--amber));
     width: 0%;
+}
+.themed-progress::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    transition: transform .15s ease;
+}
+.themed-scrubber:hover .themed-progress::after,
+.themed-scrubber:focus .themed-progress::after,
+.audio-card.is-playing .themed-progress::after {
+    transform: translateY(-50%) scale(1);
 }
 .themed-time-row {
     display: flex;
@@ -750,6 +796,45 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
     border-color: var(--amber);
     color: var(--amber);
 }
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    background: rgba(12, 10, 8, 0.78);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 102;
+    transition: transform .2s ease, border-color .2s ease, color .2s ease, background-color .2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.lightbox-prev {
+    left: max(16px, calc(10px + var(--sal)));
+}
+.lightbox-next {
+    right: max(16px, calc(10px + var(--sar)));
+}
+.lightbox-nav:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    transform: translateY(-50%) scale(1.08);
+    background: rgba(22, 17, 14, 0.95);
+}
+.lightbox-counter {
+    margin-top: 6px;
+    font: 600 11px/1 var(--mono);
+    color: var(--amber);
+    letter-spacing: .1em;
+}
 
 a:focus-visible,
 button:focus-visible {
@@ -980,6 +1065,14 @@ button:focus-visible {
     .site-footer .wrap {
         flex-direction: column;
         gap: 16px;
+    }
+    .lightbox-nav {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        min-height: 42px;
+        font-size: 15px;
+        background: rgba(12, 10, 8, 0.88);
     }
 }
 
