@@ -33,6 +33,23 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-15 (Part 4) — Antigravity CLI
+
+**Voice Recording Analysis, Transcription & Portfolio Expansion:**
+- **On-Device Voice Recording Discovery & Faster-Whisper Transcription**:
+  - Audited `/sdcard/Recordings/Voice Recorder/` and transcribed performance voice notes using `faster-whisper` on Termux glibc (`uv run --python python3.12-glibc`).
+  - **First Gig Corroboration**: Transcribed `nick goofin - first gig lol.m4a` (2025-04-15), directly matching the physical evidence in `flyer_20250415.png` and `photo_rebe_20250415_keys.jpg`. Captured the original live lyrics ("Down One Room / Looking For Hope"), synthesizer gear setup banter ("This is what it's like to be a musician..."), and outro crowd interactions.
+  - **Huntsville Blues Jam**: Discovered and transcribed `Lose Yourself (to Dance) - Voodoo HSV Blues Jam.m4a` (2026-04-12/13), documenting John Polar's out-of-town blues performance in Huntsville, AL.
+  - **2026 Bandstand Mastered Sets**: Transcribed four 2026 live audio sets to extract lyrical markers, stage banter, and collaborative cues:
+    - `bandstand_20260728`: "Face the Raven (Two G's and a J Cut)"
+    - `bandstand_20260818`: "Acoustic Progression & Pocket Groove"
+    - `bandstand_20260928`: "Recording The Vibe (Bandstand Session)" — multi-phone live recording banter and "Join Polar" announcement
+    - `bandstand_20261026`: "Danger in My Blood (Fall Showcase)" — complete rhythm pocket build, lyrics, and outro thanks
+- **Audio Catalog & Previews**:
+  - Exported mastered sets and 45-second preview clips with smooth 0.5s fade-in / 1.0s fade-out in `assets/audio/`.
+  - Registered 6 new tracks with cue timestamps into `database.json['audio']` (now 11 total audio tracks spanning Genesis 2022 to Fall 2026).
+- **Service Worker Cache**: Bumped cache to `polarecords-cache-v35` in `sw.js`.
+
 ### 2026-11-15 (Part 3) — Antigravity CLI
 
 **Comprehensive Design Flush-Out: Homepage Depth, Analog Vinyl Textures, Label Colophon & Media Filters:**
