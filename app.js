@@ -235,7 +235,13 @@ function initAudioCard(card) {
             }
         }
         sortedMarkers.forEach((m, idx) => {
-            m.classList.toggle('active', idx === activeIdx);
+            const isActive = idx === activeIdx;
+            if (m.classList.contains('active') !== isActive) {
+                m.classList.toggle('active', isActive);
+                if (isActive && typeof m.scrollIntoView === 'function') {
+                    m.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }
         });
     });
 
@@ -264,6 +270,7 @@ function initAudioCard(card) {
 
         scrubber.addEventListener('pointerdown', e => {
             isDragging = true;
+            scrubber.classList.add('is-dragging');
             try { scrubber.setPointerCapture(e.pointerId); } catch (_) {}
             updateScrub(e.clientX, false);
         });
@@ -276,6 +283,7 @@ function initAudioCard(card) {
         const endDrag = e => {
             if (!isDragging) return;
             isDragging = false;
+            scrubber.classList.remove('is-dragging');
             try { scrubber.releasePointerCapture(e.pointerId); } catch (_) {}
             updateScrub(e.clientX, true);
         };
@@ -407,6 +415,12 @@ function openLightboxGallery(items, index = 0) {
     activeGallery = items;
     activeGalleryIndex = Math.max(0, Math.min(items.length - 1, index));
     updateLightboxContent();
+    const fig = box.querySelector('figure');
+    if (fig) {
+        fig.style.transition = '';
+        fig.style.transform = '';
+        fig.style.opacity = '';
+    }
     box.hidden = false;
     document.body.style.overflow = 'hidden';
 }
@@ -423,6 +437,13 @@ function setupLightbox() {
     const close = () => {
         box.hidden = true;
         document.body.style.overflow = '';
+        box.style.backgroundColor = '';
+        const fig = box.querySelector('figure');
+        if (fig) {
+            fig.style.transition = '';
+            fig.style.transform = '';
+            fig.style.opacity = '';
+        }
         const img = box.querySelector('img');
         if (img) img.src = '';
         activeGallery = [];
@@ -470,28 +491,105 @@ function setupLightbox() {
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
+    let activeGesture = null;
 
     box.addEventListener('touchstart', e => {
         if (e.touches.length !== 1) return;
+        const fig = box.querySelector('figure');
+        if (fig) fig.style.transition = 'none';
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
         touchStartTime = Date.now();
+        activeGesture = null;
+    }, { passive: true });
+
+    box.addEventListener('touchmove', e => {
+        if (!touchStartTime || e.touches.length !== 1) return;
+        const fig = box.querySelector('figure');
+        if (!fig) return;
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+
+        if (!activeGesture) {
+            if (dy > 12 && dy > Math.abs(dx) * 1.2) {
+                activeGesture = 'pull-down';
+            } else if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                activeGesture = 'swipe-x';
+            }
+        }
+
+        if (activeGesture === 'pull-down') {
+            const dampenedDy = Math.max(0, dy);
+            const scale = Math.max(0.82, 1 - (dampenedDy / 1100));
+            fig.style.transform = `translate3d(0, ${dampenedDy}px, 0) scale(${scale})`;
+            const alpha = Math.max(0.25, 0.94 - (dampenedDy / 500));
+            box.style.backgroundColor = `rgba(12, 10, 8, ${alpha})`;
+        } else if (activeGesture === 'swipe-x') {
+            fig.style.transform = `translate3d(${dx}px, 0, 0)`;
+            fig.style.opacity = Math.max(0.65, 1 - (Math.abs(dx) / 600));
+        }
     }, { passive: true });
 
     box.addEventListener('touchend', e => {
         if (!touchStartTime || e.changedTouches.length !== 1) return;
+        const fig = box.querySelector('figure');
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const dt = Date.now() - touchStartTime;
         touchStartTime = 0;
+        box.style.backgroundColor = '';
 
-        if (dt < 450) {
-            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                if (dx < 0) next(); else prev();
-            } else if (dy > 80 && dy > Math.abs(dx) * 1.5) {
-                close();
-            }
+        if (!fig) {
+            activeGesture = null;
+            return;
         }
+
+        if (activeGesture === 'pull-down') {
+            if (dy > 80 || (dy > 40 && dt < 280)) {
+                fig.style.transition = 'transform .22s cubic-bezier(.2, .8, .2, 1), opacity .22s ease-out';
+                fig.style.transform = 'translate3d(0, 100%, 0) scale(0.85)';
+                fig.style.opacity = '0';
+                setTimeout(() => {
+                    close();
+                    fig.style.transition = '';
+                    fig.style.transform = '';
+                    fig.style.opacity = '';
+                }, 220);
+            } else {
+                fig.style.transition = 'transform .25s cubic-bezier(.2, .8, .2, 1), opacity .25s ease-out';
+                fig.style.transform = 'translate3d(0, 0, 0) scale(1)';
+                fig.style.opacity = '';
+                setTimeout(() => { fig.style.transition = ''; }, 260);
+            }
+        } else if (activeGesture === 'swipe-x') {
+            if (Math.abs(dx) > 50 || (Math.abs(dx) > 25 && dt < 280)) {
+                const dir = dx < 0 ? -1 : 1;
+                fig.style.transition = 'transform .18s cubic-bezier(.2, .8, .2, 1), opacity .18s ease-out';
+                fig.style.transform = `translate3d(${dir * 100}px, 0, 0)`;
+                fig.style.opacity = '0';
+                setTimeout(() => {
+                    if (dir === -1) next(); else prev();
+                    fig.style.transition = 'none';
+                    fig.style.transform = `translate3d(${-dir * 60}px, 0, 0)`;
+                    requestAnimationFrame(() => {
+                        fig.style.transition = 'transform .24s cubic-bezier(.2, .8, .2, 1), opacity .24s ease-out';
+                        fig.style.transform = 'translate3d(0, 0, 0)';
+                        fig.style.opacity = '1';
+                        setTimeout(() => { fig.style.transition = ''; }, 250);
+                    });
+                }, 180);
+            } else {
+                fig.style.transition = 'transform .25s cubic-bezier(.2, .8, .2, 1), opacity .25s ease-out';
+                fig.style.transform = 'translate3d(0, 0, 0)';
+                fig.style.opacity = '1';
+                setTimeout(() => { fig.style.transition = ''; }, 260);
+            }
+        } else {
+            fig.style.transition = '';
+            fig.style.transform = '';
+            fig.style.opacity = '';
+        }
+        activeGesture = null;
     }, { passive: true });
 }
 
@@ -809,6 +907,14 @@ async function loadData() {
         } catch (_) {}
     }
 }
+
+// ─── Sticky header state on scroll ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.site-header');
+    if (header) {
+        header.classList.toggle('is-scrolled', window.scrollY > 20);
+    }
+}, { passive: true });
 
 // ─── Easter egg trigger: key sequence 'polar', '~', or 5 taps on the logo ──
 (function setupEasterEggTrigger() {
