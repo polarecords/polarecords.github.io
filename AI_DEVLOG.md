@@ -33,6 +33,30 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-15 (Part 2) — Antigravity CLI
+
+**Advanced Mobile Gestures, Tactile Micro-Interactions, View Transitions & Glassmorphism:**
+- **Physics-Based Live Lightbox Gestures:**
+  - Upgraded mobile lightbox with live touch tracking (`touchstart`, `touchmove`, `touchend`):
+    * **Pull-to-Dismiss**: Pulling down directly translates and scales the image (`scale(0.82–1.0)`) with proportional backdrop dimming; releases cleanly with a slide-down dismiss animation (`translate3d(0, 100%, 0)`) or snaps back with spring easing if threshold isn't met.
+    * **Swipe to Browse**: Horizontal drag actively translates the image with real-time opacity feedback; releases into next/previous slide with directional entry animation or springs back cleanly.
+- **Glassmorphic Sticky Header & Scroll Adaptation:**
+  - Upgraded `.site-header` to `position: sticky; top: 0;` with glassmorphism (`backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(12, 10, 8, 0.86)`).
+  - Added `.is-scrolled` state dynamically toggled on scroll with adaptive safe-area padding (`var(--sat)`), enhanced shadow, and subtle amber border accent.
+  - Added playful interactive hat logo tilt: rotates `-6deg` on hover and `+5deg` on active tap with cubic-bezier spring return, providing tactile confirmation for the 5-tap Easter egg trigger.
+- **Cross-Document View Transitions (`@view-transition`):**
+  - Enabled persistent header and strip elements across pages via `view-transition-name: site-header` and `view-transition-name: site-strip`, preventing header jump/flicker during page navigation.
+  - Implemented custom cubic-bezier crossfade and subtle vertical translate animations for root view transitions (`::view-transition-old(root)` / `::view-transition-new(root)`), guarded by `prefers-reduced-motion` safety rules.
+- **Mobile Audio Cue Ribbon & Auto-Centering:**
+  - Converted `.audio-markers` on mobile (`@media (max-width: 640px)`) into a single-row horizontal swipe carousel with `scroll-snap-type: x proximity` and hidden scrollbars, freeing up significant vertical screen real estate.
+  - Added sticky `CUES ›` label and automated smooth horizontal centering (`scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })`) as live tracks transition across song milestones.
+- **Tactile Touch Micro-Interactions & Tap Suppression:**
+  - Removed jarring mobile browser gray tap flashes across all clickable elements with `-webkit-tap-highlight-color: transparent`.
+  - Added springy `:active` press states across nav links, logo, play/mute buttons, mode toggles, marker pills, timeline filters, media thumbnails, and social links.
+  - Enhanced audio scrubber with `.is-dragging` state that dynamically scales the scrub thumb to `1.4x` with an amber ambient halo during active dragging.
+- **Service Worker Cache:**
+  - Bumped cache version to `polarecords-cache-v29`.
+
 ### 2026-11-15 — Antigravity CLI
 
 **UI Comfort, Organic Warmth, Fluid Audio/Gallery Interactions & Security Hardening:**
