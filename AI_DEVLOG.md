@@ -481,9 +481,20 @@ Single source of truth for cross-session continuity.
 4. "I don't like the photo on John polar either it's an awkward angle and photo when we have better photos"
 5. "texture doesn't look that great either"
 6. "the awkward sizing I was talking about was the audio element that stretches the page"
+7. "remove the venue from the page details in general since it varies with more gigs that bandstand and more places than just the nick. I'm working on building my digital portfolio. look for more photos and videos online of john polar as well"
 
 **Done:**
-- **Accurate Venue Presence (No Residency claims):** Removed all "Weekly Residency" mentions across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`). Replaced footer badge with `Birmingham Bandstand · Mondays @ The Nick (8 PM–2 AM)` styled cleanly under `.footer-venue` & `.venue-dot`.
+- **Digital Portfolio Elevation & Venue Neutrality:**
+  * Removed recurring top `.strip` banner (`Birmingham Bandstand · every Monday at The Nick...`) across all pages (`index.html`, `john.html`, `media.html`, `archive.html`), allowing headers to present an uncluttered digital portfolio not tied to a single bar.
+  * Removed `.footer-venue` badge from all page footers; refined footer tagline and updated live tape catalog links to `#live-archives`.
+  * Renamed homepage `#featured-audio` section heading from "From The Bandstand" to "Live Recordings".
+  * Updated John Polar's live audio subhead from "Birmingham Bandstand at The Nick" to "Live stage sets & songwriter sessions".
+  * Updated `archive.html` hero credit from "Bandstand Stage · The Nick" to "Live Stage Photography".
+  * Updated `easteregg.html` terminal copy to reflect John's broader performance history across Birmingham venues and stages.
+- **Online Videos Discovered & Synced:**
+  * Queried YouTube channel `@thejohnpolar` (`UC_1_DnmZ-2uQdvtQQ48jnJQ`) and added 2 verified public live streams to `database.json`: "Freestyle Friday Livestream" (`C9v_wpbpG_M`, June 14, 2025) and "John Polar Live Stream" (`c-oD0slTiN4`, March 21, 2025).
+  * Patched `scripts/sync_youtube.py` to safely handle video items without an `id` field.
+- **Accurate Venue Presence (No Residency claims):** Removed all "Weekly Residency" mentions across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`).
 - **Easter Egg Hat Tap Capture:** Hat icon inside `.logo` is now isolated in `.logo-hat`. Attached capture-phase click listener in `app.js` with `e.preventDefault()` and `e.stopPropagation()` so tapping the hat gives animated tilt feedback and navigates to `easteregg.html` on tap 5 without prematurely triggering default anchor navigation to `index.html`.
 - **Media Sorting Correction:** Updated `getMediaCategory` in `app.js` to categorize `/woods|outdoor|portrait/i` as `'portrait'`. Added discrete "Outdoors & Portraits" filter on `media.html` (`data-filter="portrait"`) alongside "All", "Live Stage", and "Flyers & Marquees". Home "Stage Dispatches" grid now strictly filters for authentic stage shots.
 - **Media Card Symmetry & Overflow Guard:** Eliminated distorted horizontal aspect ratio on landscape photos (`aspect-ratio: 4 / 3`) in favor of uniform `aspect-ratio: 4 / 5; object-fit: cover;`. Applied `min-width: 0; max-width: 100%; overflow: hidden;` to `.media-item` and `.media-item button` along with `word-break: break-word` on `figcaption` to prevent wide grid blowout.
@@ -494,7 +505,7 @@ Single source of truth for cross-session continuity.
   * Added `width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` across `.audio-tracks`, `.audio-card`, `.themed-player`, and `.audio-markers`.
   * In mobile media queries (`max-width: 640px` and `max-width: 580px`), constrained `.marker-pill` to `max-width: calc(100vw - 64px)` and hid `.vinyl-disc` on narrow mobile screens so the audio scrubber and timer have generous breathing room without horizontal scrolling.
   * Added global `audio { max-width: 100%; }` rule.
-- **Service Worker:** Bumped cache version to `polarecords-cache-v33`.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v34`.
 
 ### 2026-07-28 — Claude Code (Sonnet 5)
 

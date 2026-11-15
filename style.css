@@ -140,7 +140,7 @@ h1, h2, h3, .tl-when, .page-head h1 {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px 24px;
-    padding-top: 14px;
+    padding-top: max(14px, var(--sat));
     padding-bottom: 14px;
     transition: padding .2s ease;
 }
