@@ -318,63 +318,71 @@ function initAudioCard(card) {
     });
 }
 
+function audioCardHtml(t) {
+    const markersHtml = (t.markers || []).map(m => `
+        <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
+            <span>${formatTime(m.time)}</span> ${esc(m.label)}
+        </button>
+    `).join('');
+
+    return `
+        <article class="audio-card" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
+            <div class="audio-card-head">
+                <div class="audio-title-group">
+                    <div class="audio-title-row">
+                        <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> LIVE CUT</span>
+                        <h3>${esc(t.title)}</h3>
+                    </div>
+                    <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
+                </div>
+                <div class="audio-mode-toggle">
+                    <button type="button" class="active" data-mode="set">Full Set (${formatTime(t.duration)})</button>
+                    <button type="button" data-mode="preview">Preview (${t.previewDuration}s)</button>
+                </div>
+            </div>
+
+            <div class="themed-player">
+                <button type="button" class="themed-play-btn" aria-label="Play / Pause ${esc(t.title)}">
+                    <i class="fas fa-play" aria-hidden="true"></i>
+                </button>
+                <div class="themed-track-wrap">
+                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                        <div class="themed-buffered" style="width: 0%;"></div>
+                        <div class="themed-progress" style="width: 0%;"></div>
+                    </div>
+                    <div class="themed-time-row">
+                        <span class="themed-time-curr">0:00</span>
+                        <span class="themed-time-dur">${formatTime(t.duration)}</span>
+                    </div>
+                </div>
+                <span class="vinyl-disc" aria-hidden="true"><i class="fas fa-compact-disc"></i></span>
+                <button type="button" class="themed-mute-btn" aria-label="Mute / Unmute">
+                    <i class="fas fa-volume-high" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            ${markersHtml ? `
+                <div class="audio-markers">
+                    <span class="audio-markers-label">Cues:</span>
+                    ${markersHtml}
+                </div>` : ''}
+
+            <audio class="audio-player-element" preload="none" style="display:none;"></audio>
+        </article>`;
+}
+
 function renderAudio(tracks) {
+    if (!tracks || !tracks.length) return;
     const el = document.getElementById('audio-tracks');
-    if (!el || !tracks) return;
-
-    el.innerHTML = tracks.map(t => {
-        const markersHtml = (t.markers || []).map(m => `
-            <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
-                <span>${formatTime(m.time)}</span> ${esc(m.label)}
-            </button>
-        `).join('');
-
-        return `
-            <article class="audio-card" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
-                <div class="audio-card-head">
-                    <div class="audio-title-group">
-                        <div class="audio-title-row">
-                            <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> LIVE CUT</span>
-                            <h3>${esc(t.title)}</h3>
-                        </div>
-                        <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
-                    </div>
-                    <div class="audio-mode-toggle">
-                        <button type="button" class="active" data-mode="set">Full Set (${formatTime(t.duration)})</button>
-                        <button type="button" data-mode="preview">Preview (${t.previewDuration}s)</button>
-                    </div>
-                </div>
-
-                <div class="themed-player">
-                    <button type="button" class="themed-play-btn" aria-label="Play / Pause ${esc(t.title)}">
-                        <i class="fas fa-play" aria-hidden="true"></i>
-                    </button>
-                    <div class="themed-track-wrap">
-                        <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-                            <div class="themed-buffered" style="width: 0%;"></div>
-                            <div class="themed-progress" style="width: 0%;"></div>
-                        </div>
-                        <div class="themed-time-row">
-                            <span class="themed-time-curr">0:00</span>
-                            <span class="themed-time-dur">${formatTime(t.duration)}</span>
-                        </div>
-                    </div>
-                    <button type="button" class="themed-mute-btn" aria-label="Mute / Unmute">
-                        <i class="fas fa-volume-high" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                ${markersHtml ? `
-                    <div class="audio-markers">
-                        <span class="audio-markers-label">Cues:</span>
-                        ${markersHtml}
-                    </div>` : ''}
-
-                <audio class="audio-player-element" preload="none" style="display:none;"></audio>
-            </article>`;
-    }).join('');
-
-    el.querySelectorAll('.audio-card').forEach(initAudioCard);
+    if (el) {
+        el.innerHTML = tracks.map(audioCardHtml).join('');
+        el.querySelectorAll('.audio-card').forEach(initAudioCard);
+    }
+    const homeAudio = document.getElementById('home-featured-track');
+    if (homeAudio) {
+        homeAudio.innerHTML = [tracks[0]].map(audioCardHtml).join('');
+        homeAudio.querySelectorAll('.audio-card').forEach(initAudioCard);
+    }
 }
 
 // ─── Shared Lightbox with Gallery Navigation & Touch Swipe ─────────────────
@@ -423,16 +431,36 @@ function openLightboxGallery(items, index = 0) {
     }
     box.hidden = false;
     document.body.style.overflow = 'hidden';
+    if (typeof showGestureHint === 'function') showGestureHint();
 }
 
 function openLightbox(src, alt = '', caption = '') {
     openLightboxGallery([{ src, alt, caption }], 0);
 }
 
+let showGestureHint = null;
+
 function setupLightbox() {
     const box = document.getElementById('lightbox');
     if (!box || box.dataset.ready) return;
     box.dataset.ready = 'true';
+
+    let hintTimer = null;
+    showGestureHint = () => {
+        if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) return;
+        let hint = box.querySelector('.lightbox-gesture-hint');
+        if (!hint) {
+            hint = document.createElement('div');
+            hint.className = 'lightbox-gesture-hint';
+            hint.innerHTML = '<i class="fas fa-arrows-up-down-left-right" aria-hidden="true"></i> Swipe to browse · Pull down to close';
+            box.appendChild(hint);
+        }
+        hint.classList.add('visible');
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(() => {
+            hint.classList.remove('visible');
+        }, 2500);
+    };
 
     const close = () => {
         box.hidden = true;
@@ -601,25 +629,76 @@ function getMediaCategory(src) {
 }
 
 // ─── Media grid + lightbox ───────────────────────────────────────────────────
+function mediaFigureHtml(m, i) {
+    const cat = getMediaCategory(m.src);
+    return `
+    <figure class="media-item is-${cat}" data-type="${cat}" data-reveal>
+        <button type="button" data-index="${i}" aria-label="Open: ${esc(m.caption)}">
+            <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
+        </button>
+        <figcaption>${esc(m.caption)}${m.credit ? ` <span class="muted">· photo ${m.creditUrl ? `<a href="${esc(m.creditUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)}</a>` : esc(m.credit)}</span>` : ''}</figcaption>
+    </figure>`;
+}
+
 function renderMedia(media) {
+    if (!media) return;
+    setupLightbox();
+
+    const homeGrid = document.getElementById('home-media-grid');
+    if (homeGrid) {
+        const homeMedia = media.slice(0, 4);
+        homeGrid.innerHTML = homeMedia.map(mediaFigureHtml).join('');
+        homeGrid.addEventListener('click', e => {
+            const btn = e.target.closest('button[data-index]');
+            if (!btn) return;
+            const idx = Number(btn.dataset.index);
+            const galleryItems = homeMedia.map(m => ({
+                src: m.src,
+                alt: m.alt,
+                caption: m.caption,
+                credit: m.credit,
+                creditUrl: m.creditUrl
+            }));
+            openLightboxGallery(galleryItems, idx);
+        });
+    }
+
     const grid = document.getElementById('media-grid');
-    if (!grid || !media) return;
+    if (!grid) return;
     const limit = Number(grid.dataset.limit) || media.length;
     const visibleMedia = media.slice(0, limit);
 
-    grid.innerHTML = visibleMedia.map((m, i) => {
-        const cat = getMediaCategory(m.src);
-        return `
-        <figure class="media-item is-${cat}" data-type="${cat}" data-reveal>
-            <button type="button" data-index="${i}" aria-label="Open: ${esc(m.caption)}">
-                <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
-            </button>
-            <figcaption>${esc(m.caption)}${m.credit ? ` <span class="muted">· photo ${m.creditUrl ? `<a href="${esc(m.creditUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)}</a>` : esc(m.credit)}</span>` : ''}</figcaption>
-        </figure>
-    `;
-    }).join('');
+    grid.innerHTML = visibleMedia.map(mediaFigureHtml).join('');
 
-    setupLightbox();
+    // Media Filter Bar (on media.html)
+    const filterBar = document.querySelector('.media-filters');
+    if (filterBar) {
+        const counts = {
+            all: visibleMedia.length,
+            stage: visibleMedia.filter(m => getMediaCategory(m.src) === 'stage' || getMediaCategory(m.src) === 'landscape').length,
+            flyer: visibleMedia.filter(m => getMediaCategory(m.src) === 'flyer').length
+        };
+        filterBar.querySelectorAll('.media-filter').forEach(btn => {
+            const type = btn.dataset.filter;
+            const span = btn.querySelector('span');
+            if (span && counts[type] !== undefined) span.textContent = counts[type];
+            btn.addEventListener('click', () => {
+                filterBar.querySelectorAll('.media-filter').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+                const items = grid.querySelectorAll('.media-item');
+                items.forEach(it => {
+                    const itType = it.dataset.type;
+                    const match = type === 'all' || (type === 'stage' && (itType === 'stage' || itType === 'landscape')) || (type === 'flyer' && itType === 'flyer');
+                    it.classList.toggle('is-filtered-out', !match);
+                });
+            });
+        });
+    }
+
     grid.addEventListener('click', e => {
         const btn = e.target.closest('button[data-index]');
         if (!btn) return;

@@ -44,9 +44,10 @@
         <div class="wrap">
             <a class="logo" href="index.html"><img src="assets/hat.png" alt="" width="34" height="34">PolaRecords</a>
             <nav class="site-nav" aria-label="Main">
-            <a href="index.html">Home</a>
-            <a href="john.html">John Polar</a>
-            <a href="archive.html" aria-current="page">Archive</a>
+                <a href="index.html">Home</a>
+                <a href="john.html">John Polar</a>
+                <a href="media.html" aria-current="page">Media</a>
+                <a href="archive.html">Archive</a>
             </nav>
         </div>
     </header>
@@ -65,24 +66,63 @@
             <p class="small"><a href="archive.html">&larr; Back to archive</a></p>
         </div>
         <section class="wrap" id="photos-and-flyers" style="padding-top:16px;">
+            <div class="media-filters" role="group" aria-label="Filter media by type">
+                <button type="button" class="media-filter active" data-filter="all" aria-pressed="true">All <span></span></button>
+                <button type="button" class="media-filter" data-filter="stage" aria-pressed="false">Stage Photography <span></span></button>
+                <button type="button" class="media-filter" data-filter="flyer" aria-pressed="false">Flyers &amp; Marquees <span></span></button>
+            </div>
             <div id="media-grid" class="media-grid"></div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="wrap">
-            <div>
-                <div>PolaRecords · Birmingham, Alabama</div>
-                <a href="mailto:john@polarecords.net">john@polarecords.net</a>
+        <div class="wrap footer-content">
+            <div class="footer-col col-brand">
+                <a class="footer-logo" href="index.html">
+                    <img src="assets/hat.png" alt="" width="28" height="28">
+                    <span>PolaRecords</span>
+                </a>
+                <p class="footer-tagline">Making sense of the madness through the music. Independent catalog &amp; live archives from Birmingham, Alabama.</p>
+                <div class="footer-residency">
+                    <span class="residency-dot"></span>
+                    <span>Weekly Residency: <b>The Nick Bandstand</b> · Mondays 8 PM–2 AM</span>
+                </div>
             </div>
-            <div class="social">
-                <a href="https://www.instagram.com/thejohnpolar/" target="_blank" rel="noopener noreferrer" aria-label="John Polar on Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@thejohnpolar" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.threads.com/@thejohnpolar" target="_blank" rel="noopener noreferrer" aria-label="Threads"><i class="fab fa-threads"></i></a>
-                <a href="https://www.facebook.com/thejohnpolar" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+
+            <div class="footer-col col-nav">
+                <span class="footer-heading">Catalog</span>
+                <ul class="footer-links">
+                    <li><a href="john.html#bandstand-archives">Live Audio Tapes</a></li>
+                    <li><a href="index.html#watch">Video Recordings</a></li>
+                    <li><a href="media.html">Stage Photography</a></li>
+                    <li><a href="archive.html">Full Timeline</a></li>
+                </ul>
             </div>
-            <div class="muted small">&copy; 2026 PolaRecords · <a class="muted" href="archive/terminal-2026/index.html">old site</a></div>
+
+            <div class="footer-col col-nav">
+                <span class="footer-heading">Network</span>
+                <ul class="footer-links">
+                    <li><a href="https://youtube.com/@thejohnpolar" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/thejohnpolar/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@thejohnpolar" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                    <li><a href="https://shoprebeloves.pixieset.com/" target="_blank" rel="noopener noreferrer">ReBe Loves Gallery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col col-contact">
+                <span class="footer-heading">Direct</span>
+                <a class="footer-email" href="mailto:john@polarecords.net">john@polarecords.net</a>
+                <span class="footer-coords">33.5186° N, 86.8104° W</span>
+                <div class="footer-node-status">
+                    <span class="node-pill">NODE_01 // LIVE</span>
+                    <span class="node-hint">Press ~ or tap hat 5x</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrap footer-bottom">
+            <div class="footer-copyright">&copy; 2026 PolaRecords · Birmingham, AL</div>
+            <div class="footer-sub"><a href="archive/terminal-2026/index.html">legacy terminal</a> · <a href="easteregg.html">restricted os</a></div>
         </div>
     </footer>
 

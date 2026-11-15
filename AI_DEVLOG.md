@@ -33,6 +33,29 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-15 (Part 3) — Antigravity CLI
+
+**Comprehensive Design Flush-Out: Homepage Depth, Analog Vinyl Textures, Label Colophon & Media Filters:**
+- **Homepage Depth & Front-Door Music Experience:**
+  - Integrated dedicated **"From The Bandstand"** featured live audio section (`#featured-audio` / `#home-featured-track`) onto `index.html`, bringing live sets, interactive scrubbers, and timestamped cues directly to the front door.
+  - Added **"Stage Dispatches"** photo preview strip (`#stage-dispatches` / `#home-media-grid`) onto `index.html` showcasing 4 curated ReBe Loves stage photography snapshots with seamless lightbox gallery integration.
+  - Added **"Media"** to the primary navigation bar across all pages (`index.html`, `john.html`, `media.html`, `archive.html`), making the visual photography archive directly accessible from anywhere.
+- **Analog Vinyl & Tube-Amp Atmosphere:**
+  - Added ultra-subtle procedural vinyl / film grain texture overlay via `body::after` (GPU-accelerated SVG `feTurbulence` with 0 external network requests), eliminating flat digital monitor black in favor of organic album-jacket texture.
+  - Upgraded `.audio-card.is-playing` with authentic **tube-amp warm amber back-glow** (`box-shadow: 0 0 32px rgba(224, 109, 43, 0.16)`) and ambient gradient.
+  - Added **spinning vinyl record disc badge** (`.vinyl-disc`) to the player console that spins at 33 ⅓ RPM when audio plays and pauses smoothly on pause.
+- **Independent Record Label Colophon Footer:**
+  - Transformed the sparse footer into a rich 4-column boutique record label colophon across all pages:
+    * **Brand & Residency**: Label description + weekly Monday residency badge (`Weekly Residency: The Nick Bandstand · Mondays 8 PM–2 AM`).
+    * **Catalog Sitemap**: Direct links to Live Audio Tapes, Video Recordings, Stage Photography, and Full Timeline.
+    * **Network & Portfolio**: Direct uplinks to YouTube, Instagram, TikTok, and ReBe Loves Pixieset gallery.
+    * **Direct & Telemetry**: Direct email, physical venue coordinates (`33.5186° N, 86.8104° W`), and live node telemetry pill with terminal hints.
+- **Media Filtering & Lightbox Polish:**
+  - Added dynamic category filter pills to `media.html` (`All`, `Stage Photography`, `Flyers & Marquees`) with live item counts and instant filtering.
+  - Added transient mobile touch gesture hint (`.lightbox-gesture-hint`) in the lightbox that gently advises mobile visitors on gestures and auto-fades after 2.5 seconds.
+- **Service Worker Cache:**
+  - Bumped cache to `polarecords-cache-v30`.
+
 ### 2026-11-15 (Part 2) — Antigravity CLI
 
 **Advanced Mobile Gestures, Tactile Micro-Interactions, View Transitions & Glassmorphism:**
