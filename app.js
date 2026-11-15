@@ -62,7 +62,7 @@ function renderQuotes(quotes) {
             <blockquote>${esc(q.text)}</blockquote>
             <figcaption>
                 <b>${esc(q.by)}</b>${q.role ? `, ${esc(q.role)}` : ''}
-                ${q.url ? ` · <a href="${esc(q.url)}" target="_blank" rel="noopener">Post</a>` : ''}
+                ${q.url ? ` · <a href="${esc(q.url)}" target="_blank" rel="noopener noreferrer">Post</a>` : ''}
             </figcaption>
         </figure>
     `).join('');
@@ -101,7 +101,7 @@ function renderVideos(videos) {
             </button>
             <figcaption>
                 <span>${esc(v.title)}</span>
-                <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''} · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">YouTube</a></span>
+                <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''} · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener noreferrer">YouTube</a></span>
             </figcaption>
         </figure>`;
     }).join('');
@@ -248,14 +248,54 @@ function initAudioCard(card) {
     });
 
     if (scrubber) {
-        const seek = e => {
+        let isDragging = false;
+        const updateScrub = (clientX, commit) => {
             const rect = scrubber.getBoundingClientRect();
-            const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-            if (audio.duration) {
+            if (!rect.width) return;
+            const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+            const dur = audio.duration || 1;
+            if (progress) progress.style.width = `${pos * 100}%`;
+            if (timeCurr) timeCurr.textContent = formatTime(pos * dur);
+            scrubber.setAttribute('aria-valuenow', Math.round(pos * 100));
+            if (commit && audio.duration) {
                 audio.currentTime = pos * audio.duration;
             }
         };
-        scrubber.addEventListener('click', seek);
+
+        scrubber.addEventListener('pointerdown', e => {
+            isDragging = true;
+            try { scrubber.setPointerCapture(e.pointerId); } catch (_) {}
+            updateScrub(e.clientX, false);
+        });
+
+        scrubber.addEventListener('pointermove', e => {
+            if (!isDragging) return;
+            updateScrub(e.clientX, false);
+        });
+
+        const endDrag = e => {
+            if (!isDragging) return;
+            isDragging = false;
+            try { scrubber.releasePointerCapture(e.pointerId); } catch (_) {}
+            updateScrub(e.clientX, true);
+        };
+
+        scrubber.addEventListener('pointerup', endDrag);
+        scrubber.addEventListener('pointercancel', endDrag);
+
+        scrubber.addEventListener('keydown', e => {
+            if (!audio.duration) return;
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                audio.currentTime = Math.max(0, audio.currentTime - 5);
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+            } else if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (audio.paused) audio.play(); else audio.pause();
+            }
+        });
     }
 
     markers.forEach(m => {
@@ -329,37 +369,130 @@ function renderAudio(tracks) {
     el.querySelectorAll('.audio-card').forEach(initAudioCard);
 }
 
-// ─── Shared Lightbox ────────────────────────────────────────────────────────
-function openLightbox(src, alt = '', caption = '') {
+// ─── Shared Lightbox with Gallery Navigation & Touch Swipe ─────────────────
+let activeGallery = [];
+let activeGalleryIndex = 0;
+
+function updateLightboxContent() {
     const box = document.getElementById('lightbox');
-    if (!box) return;
+    if (!box || !activeGallery.length) return;
+    const item = activeGallery[activeGalleryIndex];
+    if (!item) return;
+
     const boxImg = box.querySelector('img');
     const boxCap = box.querySelector('figcaption');
+    const counter = box.querySelector('.lightbox-counter');
+    const prevBtn = box.querySelector('.lightbox-prev');
+    const nextBtn = box.querySelector('.lightbox-next');
+
     if (boxImg) {
-        boxImg.src = src;
-        boxImg.alt = alt;
+        boxImg.src = item.src;
+        boxImg.alt = item.alt || '';
     }
     if (boxCap) {
-        boxCap.textContent = caption;
+        const creditHtml = item.credit ? ` <span class="muted">· photo ${item.creditUrl ? `<a href="${esc(item.creditUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.credit)}</a>` : esc(item.credit)}</span>` : '';
+        boxCap.innerHTML = `${esc(item.caption || '')}${creditHtml}`;
     }
+    if (counter) {
+        counter.textContent = activeGallery.length > 1 ? `${activeGalleryIndex + 1} / ${activeGallery.length}` : '';
+        counter.hidden = activeGallery.length <= 1;
+    }
+    if (prevBtn) prevBtn.hidden = activeGallery.length <= 1;
+    if (nextBtn) nextBtn.hidden = activeGallery.length <= 1;
+}
+
+function openLightboxGallery(items, index = 0) {
+    const box = document.getElementById('lightbox');
+    if (!box || !items || !items.length) return;
+    activeGallery = items;
+    activeGalleryIndex = Math.max(0, Math.min(items.length - 1, index));
+    updateLightboxContent();
     box.hidden = false;
     document.body.style.overflow = 'hidden';
+}
+
+function openLightbox(src, alt = '', caption = '') {
+    openLightboxGallery([{ src, alt, caption }], 0);
 }
 
 function setupLightbox() {
     const box = document.getElementById('lightbox');
     if (!box || box.dataset.ready) return;
     box.dataset.ready = 'true';
+
     const close = () => {
         box.hidden = true;
         document.body.style.overflow = '';
         const img = box.querySelector('img');
         if (img) img.src = '';
+        activeGallery = [];
     };
-    box.addEventListener('click', close);
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && !box.hidden) close();
+
+    const prev = () => {
+        if (activeGallery.length <= 1) return;
+        activeGalleryIndex = (activeGalleryIndex - 1 + activeGallery.length) % activeGallery.length;
+        updateLightboxContent();
+    };
+
+    const next = () => {
+        if (activeGallery.length <= 1) return;
+        activeGalleryIndex = (activeGalleryIndex + 1) % activeGallery.length;
+        updateLightboxContent();
+    };
+
+    box.addEventListener('click', e => {
+        if (e.target.closest('.lightbox-close')) {
+            close();
+            return;
+        }
+        if (e.target.closest('.lightbox-prev')) {
+            e.stopPropagation();
+            prev();
+            return;
+        }
+        if (e.target.closest('.lightbox-next')) {
+            e.stopPropagation();
+            next();
+            return;
+        }
+        if (!e.target.closest('figure')) {
+            close();
+        }
     });
+
+    document.addEventListener('keydown', e => {
+        if (box.hidden) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') prev();
+        else if (e.key === 'ArrowRight') next();
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    box.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+    }, { passive: true });
+
+    box.addEventListener('touchend', e => {
+        if (!touchStartTime || e.changedTouches.length !== 1) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const dt = Date.now() - touchStartTime;
+        touchStartTime = 0;
+
+        if (dt < 450) {
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                if (dx < 0) next(); else prev();
+            } else if (dy > 80 && dy > Math.abs(dx) * 1.5) {
+                close();
+            }
+        }
+    }, { passive: true });
 }
 
 function getMediaCategory(src) {
@@ -374,15 +507,16 @@ function renderMedia(media) {
     const grid = document.getElementById('media-grid');
     if (!grid || !media) return;
     const limit = Number(grid.dataset.limit) || media.length;
+    const visibleMedia = media.slice(0, limit);
 
-    grid.innerHTML = media.slice(0, limit).map((m, i) => {
+    grid.innerHTML = visibleMedia.map((m, i) => {
         const cat = getMediaCategory(m.src);
         return `
         <figure class="media-item is-${cat}" data-type="${cat}" data-reveal>
             <button type="button" data-index="${i}" aria-label="Open: ${esc(m.caption)}">
                 <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
             </button>
-            <figcaption>${esc(m.caption)}${m.credit ? ` <span class="muted">· photo ${m.creditUrl ? `<a href="${esc(m.creditUrl)}" target="_blank" rel="noopener">${esc(m.credit)}</a>` : esc(m.credit)}</span>` : ''}</figcaption>
+            <figcaption>${esc(m.caption)}${m.credit ? ` <span class="muted">· photo ${m.creditUrl ? `<a href="${esc(m.creditUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.credit)}</a>` : esc(m.credit)}</span>` : ''}</figcaption>
         </figure>
     `;
     }).join('');
@@ -391,8 +525,15 @@ function renderMedia(media) {
     grid.addEventListener('click', e => {
         const btn = e.target.closest('button[data-index]');
         if (!btn) return;
-        const m = media[btn.dataset.index];
-        openLightbox(m.src, m.alt, m.caption + (m.credit ? ` · photo ${m.credit}` : ''));
+        const idx = Number(btn.dataset.index);
+        const galleryItems = visibleMedia.map(m => ({
+            src: m.src,
+            alt: m.alt,
+            caption: m.caption,
+            credit: m.credit,
+            creditUrl: m.creditUrl
+        }));
+        openLightboxGallery(galleryItems, idx);
     });
 }
 
@@ -407,7 +548,7 @@ function loadInstagramEmbed(btn) {
     const box = document.createElement('div');
     box.className = 'ig-embed';
     box.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${esc(url)}" data-instgrm-version="14">
-        <a href="${esc(url)}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>`;
+        <a href="${esc(url)}" target="_blank" rel="noopener noreferrer">View this post on Instagram</a></blockquote>`;
     btn.replaceWith(box);
     if (window.instgrm) { window.instgrm.Embeds.process(); return; }
     if (!document.getElementById('ig-embed-js')) {
@@ -485,7 +626,7 @@ function timelineEntry(it) {
                     <i class="fas fa-play" aria-hidden="true"></i>
                 </button>
                 <div class="themed-track-wrap">
-                    <div class="themed-scrubber" role="progressbar">
+                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
                         <div class="themed-buffered" style="width:0%;"></div>
                         <div class="themed-progress" style="width:0%;"></div>
                     </div>
@@ -510,8 +651,8 @@ function timelineEntry(it) {
                 <h3>${esc(it.title)}</h3>
                 ${it.meta ? `<p class="muted">${esc(it.meta)}</p>` : ''}
                 ${it.note ? `<p class="tl-note">${esc(it.note)}</p>` : ''}
-                ${it.link && /instagram\.com\/p\//.test(it.link) ? igButton(it.link) : it.link ? `<p><a href="${esc(it.link)}"${/^https?:/.test(it.link) ? ' target="_blank" rel="noopener"' : ''}>${esc(it.linkText || 'Open')}</a></p>` : ''}
-                ${it.gallery ? `<p class="small"><a href="${esc(it.gallery)}" target="_blank" rel="noopener">${esc(it.galleryText || 'Photo gallery · ReBe Loves')}</a></p>` : ''}
+                ${it.link && /instagram\.com\/p\//.test(it.link) ? igButton(it.link) : it.link ? `<p><a href="${esc(it.link)}"${/^https?:/.test(it.link) ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(it.linkText || 'Open')}</a></p>` : ''}
+                ${it.gallery ? `<p class="small"><a href="${esc(it.gallery)}" target="_blank" rel="noopener noreferrer">${esc(it.galleryText || 'Photo gallery · ReBe Loves')}</a></p>` : ''}
                 ${video}
                 ${audio}
                 ${it.clip ? `<video class="tl-clip" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster)}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
@@ -604,8 +745,17 @@ function renderTimeline(data) {
         }
         const b = e.target.closest('.tl-pic');
         if (!b) return;
-        const img = b.querySelector('img');
-        openLightbox(b.dataset.src, img ? img.alt : '', b.dataset.caption || '');
+        const allPics = Array.from(el.querySelectorAll('.tl-pic:not([hidden])'));
+        const idx = allPics.indexOf(b);
+        const galleryItems = allPics.map(pic => {
+            const img = pic.querySelector('img');
+            return {
+                src: pic.dataset.src,
+                alt: img ? img.alt : '',
+                caption: pic.dataset.caption || ''
+            };
+        });
+        openLightboxGallery(galleryItems, idx >= 0 ? idx : 0);
     });
 
     draw();
@@ -633,6 +783,7 @@ function observeReveals() {
 async function loadData() {
     try {
         const res  = await fetch('database.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
         renderShows(data.shows);
@@ -646,7 +797,17 @@ async function loadData() {
         console.warn('Could not load data:', e);
     }
     observeReveals();
-    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    if (location.hash) {
+        try {
+            const id = decodeURIComponent(location.hash.slice(1));
+            if (id) {
+                const target = document.getElementById(id);
+                if (target) {
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 60);
+                }
+            }
+        } catch (_) {}
+    }
 }
 
 // ─── Easter egg trigger: key sequence 'polar', '~', or 5 taps on the logo ──

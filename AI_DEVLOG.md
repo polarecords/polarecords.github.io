@@ -33,6 +33,31 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-15 — Antigravity CLI
+
+**UI Comfort, Organic Warmth, Fluid Audio/Gallery Interactions & Security Hardening:**
+- **Organic Stage Ambiance & Human-Centric Aesthetic:**
+  - Added subtle ambient stage lighting atmosphere via procedural CSS radial gradients on `body::before` (warm amber stage glow + subtle teal undertones, 0 external request weight).
+  - Implemented typographic fluidness: `text-wrap: balance` on all headings (`h1`, `h2`, `h3`, `.tl-when`, `.page-head h1`) to eliminate orphaned single words; `text-wrap: pretty` on prose, quotes, and captions for natural, human editorial ragging.
+  - Applied tabular numeric alignment (`font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1;`) across playback timers, cue badges, show dates, and counters, preventing layout jitter and visual vibration during audio playback.
+- **Fluid Pointer-Drag Audio Scrubber:**
+  - Upgraded audio scrubber from basic click seeking to responsive Pointer Events (`pointerdown`, `pointermove`, `pointerup`, `pointercancel` with `setPointerCapture`).
+  - Added real-time touch and mouse dragging with live visual seek feedback and dynamic time indicator updates.
+  - Added tactile scrubber thumb (`.themed-progress::after`) that scales in smoothly on hover, focus, and drag.
+  - Added keyboard accessibility: ArrowLeft/Down (-5s), ArrowRight/Up (+5s), Space/Enter (play/pause).
+- **Continuous Lightbox Gallery Viewer & Gesture Navigation:**
+  - Upgraded lightbox from single-image popups to a full swipeable gallery viewer (`openLightboxGallery(items, index)`).
+  - Added tactile circular previous/next navigation buttons and amber monospace gallery counter badge (`3 / 16`).
+  - Implemented mobile touch swipe gestures: swipe left/right to browse images, swipe down (>80px) to dismiss lightbox.
+  - Added keyboard arrow navigation (Left/Right arrows for prev/next, Escape to close).
+  - Added click isolation preventing accidental dismissal when tapping photos or captions.
+- **Security & Stability Hardening:**
+  - Added `<meta name="referrer" content="strict-origin-when-cross-origin">` across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`).
+  - Hardened all external links with `rel="noopener noreferrer"`.
+  - Added `crossorigin="anonymous"` and `referrerpolicy="no-referrer"` to FontAwesome CDN resource tags.
+  - Hardened URL hash routing against malformed hashes or syntax errors via `decodeURIComponent` and safe element existence checks.
+  - Bumped Service Worker cache version to `polarecords-cache-v28`.
+
 ### 2026-11-14 — Antigravity CLI
 
 **Modern Mobile Quality Optimizations & Deep Live Audio Cue Expansions Across Sets:**
