@@ -480,6 +480,7 @@ Single source of truth for cross-session continuity.
 3. "it also has some sorting incorrect like an outdoor pic labeled as stage shot."
 4. "I don't like the photo on John polar either it's an awkward angle and photo when we have better photos"
 5. "texture doesn't look that great either"
+6. "the awkward sizing I was talking about was the audio element that stretches the page"
 
 **Done:**
 - **Accurate Venue Presence (No Residency claims):** Removed all "Weekly Residency" mentions across all pages (`index.html`, `john.html`, `media.html`, `archive.html`, `easteregg.html`). Replaced footer badge with `Birmingham Bandstand · Mondays @ The Nick (8 PM–2 AM)` styled cleanly under `.footer-venue` & `.venue-dot`.
@@ -488,7 +489,12 @@ Single source of truth for cross-session continuity.
 - **Media Card Symmetry & Overflow Guard:** Eliminated distorted horizontal aspect ratio on landscape photos (`aspect-ratio: 4 / 3`) in favor of uniform `aspect-ratio: 4 / 5; object-fit: cover;`. Applied `min-width: 0; max-width: 100%; overflow: hidden;` to `.media-item` and `.media-item button` along with `word-break: break-word` on `figcaption` to prevent wide grid blowout.
 - **John Polar Portrait & Mobile Framing Fix:** Replaced awkward low-angle sunglasses shot (`photo_rebe_202605_sunglasses.jpg`) on `john.html` with verified high-res stage portrait (`photo_rebe_20260628.jpg`). In `style.css`, replaced squat `aspect-ratio: 4 / 3` mobile override on `.artist-head img` with flattering `4 / 5` vertical framing (`max-height: min(72vh, 560px)`), eliminating head and fedora clipping on mobile devices.
 - **Texture Cleanup:** Removed `body::after` procedural SVG turbulence fractal noise texture overlay from `style.css` to restore deep, crisp, velvety dark background aesthetics without grainy artifacts.
-- **Service Worker:** Bumped cache version to `polarecords-cache-v32`.
+- **Audio Element Page Stretching & Overflow Guard:** Fixed root cause of audio element stretching mobile pages:
+  * In `style.css`, corrected `.audio-header` media query typo to `.audio-card-head, .audio-header` so title rows and full-set/preview toggle switch to stacked layout on mobile rather than pushing unconstrained horizontal boundaries.
+  * Added `width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` across `.audio-tracks`, `.audio-card`, `.themed-player`, and `.audio-markers`.
+  * In mobile media queries (`max-width: 640px` and `max-width: 580px`), constrained `.marker-pill` to `max-width: calc(100vw - 64px)` and hid `.vinyl-disc` on narrow mobile screens so the audio scrubber and timer have generous breathing room without horizontal scrolling.
+  * Added global `audio { max-width: 100%; }` rule.
+- **Service Worker:** Bumped cache version to `polarecords-cache-v33`.
 
 ### 2026-07-28 — Claude Code (Sonnet 5)
 
