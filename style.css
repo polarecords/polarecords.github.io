@@ -170,18 +170,29 @@ h1, h2, h3, .tl-when, .page-head h1 {
     -webkit-tap-highlight-color: transparent;
     transition: transform .15s ease;
 }
-.logo img {
+.logo-hat {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.logo img,
+.logo-hat img {
     width: 30px;
     height: 30px;
     filter: invert(1);
     opacity: .9;
     transition: transform .25s cubic-bezier(.2, .8, .2, 1), opacity .2s ease;
 }
-.logo:hover img {
+.logo:hover img,
+.logo:hover .logo-hat img,
+.logo-hat:hover img {
     opacity: 1;
     transform: rotate(-6deg) scale(1.08);
 }
-.logo:active img {
+.logo:active img,
+.logo:active .logo-hat img,
+.logo-hat:active img {
     transform: rotate(5deg) scale(0.92);
 }
 .site-nav {
@@ -811,6 +822,9 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
 }
 .media-item {
     margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
     transition: opacity .25s ease, transform .25s ease;
 }
 .media-item.is-filtered-out {
@@ -819,6 +833,8 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
 .media-item button {
     display: block;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     padding: 0;
     border: 1px solid var(--line);
     background: var(--bg-raised);
@@ -844,12 +860,21 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
 .media-item[data-type="stage"] img {
     object-position: center 20%;
 }
+.media-item.is-portrait img,
+.media-item[data-type="portrait"] img {
+    object-position: center 25%;
+}
 .media-item.is-landscape img,
 .media-item[data-type="landscape"] img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 5;
     object-position: center center;
 }
-.media-item figcaption { margin-top: 8px; font-size: 14px; }
+.media-item figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 /* Lightbox is a direct child of <body>; never give an ancestor a filter/transform. */
 .lightbox {
@@ -1028,7 +1053,8 @@ button:focus-visible {
     margin: 0 0 16px;
     max-width: 320px;
 }
-.footer-residency {
+.footer-residency,
+.footer-venue {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -1039,7 +1065,8 @@ button:focus-visible {
     padding: 6px 12px;
     border-radius: 4px;
 }
-.residency-dot {
+.residency-dot,
+.venue-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
