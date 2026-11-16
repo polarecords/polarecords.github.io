@@ -33,6 +33,30 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-16 — Antigravity CLI
+
+**Streamline & Modernize: Stage Deck & Curated Setlist, Persistent Floating Mini-Player, Organic Glassmorphism & Mobile Ergonomics:**
+- **Stage Deck & Curated Setlist Architecture (De-Cluttering Audio Overwhelm)**:
+  - Replaced the overwhelming 11-card vertical stack on `john.html` with an elevated, unified **Stage Deck** (`.stage-deck`) and a compact, tactile **Setlist Console** (`.stage-setlist`).
+  - Listeners can audition any of the 11 recorded sets across 4 curated eras (`All (11)`, `2026 Bandstand (4)`, `Duos & Road (3)`, `The Vault (4)`) without scrolling past thousands of pixels of repetitive controls.
+  - Tapping any row in the setlist seamlessly loads that set into the Stage Deck with real-time waveform scrubber, mode switcher (Full Set / Preview), animated spinning vinyl disc, and time-synced interactive cue pills.
+  - Active tracks feature live glowing 4-bar equalizer indicators (`.eq`) in both the deck header and the active setlist row.
+- **Persistent Floating Mini-Player Pill (`#floating-mini-player`)**:
+  - Engineered an ambient floating glass mini-player that automatically glides up from the bottom of the screen when playback is active and the main player scrolls out of the viewport.
+  - Features real-time track progress fill, rotating vinyl icon, track title, tabular timer (`formatTime(cur)` / `formatTime(dur)`), play/pause toggle, and a tactile one-tap scroll-to-deck jump button (`.fmp-jump-btn`).
+  - Respects iOS and Android gesture bar safe-area insets (`--sab`).
+- **Rounding Off "AI-Developed" Clunkiness & Aesthetic Modernization**:
+  - Replaced harsh 0px/2px table borders and rigid lines with modern organic border radii: `var(--radius-lg)` (18px) for cards, `var(--radius-md)` (14px) for player consoles and video embeds, and pill radii (`999px`) for buttons, mode toggles, tags, and markers.
+  - Added frosted glass surfaces (`backdrop-filter: blur(16px); background: var(--glass-bg); border: 1px solid var(--glass-border)`) with subtle amber ambient stage illumination inspired by modern artist websites (Half Alive, San Holo, Glass Animals, Netherfriends, ODESZA).
+  - Replaced the developer-centric monospace `NODE_01 // LIVE` hacker badge in the public footer with an authentic boutique artist imprint: `<span class="vault-pill"><span class="live-dot"></span> LIVE AUDIO VAULT</span>` and `Under the brim · 2019–2026`, while keeping the 5-tap fedora easter egg fully functional.
+- **Collapsible Year Timeline (`archive.html`)**:
+  - Transformed the 100+ entry archive timeline from an exhausting vertical wall into sleek collapsible year accordions (`.tl-year-header`).
+  - The latest year (2026) is expanded by default with item count badges, while prior years (2025, 2024, 2023, 2022) can be expanded or collapsed on demand.
+  - Added a `Toggle All` button to the archive filter toolbar and automatic year expansion when specific category filters (Audio, Videos, Photos, Shows) are active.
+- **Homepage Quick-Sampler**:
+  - Upgraded `#home-featured-track` with the new Stage Deck and a quick preview selector (`.home-quick-setlist`) allowing homepage visitors to audition live sets directly without page hopping.
+- **Service Worker Cache**: Bumped cache to `polarecords-cache-v36` in `sw.js`.
+
 ### 2026-11-15 (Part 4) — Antigravity CLI
 
 **Voice Recording Analysis, Transcription & Portfolio Expansion:**
