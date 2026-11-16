@@ -141,6 +141,97 @@ function formatTime(s) {
 }
 
 let activeAudio = null;
+let floatingPlayerEl = null;
+
+function ensureFloatingPlayer() {
+    if (floatingPlayerEl) return floatingPlayerEl;
+    floatingPlayerEl = document.createElement('aside');
+    floatingPlayerEl.id = 'floating-mini-player';
+    floatingPlayerEl.className = 'floating-mini-player';
+    floatingPlayerEl.setAttribute('aria-label', 'Active Audio Controls');
+    floatingPlayerEl.innerHTML = `
+        <div class="fmp-inner">
+            <span class="fmp-disc" aria-hidden="true"><i class="fas fa-compact-disc"></i></span>
+            <div class="fmp-info" title="Scroll to player deck">
+                <span class="fmp-title">PolaRecords Live Audio</span>
+                <span class="fmp-time">0:00 / 0:00</span>
+            </div>
+            <div class="fmp-actions">
+                <button type="button" class="fmp-play-btn" aria-label="Play or Pause">
+                    <i class="fas fa-play" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="fmp-jump-btn" aria-label="Scroll to player deck" title="Scroll to player">
+                    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="fmp-progress-bar"><div class="fmp-progress-fill"></div></div>
+    `;
+    document.body.appendChild(floatingPlayerEl);
+
+    const playBtn = floatingPlayerEl.querySelector('.fmp-play-btn');
+    const jumpBtn = floatingPlayerEl.querySelector('.fmp-jump-btn');
+    const info = floatingPlayerEl.querySelector('.fmp-info');
+
+    playBtn.addEventListener('click', () => {
+        if (!activeAudio) return;
+        if (activeAudio.paused) activeAudio.play(); else activeAudio.pause();
+    });
+
+    const scrollToActive = () => {
+        if (!activeAudio) return;
+        const card = activeAudio.closest('.audio-card');
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+    jumpBtn.addEventListener('click', scrollToActive);
+    info.addEventListener('click', scrollToActive);
+
+    window.addEventListener('scroll', checkFloatingPlayerVisibility, { passive: true });
+    return floatingPlayerEl;
+}
+
+function checkFloatingPlayerVisibility() {
+    if (!floatingPlayerEl || !activeAudio) return;
+    const isPlaying = !activeAudio.paused;
+    const card = activeAudio.closest('.audio-card');
+    if (!card) {
+        floatingPlayerEl.classList.remove('is-visible');
+        return;
+    }
+    const rect = card.getBoundingClientRect();
+    const inViewport = (rect.bottom > 80 && rect.top < window.innerHeight - 80);
+
+    if (activeAudio.currentTime > 0 && !inViewport) {
+        floatingPlayerEl.classList.add('is-visible');
+        floatingPlayerEl.classList.toggle('is-playing', isPlaying);
+        const playIcon = floatingPlayerEl.querySelector('.fmp-play-btn i');
+        if (playIcon) playIcon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+    } else {
+        floatingPlayerEl.classList.remove('is-visible');
+    }
+}
+
+function syncFloatingPlayer(audio, card) {
+    const fmp = ensureFloatingPlayer();
+    const titleEl = fmp.querySelector('.fmp-title');
+    const timeEl = fmp.querySelector('.fmp-time');
+    const fillEl = fmp.querySelector('.fmp-progress-fill');
+    const playIcon = fmp.querySelector('.fmp-play-btn i');
+
+    const cardTitle = card.querySelector('.audio-title-group h3');
+    if (cardTitle && titleEl) titleEl.textContent = cardTitle.textContent;
+
+    const cur = audio.currentTime || 0;
+    const dur = audio.duration || 1;
+    if (timeEl) timeEl.textContent = `${formatTime(cur)} / ${formatTime(audio.duration)}`;
+    if (fillEl) fillEl.style.width = `${Math.min(100, (cur / dur) * 100)}%`;
+    if (playIcon) playIcon.className = audio.paused ? 'fas fa-play' : 'fas fa-pause';
+    fmp.classList.toggle('is-playing', !audio.paused);
+
+    checkFloatingPlayerVisibility();
+}
 
 function initAudioCard(card) {
     if (card.dataset.initAudio) return;
@@ -202,11 +293,13 @@ function initAudioCard(card) {
         activeAudio = audio;
         card.classList.add('is-playing');
         if (playIcon) playIcon.className = 'fas fa-pause';
+        syncFloatingPlayer(audio, card);
     });
 
     audio.addEventListener('pause', () => {
         card.classList.remove('is-playing');
         if (playIcon) playIcon.className = 'fas fa-play';
+        syncFloatingPlayer(audio, card);
     });
 
     audio.addEventListener('ended', () => {
@@ -215,6 +308,7 @@ function initAudioCard(card) {
         if (progress) progress.style.width = '0%';
         if (timeCurr) timeCurr.textContent = '0:00';
         markers.forEach(m => m.classList.remove('active'));
+        syncFloatingPlayer(audio, card);
     });
 
     audio.addEventListener('timeupdate', () => {
@@ -224,6 +318,13 @@ function initAudioCard(card) {
         if (progress) progress.style.width = `${pct}%`;
         if (timeCurr) timeCurr.textContent = formatTime(cur);
         if (timeDur && audio.duration) timeDur.textContent = formatTime(audio.duration);
+
+        if (activeAudio === audio && floatingPlayerEl && floatingPlayerEl.classList.contains('is-visible')) {
+            const timeEl = floatingPlayerEl.querySelector('.fmp-time');
+            const fillEl = floatingPlayerEl.querySelector('.fmp-progress-fill');
+            if (timeEl) timeEl.textContent = `${formatTime(cur)} / ${formatTime(audio.duration || dur)}`;
+            if (fillEl) fillEl.style.width = `${pct}%`;
+        }
 
         const sortedMarkers = Array.from(markers).sort((a, b) => Number(a.dataset.time) - Number(b.dataset.time));
         let activeIdx = -1;
@@ -318,19 +419,38 @@ function initAudioCard(card) {
     });
 }
 
-function audioCardHtml(t) {
+function getTrackCategory(t) {
+    if (!t) return 'vault';
+    if (t.id && t.id.startsWith('bandstand_2026')) return 'bandstand';
+    if (/kirbolar|voodoo|austin/i.test(t.id || '') || /duo|jam|kirby/i.test(t.title || '')) return 'duo-road';
+    return 'vault';
+}
+
+function getTrackTag(t) {
+    if (!t) return 'LIVE CUT';
+    if (/blues/i.test(t.title || '')) return 'BLUES JAM';
+    if (/kirbolar|duo/i.test(t.title || '')) return 'DUO SET';
+    if (/first gig/i.test(t.title || '')) return 'FIRST GIG';
+    if (/genesis|sketch/i.test(t.title || '')) return 'VAULT CUT';
+    return 'LIVE CUT';
+}
+
+function audioCardHtml(t, isDeck = false) {
     const markersHtml = (t.markers || []).map(m => `
         <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
             <span>${formatTime(m.time)}</span> ${esc(m.label)}
         </button>
     `).join('');
 
+    const tag = getTrackTag(t);
+
     return `
-        <article class="audio-card" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
+        <article class="audio-card ${isDeck ? 'stage-deck' : ''}" data-id="${esc(t.id)}" data-set="${esc(t.setSrc)}" data-preview="${esc(t.previewSrc)}" data-reveal>
             <div class="audio-card-head">
                 <div class="audio-title-group">
                     <div class="audio-title-row">
-                        <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> LIVE CUT</span>
+                        <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> ${esc(tag)}</span>
+                        ${isDeck ? '<span class="stage-deck-badge"><i class="fas fa-headphones" aria-hidden="true"></i> STAGE DECK</span>' : ''}
                         <h3>${esc(t.title)}</h3>
                     </div>
                     <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
@@ -371,17 +491,178 @@ function audioCardHtml(t) {
         </article>`;
 }
 
+function setlistRowHtml(t, idx, isActive = false) {
+    const tag = getTrackTag(t);
+    const cat = getTrackCategory(t);
+    return `
+        <li class="setlist-row ${isActive ? 'is-active' : ''}" data-id="${esc(t.id)}" data-cat="${cat}">
+            <button type="button" class="setlist-play-btn" aria-label="Play ${esc(t.title)}">
+                <span class="setlist-index">${idx + 1}</span>
+                <span class="eq"><i></i><i></i><i></i><i></i></span>
+            </button>
+            <div class="setlist-meta-col">
+                <div class="setlist-title-line">
+                    <span class="setlist-title">${esc(t.title)}</span>
+                    <span class="setlist-tag">${esc(tag)}</span>
+                </div>
+                <span class="setlist-sub">${esc(t.venue)} · ${t.date}</span>
+            </div>
+            <div class="setlist-right">
+                <span class="setlist-dur">${formatTime(t.duration)}</span>
+            </div>
+        </li>
+    `;
+}
+
 function renderAudio(tracks) {
     if (!tracks || !tracks.length) return;
+
+    // 1. On john.html (#audio-tracks):
     const el = document.getElementById('audio-tracks');
     if (el) {
-        el.innerHTML = tracks.map(audioCardHtml).join('');
-        el.querySelectorAll('.audio-card').forEach(initAudioCard);
+        let currentTrackIndex = 0;
+
+        const counts = {
+            all: tracks.length,
+            bandstand: tracks.filter(t => getTrackCategory(t) === 'bandstand').length,
+            'duo-road': tracks.filter(t => getTrackCategory(t) === 'duo-road').length,
+            vault: tracks.filter(t => getTrackCategory(t) === 'vault').length,
+        };
+
+        el.innerHTML = `
+            <div class="stage-deck-wrap">
+                ${audioCardHtml(tracks[0], true)}
+            </div>
+            <div class="stage-setlist" data-reveal>
+                <div class="setlist-header">
+                    <div class="setlist-heading-group">
+                        <h3>Stage Setlist &amp; Catalog</h3>
+                        <span class="setlist-count-badge">${tracks.length} LIVE SETS</span>
+                    </div>
+                    <div class="setlist-filters" role="group" aria-label="Filter sets by category">
+                        <button type="button" class="setlist-filter-btn active" data-filter="all">All (${counts.all})</button>
+                        <button type="button" class="setlist-filter-btn" data-filter="bandstand">2026 Bandstand (${counts.bandstand})</button>
+                        <button type="button" class="setlist-filter-btn" data-filter="duo-road">Duos &amp; Road (${counts['duo-road']})</button>
+                        <button type="button" class="setlist-filter-btn" data-filter="vault">The Vault (${counts.vault})</button>
+                    </div>
+                </div>
+                <ul class="setlist-tracks">
+                    ${tracks.map((t, i) => setlistRowHtml(t, i, i === 0)).join('')}
+                </ul>
+            </div>
+        `;
+
+        const deckWrap = el.querySelector('.stage-deck-wrap');
+        const setlistUl = el.querySelector('.setlist-tracks');
+        const filterBtns = el.querySelectorAll('.setlist-filter-btn');
+
+        const initDeck = () => {
+            const card = deckWrap.querySelector('.audio-card');
+            if (card) initAudioCard(card);
+        };
+        initDeck();
+
+        const loadTrack = (idx, autoPlay = true) => {
+            if (idx < 0 || idx >= tracks.length) return;
+            currentTrackIndex = idx;
+            const t = tracks[idx];
+
+            if (activeAudio) {
+                activeAudio.pause();
+            }
+
+            deckWrap.innerHTML = audioCardHtml(t, true);
+            initDeck();
+
+            setlistUl.querySelectorAll('.setlist-row').forEach((row, i) => {
+                row.classList.toggle('is-active', i === idx);
+            });
+
+            if (autoPlay) {
+                const card = deckWrap.querySelector('.audio-card');
+                const audio = card ? card.querySelector('audio') : null;
+                if (audio) {
+                    audio.play().catch(() => {});
+                }
+            }
+
+            if (window.innerWidth <= 768) {
+                deckWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        };
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.dataset.filter;
+                setlistUl.querySelectorAll('.setlist-row').forEach(row => {
+                    const rowCat = row.dataset.cat;
+                    const match = cat === 'all' || rowCat === cat;
+                    row.classList.toggle('is-filtered-out', !match);
+                });
+            });
+        });
+
+        setlistUl.addEventListener('click', e => {
+            const row = e.target.closest('.setlist-row');
+            if (!row) return;
+            const targetId = row.dataset.id;
+            const idx = tracks.findIndex(t => t.id === targetId);
+            if (idx === -1) return;
+
+            if (idx === currentTrackIndex) {
+                const card = deckWrap.querySelector('.audio-card');
+                const audio = card ? card.querySelector('audio') : null;
+                if (audio) {
+                    if (audio.paused) audio.play(); else audio.pause();
+                }
+            } else {
+                loadTrack(idx, true);
+            }
+        });
     }
+
+    // 2. On index.html (#home-featured-track):
     const homeAudio = document.getElementById('home-featured-track');
     if (homeAudio) {
-        homeAudio.innerHTML = [tracks[0]].map(audioCardHtml).join('');
-        homeAudio.querySelectorAll('.audio-card').forEach(initAudioCard);
+        homeAudio.innerHTML = `
+            ${audioCardHtml(tracks[0], true)}
+            <div class="home-quick-setlist" data-reveal>
+                <div class="home-quick-info">
+                    <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> VAULT</span>
+                    <span>11 stage sets recorded · Quick preview:</span>
+                </div>
+                <div class="home-quick-pills">
+                    <button type="button" class="home-quick-pill active" data-id="${tracks[0].id}">Danger in My Blood</button>
+                    ${tracks.slice(1, 4).map(t => `<button type="button" class="home-quick-pill" data-id="${t.id}">${esc(t.title.split('(')[0].trim())}</button>`).join('')}
+                    <a href="john.html#live-archives" style="display:inline-flex;align-items:center;padding:6px 12px;font:500 12px/1 var(--mono);color:var(--amber);text-decoration:none;">All 11 &rarr;</a>
+                </div>
+            </div>
+        `;
+        const card = homeAudio.querySelector('.audio-card');
+        if (card) initAudioCard(card);
+
+        const pills = homeAudio.querySelectorAll('.home-quick-pill');
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const id = pill.dataset.id;
+                const t = tracks.find(x => x.id === id);
+                if (!t) return;
+                pills.forEach(p => p.classList.toggle('active', p === pill));
+
+                if (activeAudio) activeAudio.pause();
+                const cardWrap = homeAudio.querySelector('.audio-card');
+                const newCardHtml = audioCardHtml(t, true);
+                cardWrap.outerHTML = newCardHtml;
+                const newCard = homeAudio.querySelector('.audio-card');
+                if (newCard) {
+                    initAudioCard(newCard);
+                    const aud = newCard.querySelector('audio');
+                    if (aud) aud.play().catch(() => {});
+                }
+            });
+        });
     }
 }
 
@@ -859,11 +1140,36 @@ function renderTimeline(data) {
             if (!years.length || years.at(-1).year !== y) years.push({ year: y, items: [] });
             years.at(-1).items.push(it);
         });
-        el.innerHTML = years.map(g => `
-            <section class="tl-year" data-year="${esc(g.year)}">
-                <h2 class="tl-year-label" data-reveal>${esc(g.year)}</h2>
+        el.innerHTML = years.map((g, idx) => {
+            const isLatest = idx === 0;
+            return `
+            <section class="tl-year ${isLatest ? 'is-open' : 'is-collapsed'}" data-year="${esc(g.year)}">
+                <div class="tl-year-header" role="button" tabindex="0" aria-expanded="${isLatest}" aria-label="Toggle ${esc(g.year)} timeline">
+                    <h2 class="tl-year-label">${esc(g.year)}</h2>
+                    <span class="tl-year-count">${g.items.length} ${g.items.length === 1 ? 'item' : 'items'}</span>
+                    <span class="tl-year-toggle" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                </div>
                 <ol class="tl-list">${g.items.map(timelineEntry).join('')}</ol>
-            </section>`).join('');
+            </section>`;
+        }).join('');
+
+        el.querySelectorAll('.tl-year-header').forEach(hdr => {
+            hdr.addEventListener('click', () => {
+                const sec = hdr.closest('.tl-year');
+                if (!sec) return;
+                const wasCollapsed = sec.classList.contains('is-collapsed');
+                sec.classList.toggle('is-collapsed', !wasCollapsed);
+                sec.classList.toggle('is-open', wasCollapsed);
+                hdr.setAttribute('aria-expanded', wasCollapsed ? 'true' : 'false');
+            });
+            hdr.addEventListener('keydown', e => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    hdr.click();
+                }
+            });
+        });
+
         applyFilter();
         observeReveals();
         el.querySelectorAll('.audio-card').forEach(initAudioCard);
@@ -886,15 +1192,35 @@ function renderTimeline(data) {
                 || (active === 'photo' && e.dataset.hasPhoto === 'true');
             e.hidden = !match;
         });
-        el.querySelectorAll('.tl-year').forEach(y => { y.hidden = !y.querySelector('.tl-entry:not([hidden])'); });
+        el.querySelectorAll('.tl-year').forEach(y => {
+            const hasVisible = Boolean(y.querySelector('.tl-entry:not([hidden])'));
+            y.hidden = !hasVisible;
+            if (active !== 'all' && hasVisible) {
+                y.classList.remove('is-collapsed');
+                y.classList.add('is-open');
+                const hdr = y.querySelector('.tl-year-header');
+                if (hdr) hdr.setAttribute('aria-expanded', 'true');
+            }
+        });
     }
     if (bar) {
         bar.innerHTML = [['all', 'Everything', items.length], ...Object.entries(KIND).filter(([k]) => counts[k]).map(([k, v]) => [k, v.label + 's', counts[k]])]
             .map(([k, label, n]) => `<button type="button" data-kind="${k}" aria-pressed="${k === 'all'}">${esc(label)} <span>${n}</span></button>`).join('')
+            + `<button type="button" class="tl-toggle-all" aria-label="Expand or collapse all years">Toggle All</button>`
             + `<button type="button" class="tl-sort" aria-label="Change order">Newest first <i class="fas fa-arrow-down-long"></i></button>`;
         bar.addEventListener('click', e => {
             const b = e.target.closest('button');
             if (!b) return;
+            if (b.classList.contains('tl-toggle-all')) {
+                const anyCollapsed = el.querySelector('.tl-year.is-collapsed:not([hidden])');
+                el.querySelectorAll('.tl-year:not([hidden])').forEach(y => {
+                    y.classList.toggle('is-collapsed', !anyCollapsed);
+                    y.classList.toggle('is-open', Boolean(anyCollapsed));
+                    const hdr = y.querySelector('.tl-year-header');
+                    if (hdr) hdr.setAttribute('aria-expanded', anyCollapsed ? 'true' : 'false');
+                });
+                return;
+            }
             if (b.classList.contains('tl-sort')) {
                 newestFirst = !newestFirst;
                 b.innerHTML = `${newestFirst ? 'Newest' : 'Oldest'} first <i class="fas fa-arrow-${newestFirst ? 'down' : 'up'}-long"></i>`;
@@ -1016,7 +1342,7 @@ window.addEventListener('scroll', () => {
     let hatClicks = 0;
     let hatTimer = null;
     document.addEventListener('click', e => {
-        const hatTarget = e.target.closest('.logo-hat, .logo img, .footer-logo img, .node-pill');
+        const hatTarget = e.target.closest('.logo-hat, .logo img, .footer-logo img, .vault-pill, .node-pill');
         if (hatTarget) {
             e.preventDefault();
             e.stopPropagation();
