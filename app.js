@@ -356,6 +356,7 @@ function initAudioCard(card) {
 
     if (scrubber) {
         let isDragging = false;
+        const tooltip = scrubber.querySelector('.themed-scrubber-tooltip');
         const updateScrub = (clientX, commit) => {
             const rect = scrubber.getBoundingClientRect();
             if (!rect.width) return;
@@ -363,6 +364,10 @@ function initAudioCard(card) {
             const dur = audio.duration || 1;
             if (progress) progress.style.width = `${pos * 100}%`;
             if (timeCurr) timeCurr.textContent = formatTime(pos * dur);
+            if (tooltip) {
+                tooltip.textContent = formatTime(pos * dur);
+                tooltip.style.left = `${pos * 100}%`;
+            }
             scrubber.setAttribute('aria-valuenow', Math.round(pos * 100));
             if (commit && audio.duration) {
                 audio.currentTime = pos * audio.duration;
@@ -377,8 +382,16 @@ function initAudioCard(card) {
         });
 
         scrubber.addEventListener('pointermove', e => {
-            if (!isDragging) return;
-            updateScrub(e.clientX, false);
+            if (isDragging) {
+                updateScrub(e.clientX, false);
+            } else if (tooltip && audio.duration) {
+                const rect = scrubber.getBoundingClientRect();
+                if (rect.width) {
+                    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                    tooltip.textContent = formatTime(pos * audio.duration);
+                    tooltip.style.left = `${pos * 100}%`;
+                }
+            }
         });
 
         const endDrag = e => {
@@ -438,7 +451,9 @@ function getTrackTag(t) {
 function audioCardHtml(t, isDeck = false) {
     const markersHtml = (t.markers || []).map(m => `
         <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
-            <span>${formatTime(m.time)}</span> ${esc(m.label)}
+            <span class="marker-time">${formatTime(m.time)}</span>
+            <span class="marker-label">${esc(m.label)}</span>
+            <span class="marker-eq" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
     `).join('');
 
@@ -455,7 +470,7 @@ function audioCardHtml(t, isDeck = false) {
                     </div>
                     <span class="audio-meta">${esc(t.venue)} · ${t.date}</span>
                 </div>
-                <div class="audio-mode-toggle">
+                <div class="audio-mode-toggle" role="group" aria-label="Playback mode">
                     <button type="button" class="active" data-mode="set">Full Set (${formatTime(t.duration)})</button>
                     <button type="button" data-mode="preview">Preview (${t.previewDuration}s)</button>
                 </div>
@@ -466,9 +481,10 @@ function audioCardHtml(t, isDeck = false) {
                     <i class="fas fa-play" aria-hidden="true"></i>
                 </button>
                 <div class="themed-track-wrap">
-                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" aria-label="Seek track">
                         <div class="themed-buffered" style="width: 0%;"></div>
                         <div class="themed-progress" style="width: 0%;"></div>
+                        <div class="themed-scrubber-tooltip" aria-hidden="true">0:00</div>
                     </div>
                     <div class="themed-time-row">
                         <span class="themed-time-curr">0:00</span>
@@ -482,8 +498,8 @@ function audioCardHtml(t, isDeck = false) {
             </div>
 
             ${markersHtml ? `
-                <div class="audio-markers">
-                    <span class="audio-markers-label">Cues:</span>
+                <div class="audio-markers" role="group" aria-label="Track cues and markers">
+                    <span class="audio-markers-label"><i class="fas fa-bookmark" aria-hidden="true"></i> CUES</span>
                     ${markersHtml}
                 </div>` : ''}
 
@@ -1086,14 +1102,15 @@ function timelineEntry(it) {
         </button>` : '';
     const audio = it.audioItem ? `
         <div class="audio-card tl-audio" data-id="${esc(it.audioItem.id)}" data-set="${esc(it.audioItem.setSrc)}" data-preview="${esc(it.audioItem.previewSrc)}" style="margin-top:14px; padding:clamp(12px, 3vw, 16px);">
-            <div class="themed-player" style="padding:8px 10px; gap:8px;">
-                <button type="button" class="themed-play-btn" style="width:36px;height:36px;min-width:36px;font-size:13px;" aria-label="Play ${esc(it.audioItem.title)}">
+            <div class="themed-player" style="padding:10px 12px; gap:10px;">
+                <button type="button" class="themed-play-btn" style="width:38px;height:38px;min-width:38px;font-size:13px;" aria-label="Play ${esc(it.audioItem.title)}">
                     <i class="fas fa-play" aria-hidden="true"></i>
                 </button>
                 <div class="themed-track-wrap">
-                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                    <div class="themed-scrubber" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" aria-label="Seek track">
                         <div class="themed-buffered" style="width:0%;"></div>
                         <div class="themed-progress" style="width:0%;"></div>
+                        <div class="themed-scrubber-tooltip" aria-hidden="true">0:00</div>
                     </div>
                     <div class="themed-time-row">
                         <span class="themed-time-curr">0:00</span>
@@ -1102,16 +1119,26 @@ function timelineEntry(it) {
                 </div>
             </div>
             ${(it.audioItem.markers || []).length ? `
-                <div class="audio-markers" style="margin-top:10px;">
-                    <span class="audio-markers-label">Cues:</span>
-                    ${it.audioItem.markers.map(m => `<button type="button" class="marker-pill" data-time="${m.time}"><span>${formatTime(m.time)}</span> ${esc(m.label)}</button>`).join('')}
+                <div class="audio-markers" role="group" aria-label="Track cues and markers" style="margin-top:10px;">
+                    <span class="audio-markers-label"><i class="fas fa-bookmark" aria-hidden="true"></i> CUES</span>
+                    ${it.audioItem.markers.map(m => `
+                        <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
+                            <span class="marker-time">${formatTime(m.time)}</span>
+                            <span class="marker-label">${esc(m.label)}</span>
+                            <span class="marker-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+                        </button>
+                    `).join('')}
                 </div>` : ''}
             <audio class="audio-player-element" preload="none" style="display:none;"></audio>
         </div>` : '';
+    const kindPill = `<span class="tl-kind-pill tl-kind-${it.kind}"><i class="fas ${k.icon}" aria-hidden="true"></i> ${esc(k.label)}</span>`;
     return `
         <li class="tl-entry tl-${it.kind}" data-kind="${it.kind}" data-has-video="${hasVideo}" data-has-photo="${hasPhoto}" data-reveal>
             <span class="tl-dot" aria-hidden="true"><i class="fas ${k.icon}"></i></span>
-            <div class="tl-when">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}` : 'Undated'}<span>${esc(k.label)}</span></div>
+            <div class="tl-when">
+                <span class="tl-date-text">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}` : 'Undated'}</span>
+                ${kindPill}
+            </div>
             <div class="tl-body">
                 <h3>${esc(it.title)}</h3>
                 ${it.meta ? `<p class="muted">${esc(it.meta)}</p>` : ''}
@@ -1209,9 +1236,9 @@ function renderTimeline(data) {
     }
     if (bar) {
         bar.innerHTML = [['all', 'Everything', items.length], ...Object.entries(KIND).filter(([k]) => counts[k]).map(([k, v]) => [k, v.label + 's', counts[k]])]
-            .map(([k, label, n]) => `<button type="button" data-kind="${k}" aria-pressed="${k === 'all'}">${esc(label)} <span>${n}</span></button>`).join('')
-            + `<button type="button" class="tl-toggle-all" aria-label="Expand or collapse all years">Toggle All</button>`
-            + `<button type="button" class="tl-sort" aria-label="Change order">Newest first <i class="fas fa-arrow-down-long"></i></button>`;
+            .map(([k, label, n]) => `<button type="button" data-kind="${k}" aria-pressed="${k === 'all'}">${esc(label)} <span class="tl-pill-count">${n}</span></button>`).join('')
+            + `<button type="button" class="tl-toggle-all" aria-label="Expand or collapse all years"><i class="fas fa-angles-up-down" aria-hidden="true"></i> Toggle All</button>`
+            + `<button type="button" class="tl-sort" aria-label="Change order"><span class="tl-sort-label">${newestFirst ? 'Newest' : 'Oldest'} first</span> <i class="fas fa-arrow-${newestFirst ? 'down' : 'up'}-long" aria-hidden="true"></i></button>`;
         bar.addEventListener('click', e => {
             const b = e.target.closest('button');
             if (!b) return;
@@ -1227,7 +1254,10 @@ function renderTimeline(data) {
             }
             if (b.classList.contains('tl-sort')) {
                 newestFirst = !newestFirst;
-                b.innerHTML = `${newestFirst ? 'Newest' : 'Oldest'} first <i class="fas fa-arrow-${newestFirst ? 'down' : 'up'}-long"></i>`;
+                const sortLabel = b.querySelector('.tl-sort-label');
+                const sortIcon = b.querySelector('i');
+                if (sortLabel) sortLabel.textContent = `${newestFirst ? 'Newest' : 'Oldest'} first`;
+                if (sortIcon) sortIcon.className = `fas fa-arrow-${newestFirst ? 'down' : 'up'}-long`;
                 draw();
                 return;
             }
