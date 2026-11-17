@@ -70,6 +70,7 @@ body::before {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     font-size: 18px;
     line-height: 1.6;
     max-width: 800px;
@@ -78,6 +79,20 @@ body::before {
     box-sizing: border-box;
     animation: flicker 0.15s infinite;
     position: relative;
+}
+
+audio {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.audio-stream-wrap {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 8px 0;
 }
 
 /* Log Stream Enhancements */

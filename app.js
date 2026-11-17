@@ -635,8 +635,12 @@ function renderAudio(tracks) {
                 </div>
                 <div class="home-quick-pills">
                     <button type="button" class="home-quick-pill active" data-id="${tracks[0].id}">Danger in My Blood</button>
-                    ${tracks.slice(1, 4).map(t => `<button type="button" class="home-quick-pill" data-id="${t.id}">${esc(t.title.split('(')[0].trim())}</button>`).join('')}
-                    <a href="john.html#live-archives" style="display:inline-flex;align-items:center;padding:6px 12px;font:500 12px/1 var(--mono);color:var(--amber);text-decoration:none;">All 11 &rarr;</a>
+                    ${tracks.slice(1, 4).map(t => {
+                        let short = t.title.split('(')[0].trim();
+                        if (short.length > 22) short = short.slice(0, 20).trim() + '…';
+                        return `<button type="button" class="home-quick-pill" data-id="${t.id}">${esc(short)}</button>`;
+                    }).join('')}
+                    <a href="john.html#live-archives" style="display:inline-flex;align-items:center;padding:6px 12px;font:500 12px/1 var(--mono);color:var(--amber);text-decoration:none;white-space:nowrap;">All 11 &rarr;</a>
                 </div>
             </div>
         `;
@@ -1081,9 +1085,9 @@ function timelineEntry(it) {
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </button>` : '';
     const audio = it.audioItem ? `
-        <div class="audio-card tl-audio" data-id="${esc(it.audioItem.id)}" data-set="${esc(it.audioItem.setSrc)}" data-preview="${esc(it.audioItem.previewSrc)}" style="margin-top:14px; padding:16px;">
-            <div class="themed-player" style="padding:8px 12px;">
-                <button type="button" class="themed-play-btn" style="width:36px;height:36px;font-size:13px;" aria-label="Play ${esc(it.audioItem.title)}">
+        <div class="audio-card tl-audio" data-id="${esc(it.audioItem.id)}" data-set="${esc(it.audioItem.setSrc)}" data-preview="${esc(it.audioItem.previewSrc)}" style="margin-top:14px; padding:clamp(12px, 3vw, 16px);">
+            <div class="themed-player" style="padding:8px 10px; gap:8px;">
+                <button type="button" class="themed-play-btn" style="width:36px;height:36px;min-width:36px;font-size:13px;" aria-label="Play ${esc(it.audioItem.title)}">
                     <i class="fas fa-play" aria-hidden="true"></i>
                 </button>
                 <div class="themed-track-wrap">
@@ -1098,7 +1102,7 @@ function timelineEntry(it) {
                 </div>
             </div>
             ${(it.audioItem.markers || []).length ? `
-                <div class="audio-markers" style="margin-top:8px;">
+                <div class="audio-markers" style="margin-top:10px;">
                     <span class="audio-markers-label">Cues:</span>
                     ${it.audioItem.markers.map(m => `<button type="button" class="marker-pill" data-time="${m.time}"><span>${formatTime(m.time)}</span> ${esc(m.label)}</button>`).join('')}
                 </div>` : ''}

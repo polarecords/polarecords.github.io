@@ -33,6 +33,33 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-17 — Antigravity CLI
+
+**Eliminated Audio File Border Breakout & Mobile Horizontal Overflow:**
+- **Global Viewport Lock**: Added `overflow-x: hidden; max-width: 100%;` to `html` (in addition to `body`), preventing mobile WebKit/Blink browsers from engaging rubber-band horizontal drag when nested elements render.
+- **Audio Markers Carousel & Pill Bounding**:
+  - Replaced the brittle `calc(100vw - 64px)` with container-relative `max-width: 100%; box-sizing: border-box;` on `.marker-pill`.
+  - Configured `.audio-markers` across all viewports to use native horizontal momentum scrolling (`flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin;`), with a sticky "CUES ›" indicator. This ensures cues never force player cards to expand horizontally regardless of cue label length.
+- **Stage Deck Wrap & Player Console Constraints**:
+  - Bound `.stage-deck-wrap`, `.stage-deck`, `.audio-card`, and `.audio-tracks` to strict `width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;`.
+  - Bound `.themed-player`, `.themed-track-wrap`, and `.themed-scrubber` to `min-width: 0; max-width: 100%; overflow: hidden; box-sizing: border-box;`.
+  - Ensured mobile views (<=580px) hide the decorative spinning vinyl disc and compress play/mute button footprints (38px/34px).
+- **Home Quick Setlist Mobile Layout**:
+  - Added mobile stacking rules (`flex-direction: column; align-items: stretch;`) for `.home-quick-setlist`.
+  - Truncated extra-long quick-preview titles in `app.js` to ~20 characters to keep preview pills contained cleanly within mobile viewports.
+- **Curated Setlist Drawer & Row Containment**:
+  - Wrapped `.stage-setlist`, `.setlist-header`, `.setlist-filters`, and `.setlist-tracks` in strict `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;`.
+  - Constrained `.setlist-meta-col`, `.setlist-title-line`, `.setlist-title`, and `.setlist-sub` with `text-overflow: ellipsis; overflow: hidden; white-space: nowrap; min-width: 0;`.
+- **Timeline Audio Cards (`archive.html`)**:
+  - Updated `.tl-entry` to use `grid-template-columns: 96px minmax(0, 1fr)` (and `minmax(0, 1fr)` on mobile <=720px) so child audio cards cannot force CSS Grid tracks wider than the screen.
+  - Added `.tl-audio { width: 100% !important; min-width: 0 !important; max-width: 100% !important; box-sizing: border-box !important; overflow: hidden !important; }`.
+- **Floating Mini-Player Precision Bounding**:
+  - Updated `#floating-mini-player` to `width: min(calc(100% - 24px), 520px); max-width: calc(100% - 24px); overflow: hidden;` (and `calc(100% - 20px)` on mobile), eliminating scrollbar-induced width overflows caused by `100vw`.
+- **Easteregg Restricted Terminal Stream Bounding**:
+  - Wrapped native `<audio controls>` elements in `.audio-stream-wrap` with `width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;`.
+  - Added `overflow-x: hidden;` to `#terminal` in `terminal.css`.
+- **Service Worker Cache**: Bumped cache version to `polarecords-cache-v37` in `sw.js`.
+
 ### 2026-11-16 — Antigravity CLI
 
 **Streamline & Modernize: Stage Deck & Curated Setlist, Persistent Floating Mini-Player, Organic Glassmorphism & Mobile Ergonomics:**
