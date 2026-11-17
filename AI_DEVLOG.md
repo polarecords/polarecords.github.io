@@ -33,6 +33,35 @@ Single source of truth for cross-session continuity.
 
 ## Session History (newest first)
 
+### 2026-11-17 (Part 2) — Antigravity CLI
+
+**High-End Audio Player & Responsive Pill System Quality Overhaul:**
+- **Tactile High-Fidelity Audio Scrubber**:
+  - Removed clipping `overflow: hidden` from `.themed-scrubber`, allowing the 14px playhead thumb knob to sit fully centered on the 6px track without being sliced in half.
+  - Redesigned the track as an authentic dark recessed groove with inner shadow (`inset 0 1px 3px rgba(0, 0, 0, 0.7)`) and luminous amber/teal gradient fill (`linear-gradient(90deg, #6fd6c8 0%, #e08b43 50%, #e06d2b 100%)`).
+  - Added dynamic track height expansion (6px to 8px) on hover/scrub and an expanded 24px hit area for effortless touch scrubbing.
+  - Engineered an interactive floating scrub time tooltip (`.themed-scrubber-tooltip`) displaying real-time time preview (`formatTime`) that tracks cursor/finger position across the scrubber during drag and hover.
+- **Micro-Equalizer & Refined Cue Pills (`.marker-pill`)**:
+  - Eliminated the abrasive solid orange background from idle cue pills; idle pills now feature a subtle frosted glass body with an amber-tinted badge (`rgba(224, 109, 43, 0.12)`) and tabular font formatting.
+  - Active playing cue pills now illuminate with an ambient amber glow and an animated 3-bar equalizer wave (`.marker-eq`) that dances in real time next to the cue title.
+- **Archive Timeline Category Micro-Pills (`.tl-kind-pill`)**:
+  - Replaced raw unstyled category text in `.tl-when` with bespoke micro-capsule badges (`.tl-kind-pill`) complete with curated icons and chromatic tinting:
+    - `SHOW`: Warm amber capsule with microphone icon (`fa-microphone`).
+    - `VIDEO`: Crimson rose capsule with play icon (`fa-play`).
+    - `AUDIO`: Stage amber capsule with headphones icon (`fa-headphones`).
+    - `PHOTO`: Cyan teal capsule with image icon (`fa-image`).
+    - `MILESTONE`: Luminous teal capsule with flag/star icon.
+  - Seamlessly aligns next to the date text on mobile viewports for clean, modern readability.
+- **Segmented Filter Pill Rack (`.tl-filters`)**:
+  - Encased archive filter buttons in a frosted glass segmented pill rack (`backdrop-filter: blur(12px)`).
+  - Transformed unstyled filter counts into recessed tabular badges (`.tl-pill-count`) that invert cleanly on active filter selection.
+  - Enhanced sort order and toggle buttons with smooth state toggling and font awesome direction icons.
+- **Button Physics & Playback Controls**:
+  - Rebuilt `.themed-play-btn` and `.fmp-play-btn` with multi-stop radial bevels and spring-scale press responses (`transform: scale(0.92)`).
+  - Upgraded `.audio-mode-toggle` into an authentic recessed hardware switch with sliding amber active segment.
+  - Polished `.setlist-filter-btn`, `.home-quick-pill`, `.setlist-tag`, and `.setlist-dur` with matching capsule radii and active states.
+- **Service Worker Cache**: Bumped cache version to `polarecords-cache-v38` in `sw.js`.
+
 ### 2026-11-17 — Antigravity CLI
 
 **Eliminated Audio File Border Breakout & Mobile Horizontal Overflow:**
