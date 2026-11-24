@@ -6,7 +6,12 @@
       "venue": "Café Negril, New Orleans",
       "with": "John Lisi & Delta Funk",
       "video": "1FKCS_flkqw",
-      "audio": "negril_20261117_blues"
+      "audio": "negril_20261117_blues",
+      "clip": {
+        "src": "assets/video_20261117_negril.mp4",
+        "poster": "assets/photo_20261117_negril.jpg",
+        "caption": "Where Do We Go (Live at Café Negril, 4:36)"
+      }
     },
     {
       "date": "2026-11-09",
@@ -517,6 +522,7 @@
   ],
   "videos": [
     {
+      "src": "assets/video_20261117_negril.mp4",
       "id": "1FKCS_flkqw",
       "date": "2026-11-17",
       "title": "Where Do We Go (Café Negril Blues Jam)",

@@ -89,7 +89,7 @@ function renderVideos(videos) {
                 </button>
                 <figcaption>
                     <span>${esc(v.title)}</span>
-                    <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''}</span>
+                    <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''}${v.id ? ` · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener noreferrer">YouTube</a>` : ''}</span>
                 </figcaption>
             </figure>`;
         }
@@ -115,6 +115,7 @@ function renderVideos(videos) {
             vid.controls = true;
             vid.autoplay = true;
             vid.playsInline = true;
+            vid.className = 'video-thumb' + (mp4Btn.classList.contains('is-vertical') ? ' is-vertical' : '');
             mp4Btn.replaceWith(vid);
             return;
         }
@@ -127,6 +128,9 @@ function renderVideos(videos) {
             iframe.allowFullscreen = true;
             iframe.className = 'video-thumb';
             iframe.style.border = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = 'auto';
+            iframe.style.aspectRatio = '16 / 9';
             ytBtn.replaceWith(iframe);
         }
     });
@@ -932,8 +936,9 @@ function getMediaCategory(src) {
 // ─── Media grid + lightbox ───────────────────────────────────────────────────
 function mediaFigureHtml(m, i) {
     const cat = getMediaCategory(m.src);
+    const isLandscape = /negril|landscape/i.test(m.src);
     return `
-    <figure class="media-item is-${cat}" data-type="${cat}" data-reveal>
+    <figure class="media-item is-${cat}${isLandscape ? ' is-landscape' : ''}" data-type="${cat}" data-reveal>
         <button type="button" data-index="${i}" aria-label="Open: ${esc(m.caption)}">
             <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
         </button>
@@ -1068,12 +1073,13 @@ function timelineItems(data) {
         if (s.clip?.src) usedClips.add(s.clip.src);
         items.push({ kind: 'show', date: s.date, title: s.title,
             meta: `${s.venue}${s.with ? ` · with ${s.with}` : ''}`, note: s.note, pics,
-            link: s.link, linkText: s.linkText, gallery: s.gallery, galleryText: s.galleryText, clip: s.clip });
+            link: s.link, linkText: s.linkText, gallery: s.gallery, galleryText: s.galleryText,
+            video: s.video, clip: s.clip });
     });
     (data.videos || []).forEach(v => {
         if (v.src && usedClips.has(v.src)) return;
         items.push({ kind: 'video', date: v.date, title: v.title,
-            video: v.id, clip: v.src ? { src: v.src, poster: v.poster } : null });
+            video: v.id, poster: v.poster, clip: v.src ? { src: v.src, poster: v.poster } : null });
     });
     (data.audio || []).forEach(a => {
         items.push({ kind: 'audio', date: a.date, title: a.title,
@@ -1095,9 +1101,10 @@ function timelineEntry(it) {
             <img src="${esc(m.thumb || m.src)}" alt="${esc(m.alt)}" loading="lazy">
         </button>`;
     }).join('');
+    const thumb = it.poster || (it.video ? `https://i.ytimg.com/vi/${esc(it.video)}/hqdefault.jpg` : '');
     const video = it.video ? `
         <button type="button" class="tl-video is-youtube" data-video-id="${esc(it.video)}" data-title="${esc(it.title)}" aria-label="Play video: ${esc(it.title)}">
-            <img src="https://i.ytimg.com/vi/${esc(it.video)}/hqdefault.jpg" alt="${esc(it.title)}" loading="lazy">
+            <img src="${esc(thumb)}" alt="${esc(it.title)}" loading="lazy">
             <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </button>` : '';
     const audio = it.audioItem ? `
@@ -1132,6 +1139,7 @@ function timelineEntry(it) {
             <audio class="audio-player-element" preload="none" style="display:none;"></audio>
         </div>` : '';
     const kindPill = `<span class="tl-kind-pill tl-kind-${it.kind}"><i class="fas ${k.icon}" aria-hidden="true"></i> ${esc(k.label)}</span>`;
+    const isClipVertical = Boolean(it.clip && it.clip.poster && /live_clip|video_20250701/.test(it.clip.poster));
     return `
         <li class="tl-entry tl-${it.kind}" data-kind="${it.kind}" data-has-video="${hasVideo}" data-has-photo="${hasPhoto}" data-reveal>
             <span class="tl-dot" aria-hidden="true"><i class="fas ${k.icon}"></i></span>
@@ -1147,7 +1155,7 @@ function timelineEntry(it) {
                 ${it.gallery ? `<p class="small"><a href="${esc(it.gallery)}" target="_blank" rel="noopener noreferrer">${esc(it.galleryText || 'Photo gallery · ReBe Loves')}</a></p>` : ''}
                 ${video}
                 ${audio}
-                ${it.clip ? `<video class="tl-clip" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster)}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
+                ${it.clip ? `<video class="tl-clip ${isClipVertical ? 'is-vertical' : 'is-landscape'}" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster || '')}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
                 ${pics ? `<div class="tl-pics">${pics}</div>` : ''}
             </div>
         </li>`;
@@ -1278,6 +1286,8 @@ function renderTimeline(data) {
             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
             iframe.allowFullscreen = true;
             iframe.className = 'tl-video';
+            iframe.style.width = '100%';
+            iframe.style.height = 'auto';
             iframe.style.aspectRatio = '16 / 9';
             iframe.style.border = '0';
             yt.replaceWith(iframe);
