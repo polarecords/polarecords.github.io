@@ -10,14 +10,33 @@
       "clip": {
         "src": "assets/video_20261117_negril.mp4",
         "poster": "assets/photo_20261117_negril.jpg",
-        "caption": "Where Do We Go (Live at Café Negril, 4:36)"
+        "caption": "Where Do We Go / New Direction (Live at Café Negril, 2:39)",
+        "audioTracks": [
+          {
+            "id": "stream",
+            "label": "House Stream",
+            "src": "",
+            "offset": 0
+          },
+          {
+            "id": "room",
+            "label": "Room Mic (Phone)",
+            "src": "assets/audio/negril_20261117_room_set.m4a",
+            "offset": 361.562
+          },
+          {
+            "id": "dual",
+            "label": "Dual Mix",
+            "src": "assets/audio/negril_20261117_blues_set.m4a",
+            "offset": 361.556
+          }
+        ]
       }
     },
     {
       "date": "2026-11-09",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-11-03",
@@ -30,21 +49,18 @@
     {
       "date": "2026-11-02",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-10-26",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
       "with": "Gatsby"
     },
     {
       "date": "2026-10-19",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-10-13",
@@ -58,20 +74,17 @@
     {
       "date": "2026-09-28",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-09-21",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-09-14",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-09-10",
@@ -84,44 +97,37 @@
     {
       "date": "2026-09-07",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-09-01",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-08-25",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-08-17",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-08-10",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-07-28",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-07-27",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
       "clip": {
         "src": "assets/live_clip.mp4",
         "poster": "assets/live_clip.jpg",
@@ -131,51 +137,43 @@
     {
       "date": "2026-07-14",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-07-13",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-07-06",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-30",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-29",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-23",
       "title": "Songwriter Nights",
       "venue": "The Nick",
-      "source": "phone",
       "note": "Surprise 9:30 PM set."
     },
     {
       "date": "2026-06-22",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-15",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-11",
@@ -186,15 +184,13 @@
     {
       "date": "2026-06-09",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-06-01",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "with": "Guntram Anderlik",
-      "source": "phone"
+      "with": "Guntram Anderlik"
     },
     {
       "date": "2026-05-05",
@@ -206,93 +202,78 @@
     {
       "date": "2026-04-27",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-04-23",
       "title": "Open mic",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2026-04-20",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-04-12",
       "title": "Blues jam",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2026-04-06",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-03-30",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-03-26",
       "title": "Open mic",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2026-03-24",
       "title": "Songwriter Nights",
       "venue": "The Nick",
-      "with": "Guntram Anderlik",
-      "source": "phone"
+      "with": "Guntram Anderlik"
     },
     {
       "date": "2026-02-17",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-02-02",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2026-01-27",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-12-04",
       "title": "Open mic",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2025-12-02",
       "title": "December jam",
-      "venue": "Dave's Pub",
-      "source": "phone"
+      "venue": "Dave's Pub"
     },
     {
       "date": "2025-11-27",
       "title": "Open mic",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2025-11-23",
       "title": "Blues jam",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2025-11-11",
@@ -303,28 +284,23 @@
     {
       "date": "2025-11-04",
       "title": "Jam night",
-      "venue": "Dave's Pub",
-      "source": "phone"
+      "venue": "Dave's Pub"
     },
     {
       "date": "2025-10-27",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-10-14",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-10-13",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "with": "Ala",
-      "source": "phone",
-      "note": "Open mic set with Austin & Ala."
+      "note": "Open mic duo percussion & vocal set."
     },
     {
       "date": "2025-09-30",
@@ -335,20 +311,17 @@
     {
       "date": "2025-09-01",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-08-25",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-08-12",
       "title": "Songwriter Nights",
       "venue": "The Nick",
-      "source": "phone",
       "note": "8:20 PM set.",
       "with": "Bradley Bell, Andrew Bobulinski, Kurt & Rad",
       "gallery": "https://shoprebeloves.pixieset.com/songwritersnightsthenick/august122025/",
@@ -357,20 +330,17 @@
     {
       "date": "2025-08-11",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-08-04",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-07-01",
       "title": "Songwriter Nights",
       "venue": "The Nick",
-      "source": "phone",
       "clip": {
         "src": "assets/video_20250701.mp4",
         "poster": "assets/thumbs/video_20250701.jpg",
@@ -383,8 +353,7 @@
     {
       "date": "2025-06-02",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-05-20",
@@ -399,15 +368,13 @@
       "date": "2025-05-19",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
       "gallery": "https://shoprebeloves.pixieset.com/birminghambandstandsthenick/",
       "galleryText": "Photo gallery · ReBe Loves"
     },
     {
       "date": "2025-05-12",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-05-08",
@@ -421,14 +388,12 @@
     {
       "date": "2025-05-05",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-04-28",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
       "note": "10:00 PM set."
     },
     {
@@ -443,81 +408,66 @@
     {
       "date": "2025-04-07",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-02-11",
       "title": "Songwriter Nights",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2025-02-06",
       "title": "Open mic",
-      "venue": "Voodoo Lounge, Huntsville",
-      "source": "phone"
+      "venue": "Voodoo Lounge, Huntsville"
     },
     {
       "date": "2025-01-27",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2024-09-23",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "with": "Alex & Friends",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2024-08-05",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2024-07-22",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
       "note": "8:40 PM set."
     },
     {
       "date": "2024-07-15",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "with": "Kirby",
-      "source": "recording",
-      "note": "Kirbolar duo set with Kirby & Polar."
+      "note": "Live duo set at Birmingham Bandstand."
     },
     {
       "date": "2024-06-17",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2023-03-20",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "with": "Alex & Friends",
-      "source": "phone",
-      "note": "Open mic night (Voice 420)."
+      "note": "Early open mic set."
     },
     {
       "date": "2023-02-06",
       "title": "Birmingham Bandstand",
-      "venue": "The Nick",
-      "source": "phone"
+      "venue": "The Nick"
     },
     {
       "date": "2023-01-23",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
-      "source": "phone",
-      "note": "Earliest open mic on record (Voice 342 live cut)."
+      "note": "Earliest open mic on record."
     }
   ],
   "videos": [
@@ -526,7 +476,27 @@
       "id": "1FKCS_flkqw",
       "date": "2026-11-17",
       "title": "Where Do We Go (Café Negril Blues Jam)",
-      "poster": "assets/photo_20261117_negril.jpg"
+      "poster": "assets/photo_20261117_negril.jpg",
+      "audioTracks": [
+        {
+          "id": "stream",
+          "label": "House Stream",
+          "src": "",
+          "offset": 0
+        },
+        {
+          "id": "room",
+          "label": "Room Mic (Phone)",
+          "src": "assets/audio/negril_20261117_room_set.m4a",
+          "offset": 361.562
+        },
+        {
+          "id": "dual",
+          "label": "Dual Mix",
+          "src": "assets/audio/negril_20261117_blues_set.m4a",
+          "offset": 361.556
+        }
+      ]
     },
     {
       "src": "assets/live_clip.mp4",
@@ -765,39 +735,96 @@
   "audio": [
     {
       "id": "negril_20261117_blues",
-      "title": "Where Do We Go (New Orleans Blues Jam)",
+      "title": "Where Do We Go / New Direction (New Orleans Blues Jam)",
       "date": "2026-11-17",
       "venue": "Café Negril, New Orleans",
       "setSrc": "assets/audio/negril_20261117_blues_set.m4a",
       "previewSrc": "assets/audio/negril_20261117_blues_preview.m4a",
-      "duration": 276,
+      "duration": 520,
       "previewDuration": 45,
       "markers": [
         {
           "time": 0,
-          "label": "Blues Intro & Vocal Pocket"
+          "label": "Song 1: Opening Groove (Room Mic)",
+          "note": "Drums and bass lock in on Frenchmen St — John Polar steps up with Delta Funk (Room Mic perspective)."
         },
         {
-          "time": 42,
-          "label": "Where Do We Go (Theme)"
+          "time": 114,
+          "label": "When You Wake Up (Theme)",
+          "note": "When you wake up and you don't know where you're going — choose a direction, find your way."
         },
         {
-          "time": 95,
-          "label": "Rhythm Groove & Cadence"
+          "time": 214,
+          "label": "Horn & Band Breakdown",
+          "note": "Brass and keys stretch out over the funk pocket before the vocal return."
         },
         {
-          "time": 154,
-          "label": "Guitar Solo & Pocket Breakdown"
+          "time": 244,
+          "label": "Where Do We Go (Climax)",
+          "note": "Full vocal climb riding the horn section into the Song 1 finale."
         },
         {
-          "time": 218,
-          "label": "Dynamic Climax & Vocal Return"
+          "time": 272,
+          "label": "Encore Call (John from Alabama)",
+          "note": "Crowd cheers and the host calls for a second freestyle tune."
         },
         {
-          "time": 258,
-          "label": "Band Outro & Stage Applause"
+          "time": 296,
+          "label": "Song 2: Heavy Blues-Funk Riff",
+          "note": "The band drops a psychedelic blues riff — shifting gears into Song 2."
+        },
+        {
+          "time": 362,
+          "label": "New Direction (House Stream Joins)",
+          "note": "The Café Negril livestream feed kicks in here — switch perspectives above to A/B Room Mic vs House Stream."
+        },
+        {
+          "time": 456,
+          "label": "Vocal Climb & Final Groove",
+          "note": "Leaning into full vocal resonance with the house band through the closing stretch."
+        },
+        {
+          "time": 512,
+          "label": "Final Chord & Stage Sign-Off",
+          "note": "Big closing chord, warm New Orleans crowd reaction, and stage sign-off."
         }
-      ]
+      ],
+      "perspectives": [
+        {
+          "id": "dual",
+          "label": "Dual Mix",
+          "icon": "fa-layer-group",
+          "desc": "Room mic (0:00) transitioning into stereo house stream (6:02)",
+          "src": "assets/audio/negril_20261117_blues_set.m4a",
+          "duration": 520,
+          "offset": 0
+        },
+        {
+          "id": "room",
+          "label": "Room Mic",
+          "icon": "fa-microphone-lines",
+          "desc": "Full 2-song floor recording — warm crowd & upfront vocals",
+          "src": "assets/audio/negril_20261117_room_set.m4a",
+          "duration": 520,
+          "offset": 0
+        },
+        {
+          "id": "stream",
+          "label": "House Stream",
+          "icon": "fa-tower-broadcast",
+          "desc": "Stereo Café Negril livestream feed (Song 2 finale · 2:39)",
+          "src": "assets/audio/negril_20261117_stream_set.m4a",
+          "duration": 159,
+          "offset": 361.56
+        }
+      ],
+      "syncVideo": {
+        "src": "assets/video_20261117_negril.mp4",
+        "poster": "assets/photo_20261117_negril.jpg",
+        "offset": 361.56,
+        "duration": 158.65,
+        "label": "Café Negril Livestream"
+      }
     },
     {
       "id": "bandstand_20261026",
@@ -823,7 +850,8 @@
         },
         {
           "time": 282,
-          "label": "Danger in My Blood (Theme)"
+          "label": "Danger in My Blood (Theme)",
+          "note": "Driving acoustic rhythm into raw vocal tension on The Nick stage."
         },
         {
           "time": 306,
@@ -964,12 +992,12 @@
       ]
     },
     {
-      "id": "bandstand_20251013_austin_ala",
-      "title": "Austin & Ala (Open Mic Set)",
+      "id": "bandstand_20251013_duo",
+      "title": "Live Duo Set (Open Mic)",
       "date": "2025-10-13",
       "venue": "The Nick",
-      "setSrc": "assets/audio/bandstand_20251013_austin_ala_set.m4a",
-      "previewSrc": "assets/audio/bandstand_20251013_austin_ala_preview.m4a",
+      "setSrc": "assets/audio/bandstand_20251013_duo_set.m4a",
+      "previewSrc": "assets/audio/bandstand_20251013_duo_preview.m4a",
       "duration": 845,
       "previewDuration": 45,
       "markers": [
@@ -979,7 +1007,7 @@
         },
         {
           "time": 180,
-          "label": "Rhythm Pocket (Ala Percussion)"
+          "label": "Rhythm Pocket (Percussion)"
         },
         {
           "time": 460,
@@ -1028,12 +1056,12 @@
       ]
     },
     {
-      "id": "bandstand_20240715_kirbolar",
-      "title": "Kirbolar (Kirby & Polar Live Set)",
+      "id": "bandstand_20240715_duo",
+      "title": "Bandstand Live Duo Set",
       "date": "2024-07-15",
       "venue": "The Nick",
-      "setSrc": "assets/audio/bandstand_20240715_kirbolar_set.m4a",
-      "previewSrc": "assets/audio/bandstand_20240715_kirbolar_preview.m4a",
+      "setSrc": "assets/audio/bandstand_20240715_duo_set.m4a",
+      "previewSrc": "assets/audio/bandstand_20240715_duo_preview.m4a",
       "duration": 835,
       "previewDuration": 45,
       "markers": [
@@ -1092,12 +1120,12 @@
       ]
     },
     {
-      "id": "bandstand_20230320_alex_friends",
-      "title": "Open Mic @ Alex & Friends (Voice 420)",
+      "id": "bandstand_20230320_openmic",
+      "title": "Early Open Mic Set",
       "date": "2023-03-20",
       "venue": "The Nick",
-      "setSrc": "assets/audio/bandstand_20230320_alex_friends_set.m4a",
-      "previewSrc": "assets/audio/bandstand_20230320_alex_friends_preview.m4a",
+      "setSrc": "assets/audio/bandstand_20230320_openmic_set.m4a",
+      "previewSrc": "assets/audio/bandstand_20230320_openmic_preview.m4a",
       "duration": 680,
       "previewDuration": 45,
       "markers": [
@@ -1125,7 +1153,7 @@
     },
     {
       "id": "bandstand_20230124",
-      "title": "Bandstand Genesis (Voice 342 Live Cut)",
+      "title": "Bandstand Genesis (Live Cut)",
       "date": "2023-01-23",
       "venue": "The Nick",
       "setSrc": "assets/audio/bandstand_20230124_set.m4a",
@@ -1177,9 +1205,9 @@
     },
     {
       "id": "genesis_20221106",
-      "title": "Snowy Skies (Pre-Flight Sketch)",
+      "title": "Snowy Skies (Acoustic Sketch)",
       "date": "2022-11-06",
-      "venue": "ATL Airport Pre-Flight",
+      "venue": "Early Demo Archive",
       "setSrc": "assets/audio/genesis_20221106_snowy_skies_full.m4a",
       "previewSrc": "assets/audio/genesis_20221106_snowy_skies_preview.m4a",
       "duration": 180,
@@ -1187,7 +1215,8 @@
       "markers": [
         {
           "time": 0,
-          "label": "Vocal Cadence"
+          "label": "Vocal Cadence",
+          "note": "Early acoustic vocal sketch — the earliest documented spark."
         },
         {
           "time": 45,
@@ -1202,6 +1231,80 @@
           "label": "Resolution"
         }
       ]
+    }
+  ],
+  "vault_sketches": [
+    {
+      "id": "sketch_snowy_skies",
+      "title": "Snowy Skies (Acoustic Sketch)",
+      "date": "2022-11-06",
+      "origin": "Early demo archive",
+      "era": "2022 Sketch",
+      "note": "Early acoustic sketch. First documented spark of the project.",
+      "status": "Archived sketch"
+    },
+    {
+      "id": "sketch_bandstand_genesis",
+      "title": "Bandstand Genesis",
+      "date": "2023-01-23",
+      "origin": "Open mic archive",
+      "era": "2023 Live",
+      "note": "Earliest open mic recording on record. The raw start of stage appearances.",
+      "status": "Archived live sketch"
+    },
+    {
+      "id": "sketch_early_duo",
+      "title": "Early Open Mic Duo",
+      "date": "2023-03-20",
+      "origin": "Open mic archive",
+      "era": "2023 Live",
+      "note": "Early collaborative open mic set. Freestyle rhythm and acoustic flow.",
+      "status": "Collaborative sketch"
+    },
+    {
+      "id": "sketch_who_i_am",
+      "title": "Who I Am",
+      "date": "2024-05-18",
+      "origin": "Demo archive",
+      "era": "2024 Sketch",
+      "note": "Melodic vocal arcs moving into soulful vocal pockets.",
+      "status": "In development"
+    },
+    {
+      "id": "sketch_steppin",
+      "title": "Steppin' Outta Line",
+      "date": "2024-06-17",
+      "origin": "Demo archive",
+      "era": "2024 Sketch",
+      "note": "First take after a long gap. Raw, unfinished, kept for the record.",
+      "status": "In development"
+    },
+    {
+      "id": "sketch_emotional_evocation",
+      "title": "Emotional Evocation (Find My Bliss)",
+      "date": "2024-12-26",
+      "origin": "Songwriting sketch",
+      "era": "2024 Concept",
+      "note": "Late-December songwriting memo. Potential EP concept.",
+      "status": "Concept"
+    },
+    {
+      "id": "sketch_move_groove",
+      "title": "Move (Groove)",
+      "date": "2025-01-05",
+      "origin": "Demo archive",
+      "era": "2025 Sketch",
+      "note": "Cadence experimentation and rhythmic vocal pocket. Finding the funk.",
+      "status": "In development"
+    },
+    {
+      "id": "sketch_rainclouds",
+      "title": "Rainclouds (Eclipse)",
+      "date": "2025-01-22",
+      "origin": "Demo archive",
+      "era": "2025 Sketch",
+      "note": "Atmospheric vocal arrangement exploring contrast and minimalism.",
+      "status": "In development"
     }
   ]
 }

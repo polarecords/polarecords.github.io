@@ -70,6 +70,136 @@ function renderQuotes(quotes) {
     if (section) section.hidden = !quotes.length;
 }
 
+function videoAudioBarHtml(tracks) {
+    if (!tracks || tracks.length < 2) return '';
+    return `
+        <div class="video-audio-bar" role="group" aria-label="Video audio perspective">
+            <span class="video-audio-label"><i class="fas fa-sliders" aria-hidden="true"></i> AUDIO</span>
+            ${tracks.map((tr, i) => `
+                <button type="button" class="video-audio-pill ${i === 0 ? 'active' : ''}" data-track-id="${esc(tr.id)}" data-audio-src="${esc(tr.src || '')}" data-audio-offset="${tr.offset || 0}" aria-pressed="${i === 0}">${esc(tr.label)}</button>
+            `).join('')}
+        </div>`;
+}
+
+function initSyncedVideoBox(box) {
+    if (!box || box.dataset.initSyncVid) return;
+    const bar = box.querySelector('.video-audio-bar');
+    if (!bar) return;
+    box.dataset.initSyncVid = 'true';
+
+    let extAudio = null;
+    let currentSrc = '';
+    let currentOffset = 0;
+
+    function ensureExtAudio() {
+        if (!extAudio) {
+            extAudio = document.createElement('audio');
+            extAudio.preload = 'auto';
+            extAudio.volume = 0.85;
+            extAudio.setAttribute('controlsList', 'nodownload');
+            extAudio.style.display = 'none';
+            box.appendChild(extAudio);
+        }
+        return extAudio;
+    }
+
+    function bindVideoEvents(vid) {
+        if (!vid || vid.dataset.boundSyncAudio) return;
+        vid.dataset.boundSyncAudio = 'true';
+        const syncToVid = (forceSeek = false) => {
+            if (!currentSrc || !extAudio) return;
+            const target = (vid.currentTime || 0) + currentOffset;
+            if (forceSeek || Math.abs((extAudio.currentTime || 0) - target) > 0.12) {
+                try { extAudio.currentTime = target; } catch (_) {}
+            }
+        };
+        vid.addEventListener('play', () => {
+            if (activeAudio && activeAudio !== extAudio) activeAudio.pause();
+            if (currentSrc && extAudio) {
+                vid.muted = true;
+                syncToVid(true);
+                extAudio.play().catch(() => {});
+            }
+        });
+        vid.addEventListener('pause', () => { if (extAudio) extAudio.pause(); });
+        vid.addEventListener('ended', () => { if (extAudio) extAudio.pause(); });
+        vid.addEventListener('waiting', () => { if (extAudio) extAudio.pause(); });
+        vid.addEventListener('playing', () => {
+            if (currentSrc && extAudio) {
+                vid.muted = true;
+                syncToVid(true);
+                extAudio.play().catch(() => {});
+            }
+        });
+        vid.addEventListener('seeking', () => syncToVid(true));
+        vid.addEventListener('ratechange', () => { if (extAudio) extAudio.playbackRate = vid.playbackRate; });
+        vid.addEventListener('timeupdate', () => syncToVid(false));
+    }
+
+    const existingVid = box.querySelector('video');
+    if (existingVid) bindVideoEvents(existingVid);
+
+    bar.addEventListener('click', e => {
+        const pill = e.target.closest('.video-audio-pill');
+        if (!pill) return;
+
+        // If the video is still a poster button, upgrade it to a live <video> inside this click gesture
+        let vid = box.querySelector('video');
+        if (!vid) {
+            const mp4Btn = box.querySelector('button.video-thumb[data-src]');
+            if (mp4Btn) {
+                vid = document.createElement('video');
+                vid.src = mp4Btn.dataset.src;
+                if (mp4Btn.dataset.poster) vid.poster = mp4Btn.dataset.poster;
+                vid.controls = true;
+                vid.setAttribute('controlsList', 'nodownload');
+                vid.disablePictureInPicture = true;
+                vid.volume = 0.8;
+                vid.playsInline = true;
+                vid.className = 'video-thumb' + (mp4Btn.classList.contains('is-vertical') ? ' is-vertical' : '');
+                mp4Btn.replaceWith(vid);
+            }
+        }
+        if (!vid) return;
+        bindVideoEvents(vid);
+
+        bar.querySelectorAll('.video-audio-pill').forEach(b => {
+            const on = b === pill;
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+
+        currentSrc = pill.dataset.audioSrc || '';
+        currentOffset = Number(pill.dataset.audioOffset || 0);
+
+        if (!currentSrc) {
+            if (extAudio) extAudio.pause();
+            vid.muted = false;
+            if (vid.paused) vid.play().catch(() => {});
+            return;
+        }
+
+        const aud = ensureExtAudio();
+        if (activeAudio && activeAudio !== aud) activeAudio.pause();
+        vid.muted = true;
+        const targetTime = (vid.currentTime || 0) + currentOffset;
+        const startSynced = () => {
+            try { aud.currentTime = targetTime; } catch (_) {}
+            aud.playbackRate = vid.playbackRate || 1;
+            if (vid.paused) vid.play().catch(() => {});
+            aud.play().catch(() => {});
+        };
+        if (!aud.src || !aud.src.endsWith(currentSrc)) {
+            aud.src = currentSrc;
+            aud.addEventListener('loadedmetadata', startSynced, { once: true });
+            aud.load();
+            if (vid.paused) vid.play().catch(() => {});
+        } else {
+            startSynced();
+        }
+    });
+}
+
 // ─── Videos: direct links for YouTube, inline player for local MP4 ─────────
 function renderVideos(videos) {
     const el = document.getElementById('videos');
@@ -87,6 +217,7 @@ function renderVideos(videos) {
                     <img src="${esc(thumb)}" alt="${esc(v.title)}" loading="lazy">
                     <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
                 </button>
+                ${videoAudioBarHtml(v.audioTracks)}
                 <figcaption>
                     <span>${esc(v.title)}</span>
                     <span class="muted small">${d ? `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` : ''}${v.id ? ` · <a href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener noreferrer">YouTube</a>` : ''}</span>
@@ -106,6 +237,8 @@ function renderVideos(videos) {
         </figure>`;
     }).join('');
 
+    el.querySelectorAll('figure.video').forEach(initSyncedVideoBox);
+
     el.addEventListener('click', e => {
         const mp4Btn = e.target.closest('button.video-thumb[data-src]');
         if (mp4Btn) {
@@ -113,6 +246,9 @@ function renderVideos(videos) {
             vid.src = mp4Btn.dataset.src;
             if (mp4Btn.dataset.poster) vid.poster = mp4Btn.dataset.poster;
             vid.controls = true;
+            vid.setAttribute('controlsList', 'nodownload');
+            vid.disablePictureInPicture = true;
+            vid.volume = 0.8;
             vid.autoplay = true;
             vid.playsInline = true;
             vid.className = 'video-thumb' + (mp4Btn.classList.contains('is-vertical') ? ' is-vertical' : '');
@@ -217,6 +353,12 @@ function checkFloatingPlayerVisibility() {
     }
 }
 
+document.addEventListener('contextmenu', e => {
+    if (e.target && e.target.closest('audio, video, .audio-card')) {
+        e.preventDefault();
+    }
+});
+
 function syncFloatingPlayer(audio, card) {
     const fmp = ensureFloatingPlayer();
     const titleEl = fmp.querySelector('.fmp-title');
@@ -226,6 +368,26 @@ function syncFloatingPlayer(audio, card) {
 
     const cardTitle = card.querySelector('.audio-title-group h3');
     if (cardTitle && titleEl) titleEl.textContent = cardTitle.textContent;
+
+    if ('mediaSession' in navigator && cardTitle) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: cardTitle.textContent.trim(),
+            artist: 'John Polar',
+            album: 'PolaRecords Live Audio Vault',
+            artwork: [
+                { src: 'assets/hat.png', sizes: '96x96', type: 'image/png' },
+                { src: 'assets/hat.png', sizes: '128x128', type: 'image/png' },
+                { src: 'assets/photo_rebe_20260628.jpg', sizes: '512x512', type: 'image/jpeg' }
+            ]
+        });
+        navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+        try {
+            navigator.mediaSession.setActionHandler('play', () => audio.play());
+            navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+            navigator.mediaSession.setActionHandler('seekbackward', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+            navigator.mediaSession.setActionHandler('seekforward', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); });
+        } catch (_) {}
+    }
 
     const cur = audio.currentTime || 0;
     const dur = audio.duration || 1;
@@ -251,27 +413,166 @@ function initAudioCard(card) {
     const timeDur = card.querySelector('.themed-time-dur');
     const muteBtn = card.querySelector('.themed-mute-btn');
     const modeBtns = card.querySelectorAll('.audio-mode-toggle button');
+    const perspBtns = card.querySelectorAll('.persp-pill');
+    const perspDesc = card.querySelector('.audio-persp-desc');
+    const syncVidToggle = card.querySelector('.persp-video-toggle');
+    const syncVidWrap = card.querySelector('.audio-sync-video-wrap');
+    const syncVid = card.querySelector('.audio-sync-video');
+    const syncVidStandby = card.querySelector('.sync-video-standby');
+    const syncVidJumpBtn = card.querySelector('.sync-video-jump-btn');
+    const syncVidBadge = card.querySelector('.sync-video-audio-badge');
+    const syncVidOffset = syncVidWrap ? Number(syncVidWrap.dataset.videoOffset || 0) : 0;
+    const syncVidDur = syncVidWrap ? Number(syncVidWrap.dataset.videoDur || 0) : 0;
     const markers = card.querySelectorAll('.marker-pill');
+    const linerNotes = card.querySelector('.audio-liner-notes');
+    const linerText = linerNotes ? linerNotes.querySelector('.liner-notes-text') : null;
 
     let currentMode = 'set';
-    if (!audio.src) audio.src = card.dataset.set;
+    let activePersp = perspBtns.length ? {
+        id: perspBtns[0].dataset.persp,
+        src: perspBtns[0].dataset.src,
+        offset: Number(perspBtns[0].dataset.offset || 0),
+        dur: Number(perspBtns[0].dataset.dur || 0)
+    } : {
+        id: 'default',
+        src: card.dataset.set,
+        offset: 0,
+        dur: 0
+    };
+
+    audio.volume = 0.8;
+    if (!audio.src) audio.src = activePersp.src;
+
+    function seekAndMaybePlay(targetTime, shouldPlay) {
+        const apply = () => {
+            if (isFinite(audio.duration) && audio.duration > 0) {
+                audio.currentTime = Math.max(0, Math.min(targetTime, audio.duration - 0.1));
+            } else {
+                audio.currentTime = Math.max(0, targetTime);
+            }
+            if (shouldPlay) audio.play().catch(() => {});
+        };
+        if (audio.readyState >= 1) {
+            apply();
+        } else {
+            audio.addEventListener('loadedmetadata', apply, { once: true });
+            audio.load();
+        }
+    }
 
     function setMode(mode) {
         currentMode = mode;
         modeBtns.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
         const wasPlaying = !audio.paused;
-        const targetSrc = mode === 'preview' ? card.dataset.preview : card.dataset.set;
+        const targetSrc = mode === 'preview' ? card.dataset.preview : activePersp.src;
         if (!audio.src.endsWith(targetSrc)) {
             audio.src = targetSrc;
-            if (wasPlaying) audio.play();
+            if (wasPlaying) audio.play().catch(() => {});
         }
         if (progress) progress.style.width = '0%';
         if (timeCurr) timeCurr.textContent = '0:00';
+        if (timeDur) {
+            if (mode === 'preview') timeDur.textContent = '0:45';
+            else if (activePersp.dur) timeDur.textContent = formatTime(activePersp.dur);
+        }
+    }
+
+    function switchPerspective(btn, explicitGlobalTime = null, forcePlay = null) {
+        const newSrc = btn.dataset.src;
+        const newOffset = Number(btn.dataset.offset || 0);
+        const newDur = Number(btn.dataset.dur || 0);
+        const wasPlaying = forcePlay !== null ? forcePlay : !audio.paused;
+
+        const prevGlobal = explicitGlobalTime !== null
+            ? explicitGlobalTime
+            : (currentMode === 'preview' ? newOffset : (audio.currentTime || 0) + (activePersp.offset || 0));
+
+        activePersp = { id: btn.dataset.persp, src: newSrc, offset: newOffset, dur: newDur };
+        currentMode = 'set';
+        modeBtns.forEach(b => b.classList.toggle('active', b.dataset.mode === 'set'));
+        perspBtns.forEach(b => {
+            const on = b === btn;
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (perspDesc && btn.dataset.desc) perspDesc.textContent = btn.dataset.desc;
+        if (syncVidBadge) syncVidBadge.textContent = `AUDIO: ${btn.textContent.trim().toUpperCase()}`;
+        if (timeDur && newDur) timeDur.textContent = formatTime(newDur);
+
+        let targetLocal = prevGlobal - newOffset;
+        if (targetLocal < 0 || (newDur && targetLocal >= newDur - 0.5)) {
+            targetLocal = 0;
+        }
+
+        if (activeAudio && activeAudio !== audio && wasPlaying) activeAudio.pause();
+        if (!audio.src.endsWith(newSrc)) {
+            audio.src = newSrc;
+            seekAndMaybePlay(targetLocal, wasPlaying);
+        } else {
+            seekAndMaybePlay(targetLocal, wasPlaying);
+        }
     }
 
     modeBtns.forEach(btn => {
         btn.addEventListener('click', () => setMode(btn.dataset.mode));
     });
+
+    perspBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchPerspective(btn));
+    });
+
+    function syncVideoToAudio(forceSeek = false) {
+        if (!syncVid || !syncVidWrap || syncVidWrap.hidden) return;
+        const gTime = currentMode === 'preview'
+            ? (syncVidOffset + (audio.currentTime || 0))
+            : ((audio.currentTime || 0) + (activePersp.offset || 0));
+        const vidTime = gTime - syncVidOffset;
+        const inRange = vidTime >= 0 && (!syncVidDur || vidTime <= syncVidDur);
+
+        if (syncVidStandby) syncVidStandby.hidden = inRange;
+        if (!inRange) {
+            if (!syncVid.paused) syncVid.pause();
+            return;
+        }
+        if (forceSeek || Math.abs((syncVid.currentTime || 0) - vidTime) > 0.14) {
+            try { syncVid.currentTime = Math.max(0, vidTime); } catch (_) {}
+        }
+        if (!audio.paused && syncVid.paused) {
+            syncVid.play().catch(() => {});
+        } else if (audio.paused && !syncVid.paused) {
+            syncVid.pause();
+        }
+    }
+
+    if (syncVidToggle && syncVidWrap && syncVid) {
+        syncVidToggle.addEventListener('click', () => {
+            const show = syncVidWrap.hidden;
+            syncVidWrap.hidden = !show;
+            syncVidToggle.classList.toggle('active', show);
+            syncVidToggle.setAttribute('aria-pressed', show ? 'true' : 'false');
+            if (show) {
+                if (!syncVid.src && syncVid.dataset.src) {
+                    syncVid.src = syncVid.dataset.src;
+                    syncVid.addEventListener('loadedmetadata', () => syncVideoToAudio(true), { once: true });
+                    syncVid.load();
+                } else {
+                    syncVideoToAudio(true);
+                }
+            } else if (!syncVid.paused) {
+                syncVid.pause();
+            }
+        });
+    }
+
+    if (syncVidJumpBtn && syncVidWrap) {
+        syncVidJumpBtn.addEventListener('click', () => {
+            if (activeAudio && activeAudio !== audio) activeAudio.pause();
+            if (currentMode !== 'set') setMode('set');
+            const localTarget = Math.max(0, syncVidOffset - (activePersp.offset || 0));
+            seekAndMaybePlay(localTarget, true);
+            syncVideoToAudio(true);
+        });
+    }
 
     if (playBtn) {
         playBtn.addEventListener('click', () => {
@@ -298,12 +599,14 @@ function initAudioCard(card) {
         card.classList.add('is-playing');
         if (playIcon) playIcon.className = 'fas fa-pause';
         syncFloatingPlayer(audio, card);
+        syncVideoToAudio(true);
     });
 
     audio.addEventListener('pause', () => {
         card.classList.remove('is-playing');
         if (playIcon) playIcon.className = 'fas fa-play';
         syncFloatingPlayer(audio, card);
+        if (syncVid && !syncVid.paused) syncVid.pause();
     });
 
     audio.addEventListener('ended', () => {
@@ -313,7 +616,10 @@ function initAudioCard(card) {
         if (timeCurr) timeCurr.textContent = '0:00';
         markers.forEach(m => m.classList.remove('active'));
         syncFloatingPlayer(audio, card);
+        if (syncVid && !syncVid.paused) syncVid.pause();
     });
+
+    audio.addEventListener('seeked', () => syncVideoToAudio(true));
 
     audio.addEventListener('timeupdate', () => {
         const cur = audio.currentTime;
@@ -330,10 +636,12 @@ function initAudioCard(card) {
             if (fillEl) fillEl.style.width = `${pct}%`;
         }
 
+        const curGlobal = currentMode === 'preview' ? -1 : (cur + (activePersp.offset || 0));
+        syncVideoToAudio(false);
         const sortedMarkers = Array.from(markers).sort((a, b) => Number(a.dataset.time) - Number(b.dataset.time));
         let activeIdx = -1;
         for (let i = 0; i < sortedMarkers.length; i++) {
-            if (cur >= Number(sortedMarkers[i].dataset.time)) {
+            if (curGlobal >= Number(sortedMarkers[i].dataset.time)) {
                 activeIdx = i;
             } else {
                 break;
@@ -348,6 +656,15 @@ function initAudioCard(card) {
                 }
             }
         });
+        if (linerNotes && linerText) {
+            const currentMarker = activeIdx >= 0 ? sortedMarkers[activeIdx] : null;
+            if (currentMarker && currentMarker.dataset.note) {
+                linerText.textContent = currentMarker.dataset.note;
+                linerNotes.style.display = 'flex';
+            } else {
+                linerNotes.style.display = 'none';
+            }
+        }
     });
 
     audio.addEventListener('progress', () => {
@@ -426,12 +743,24 @@ function initAudioCard(card) {
 
     markers.forEach(m => {
         m.addEventListener('click', () => {
-            const time = Number(m.dataset.time);
-            if (currentMode !== 'set') setMode('set');
+            const globalTime = Number(m.dataset.time);
             if (activeAudio && activeAudio !== audio) activeAudio.pause();
-            audio.currentTime = time;
-            audio.play();
+            if (perspBtns.length && activePersp.offset > globalTime) {
+                switchPerspective(perspBtns[0], globalTime, true);
+            } else {
+                if (currentMode !== 'set') setMode('set');
+                const localTime = Math.max(0, globalTime - (activePersp.offset || 0));
+                seekAndMaybePlay(localTime, true);
+            }
             markers.forEach(pill => pill.classList.toggle('active', pill === m));
+            if (linerNotes && linerText) {
+                if (m.dataset.note) {
+                    linerText.textContent = m.dataset.note;
+                    linerNotes.style.display = 'flex';
+                } else {
+                    linerNotes.style.display = 'none';
+                }
+            }
         });
     });
 }
@@ -439,22 +768,54 @@ function initAudioCard(card) {
 function getTrackCategory(t) {
     if (!t) return 'vault';
     if (t.id && t.id.startsWith('bandstand_2026')) return 'bandstand';
-    if (/kirbolar|voodoo|austin/i.test(t.id || '') || /duo|jam|kirby/i.test(t.title || '')) return 'duo-road';
+    if (/duo|voodoo|negril/i.test(t.id || '') || /duo|jam/i.test(t.title || '')) return 'duo-road';
     return 'vault';
 }
 
 function getTrackTag(t) {
     if (!t) return 'LIVE CUT';
     if (/blues/i.test(t.title || '')) return 'BLUES JAM';
-    if (/kirbolar|duo/i.test(t.title || '')) return 'DUO SET';
+    if (/duo/i.test(t.title || '')) return 'DUO SET';
     if (/first gig/i.test(t.title || '')) return 'FIRST GIG';
     if (/genesis|sketch/i.test(t.title || '')) return 'VAULT CUT';
     return 'LIVE CUT';
 }
 
+function perspectivesBarHtml(t) {
+    if (!t || (!t.perspectives || t.perspectives.length < 2) && !t.syncVideo) return '';
+    const sv = t.syncVideo;
+    return `
+        <div class="audio-perspectives" role="group" aria-label="Audio perspective">
+            <div class="audio-persp-row">
+                <span class="audio-persp-label"><i class="fas fa-sliders" aria-hidden="true"></i> PERSPECTIVE</span>
+                <div class="audio-persp-pills">
+                    ${(t.perspectives || []).map((p, idx) => `
+                        <button type="button" class="persp-pill ${idx === 0 ? 'active' : ''}" data-persp="${esc(p.id)}" data-src="${esc(p.src)}" data-offset="${p.offset || 0}" data-dur="${p.duration || t.duration}" data-desc="${esc(p.desc || '')}" aria-pressed="${idx === 0}">
+                            <i class="fas ${esc(p.icon || 'fa-headphones')}" aria-hidden="true"></i> ${esc(p.label)}
+                        </button>
+                    `).join('')}
+                    ${sv ? `
+                        <button type="button" class="persp-pill persp-video-toggle" aria-pressed="false">
+                            <i class="fas fa-video" aria-hidden="true"></i> Watch Stage Sync
+                        </button>` : ''}
+                </div>
+            </div>
+            <span class="audio-persp-desc">${esc((t.perspectives && t.perspectives[0]?.desc) || '')}</span>
+            ${sv ? `
+                <div class="audio-sync-video-wrap" hidden data-video-offset="${sv.offset || 0}" data-video-dur="${sv.duration || 0}">
+                    <video class="audio-sync-video" data-src="${esc(sv.src)}" poster="${esc(sv.poster || '')}" muted playsinline preload="none" controlsList="nodownload" disablePictureInPicture></video>
+                    <span class="sync-video-audio-badge">AUDIO: ${esc((t.perspectives && t.perspectives[0]?.label || 'LIVE').toUpperCase())}</span>
+                    <div class="sync-video-standby">
+                        <span class="sync-standby-text"><i class="fas fa-microphone-lines" aria-hidden="true"></i> Room Mic · Stage stream joins at ${formatTime(sv.offset || 0)}</span>
+                        <button type="button" class="sync-video-jump-btn"><i class="fas fa-forward" aria-hidden="true"></i> Jump to ${formatTime(sv.offset || 0)} Video</button>
+                    </div>
+                </div>` : ''}
+        </div>`;
+}
+
 function audioCardHtml(t, isDeck = false) {
     const markersHtml = (t.markers || []).map(m => `
-        <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
+        <button type="button" class="marker-pill" data-time="${m.time}" ${m.note ? `data-note="${esc(m.note)}"` : ''} aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
             <span class="marker-time">${formatTime(m.time)}</span>
             <span class="marker-label">${esc(m.label)}</span>
             <span class="marker-eq" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -501,13 +862,19 @@ function audioCardHtml(t, isDeck = false) {
                 </button>
             </div>
 
+            ${perspectivesBarHtml(t)}
+
             ${markersHtml ? `
                 <div class="audio-markers" role="group" aria-label="Track cues and markers">
                     <span class="audio-markers-label"><i class="fas fa-bookmark" aria-hidden="true"></i> CUES</span>
                     ${markersHtml}
+                </div>
+                <div class="audio-liner-notes" aria-live="polite" style="display:none;">
+                    <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+                    <span class="liner-notes-text"></span>
                 </div>` : ''}
 
-            <audio class="audio-player-element" preload="none" style="display:none;"></audio>
+            <audio class="audio-player-element" preload="none" controlsList="nodownload" style="display:none;"></audio>
         </article>`;
 }
 
@@ -646,21 +1013,23 @@ function renderAudio(tracks) {
     // 2. On index.html (#home-featured-track):
     const homeAudio = document.getElementById('home-featured-track');
     if (homeAudio) {
+        let firstShort = tracks[0].title.split('(')[0].trim();
+        if (firstShort.length > 22) firstShort = firstShort.slice(0, 20).trim() + '…';
         homeAudio.innerHTML = `
             ${audioCardHtml(tracks[0], true)}
             <div class="home-quick-setlist" data-reveal>
                 <div class="home-quick-info">
                     <span class="audio-live-badge"><span class="eq"><i></i><i></i><i></i><i></i></span> VAULT</span>
-                    <span>11 stage sets recorded · Quick preview:</span>
+                    <span>${tracks.length} stage sets recorded · Quick preview:</span>
                 </div>
                 <div class="home-quick-pills">
-                    <button type="button" class="home-quick-pill active" data-id="${tracks[0].id}">Danger in My Blood</button>
+                    <button type="button" class="home-quick-pill active" data-id="${tracks[0].id}">${esc(firstShort)}</button>
                     ${tracks.slice(1, 4).map(t => {
                         let short = t.title.split('(')[0].trim();
                         if (short.length > 22) short = short.slice(0, 20).trim() + '…';
                         return `<button type="button" class="home-quick-pill" data-id="${t.id}">${esc(short)}</button>`;
                     }).join('')}
-                    <a href="john.html#live-archives" style="display:inline-flex;align-items:center;padding:6px 12px;font:500 12px/1 var(--mono);color:var(--amber);text-decoration:none;white-space:nowrap;">All 11 &rarr;</a>
+                    <a href="john.html#live-archives" style="display:inline-flex;align-items:center;padding:6px 12px;font:500 12px/1 var(--mono);color:var(--amber);text-decoration:none;white-space:nowrap;">All ${tracks.length} &rarr;</a>
                 </div>
             </div>
         `;
@@ -1055,10 +1424,11 @@ document.addEventListener('click', e => {
 // Everything with a date, grouped by year. Flyers/photos from a show's date are
 // attached to that show instead of getting their own row.
 const KIND = {
-    show:  { label: 'Show',  icon: 'fa-microphone' },
-    video: { label: 'Video', icon: 'fa-play' },
-    audio: { label: 'Audio', icon: 'fa-headphones' },
-    photo: { label: 'Photo', icon: 'fa-image' },
+    show:   { label: 'Show',         icon: 'fa-microphone' },
+    video:  { label: 'Video',        icon: 'fa-play' },
+    audio:  { label: 'Audio',        icon: 'fa-headphones' },
+    photo:  { label: 'Photo',        icon: 'fa-image' },
+    sketch: { label: 'Vault Sketch', icon: 'fa-tape' },
 };
 
 function timelineItems(data) {
@@ -1086,6 +1456,16 @@ function timelineItems(data) {
             meta: `${a.venue} · Bandstand Live Cut`, audioItem: a });
     });
     media.filter(m => m.date && !used.has(m)).forEach(m => items.push({ kind: 'photo', date: m.date, title: m.caption, pics: [m] }));
+    (data.vault_sketches || []).forEach(v => {
+        items.push({
+            kind: 'sketch',
+            date: v.date,
+            title: v.title,
+            meta: `${v.era} · ${v.origin}`,
+            note: v.note,
+            status: v.status
+        });
+    });
     return items;
 }
 
@@ -1125,18 +1505,23 @@ function timelineEntry(it) {
                     </div>
                 </div>
             </div>
+            ${perspectivesBarHtml(it.audioItem)}
             ${(it.audioItem.markers || []).length ? `
                 <div class="audio-markers" role="group" aria-label="Track cues and markers" style="margin-top:10px;">
                     <span class="audio-markers-label"><i class="fas fa-bookmark" aria-hidden="true"></i> CUES</span>
                     ${it.audioItem.markers.map(m => `
-                        <button type="button" class="marker-pill" data-time="${m.time}" aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
+                        <button type="button" class="marker-pill" data-time="${m.time}" ${m.note ? `data-note="${esc(m.note)}"` : ''} aria-label="Jump to ${esc(m.label)} at ${formatTime(m.time)}">
                             <span class="marker-time">${formatTime(m.time)}</span>
                             <span class="marker-label">${esc(m.label)}</span>
                             <span class="marker-eq" aria-hidden="true"><i></i><i></i><i></i></span>
                         </button>
                     `).join('')}
+                </div>
+                <div class="audio-liner-notes" aria-live="polite" style="display:none;">
+                    <i class="fas fa-feather-pointed" aria-hidden="true"></i>
+                    <span class="liner-notes-text"></span>
                 </div>` : ''}
-            <audio class="audio-player-element" preload="none" style="display:none;"></audio>
+            <audio class="audio-player-element" preload="none" controlsList="nodownload" style="display:none;"></audio>
         </div>` : '';
     const kindPill = `<span class="tl-kind-pill tl-kind-${it.kind}"><i class="fas ${k.icon}" aria-hidden="true"></i> ${esc(k.label)}</span>`;
     const isClipVertical = Boolean(it.clip && it.clip.poster && /live_clip|video_20250701/.test(it.clip.poster));
@@ -1151,11 +1536,12 @@ function timelineEntry(it) {
                 <h3>${esc(it.title)}</h3>
                 ${it.meta ? `<p class="muted">${esc(it.meta)}</p>` : ''}
                 ${it.note ? `<p class="tl-note">${esc(it.note)}</p>` : ''}
+                ${it.status ? `<div style="margin-top:6px;"><span class="vault-tape-badge"><i class="fas fa-tape" aria-hidden="true"></i> ${esc(it.status)}</span></div>` : ''}
                 ${it.link && /instagram\.com\/p\//.test(it.link) ? igButton(it.link) : it.link ? `<p><a href="${esc(it.link)}"${/^https?:/.test(it.link) ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(it.linkText || 'Open')}</a></p>` : ''}
                 ${it.gallery ? `<p class="small"><a href="${esc(it.gallery)}" target="_blank" rel="noopener noreferrer">${esc(it.galleryText || 'Photo gallery · ReBe Loves')}</a></p>` : ''}
                 ${video}
                 ${audio}
-                ${it.clip ? `<video class="tl-clip ${isClipVertical ? 'is-vertical' : 'is-landscape'}" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster || '')}" controls playsinline preload="none"></video>${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}` : ''}
+                ${it.clip ? `<div class="tl-clip-box"><video class="tl-clip ${isClipVertical ? 'is-vertical' : 'is-landscape'}" src="${esc(it.clip.src)}" poster="${esc(it.clip.poster || '')}" controls controlsList="nodownload" disablePictureInPicture playsinline preload="none"></video>${videoAudioBarHtml(it.clip.audioTracks)}${it.clip.caption ? `<p class="caption">${esc(it.clip.caption)}</p>` : ''}</div>` : ''}
                 ${pics ? `<div class="tl-pics">${pics}</div>` : ''}
             </div>
         </li>`;
@@ -1212,6 +1598,7 @@ function renderTimeline(data) {
         applyFilter();
         observeReveals();
         el.querySelectorAll('.audio-card').forEach(initAudioCard);
+        el.querySelectorAll('.tl-clip-box').forEach(initSyncedVideoBox);
     }
 
     // Filters
@@ -1220,6 +1607,7 @@ function renderTimeline(data) {
         video: items.filter(it => it.kind === 'video' || it.video || it.clip).length,
         audio: items.filter(it => it.kind === 'audio').length,
         photo: items.filter(it => it.kind === 'photo' || (it.pics && it.pics.length)).length,
+        sketch: items.filter(it => it.kind === 'sketch').length,
     };
     const bar = document.getElementById('timeline-filters');
     let active = 'all';
@@ -1410,7 +1798,11 @@ window.addEventListener('scroll', () => {
 })();
 
 document.documentElement.classList.add('js');
-document.addEventListener('DOMContentLoaded', () => { observeReveals(); loadData(); });
+document.addEventListener('DOMContentLoaded', () => {
+    observeReveals();
+    document.querySelectorAll('figure.video').forEach(initSyncedVideoBox);
+    loadData();
+});
 
 if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     window.addEventListener('load', () => {

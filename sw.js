@@ -1,4 +1,4 @@
-const CACHE_NAME = 'polarecords-cache-v40';
+const CACHE_NAME = 'polarecords-cache-v43';
 const urlsToCache = [
     './',
     './index.html',
@@ -6,7 +6,6 @@ const urlsToCache = [
     './polaraf.html',
     './media.html',
     './archive.html',
-    './easteregg.html',
     './style.css',
     './app.js',
     './database.json',
@@ -24,10 +23,14 @@ self.addEventListener('install', event => {
 });
 
 // Network-first: always serve live content when online (event dates, nav/style
-// fixes, etc. must never go stale on a returning visitor's phone). Cache is
-// only a fallback for offline use, refreshed opportunistically on each visit.
+// fixes, etc. must never go stale on a returning visitor's phone). Audio/video
+// streams are never persisted into Cache Storage so recordings stream on-demand.
 self.addEventListener('fetch', event => {
     if (event.request.method !== 'GET') return;
+    const url = new URL(event.request.url);
+    const isMediaStream = url.pathname.includes('/assets/audio/')
+        || /\.(m4a|mp3|wav|mp4|webm|ogg)$/i.test(url.pathname);
+    if (isMediaStream) return;
     event.respondWith(
         fetch(event.request).then(networkResponse => {
             if (networkResponse && networkResponse.status === 200) {

@@ -963,6 +963,220 @@ section.wrap, section { padding-top: clamp(44px, 7vw, 84px); }
 .marker-pill.active .marker-eq i:nth-child(2) { animation: eq 0.45s ease-in-out infinite alternate 0.15s; }
 .marker-pill.active .marker-eq i:nth-child(3) { animation: eq 0.75s ease-in-out infinite alternate 0.3s; }
 
+/* Audio Perspective Switcher */
+.audio-perspectives {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-sm);
+}
+.audio-persp-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.audio-persp-label {
+    font: 600 10px/1 var(--mono);
+    letter-spacing: .1em;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 2px;
+}
+.audio-persp-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.persp-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-dim, #c9bfb0);
+    font: 500 11.5px/1 var(--mono);
+    cursor: pointer;
+    transition: all .18s ease;
+}
+.persp-pill:hover {
+    border-color: rgba(224, 109, 43, 0.55);
+    color: var(--text);
+}
+.persp-pill.active {
+    background: rgba(224, 109, 43, 0.18);
+    border-color: var(--amber);
+    color: var(--amber);
+    box-shadow: 0 0 12px rgba(224, 109, 43, 0.16);
+}
+.audio-persp-desc {
+    font: 400 11.5px/1.4 var(--mono);
+    color: var(--muted);
+}
+
+/* Synced Stage Video inside Audio Card & Video Audio Switcher */
+.audio-sync-video-wrap {
+    position: relative;
+    margin-top: 8px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(224, 109, 43, 0.3);
+}
+.audio-sync-video-wrap[hidden] { display: none; }
+.audio-sync-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #000;
+}
+.sync-video-audio-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(12, 10, 8, 0.78);
+    border: 1px solid rgba(224, 109, 43, 0.45);
+    color: var(--amber);
+    font: 600 10px/1 var(--mono);
+    letter-spacing: .08em;
+    pointer-events: none;
+    z-index: 2;
+}
+.sync-video-standby {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    text-align: center;
+    background: rgba(12, 10, 8, 0.72);
+    backdrop-filter: blur(3px);
+    z-index: 3;
+}
+.sync-video-standby[hidden] { display: none; }
+.sync-standby-text {
+    font: 500 12px/1.4 var(--mono);
+    color: var(--text, #f1e8da);
+}
+.sync-standby-text i { color: var(--amber); margin-right: 4px; }
+.sync-video-jump-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(224, 109, 43, 0.2);
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font: 600 11.5px/1 var(--mono);
+    cursor: pointer;
+    transition: all .18s ease;
+}
+.sync-video-jump-btn:hover {
+    background: var(--amber);
+    color: #0c0a08;
+}
+
+.video-audio-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+.video-audio-label {
+    font: 600 10px/1 var(--mono);
+    letter-spacing: .08em;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 2px;
+}
+.video-audio-pill {
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-dim, #c9bfb0);
+    font: 500 11px/1 var(--mono);
+    cursor: pointer;
+    transition: all .18s ease;
+}
+.video-audio-pill:hover {
+    border-color: rgba(224, 109, 43, 0.55);
+    color: var(--text);
+}
+.video-audio-pill.active {
+    background: rgba(224, 109, 43, 0.18);
+    border-color: var(--amber);
+    color: var(--amber);
+}
+
+/* Liner Notes Drawer */
+.audio-liner-notes {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: rgba(224, 109, 43, 0.08);
+    border-left: 2px solid var(--amber);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font: italic 13px/1.55 var(--font-base, -apple-system, BlinkMacSystemFont, sans-serif);
+    color: #ded6c9;
+    animation: fade-in .25s ease;
+}
+.audio-liner-notes i {
+    color: var(--amber);
+    font-size: 11px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+.liner-notes-text {
+    flex: 1;
+}
+
+/* Vault Tape Badge */
+.vault-tape-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    background: rgba(224, 109, 43, 0.12);
+    border: 1px solid rgba(224, 109, 43, 0.3);
+    border-radius: var(--radius-sm);
+    font: 600 11px/1 var(--mono);
+    color: var(--amber);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+.tl-entry.tl-sketch .tl-dot {
+    background: rgba(224, 109, 43, 0.18);
+    border-color: var(--amber);
+    color: var(--amber);
+}
+.tl-entry.tl-sketch .tl-kind-pill {
+    background: rgba(224, 109, 43, 0.14);
+    color: var(--amber);
+    border-color: rgba(224, 109, 43, 0.35);
+}
+
 /* ─── Stage Deck & Curated Setlist ─────────────────────────────────────── */
 .stage-deck {
     border-radius: var(--radius-lg);
