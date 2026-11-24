@@ -1,6 +1,14 @@
 {
   "shows": [
     {
+      "date": "2026-11-17",
+      "title": "Super-Most-Fantastic-Blues-N-Such Jam",
+      "venue": "Café Negril, New Orleans",
+      "with": "John Lisi & Delta Funk",
+      "video": "1FKCS_flkqw",
+      "audio": "negril_20261117_blues"
+    },
+    {
       "date": "2026-11-09",
       "title": "Birmingham Bandstand",
       "venue": "The Nick",
@@ -509,6 +517,12 @@
   ],
   "videos": [
     {
+      "id": "1FKCS_flkqw",
+      "date": "2026-11-17",
+      "title": "Where Do We Go (Café Negril Blues Jam)",
+      "poster": "assets/photo_20261117_negril.jpg"
+    },
+    {
       "src": "assets/live_clip.mp4",
       "poster": "assets/live_clip.jpg",
       "date": "2026-07-27",
@@ -547,6 +561,13 @@
     }
   ],
   "media": [
+    {
+      "src": "assets/photo_20261117_negril.jpg",
+      "thumb": "assets/thumbs/photo_20261117_negril.jpg",
+      "date": "2026-11-17",
+      "caption": "John Polar fronting the Tuesday blues jam at Café Negril in New Orleans",
+      "alt": "John Polar performing live on stage at Café Negril on Frenchmen Street in New Orleans with John Lisi & Delta Funk"
+    },
     {
       "src": "assets/photo_rebe_20260628.jpg",
       "thumb": "assets/thumbs/photo_rebe_20260628.jpg",
@@ -736,6 +757,42 @@
     }
   ],
   "audio": [
+    {
+      "id": "negril_20261117_blues",
+      "title": "Where Do We Go (New Orleans Blues Jam)",
+      "date": "2026-11-17",
+      "venue": "Café Negril, New Orleans",
+      "setSrc": "assets/audio/negril_20261117_blues_set.m4a",
+      "previewSrc": "assets/audio/negril_20261117_blues_preview.m4a",
+      "duration": 276,
+      "previewDuration": 45,
+      "markers": [
+        {
+          "time": 0,
+          "label": "Blues Intro & Vocal Pocket"
+        },
+        {
+          "time": 42,
+          "label": "Where Do We Go (Theme)"
+        },
+        {
+          "time": 95,
+          "label": "Rhythm Groove & Cadence"
+        },
+        {
+          "time": 154,
+          "label": "Guitar Solo & Pocket Breakdown"
+        },
+        {
+          "time": 218,
+          "label": "Dynamic Climax & Vocal Return"
+        },
+        {
+          "time": 258,
+          "label": "Band Outro & Stage Applause"
+        }
+      ]
+    },
     {
       "id": "bandstand_20261026",
       "title": "Danger in My Blood (Fall Showcase)",
