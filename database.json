@@ -838,15 +838,18 @@
       "markers": [
         {
           "time": 0,
-          "label": "Atmosphere & Lead-In"
+          "label": "Atmosphere & Lead-In",
+          "note": "Stepping into the room at The Nick — guitar and vocal warm-up before the pocket locks."
         },
         {
           "time": 107,
-          "label": "Rhythm Pocket & Cadence"
+          "label": "Rhythm Pocket & Cadence",
+          "note": "Rhythm settles in; moving from sparse chords into steady vocal cadence."
         },
         {
           "time": 210,
-          "label": "Freestyle Run"
+          "label": "Freestyle Run",
+          "note": "Continuous improvised vocal run building momentum without breaking stride."
         },
         {
           "time": 282,
@@ -855,11 +858,13 @@
         },
         {
           "time": 306,
-          "label": "Finding My Way (Climax)"
+          "label": "Finding My Way (Climax)",
+          "note": "Pushing the dynamic peak before letting the chords open back up."
         },
         {
           "time": 356,
-          "label": "Sound of This Light (Outro)"
+          "label": "Sound of This Light (Outro)",
+          "note": "Final acoustic resolution into the quiet end of the set."
         }
       ]
     },
@@ -971,7 +976,8 @@
       "markers": [
         {
           "time": 0,
-          "label": "Blues Intro & Pocket Groove"
+          "label": "Blues Intro & Pocket Groove",
+          "note": "Sitting in at the Huntsville blues jam — locking straight into the pocket."
         },
         {
           "time": 16,
@@ -979,7 +985,8 @@
         },
         {
           "time": 56,
-          "label": "Solo & Pocket Shift"
+          "label": "Solo & Pocket Shift",
+          "note": "Band opens up for the middle shift before the final vocal push."
         },
         {
           "time": 75,
@@ -1003,23 +1010,28 @@
       "markers": [
         {
           "time": 0,
-          "label": "Setup & Intro"
+          "label": "Setup & Intro",
+          "note": "Setting the mics and finding the tempo together on The Nick stage."
         },
         {
           "time": 180,
-          "label": "Rhythm Pocket (Percussion)"
+          "label": "Rhythm Pocket (Percussion)",
+          "note": "Percussion locks into a steady pocket while vocals stretch over the groove."
         },
         {
           "time": 460,
-          "label": "Drum Beats & Vocal Run"
+          "label": "Drum Beats & Vocal Run",
+          "note": "Continuous second movement — live drum accents driving a sharper vocal cadence."
         },
         {
           "time": 620,
-          "label": "Freestyle Jam & Pocket Shift"
+          "label": "Freestyle Jam & Pocket Shift",
+          "note": "Tempo and mood shift into an improvised late-set jam."
         },
         {
           "time": 828,
-          "label": "Outro & Banter Thanks"
+          "label": "Outro & Banter Thanks",
+          "note": "Final beat drops out into crowd applause and quick stage sign-off."
         }
       ]
     },
@@ -1035,15 +1047,18 @@
       "markers": [
         {
           "time": 0,
-          "label": "Stage Opening & First Gig"
+          "label": "Stage Opening & First Gig",
+          "note": "First official Songwriter Nights appearance at The Nick (April 15, 2025)."
         },
         {
           "time": 30,
-          "label": "Down One Room / Looking For Hope"
+          "label": "Down One Room / Looking For Hope",
+          "note": "Opening movement — acoustic chords carrying the early theme."
         },
         {
           "time": 69,
-          "label": "Lying to the Sun (Vocal Run)"
+          "label": "Lying to the Sun (Vocal Run)",
+          "note": "Vocals lift into the middle section as the room settles in."
         },
         {
           "time": 91,
@@ -1051,7 +1066,8 @@
         },
         {
           "time": 119,
-          "label": "Resolution & Acoustic Outro"
+          "label": "Resolution & Acoustic Outro",
+          "note": "Closing acoustic cadence wrapping up the debut songwriter night."
         }
       ]
     },
@@ -1067,11 +1083,13 @@
       "markers": [
         {
           "time": 0,
-          "label": "Mic Check & Beat In"
+          "label": "Mic Check & Beat In",
+          "note": "Mic check straight into the opening beat at Monday Bandstand."
         },
         {
           "time": 74,
-          "label": "Red Skies & Capes"
+          "label": "Red Skies & Capes",
+          "note": "First movement takes shape — rhythmic vocals over a driving groove."
         },
         {
           "time": 108,
@@ -1079,7 +1097,8 @@
         },
         {
           "time": 130,
-          "label": "Out in the Woods"
+          "label": "Out in the Woods",
+          "note": "Transitioning without a stop into the second movement."
         },
         {
           "time": 205,
@@ -1091,7 +1110,8 @@
         },
         {
           "time": 288,
-          "label": "Red Rover / Stranger Danger"
+          "label": "Red Rover / Stranger Danger",
+          "note": "Energy picks up mid-set with sharper cadence and call-and-response feel."
         },
         {
           "time": 366,
@@ -1099,7 +1119,8 @@
         },
         {
           "time": 418,
-          "label": "Consistency is a Mystery"
+          "label": "Consistency is a Mystery",
+          "note": "Mid-set shift into a steadier, reflective pocket."
         },
         {
           "time": 510,
@@ -1111,11 +1132,13 @@
         },
         {
           "time": 635,
-          "label": "One More Jam / Reckoning"
+          "label": "One More Jam / Reckoning",
+          "note": "One more continuous stretch building toward the close."
         },
         {
           "time": 770,
-          "label": "Grand Finale & Outro"
+          "label": "Grand Finale & Outro",
+          "note": "Final push and crowd sign-off wrapping a 14-minute uninterrupted run."
         }
       ]
     },
@@ -1131,19 +1154,23 @@
       "markers": [
         {
           "time": 0,
-          "label": "Stage Intro & Acoustic Tuning"
+          "label": "Stage Intro & Acoustic Tuning",
+          "note": "Early 2023 open-mic tuning and first chords in the room."
         },
         {
           "time": 180,
-          "label": "Vocal Build & Cadence"
+          "label": "Vocal Build & Cadence",
+          "note": "Vocal build finding its stride over raw acoustic rhythm."
         },
         {
           "time": 380,
-          "label": "Bottom of the Wall"
+          "label": "Bottom of the Wall",
+          "note": "Core hook lands — raw tension and grit from the early era."
         },
         {
           "time": 520,
-          "label": "Resolution & Climax"
+          "label": "Resolution & Climax",
+          "note": "Pushing into the closing climax before the final applause."
         },
         {
           "time": 669,
@@ -1163,11 +1190,13 @@
       "markers": [
         {
           "time": 0,
-          "label": "Polar AF Mic Check"
+          "label": "Polar AF Mic Check",
+          "note": "Earliest Bandstand recording on file — quick mic check on The Nick stage."
         },
         {
           "time": 79,
-          "label": "Through the Woods"
+          "label": "Through the Woods",
+          "note": "First movement opens up into an acoustic-driven run."
         },
         {
           "time": 144,
@@ -1175,7 +1204,8 @@
         },
         {
           "time": 178,
-          "label": "Walking for a Mile"
+          "label": "Walking for a Mile",
+          "note": "Continuous transition into the second section without breaking flow."
         },
         {
           "time": 248,
@@ -1187,19 +1217,23 @@
         },
         {
           "time": 281,
-          "label": "Worked On With A Friend"
+          "label": "Worked On With A Friend",
+          "note": "Shifting into a collaborative piece mid-set."
         },
         {
           "time": 460,
-          "label": "Proud of Your Passion"
+          "label": "Proud of Your Passion",
+          "note": "Long central stretch moving between melodic vocals and spoken cadence."
         },
         {
           "time": 695,
-          "label": "Two Mics Up (Stage Banter)"
+          "label": "Two Mics Up (Stage Banter)",
+          "note": "Quick stage check before launching into the final leg of the 16-minute set."
         },
         {
           "time": 940,
-          "label": "Grand Finale & Outro Thanks"
+          "label": "Grand Finale & Outro Thanks",
+          "note": "Closing chords, crowd response, and sign-off from the earliest live cut."
         }
       ]
     },
