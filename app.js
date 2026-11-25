@@ -413,7 +413,7 @@ function initAudioCard(card) {
     const timeDur = card.querySelector('.themed-time-dur');
     const muteBtn = card.querySelector('.themed-mute-btn');
     const modeBtns = card.querySelectorAll('.audio-mode-toggle button');
-    const perspBtns = card.querySelectorAll('.persp-pill');
+    const perspBtns = card.querySelectorAll('.persp-pill[data-persp]');
     const perspDesc = card.querySelector('.audio-persp-desc');
     const syncVidToggle = card.querySelector('.persp-video-toggle');
     const syncVidWrap = card.querySelector('.audio-sync-video-wrap');
@@ -455,8 +455,10 @@ function initAudioCard(card) {
         if (audio.readyState >= 1) {
             apply();
         } else {
+            // Trigger play() synchronously inside user gesture on mobile browsers so autoplay isn't blocked
             audio.addEventListener('loadedmetadata', apply, { once: true });
             audio.load();
+            if (shouldPlay) audio.play().catch(() => {});
         }
     }
 
@@ -569,8 +571,16 @@ function initAudioCard(card) {
             if (activeAudio && activeAudio !== audio) activeAudio.pause();
             if (currentMode !== 'set') setMode('set');
             const localTarget = Math.max(0, syncVidOffset - (activePersp.offset || 0));
+            if (syncVidStandby) syncVidStandby.hidden = true;
+            if (syncVid && !syncVid.src && syncVid.dataset.src) {
+                syncVid.src = syncVid.dataset.src;
+                syncVid.load();
+            }
             seekAndMaybePlay(localTarget, true);
-            syncVideoToAudio(true);
+            if (syncVid) {
+                try { syncVid.currentTime = 0; } catch (_) {}
+                syncVid.play().catch(() => {});
+            }
         });
     }
 
@@ -806,8 +816,8 @@ function perspectivesBarHtml(t) {
                     <video class="audio-sync-video" data-src="${esc(sv.src)}" poster="${esc(sv.poster || '')}" muted playsinline preload="none" controlsList="nodownload" disablePictureInPicture></video>
                     <span class="sync-video-audio-badge">AUDIO: ${esc((t.perspectives && t.perspectives[0]?.label || 'LIVE').toUpperCase())}</span>
                     <div class="sync-video-standby">
-                        <span class="sync-standby-text"><i class="fas fa-microphone-lines" aria-hidden="true"></i> Room Mic · Stage stream joins at ${formatTime(sv.offset || 0)}</span>
-                        <button type="button" class="sync-video-jump-btn"><i class="fas fa-forward" aria-hidden="true"></i> Jump to ${formatTime(sv.offset || 0)} Video</button>
+                        <span class="sync-standby-text"><i class="fas fa-microphone-lines" aria-hidden="true"></i> Room Mic · Stage stream joins at ${formatTime(Math.round(sv.offset || 0))}</span>
+                        <button type="button" class="sync-video-jump-btn"><i class="fas fa-forward" aria-hidden="true"></i> Jump to ${formatTime(Math.round(sv.offset || 0))} Video</button>
                     </div>
                 </div>` : ''}
         </div>`;
